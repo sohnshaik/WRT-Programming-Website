@@ -1,0 +1,399 @@
+// ── TYPOGRAPHY ───────────────────────────────────────────────
+h2.sh {
+  font-size: 1.1rem; font-weight: 700; color: $navy;
+  margin: 2.25rem 0 0.9rem;
+  padding-bottom: 0.5rem; border-bottom: 2px solid $gray-200;
+  display: flex; align-items: center; gap: 8px;
+  &::before {
+    content: '';
+    display: inline-block; width: 4px; height: 18px;
+    background: $red; border-radius: 2px;
+  }
+}
+h3.sub {
+  font-size: 0.95rem; font-weight: 700; color: $gray-800;
+  margin: 1.5rem 0 0.5rem;
+}
+p {
+  color: $gray-600; margin-bottom: 0.9rem;
+  font-weight: 400; line-height: 1.7;
+}
+strong { color: $gray-800; font-weight: 700; }
+ul, ol { color: $gray-600; margin: 0.5rem 0 0.9rem 1.4rem; line-height: 1.7; }
+li { margin-bottom: 0.2rem; }
+
+// ── PAGE HERO ────────────────────────────────────────────────
+.page-hero {
+  background: $navy;
+  padding: 2rem 2.5rem;
+  border-bottom: 4px solid $red;
+
+  .ph-breadcrumb {
+    font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 0.75rem;
+    a { color: rgba(255,255,255,0.6); text-decoration: none; &:hover { color: $white; } }
+    span { margin: 0 6px; }
+  }
+  .ph-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 3px;
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 0.6rem;
+    &.badge-summer    { background: rgba(196,18,48,0.3);  color: #ffb3be; }
+    &.badge-offseason { background: rgba(27,42,74,0.5);   color: #a8bfff; border: 1px solid rgba(168,191,255,0.3); }
+    &.badge-bridge    { background: rgba(180,83,9,0.35);  color: #fcd19c; }
+  }
+  h1 {
+    font-size: 1.9rem; font-weight: 900; color: $white;
+    line-height: 1.2; margin-bottom: 0.5rem;
+  }
+  p {
+    font-size: 1rem; color: rgba(255,255,255,0.65);
+    font-weight: 300; max-width: 580px; margin: 0;
+  }
+}
+
+// ── CALLOUTS ────────────────────────────────────────────────
+.callout {
+  padding: 0.9rem 1.1rem; border-radius: 5px;
+  margin: 1rem 0; border-left: 4px solid;
+  font-size: 14px; line-height: 1.6;
+  p { margin: 0; font-size: 14px; }
+  strong { font-weight: 700; color: inherit; }
+  code { font-size: 12.5px; }
+
+  &.tip     { background: $green-light;  border-color: $green;     p { color: darken($green, 5%); } }
+  &.info    { background: $blue-light;   border-color: $blue-info; p { color: $blue-info; } }
+  &.warning { background: $amber-light;  border-color: $amber;     p { color: $amber; } }
+  &.danger  { background: $red-light;    border-color: $red;       p { color: $red-dark; } }
+}
+
+// ── CONCEPT CARDS ────────────────────────────────────────────
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+  gap: 10px; margin: 1rem 0;
+}
+.concept-card {
+  background: $white; border: 1px solid $gray-200;
+  border-top: 3px solid $red; border-radius: 5px;
+  padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  .cc-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: $red; margin-bottom: 5px; }
+  .cc-title { font-size: 14px; font-weight: 700; color: $gray-800; margin-bottom: 4px; }
+  .cc-desc  { font-size: 13px; color: $gray-500; line-height: 1.5; }
+}
+
+// ── TABLE ────────────────────────────────────────────────────
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: 13.5px; margin: 1rem 0; background: $white;
+  border: 1px solid $gray-200; border-radius: 5px;
+  overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+thead { background: $navy; }
+th {
+  padding: 10px 14px; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.75); text-align: left;
+}
+td {
+  padding: 9px 14px; border-bottom: 1px solid $gray-100;
+  color: $gray-600;
+}
+td:first-child { font-family: $font-mono; color: $red-dark; font-size: 12.5px; font-weight: 600; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: $gray-50; }
+
+// ── BUTTONS ─────────────────────────────────────────────────
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 18px; border-radius: 5px;
+  font-family: $font-body; font-size: 13px; font-weight: 700;
+  cursor: pointer; border: none; transition: all $t-fast;
+  text-decoration: none; letter-spacing: 0.01em;
+  &:hover { text-decoration: none; }
+  &:disabled { opacity: 0.45; cursor: default; }
+
+  &-primary { background: $red;   color: $white; &:hover { background: $red-dark; } }
+  &-navy    { background: $navy;  color: $white; &:hover { background: $navy-dark; } }
+  &-outline {
+    background: $white; color: $navy;
+    border: 1px solid $gray-300;
+    &:hover { background: $gray-50; border-color: $navy; }
+  }
+  &-success { background: $green; color: $white; &:hover { background: darken($green, 8%); } }
+  &-sm { padding: 6px 13px; font-size: 12px; }
+}
+
+// ── QUIZ ────────────────────────────────────────────────────
+.quiz-wrap {
+  background: $white; border: 1px solid $gray-200;
+  border-radius: 8px; margin: 1.5rem 0; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+.quiz-head {
+  background: $navy; padding: 0.9rem 1.25rem;
+  display: flex; align-items: center; justify-content: space-between;
+  .qh-title {
+    font-size: 13px; font-weight: 700; color: $white;
+    display: flex; align-items: center; gap: 8px;
+    &::before {
+      content: '?'; width: 22px; height: 22px; background: $red;
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 12px; font-weight: 900; flex-shrink: 0;
+    }
+  }
+  .qh-progress { font-size: 12px; color: rgba(255,255,255,0.5); font-family: $font-mono; }
+}
+.quiz-progress-bar {
+  height: 4px; background: $gray-200;
+  .qpb-fill { height: 100%; background: $red; transition: width 0.3s; }
+}
+.quiz-body { padding: 1.5rem; }
+.quiz-q {
+  font-size: 15px; color: $gray-800; margin-bottom: 1.1rem; line-height: 1.6;
+  code { font-family: $font-mono; background: $gray-100; color: $red-dark; padding: 1px 6px; border-radius: 3px; font-size: 13px; }
+}
+.quiz-options { display: flex; flex-direction: column; gap: 7px; }
+.quiz-option {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px; background: $gray-50;
+  border: 1px solid $gray-200; border-radius: 5px;
+  cursor: pointer; font-size: 14px; color: $gray-700;
+  text-align: left; width: 100%; font-family: $font-body;
+  transition: all $t-fast; line-height: 1.5;
+  &:hover:not(:disabled) { border-color: $navy-mid; background: $navy-light; }
+  &.correct { border-color: $green; background: $green-light; color: darken($green, 10%); }
+  &.wrong   { border-color: $red;   background: $red-light;   color: $red-dark; }
+  &:disabled { cursor: default; }
+  .opt-letter {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: $gray-200; color: $gray-500;
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px; font-family: $font-mono;
+  }
+  &.correct .opt-letter { background: $green; color: $white; }
+  &.wrong   .opt-letter { background: $red;   color: $white; }
+}
+.quiz-feedback {
+  margin-top: 1rem; padding: 0.9rem 1.1rem;
+  border-radius: 5px; font-size: 13.5px; line-height: 1.6;
+  display: none; &.show { display: block; }
+  &.fb-correct { background: $green-light; border: 1px solid lighten($green, 30%); color: darken($green, 8%); }
+  &.fb-wrong   { background: $red-light;   border: 1px solid $red-mid;             color: $red-dark; }
+  strong { font-weight: 700; }
+  code { font-family: $font-mono; background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 3px; font-size: 12.5px; }
+}
+.quiz-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid $gray-100;
+}
+.quiz-score { font-size: 13px; color: $gray-500; font-family: $font-mono; }
+
+// ── SCORE CARD ──────────────────────────────────────────────
+.score-card {
+  display: none; text-align: center;
+  padding: 2.5rem 2rem; background: $white;
+  border: 1px solid $gray-200; border-radius: 8px; margin: 1.5rem 0;
+  &.show { display: block; }
+  .sc-ring {
+    width: 110px; height: 110px; border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; position: relative;
+    .sc-pct { font-size: 1.9rem; font-weight: 900; color: $navy; line-height: 1; }
+    .sc-pct-label { font-size: 11px; color: $gray-400; }
+  }
+  .sc-score { font-size: 15px; color: $gray-500; margin-bottom: 0.5rem; }
+  .sc-msg   { font-size: 16px; font-weight: 700; color: $gray-800; margin-bottom: 1.5rem; }
+  .sc-saved { font-size: 12px; color: $green; font-weight: 600; margin-bottom: 1rem; }
+}
+
+// ── FILL-IN-THE-BLANK ───────────────────────────────────────
+.fill-container {
+  font-family: $font-mono; font-size: 13.5px;
+  background: $code-bg; border: 1px solid $gray-700;
+  border-radius: 6px; padding: 1.1rem 1.25rem; margin: 0.75rem 0;
+  line-height: 2.4; color: #94a3b8;
+}
+.fill-blank {
+  display: inline-block; min-width: 90px;
+  border: none; border-bottom: 2px solid #475569;
+  padding: 0 4px; font-family: $font-mono; font-size: 13px;
+  color: $code-fg; background: transparent; outline: none;
+  transition: border-color $t-fast; vertical-align: bottom;
+  &:focus { border-color: $red; }
+  &.correct-blank { border-color: $green; color: #6ee7b7; }
+  &.wrong-blank   { border-color: $red;   color: #fca5a5; }
+}
+
+// ── CHALLENGE ───────────────────────────────────────────────
+.challenge {
+  border: 1px solid $gray-200; border-radius: 8px;
+  margin: 1.5rem 0; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  .ch-header {
+    background: linear-gradient(135deg, $navy 0%, $navy-dark 100%);
+    padding: 1rem 1.25rem; display: flex; align-items: center; gap: 12px;
+    .ch-icon {
+      width: 36px; height: 36px; background: $red; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .ch-title { font-size: 14px; font-weight: 700; color: $white; }
+    .ch-sub   { font-size: 12px; color: rgba(255,255,255,0.5); }
+  }
+  .ch-body {
+    padding: 1.25rem; background: $white;
+    .ch-prompt {
+      font-size: 14px; color: $gray-700; line-height: 1.7; margin-bottom: 1rem;
+      code { font-family: $font-mono; background: $gray-100; color: $red-dark; padding: 1px 6px; border-radius: 3px; font-size: 12.5px; }
+    }
+  }
+}
+textarea.code-input {
+  width: 100%; min-height: 140px;
+  background: $code-bg; border: 1px solid #334155;
+  border-radius: 5px; padding: 0.9rem 1rem;
+  font-family: $font-mono; font-size: 13px; color: $code-fg;
+  resize: vertical; outline: none; transition: border-color $t-fast;
+  line-height: 1.6;
+  &:focus { border-color: $red; }
+}
+
+// ── INTERACTIVE BOX ─────────────────────────────────────────
+.interactive-box {
+  background: $white; border: 1px solid $gray-200;
+  border-radius: 8px; margin: 1.25rem 0; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  .ib-header {
+    background: $gray-50; border-bottom: 1px solid $gray-200;
+    padding: 0.8rem 1.25rem; font-size: 12px; font-weight: 700;
+    color: $gray-500; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .ib-body { padding: 1.25rem; }
+}
+
+// ── COMPLETE BANNER ─────────────────────────────────────────
+.complete-banner {
+  background: $green-light; border: 1px solid lighten($green, 25%);
+  border-radius: 7px; padding: 1.1rem 1.5rem;
+  display: flex; align-items: center; gap: 12px; margin-top: 2rem;
+  .cb-icon { font-size: 24px; }
+  .cb-text {
+    flex: 1;
+    .cb-title { font-size: 14px; font-weight: 700; color: $green; }
+    .cb-sub   { font-size: 13px; color: darken($green, 5%); font-weight: 300; }
+  }
+}
+
+// ── PAGE NAV ────────────────────────────────────────────────
+.page-nav {
+  display: flex; justify-content: space-between;
+  margin-top: 3rem; padding-top: 1.5rem;
+  border-top: 1px solid $gray-200; gap: 1rem;
+}
+.pn-link {
+  display: flex; flex-direction: column; gap: 3px;
+  text-decoration: none; padding: 0.9rem 1.1rem;
+  border: 1px solid $gray-200; border-radius: 6px;
+  background: $white; transition: all $t-fast; max-width: 48%;
+  &:hover { border-color: $navy; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-decoration: none; }
+  .pn-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: $gray-400; }
+  .pn-title { font-size: 14px; font-weight: 700; color: $navy; }
+  &.pn-next { text-align: right; }
+}
+
+// ── DASHBOARD ───────────────────────────────────────────────
+.dashboard-hero {
+  background: $navy; padding: 2.5rem 2.5rem 2rem;
+  border-bottom: 4px solid $red;
+  .dh-inner { max-width: $content-max; margin: 0 auto; display: flex; align-items: center; gap: 1.5rem; }
+  .dh-logo  { width: 70px; height: 70px; object-fit: contain; flex-shrink: 0; }
+  .dh-text {
+    h1 { font-size: 1.75rem; font-weight: 900; color: $white; line-height: 1.2; }
+    p  { font-size: 0.95rem; color: rgba(255,255,255,0.6); margin: 0.3rem 0 0; font-weight: 300; }
+  }
+  .dh-stats {
+    margin-left: auto; display: flex; gap: 1.5rem;
+    .stat {
+      text-align: center;
+      .stat-num   { font-size: 1.6rem; font-weight: 900; color: $white; line-height: 1; }
+      .stat-label { font-size: 11px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
+    }
+  }
+}
+
+.module-section { max-width: $content-max; margin: 0 auto; padding: 2rem 2.5rem; }
+
+.module-phase-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;
+  h2 { font-size: 1.1rem; font-weight: 700; color: $navy; }
+  .mph-badge {
+    padding: 3px 10px; border-radius: 3px; font-size: 11px;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    &.summer    { background: $red-light;  color: $red-dark; }
+    &.offseason { background: $navy-light; color: $navy; }
+  }
+}
+
+.module-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 2.5rem; }
+
+.module-item {
+  background: $white; border: 1px solid $gray-200; border-radius: 7px;
+  display: flex; align-items: center; text-decoration: none;
+  transition: all $t-fast; overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  &:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.1); border-color: $navy-mid; transform: translateY(-1px); text-decoration: none; }
+  &.completed { border-left: 4px solid $green; }
+
+  .mi-num {
+    width: 52px; min-height: 68px; background: $navy;
+    color: $white; font-size: 11px; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-family: $font-mono; flex-direction: column; gap: 2px;
+    .mi-phase { font-size: 8px; opacity: 0.5; letter-spacing: 0.05em; }
+  }
+  &.completed .mi-num { background: $green; }
+  .mi-body { flex: 1; padding: 0.9rem 1rem; }
+  .mi-title { font-size: 14px; font-weight: 700; color: $gray-800; margin-bottom: 3px; }
+  .mi-sub   { font-size: 12px; color: $gray-500; line-height: 1.4; }
+  .mi-right { padding: 0 1.1rem; display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+  .mi-score {
+    font-family: $font-mono; font-size: 13px; font-weight: 700; color: $gray-400;
+    &.has-score { color: $navy; }
+  }
+  .mi-status {
+    font-size: 11px; padding: 2px 8px; border-radius: 3px; font-weight: 700;
+    &.status-done   { background: $green-light; color: $green; }
+    &.status-inprog { background: $amber-light; color: $amber; }
+    &.status-todo   { background: $gray-100;    color: $gray-400; }
+  }
+}
+
+// ── SITE FOOTER ──────────────────────────────────────────────
+.site-footer {
+  margin-left: $sidebar-w;
+  padding: 1.25rem 2.5rem;
+  border-top: 1px solid $gray-200;
+  background: $white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+
+  .sf-left {
+    display: flex; align-items: center; gap: 10px;
+    img { width: 22px; height: 22px; object-fit: contain; border-radius: 3px; }
+    span { font-size: 12px; color: $gray-500; }
+  }
+  .sf-right {
+    display: flex; gap: 1rem;
+    a { font-size: 12px; color: $gray-400; text-decoration: none;
+        &:hover { color: $navy; } }
+  }
+}
+
+@media (max-width: 900px) {
+  .site-footer { margin-left: 0; padding: 1rem 1.25rem; }
+}

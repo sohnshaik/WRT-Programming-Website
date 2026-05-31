@@ -1,0 +1,113 @@
+<nav class="sidebar" id="sidebar">
+
+  <div class="sidebar-course-header">
+    <div class="sch-label">WRT Programming</div>
+    <div class="sch-title">Java &amp; FRC Course<br>2026–27 Season</div>
+    <div class="sch-progress">
+      <div class="sp-label">
+        <span>Course Progress</span>
+        <span class="sp-pct-text">0%</span>
+      </div>
+      <div class="sp-track"><div class="sp-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      Summer — Java Foundations
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item {% if page.url contains 'week1' and page.phase == 'summer' %}active{% endif %}" href="{{ '/weeks/summer/week1' | relative_url }}" data-page="summer-w1">
+        <span class="ni-num">W1</span>
+        <span class="ni-text">The Basics</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'week2' and page.phase == 'summer' %}active{% endif %}" href="{{ '/weeks/summer/week2' | relative_url }}" data-page="summer-w2">
+        <span class="ni-num">W2</span>
+        <span class="ni-text">Logic &amp; Control Flow</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'week3' and page.phase == 'summer' %}active{% endif %}" href="{{ '/weeks/summer/week3' | relative_url }}" data-page="summer-w3">
+        <span class="ni-num">W3</span>
+        <span class="ni-text">Loops</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'week4' %}active{% endif %}" href="{{ '/weeks/summer/week4' | relative_url }}" data-page="summer-w4">
+        <span class="ni-num">W4</span>
+        <span class="ni-text">Arrays &amp; Methods</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'week5' %}active{% endif %}" href="{{ '/weeks/summer/week5' | relative_url }}" data-page="summer-w5">
+        <span class="ni-num">W5</span>
+        <span class="ni-text">OOP — Classes &amp; Objects</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'week6' %}active{% endif %}" href="{{ '/weeks/summer/week6' | relative_url }}" data-page="summer-w6">
+        <span class="ni-num">W6</span>
+        <span class="ni-text">Inheritance &amp; Polymorphism</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'week7' %}active{% endif %}" href="{{ '/weeks/summer/week7' | relative_url }}" data-page="summer-w7">
+        <span class="ni-num">W7</span>
+        <span class="ni-text">Advanced Classes</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'week8' %}active{% endif %}" href="{{ '/weeks/summer/week8' | relative_url }}" data-page="summer-w8">
+        <span class="ni-num">W8</span>
+        <span class="ni-text">Bridge — XRP &amp; WPILib</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      Offseason — FRC Training
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item {% if page.url contains 'os-week1' %}active{% endif %}" href="{{ '/weeks/offseason/os-week1' | relative_url }}" data-page="offseason-o1">
+        <span class="ni-num">O1</span>
+        <span class="ni-text">Git &amp; GitHub</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'os-week2' %}active{% endif %}" href="{{ '/weeks/offseason/os-week2' | relative_url }}" data-page="offseason-o2">
+        <span class="ni-num">O2</span>
+        <span class="ni-text">WPILib Setup</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'os-week3' %}active{% endif %}" href="{{ '/weeks/offseason/os-week3' | relative_url }}" data-page="offseason-o3">
+        <span class="ni-num">O3</span>
+        <span class="ni-text">Command-Based</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'os-week4' %}active{% endif %}" href="{{ '/weeks/offseason/os-week4' | relative_url }}" data-page="offseason-o4">
+        <span class="ni-num">O4</span>
+        <span class="ni-text">Motors &amp; Sensors</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'os-week5' %}active{% endif %}" href="{{ '/weeks/offseason/os-week5' | relative_url }}" data-page="offseason-o5">
+        <span class="ni-num">O5</span>
+        <span class="ni-text">PID Control</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'os-week6' %}active{% endif %}" href="{{ '/weeks/offseason/os-week6' | relative_url }}" data-page="offseason-o6">
+        <span class="ni-num">O6</span>
+        <span class="ni-text">Autonomous</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'os-week7' %}active{% endif %}" href="{{ '/weeks/offseason/os-week7' | relative_url }}" data-page="offseason-o7">
+        <span class="ni-num">O7</span>
+        <span class="ni-text">Subsystem Ownership</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item {% if page.url contains 'os-week8' %}active{% endif %}" href="{{ '/weeks/offseason/os-week8' | relative_url }}" data-page="offseason-o8">
+        <span class="ni-num">O8</span>
+        <span class="ni-text">Build Season Prep</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+</nav>

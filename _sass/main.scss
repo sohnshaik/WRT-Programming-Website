@@ -1,0 +1,10 @@
+// ── WRT PROGRAMMING — MAIN STYLESHEET ────────────────────────
+// Organized into partials for maintainability.
+
+@import "partials/tokens";      // Design tokens (colors, fonts, layout vars)
+@import "partials/base";        // Reset, global base styles, fonts
+@import "partials/rouge";       // Rouge syntax highlighting + .code-block
+@import "partials/layout";      // Topbar, sidebar, shell, content wrapper
+@import "partials/components";  // Everything else: cards, quiz, dashboard, etc.
+@import "partials/responsive";  // Breakpoints
+

@@ -1,0 +1,119 @@
+// ── ROUGE SYNTAX HIGHLIGHTING ────────────────────────────────
+// Custom dark theme to match the Walton code-block surface ($code-bg).
+// Rouge wraps code blocks in <div class="highlight"><pre>...</pre></div>
+// and adds <span> tags with these classes.
+
+.highlight {
+  background: $code-bg;
+  border-radius: 0 0 6px 6px;
+  overflow-x: auto;
+
+  pre {
+    padding: 1.1rem 1.25rem;
+    font-family: $font-mono;
+    font-size: 13px;
+    line-height: 1.7;
+    color: $code-fg;
+    background: transparent;
+    margin: 0;
+  }
+
+  // ── token colors ─────────────────────────────────────────
+  .c,  .c1, .cm, .cs { color: #64748b; font-style: italic; } // Comment
+  .k,  .kd, .kn, .kr, .kp { color: #f472b6; font-weight: 600; } // Keyword
+  .kt { color: #93c5fd; }                // Keyword.Type
+  .na { color: #6ee7b7; }                // Name.Attribute
+  .nb { color: #93c5fd; }                // Name.Builtin
+  .nc { color: #fde68a; font-weight: 600; } // Name.Class
+  .nd { color: #f472b6; }                // Name.Decorator (@Override)
+  .nf { color: #6ee7b7; }                // Name.Function
+  .nn { color: #fde68a; }                // Name.Namespace
+  .no { color: #c4b5fd; }                // Name.Constant
+  .nt { color: #f472b6; }                // Name.Tag
+  .nv, .vi { color: $code-fg; }          // Name.Variable
+  .s,  .s1, .s2, .sb, .sc, .sd, .sh, .si, .sx { color: #fbbf24; } // String
+  .m,  .mi, .mf, .mh, .mo { color: #c4b5fd; } // Number
+  .o,  .ow { color: #94a3b8; }           // Operator
+  .p  { color: #94a3b8; }                // Punctuation
+  .ge { font-style: italic; }
+  .gs { font-weight: bold; }
+  .gd { color: #fca5a5; background: rgba(239,68,68,0.1); }  // diff del
+  .gi { color: #6ee7b7; background: rgba(0,135,90,0.1); }   // diff ins
+  .err { color: #fca5a5; }
+}
+
+// Inline code (kramdown wraps in <code>)
+code:not(.highlight code) {
+  font-family: $font-mono;
+  font-size: 0.875em;
+  background: $gray-100;
+  color: $red-dark;
+  padding: 1px 5px;
+  border-radius: 3px;
+  border: 1px solid $gray-200;
+}
+
+// Fenced code blocks rendered by kramdown + rouge
+// (figure.highlight > pre > code)
+figure.highlight {
+  margin: 1.1rem 0;
+  border-radius: 6px;
+  border: 1px solid $gray-700;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+// Our own hand-rolled .code-block components (used in week pages)
+.code-block {
+  border: 1px solid $gray-200;
+  border-radius: 6px;
+  margin: 1.1rem 0;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.cb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 14px;
+  background: $navy;
+  .cb-lang {
+    font-family: $font-mono;
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .cb-copy {
+    font-family: $font-mono;
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    background: none;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    transition: all $t-fast;
+    &:hover { color: $white; background: rgba(255,255,255,0.1); }
+  }
+}
+.code-block pre {
+  padding: 1.1rem 1.25rem;
+  overflow-x: auto;
+  font-family: $font-mono;
+  font-size: 13px;
+  line-height: 1.65;
+  background: $code-bg;
+  color: $code-fg;
+  margin: 0;
+}
+
+// Manual syntax colors used in hand-written pre blocks
+.kw  { color: #f472b6; font-weight: 600; }
+.type{ color: #93c5fd; }
+.str { color: #fbbf24; }
+.num { color: #c4b5fd; }
+.cmt { color: #64748b; font-style: italic; }
+.fn  { color: #6ee7b7; }
+.cls { color: #fde68a; font-weight: 600; }

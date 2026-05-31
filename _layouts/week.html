@@ -1,0 +1,44 @@
+---
+layout: default
+---
+
+<div class="page-hero">
+  <div class="ph-breadcrumb">
+    <a href="{{ '/' | relative_url }}">Home</a>
+    <span>/</span>
+    <a href="#">{{ page.phase_label }}</a>
+    <span>/</span>
+    <span>{{ page.week_label }}</span>
+  </div>
+  <div class="ph-badge badge-{{ page.phase }}">{{ page.badge }}</div>
+  <h1>{{ page.title }}</h1>
+  <p>{{ page.subtitle }}</p>
+</div>
+
+<div class="content-wrap">
+  {{ content }}
+
+  <div class="complete-banner" id="complete-banner" style="display:none">
+    <span class="cb-icon">🏆</span>
+    <div class="cb-text">
+      <div class="cb-title">Week Complete!</div>
+      <div class="cb-sub">Your score has been saved. Keep going.</div>
+    </div>
+    <a href="{{ page.next_url | relative_url }}" class="btn btn-success btn-sm">Next Week →</a>
+  </div>
+
+  <div class="page-nav">
+    {% if page.prev_url %}
+    <a href="{{ page.prev_url | relative_url }}" class="pn-link">
+      <span class="pn-label">← Previous</span>
+      <span class="pn-title">{{ page.prev_title }}</span>
+    </a>
+    {% else %}<div></div>{% endif %}
+    {% if page.next_url %}
+    <a href="{{ page.next_url | relative_url }}" class="pn-link pn-next">
+      <span class="pn-label">Next →</span>
+      <span class="pn-title">{{ page.next_title }}</span>
+    </a>
+    {% endif %}
+  </div>
+</div>

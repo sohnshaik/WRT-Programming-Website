@@ -1,0 +1,16 @@
+<header class="topbar">
+  <button class="hamburger" onclick="toggleSidebar()">☰</button>
+  <a href="{{ '/' | relative_url }}" class="topbar-logo">
+    <img src="{{ '/assets/images/logo.jpeg' | relative_url }}" alt="Walton Robotics">
+    <div>
+      <div class="topbar-name">WRT Programming</div>
+      <div class="topbar-sub">Team 2974 · {{ site.season }}</div>
+    </div>
+  </a>
+  <div class="topbar-sep"></div>
+  <nav class="topbar-links">
+    <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Dashboard</a>
+    <a href="{{ '/weeks/summer/week1' | relative_url }}" {% if page.phase == 'summer' or page.phase == 'bridge' %}class="active"{% endif %}>Summer</a>
+    <a href="{{ '/weeks/offseason/os-week1' | relative_url }}" {% if page.phase == 'offseason' %}class="active"{% endif %}>Offseason</a>
+  </nav>
+</header>

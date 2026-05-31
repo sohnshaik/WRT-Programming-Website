@@ -1,0 +1,99 @@
+summer:
+  - num: 1
+    slug: week1
+    title: "The Basics"
+    subtitle: "Variables, data types, operators, scope, readability"
+    badge: "Summer · Week 1 of 8"
+    phase: summer
+  - num: 2
+    slug: week2
+    title: "Logic & Control Flow"
+    subtitle: "Booleans, if/else, switch statements, logical operators"
+    badge: "Summer · Week 2 of 8"
+    phase: summer
+  - num: 3
+    slug: week3
+    title: "Loops"
+    subtitle: "For loops, foreach, and why while loops are banned from robot code"
+    badge: "Summer · Week 3 of 8"
+    phase: summer
+  - num: 4
+    slug: week4
+    title: "Arrays & Methods"
+    subtitle: "Arrays, ArrayLists, method signatures, parameters, Javadocs"
+    badge: "Summer · Week 4 of 8"
+    phase: summer
+  - num: 5
+    slug: week5
+    title: "OOP — Classes & Objects"
+    subtitle: "Classes, constructors, encapsulation, getters and setters"
+    badge: "Summer · Week 5 of 8"
+    phase: summer
+  - num: 6
+    slug: week6
+    title: "Inheritance & Polymorphism"
+    subtitle: "extends, super, @Override, abstract classes, interfaces"
+    badge: "Summer · Week 6 of 8"
+    phase: summer
+  - num: 7
+    slug: week7
+    title: "Advanced Classes"
+    subtitle: "Enums, nested classes, interfaces in depth, ArrayList deep dive"
+    badge: "Summer · Week 7 of 8"
+    phase: summer
+  - num: 8
+    slug: week8
+    title: "Bridge Week — XRP & WPILib"
+    subtitle: "Java meets robot code. XRP drivebase, reading Walton's codebase"
+    badge: "Summer · Week 8 of 8"
+    phase: bridge
+
+offseason:
+  - num: 1
+    slug: os-week1
+    title: "Git & GitHub"
+    subtitle: "Branches, PRs, commit messages, the 2974 workflow"
+    badge: "Offseason · Week 1 of 8"
+    phase: offseason
+  - num: 2
+    slug: os-week2
+    title: "WPILib Setup"
+    subtitle: "Dev environment, project structure, RobotContainer, Constants"
+    badge: "Offseason · Week 2 of 8"
+    phase: offseason
+  - num: 3
+    slug: os-week3
+    title: "Command-Based Architecture"
+    subtitle: "Subsystems, Commands, Triggers, the Scheduler"
+    badge: "Offseason · Week 3 of 8"
+    phase: offseason
+  - num: 4
+    slug: os-week4
+    title: "Motors & Sensors"
+    subtitle: "SparkMax, TalonFX, encoders, gyroscopes, SmartDashboard"
+    badge: "Offseason · Week 4 of 8"
+    phase: offseason
+  - num: 5
+    slug: os-week5
+    title: "PID Control"
+    subtitle: "P, I, D terms, WPILib PIDController, feedforward, tuning"
+    badge: "Offseason · Week 5 of 8"
+    phase: offseason
+  - num: 6
+    slug: os-week6
+    title: "Autonomous & PathPlanner"
+    subtitle: "Auto sequences, field coordinates, odometry, PathPlanner"
+    badge: "Offseason · Week 6 of 8"
+    phase: offseason
+  - num: 7
+    slug: os-week7
+    title: "Subsystem Ownership"
+    subtitle: "Read, document, and improve a real subsystem from Watergate/Oasis/Shosty"
+    badge: "Offseason · Week 7 of 8"
+    phase: offseason
+  - num: 8
+    slug: os-week8
+    title: "Build Season Prep"
+    subtitle: "SCRUM, sprint planning, Git workflow for build season, AdvantageKit"
+    badge: "Offseason · Week 8 of 8"
+    phase: offseason

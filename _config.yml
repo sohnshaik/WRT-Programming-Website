@@ -1,3 +1,88 @@
-title: Walton Robotics Programming Course
-description: Java foundations and FRC-specific training for Team 2974
-theme: null
+# ── SITE INFO ────────────────────────────────────────────────
+title:       WRT Programming
+description: "Walton Robotics Team 2974 — Java & FRC Programming Course"
+url:         "https://wrtprogramming.com"
+baseurl:     ""
+lang:        en
+
+# ── BUILD ────────────────────────────────────────────────────
+markdown:    kramdown
+highlighter: rouge
+permalink:   pretty
+
+kramdown:
+  input:          GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: "highlight"
+
+# ── ROUGE (syntax highlighting) ──────────────────────────────
+# We ship our own theme — rouge just adds span classes
+# The .highlight wrapper is styled in _sass/_rouge.scss
+
+# ── SASS ─────────────────────────────────────────────────────
+sass:
+  sass_dir: _sass
+  style:    compressed
+
+# ── PLUGINS ──────────────────────────────────────────────────
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-redirect-from
+
+# ── SEO / FEED ───────────────────────────────────────────────
+author:
+  name:  "Walton Robotics Team 2974"
+  email: "programming@waltonrobotics.org"
+
+social:
+  links:
+    - "https://github.com/WaltonRobotics"
+
+twitter:
+  card: summary
+
+# ── FEED ─────────────────────────────────────────────────────
+feed:
+  path: feed.xml
+
+# ── COLLECTIONS (future-proof for resources/projects) ────────
+collections:
+  resources:
+    output: false
+
+# ── DEFAULTS ─────────────────────────────────────────────────
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: "weeks/summer"
+    values:
+      layout:      "week"
+      phase:       "summer"
+      phase_label: "Summer"
+  - scope:
+      path: "weeks/offseason"
+    values:
+      layout:      "week"
+      phase:       "offseason"
+      phase_label: "Offseason"
+
+# ── EXCLUDE ──────────────────────────────────────────────────
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .bundle
+  - "*.sh"
+
+# ── SITE META ────────────────────────────────────────────────
+team_number: 2974
+season:      "2026-27"

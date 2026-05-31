@@ -1,0 +1,34 @@
+// ── RESPONSIVE ───────────────────────────────────────────────
+@media (max-width: 900px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform $t-base;
+    &.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.2); }
+  }
+  .main { margin-left: 0; }
+  .topbar .hamburger { display: block; }
+  .topbar-links { display: none; }
+
+  .dashboard-hero .dh-stats { display: none; }
+  .content-wrap  { padding: 1.5rem 1.25rem 3rem; }
+  .page-hero     { padding: 1.5rem 1.25rem; h1 { font-size: 1.4rem; } }
+  .module-section{ padding: 1.5rem 1.25rem; }
+  .concept-grid  { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .page-hero h1 { font-size: 1.2rem; }
+  .concept-grid { grid-template-columns: 1fr; }
+  .quiz-option  { font-size: 13px; }
+  .module-item .mi-right { display: none; }
+  .page-nav { flex-direction: column; }
+  .pn-link  { max-width: 100%; }
+}
+
+// Sidebar overlay backdrop on mobile
+.sidebar-backdrop {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4); z-index: 99;
+  &.show { display: block; }
+}
