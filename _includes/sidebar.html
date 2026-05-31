@@ -1,5 +1,4 @@
 <nav class="sidebar" id="sidebar">
-
   <div class="sidebar-course-header">
     <div class="sch-header-top">
       <div>
@@ -10,6 +9,7 @@
         <span class="scb-icon">‹</span>
       </button>
     </div>
+
     <div class="sch-progress">
       <div class="sp-label">
         <span>Course Progress</span>
@@ -20,13 +20,23 @@
   </div>
 
   <button class="sidebar-search-btn" onclick="openSearch()" title="Search topics">
-    <span>🔍</span>
+    <span></span>
     <span class="ssb-text">Search</span>
   </button>
 
+  <div class="nav-group nav-group-home">
+    <div class="nav-items">
+      <a class="nav-item {% if page.page_id == 'home' or page.url == '/' or page.url == '/index.html' %}active{% endif %}" href="{{ '/' | relative_url }}" data-page="home">
+        <span class="ni-num">⌂</span>
+        <span class="ni-text">Dashboard</span>
+        <span class="ni-check"></span>
+      </a>
+    </div>
+  </div>
+
   <div class="nav-group">
     <div class="nav-group-label">
-      Summer — Java Foundations
+      <span class="ngl-text">Summer — Java Foundations</span>
       <span class="ngl-arrow">▾</span>
     </div>
     <div class="nav-items">
@@ -75,7 +85,7 @@
 
   <div class="nav-group">
     <div class="nav-group-label">
-      Offseason — FRC Training
+      <span class="ngl-text">Offseason — FRC Training</span>
       <span class="ngl-arrow">▾</span>
     </div>
     <div class="nav-items">
@@ -121,5 +131,4 @@
       </a>
     </div>
   </div>
-
 </nav>
