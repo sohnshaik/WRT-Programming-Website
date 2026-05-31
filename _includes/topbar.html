@@ -12,5 +12,6 @@
     <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Dashboard</a>
     <a href="{{ '/weeks/summer/week1' | relative_url }}" {% if page.phase == 'summer' or page.phase == 'bridge' %}class="active"{% endif %}>Summer</a>
     <a href="{{ '/weeks/offseason/os-week1' | relative_url }}" {% if page.phase == 'offseason' %}class="active"{% endif %}>Offseason</a>
+    <a href="{{ '/style-guide' | relative_url }}" {% if page.page_id == 'style-guide' %}class="active"{% endif %}>Style Guide</a>
   </nav>
 </header>

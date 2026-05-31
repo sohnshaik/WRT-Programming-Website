@@ -4,8 +4,15 @@
     transform: translateX(-100%);
     transition: transform $t-base;
     &.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.2); }
+    &.collapsed {
+      width: $sidebar-w; // Restore full width on mobile
+      .sch-header-top { flex-direction: row; }
+      .sch-title, .sch-label, .sp-label span:first-child { display: block; }
+      .sidebar-search-btn .ssb-text { display: inline; }
+      .nav-item .ni-text { display: block; }
+    }
   }
-  .main { margin-left: 0; }
+  .main { margin-left: 0; &.sidebar-narrow { margin-left: 0; } }
   .topbar .hamburger { display: block; }
   .topbar-links { display: none; }
 

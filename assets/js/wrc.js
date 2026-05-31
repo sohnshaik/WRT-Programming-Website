@@ -300,8 +300,113 @@ function closeSidebar() {
 
 // Close sidebar on ESC
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeSidebar();
+  if (e.key === 'Escape') {
+    closeSidebar();
+    closeSearch();
+  }
 });
+
+// ── SIDEBAR WIDTH TOGGLE (DESKTOP COLLAPSE) ──────────────────
+function toggleSidebarWidth() {
+  const sb = document.getElementById('sidebar');
+  if (!sb) return;
+  const isCollapsed = sb.classList.toggle('collapsed');
+  const btn = sb.querySelector('.sidebar-collapse-btn .scb-icon');
+  if (btn) btn.textContent = isCollapsed ? '›' : '‹';
+  localStorage.setItem('sidebar-collapsed', isCollapsed);
+  
+  const main = document.querySelector('.main');
+  if (main) main.classList.toggle('sidebar-narrow');
+}
+
+// Restore collapsed state on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const wasCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
+  if (wasCollapsed) {
+    const sb = document.getElementById('sidebar');
+    const btn = sb?.querySelector('.sidebar-collapse-btn .scb-icon');
+    if (sb) sb.classList.add('collapsed');
+    if (btn) btn.textContent = '›';
+    const main = document.querySelector('.main');
+    if (main) main.classList.add('sidebar-narrow');
+  }
+});
+
+// ── SEARCH FUNCTIONALITY ─────────────────────────────────────
+const SEARCH_INDEX = [
+  { title: 'The Basics', url: '/weeks/summer/week1', tags: ['variables', 'types', 'scope', 'java'] },
+  { title: 'Logic & Control Flow', url: '/weeks/summer/week2', tags: ['boolean', 'if', 'switch', 'operators'] },
+  { title: 'Loops', url: '/weeks/summer/week3', tags: ['for', 'foreach', 'while', 'iteration'] },
+  { title: 'Arrays & Methods', url: '/weeks/summer/week4', tags: ['array', 'arraylist', 'method', 'parameters'] },
+  { title: 'OOP — Classes & Objects', url: '/weeks/summer/week5', tags: ['class', 'object', 'oop', 'encapsulation'] },
+  { title: 'Inheritance & Polymorphism', url: '/weeks/summer/week6', tags: ['inherit', 'extends', 'interface', 'override'] },
+  { title: 'Advanced Classes', url: '/weeks/summer/week7', tags: ['enum', 'abstract', 'nested', 'generics'] },
+  { title: 'Bridge Week — XRP & WPILib', url: '/weeks/summer/week8', tags: ['wpilibx', 'robot', 'xrp', 'hardware'] },
+  { title: 'Git & GitHub', url: '/weeks/offseason/os-week1', tags: ['git', 'github', 'branch', 'pull request'] },
+  { title: 'WPILib Setup', url: '/weeks/offseason/os-week2', tags: ['setup', 'environment', 'wpilib', 'robotcontainer'] },
+  { title: 'Command-Based Architecture', url: '/weeks/offseason/os-week3', tags: ['command', 'subsystem', 'scheduler', 'trigger'] },
+  { title: 'Motors & Sensors', url: '/weeks/offseason/os-week4', tags: ['motor', 'encoder', 'sensor', 'smartdashboard'] },
+  { title: 'PID Control', url: '/weeks/offseason/os-week5', tags: ['pid', 'control', 'tuning', 'feedforward'] },
+  { title: 'Autonomous & PathPlanner', url: '/weeks/offseason/os-week6', tags: ['autonomous', 'pathplanner', 'odometry', 'field'] },
+  { title: 'Subsystem Ownership', url: '/weeks/offseason/os-week7', tags: ['subsystem', 'architecture', 'design', 'code review'] },
+  { title: 'Build Season Prep', url: '/weeks/offseason/os-week8', tags: ['build', 'sprint', 'scrum', 'advantagekit'] }
+];
+
+function openSearch() {
+  const modal = document.getElementById('search-modal') || createSearchModal();
+  modal.style.display = 'flex';
+  modal.querySelector('.search-input')?.focus();
+}
+
+function closeSearch() {
+  const modal = document.getElementById('search-modal');
+  if (modal) modal.style.display = 'none';
+}
+
+function createSearchModal() {
+  const modal = document.createElement('div');
+  modal.id = 'search-modal';
+  modal.className = 'search-modal';
+  modal.innerHTML = `
+    <div class="search-modal-bg" onclick="closeSearch()"></div>
+    <div class="search-modal-content">
+      <div class="search-header">
+        <input type="text" class="search-input" placeholder="Search topics, keywords..." 
+               onkeyup="performSearch(this.value)">
+        <button onclick="closeSearch()" class="search-close">✕</button>
+      </div>
+      <div id="search-results" class="search-results"></div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  modal.querySelector('.search-modal-bg').addEventListener('click', closeSearch);
+  return modal;
+}
+
+function performSearch(query) {
+  const results = document.getElementById('search-results');
+  if (!query.trim()) {
+    results.innerHTML = '<div class="sr-empty">Start typing to search...</div>';
+    return;
+  }
+
+  const q = query.toLowerCase();
+  const matches = SEARCH_INDEX.filter(item =>
+    item.title.toLowerCase().includes(q) ||
+    item.tags.some(tag => tag.includes(q))
+  );
+
+  if (matches.length === 0) {
+    results.innerHTML = '<div class="sr-empty">No results found.</div>';
+  } else {
+    results.innerHTML = matches.map(item => `
+      <a href="${item.url}" class="search-result-item" onclick="closeSearch()">
+        <span class="sri-title">${item.title}</span>
+        <span class="sri-tags">${item.tags.slice(0, 2).join(' • ')}</span>
+      </a>
+    `).join('');
+  }
+}
 
 // ── NAV GROUP COLLAPSE ───────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -322,4 +427,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Show complete banner if already done
   const pageId = document.body.dataset.pageId;
   if (pageId) WRC.maybeShowBanner(pageId);
+
+  // Create search modal
+  createSearchModal();
+
+  // Search via Ctrl+K
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+  });
 });
