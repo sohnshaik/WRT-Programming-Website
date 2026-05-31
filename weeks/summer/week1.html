@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 1 — The Basics | Walton Robotics</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="site-wrapper">
+
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="team-tag">Team 2974</div>
+      <h1>Walton Robotics<br>Programming Course</h1>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Start Here</div>
+      <a class="nav-link" href="../../index.html">Home</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Summer — Java Foundations</div>
+      <a class="nav-link active" href="week1.html"><span class="week-num">W1</span> The Basics</a>
+      <a class="nav-link" href="week2.html"><span class="week-num">W2</span> Logic &amp; Control Flow</a>
+      <a class="nav-link" href="week3.html"><span class="week-num">W3</span> Loops</a>
+      <a class="nav-link" href="week4.html"><span class="week-num">W4</span> Arrays &amp; Methods</a>
+      <a class="nav-link" href="week5.html"><span class="week-num">W5</span> OOP — Classes &amp; Objects</a>
+      <a class="nav-link" href="week6.html"><span class="week-num">W6</span> Inheritance &amp; Polymorphism</a>
+      <a class="nav-link" href="week7.html"><span class="week-num">W7</span> Advanced Classes</a>
+      <a class="nav-link" href="week8.html"><span class="week-num">W8</span> Bridge — XRP &amp; WPILib</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Offseason — FRC Training</div>
+      <a class="nav-link" href="../offseason/week1.html"><span class="week-num">O1</span> Git &amp; GitHub</a>
+      <a class="nav-link" href="../offseason/week2.html"><span class="week-num">O2</span> WPILib Setup</a>
+      <a class="nav-link" href="../offseason/week3.html"><span class="week-num">O3</span> Command-Based</a>
+      <a class="nav-link" href="../offseason/week4.html"><span class="week-num">O4</span> Motors &amp; Sensors</a>
+      <a class="nav-link" href="../offseason/week5.html"><span class="week-num">O5</span> PID Control</a>
+      <a class="nav-link" href="../offseason/week6.html"><span class="week-num">O6</span> Autonomous</a>
+      <a class="nav-link" href="../offseason/week7.html"><span class="week-num">O7</span> Subsystem Ownership</a>
+      <a class="nav-link" href="../offseason/week8.html"><span class="week-num">O8</span> Build Season Prep</a>
+    </div>
+    <div class="sidebar-footer"><div>2974 · Walton Robotics</div><div>2026–27 Season</div></div>
+  </nav>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a>
+        <span>/</span>
+        <a href="#">Summer</a>
+        <span>/</span>
+        <span>Week 1</span>
+      </div>
+      <div class="week-badge badge-summer">Summer · Week 1 of 8</div>
+      <h1 class="page-title">The Basics</h1>
+      <p class="page-subtitle">Variables, data types, operators, scope, and writing code that other people can actually read.</p>
+    </div>
+
+    <!-- VARIABLES -->
+    <h2 class="section-title">Variables</h2>
+    <p>A variable is a named container for a value. You give it a type, a name, and usually a starting value. From that point on, you can use the name anywhere in that variable's scope.</p>
+    <p>In FRC, you use variables constantly — motor IDs, speeds, sensor readings, flags. Naming them well is half the job.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">java</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+      <pre><span class="cmt">// Basic variable declaration</span>
+<span class="type">int</span> motorID = <span class="num">1</span>;
+<span class="type">double</span> motorSpeed = <span class="num">0.75</span>;
+<span class="type">boolean</span> isRunning = <span class="kw">false</span>;
+<span class="type">String</span> subsystemName = <span class="str">"Drivetrain"</span>;
+
+<span class="cmt">// final = constant, can never change after this line</span>
+<span class="kw">final</span> <span class="type">int</span> MAX_MOTOR_ID = <span class="num">20</span>;
+</pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <p><strong>FRC connection:</strong> In robot code you'll see a <code>Constants.java</code> file full of <code>final</code> variables — motor IDs, gear ratios, PID values. That's this concept, just organized into one place.</p>
+    </div>
+
+    <!-- DATA TYPES -->
+    <h2 class="section-title">Data Types</h2>
+    <p>Every variable in Java has a type. Types tell Java how much memory to use and what operations are valid. There are two categories: <strong>primitive</strong> (built-in, lowercase) and <strong>non-primitive</strong> (objects, uppercase).</p>
+
+    <table>
+      <thead>
+        <tr><th>Type</th><th>Category</th><th>Example value</th><th>FRC use</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>int</td><td>Primitive</td><td>5, -3, 1000</td><td>Motor IDs, counter values</td></tr>
+        <tr><td>double</td><td>Primitive</td><td>0.75, -1.0, 3.14</td><td>Motor speeds, sensor readings</td></tr>
+        <tr><td>boolean</td><td>Primitive</td><td>true / false</td><td>Button state, limit switch</td></tr>
+        <tr><td>String</td><td>Non-primitive</td><td>"Drivetrain"</td><td>Subsystem names, logging</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-title">Type Casting</h3>
+    <p>Sometimes you need to convert between types. Going from a small type to a bigger one (like <code>int</code> → <code>double</code>) happens automatically. Going the other direction requires you to explicitly cast it — and you lose some precision.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">java</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+      <pre><span class="cmt">// Implicit (automatic) — int fits inside double, no info lost</span>
+<span class="type">int</span> ticks = <span class="num">500</span>;
+<span class="type">double</span> position = ticks; <span class="cmt">// fine, becomes 500.0</span>
+
+<span class="cmt">// Explicit (manual) — double → int, decimal part gets chopped</span>
+<span class="type">double</span> sensorReading = <span class="num">3.87</span>;
+<span class="type">int</span> roundedDown = (<span class="type">int</span>) sensorReading; <span class="cmt">// becomes 3, not 4</span>
+
+<span class="cmt">// FRC example: encoder returns double, you need an int index</span>
+<span class="type">double</span> encoderTicks = <span class="fn">getEncoder</span>().<span class="fn">getPosition</span>();
+<span class="type">int</span> slot = (<span class="type">int</span>) encoderTicks;</pre>
+    </div>
+
+    <!-- OPERATORS -->
+    <h2 class="section-title">Operators</h2>
+    <p>Operators let you do math and comparisons. You'll use these in almost every line of robot code.</p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="cc-label">Math operators</div>
+        <div class="cc-title">+  −  *  /  %</div>
+        <div class="cc-desc"><code>%</code> is remainder (modulo). <code>5 % 2 = 1</code>. Useful for cycling through indices.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-label">Assignment</div>
+        <div class="cc-title">+=  −=  *=  /=</div>
+        <div class="cc-desc"><code>speed += 0.1</code> is shorthand for <code>speed = speed + 0.1</code>. You'll write this constantly.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-label">Increment / Decrement</div>
+        <div class="cc-title">++  −−</div>
+        <div class="cc-desc"><code>i++</code> adds 1. <code>i--</code> subtracts 1. Used in every for loop you'll ever write.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-label">Comparison</div>
+        <div class="cc-title">==  !=  &lt;  &gt;  &lt;=  &gt;=</div>
+        <div class="cc-desc">These return a boolean. <code>==</code> checks equality; don't mix it up with <code>=</code> (assignment).</div>
+      </div>
+    </div>
+
+    <!-- READABILITY -->
+    <h2 class="section-title">Writing Readable Code</h2>
+    <p>We have a lot of programmers on this team. Everyone thinks differently. If your code is a mess, the person debugging it at 11pm before a competition is going to have a very bad time — and that person might be you.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">java — bad vs good</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+      <pre><span class="cmt">// BAD — what does any of this mean?</span>
+<span class="type">double</span> x1 = <span class="num">0.8</span>;
+<span class="type">int</span> y = <span class="num">3</span>;
+<span class="type">boolean</span> f = <span class="kw">true</span>;
+
+<span class="cmt">// GOOD — self-documenting</span>
+<span class="type">double</span> maxShooterSpeed = <span class="num">0.8</span>;
+<span class="type">int</span> shooterMotorID = <span class="num">3</span>;
+<span class="type">boolean</span> isShooterEnabled = <span class="kw">true</span>;
+</pre>
+    </div>
+
+    <div class="callout callout-warning">
+      <p><strong>Naming rules:</strong> Variables and methods → <code>camelCase</code>. Classes → <code>PascalCase</code>. Constants → <code>SCREAMING_SNAKE_CASE</code>. Never use Java reserved words like <code>int</code>, <code>class</code>, <code>for</code>, <code>boolean</code> as names.</p>
+    </div>
+
+    <h3 class="sub-title">Scope</h3>
+    <p>A variable only exists inside the <code>{ }</code> block it was declared in. Declare a variable inside an <code>if</code> block and you can't use it outside of that block.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">java</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+      <pre><span class="type">void</span> <span class="fn">example</span>() {
+    <span class="type">double</span> speed = <span class="num">0.5</span>; <span class="cmt">// exists for the whole method</span>
+
+    <span class="kw">if</span> (speed &gt; <span class="num">0.3</span>) {
+        <span class="type">boolean</span> isFast = <span class="kw">true</span>; <span class="cmt">// only exists inside this if block</span>
+        System.out.<span class="fn">println</span>(isFast);
+    }
+
+    <span class="cmt">// System.out.println(isFast); ← ERROR: isFast out of scope here</span>
+}</pre>
+    </div>
+
+    <!-- FILL IN THE BLANK -->
+    <h2 class="section-title">Fill in the Blanks</h2>
+    <p>Complete the code below. Type the correct Java keyword, type name, or value into each blank.</p>
+
+    <div id="fill1" style="margin-bottom:1rem">
+      <div class="fill-container">
+        <span class="cmt">// 1. Declare an integer variable for a motor ID of 5</span><br>
+        <input class="fill-blank" data-answer="int" placeholder="???"> motorID = 5;
+      </div>
+      <div class="fill-container">
+        <span class="cmt">// 2. Declare a constant double for max speed</span><br>
+        <span class="kw">final</span> <input class="fill-blank" data-answer="double" placeholder="???"> MAX_SPEED = 1.0;
+      </div>
+      <div class="fill-container">
+        <span class="cmt">// 3. Cast a double to int (explicit cast)</span><br>
+        <span class="type">double</span> val = 4.9;<br>
+        <span class="type">int</span> truncated = (<input class="fill-blank" data-answer="int" placeholder="???">)val;
+      </div>
+      <div class="fill-container">
+        <span class="cmt">// 4. Increment a counter variable named i</span><br>
+        <span class="type">int</span> i = 0;<br>
+        <input class="fill-blank" data-answer="i++|i += 1|i=i+1|i = i + 1" placeholder="???"> <span class="cmt">// i is now 1</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <button class="btn btn-amber btn-sm" onclick="checkFills('fill1')">Check Answers</button>
+      <span id="fill1-result" style="font-family:var(--font-mono);font-size:12px;display:none"></span>
+    </div>
+
+    <!-- QUIZ -->
+    <h2 class="section-title">Knowledge Check</h2>
+    <div id="quiz-w1"></div>
+
+    <!-- CHALLENGE -->
+    <h2 class="section-title">Coding Challenge</h2>
+    <div class="challenge-box">
+      <div class="challenge-header">
+        <div class="challenge-title">⚡ Challenge — Motor Calculator</div>
+        <div class="challenge-desc">Apply variables, types, and operators in a mini FRC scenario</div>
+      </div>
+      <div class="challenge-body">
+        <p class="challenge-prompt">
+          Write a short Java snippet that does the following:
+          <br><br>
+          1. Declare a <code>final double</code> called <code>GEAR_RATIO</code> set to <code>8.46</code><br>
+          2. Declare a <code>double</code> called <code>motorRPM</code> set to <code>5400.0</code><br>
+          3. Declare a <code>double</code> called <code>wheelRPM</code> and calculate it as <code>motorRPM / GEAR_RATIO</code><br>
+          4. Cast <code>wheelRPM</code> to an <code>int</code> and store it in <code>wheelRPMInt</code><br>
+          5. Add a single-line comment above each line explaining what it does
+        </p>
+        <textarea class="code-input" placeholder="// Write your code here..."></textarea>
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <button class="btn btn-amber btn-sm" onclick="showSolution('sol1')">Show Solution</button>
+        </div>
+        <div id="sol1" style="display:none;margin-top:1rem">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">solution</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+            <pre><span class="cmt">// Gear ratio between motor and wheel shaft</span>
+<span class="kw">final</span> <span class="type">double</span> GEAR_RATIO = <span class="num">8.46</span>;
+
+<span class="cmt">// Free spin speed of the Falcon 500 motor</span>
+<span class="type">double</span> motorRPM = <span class="num">5400.0</span>;
+
+<span class="cmt">// Actual wheel speed after the gear reduction</span>
+<span class="type">double</span> wheelRPM = motorRPM / GEAR_RATIO;
+
+<span class="cmt">// Truncated to int — loses decimal precision</span>
+<span class="type">int</span> wheelRPMInt = (<span class="type">int</span>) wheelRPM;</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+      <button class="btn btn-outline" id="complete-btn" onclick="markComplete('summer-w1')">Mark as Complete</button>
+    </div>
+
+    <div class="page-nav">
+      <div></div>
+      <a href="week2.html" class="nav-arrow">
+        <span class="na-label">Next →</span>
+        <span class="na-title">Week 2 — Logic &amp; Control Flow</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<script src="../../js/quiz.js"></script>
+<script>
+const quiz_quiz_w1 = new Quiz('quiz-w1', [
+  {
+    question: "What is the correct way to declare a constant integer in Java?",
+    options: [
+      "const int MAX_SPEED = 10;",
+      "final int MAX_SPEED = 10;",
+      "int final MAX_SPEED = 10;",
+      "static int MAX_SPEED = 10;"
+    ],
+    correct: 1,
+    explanation: "<code>final</code> is the Java keyword for constants. <code>const</code> doesn't exist in Java (it's C/C++). <code>static</code> is different — it means the variable belongs to the class, not an instance."
+  },
+  {
+    question: "You have <code>double speed = 3.9;</code> and cast it to int. What value do you get?",
+    options: ["4 (rounds up)", "3 (truncates toward zero)", "3.9 (no change)", "Error — can't cast double to int"],
+    correct: 1,
+    explanation: "Java truncates toward zero when casting double to int — it doesn't round. <code>(int) 3.9 = 3</code>, not 4. This trips people up when working with encoder values."
+  },
+  {
+    question: "Which of these variable names follows Java naming conventions for a non-constant variable?",
+    options: ["MotorSpeed", "motorspeed", "motorSpeed", "motor_speed"],
+    correct: 2,
+    explanation: "Non-constant variables use camelCase in Java — lowercase first letter, capital letter at the start of each new word. <code>motorSpeed</code> is correct. <code>MotorSpeed</code> would be a class name (PascalCase)."
+  },
+  {
+    question: "What does the <code>%</code> operator do?",
+    options: [
+      "Calculates a percentage",
+      "Returns the remainder after division",
+      "Divides and rounds to nearest int",
+      "None of the above"
+    ],
+    correct: 1,
+    explanation: "<code>%</code> is the modulo operator — it returns the remainder. <code>7 % 3 = 1</code> because 7 / 3 = 2 remainder 1. In FRC it's useful for cycling through options: <code>index % arrayLength</code> wraps around."
+  },
+  {
+    question: "A variable declared inside an <code>if</code> block is accessible...",
+    options: [
+      "Anywhere in the file",
+      "Anywhere in the method",
+      "Only inside that if block",
+      "Only inside the class"
+    ],
+    correct: 2,
+    explanation: "This is scope. Variables live and die with their enclosing curly braces <code>{ }</code>. Declare inside an <code>if</code>? It dies when the if block ends. This is a common source of 'variable not found' compiler errors."
+  },
+  {
+    question: "What is the output of: <code>int x = 10; x += 3; System.out.println(x);</code>",
+    options: ["10", "3", "13", "103"],
+    correct: 2,
+    explanation: "<code>x += 3</code> is shorthand for <code>x = x + 3</code>. So x starts at 10, then becomes 13."
+  }
+]);
+
+function showSolution(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const completed = JSON.parse(localStorage.getItem('wrc-progress') || '{}');
+  if (completed['summer-w1']) {
+    const btn = document.getElementById('complete-btn');
+    if (btn) { btn.textContent = '✓ Completed'; btn.disabled = true; btn.style.opacity = '0.6'; }
+  }
+});
+</script>
+</body>
+</html>

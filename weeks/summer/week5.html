@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 5 — OOP: Classes & Objects | Walton Robotics</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="site-wrapper">
+
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="team-tag">Team 2974</div>
+      <h1>Walton Robotics<br>Programming Course</h1>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Start Here</div>
+      <a class="nav-link" href="../../index.html">Home</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Summer — Java Foundations</div>
+      <a class="nav-link" href="week1.html"><span class="week-num">W1</span> The Basics</a>
+      <a class="nav-link" href="week2.html"><span class="week-num">W2</span> Logic &amp; Control Flow</a>
+      <a class="nav-link" href="week3.html"><span class="week-num">W3</span> Loops</a>
+      <a class="nav-link" href="week4.html"><span class="week-num">W4</span> Arrays &amp; Methods</a>
+      <a class="nav-link active" href="week5.html"><span class="week-num">W5</span> OOP — Classes &amp; Objects</a>
+      <a class="nav-link" href="week6.html"><span class="week-num">W6</span> Inheritance &amp; Polymorphism</a>
+      <a class="nav-link" href="week7.html"><span class="week-num">W7</span> Advanced Classes</a>
+      <a class="nav-link" href="week8.html"><span class="week-num">W8</span> Bridge — XRP &amp; WPILib</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Offseason — FRC Training</div>
+      <a class="nav-link" href="../offseason/week1.html"><span class="week-num">O1</span> Git &amp; GitHub</a>
+      <a class="nav-link" href="../offseason/week2.html"><span class="week-num">O2</span> WPILib Setup</a>
+      <a class="nav-link" href="../offseason/week3.html"><span class="week-num">O3</span> Command-Based</a>
+      <a class="nav-link" href="../offseason/week4.html"><span class="week-num">O4</span> Motors &amp; Sensors</a>
+      <a class="nav-link" href="../offseason/week5.html"><span class="week-num">O5</span> PID Control</a>
+      <a class="nav-link" href="../offseason/week6.html"><span class="week-num">O6</span> Autonomous</a>
+      <a class="nav-link" href="../offseason/week7.html"><span class="week-num">O7</span> Subsystem Ownership</a>
+      <a class="nav-link" href="../offseason/week8.html"><span class="week-num">O8</span> Build Season Prep</a>
+    </div>
+    <div class="sidebar-footer"><div>2974 · Walton Robotics</div><div>2026–27 Season</div></div>
+  </nav>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a><span>/</span>
+        <a href="#">Summer</a><span>/</span><span>Week 5</span>
+      </div>
+      <div class="week-badge badge-summer">Summer · Week 5 of 8</div>
+      <h1 class="page-title">OOP — Classes &amp; Objects</h1>
+      <p class="page-subtitle">The most important week in this course. Everything in FRC robot code is a class. If you understand this week cold, the rest falls into place.</p>
+    </div>
+
+    <div class="callout callout-info">
+      <p><strong>Why this matters:</strong> Every subsystem on our robot is a class. <code>Drivetrain.java</code>, <code>Shooter.java</code>, <code>Coral.java</code> — all classes. When you add a motor to a subsystem or write a method to control it, you're doing exactly what this week teaches you.</p>
+    </div>
+
+    <h2 class="section-title">What is a Class?</h2>
+    <p>A <strong>class</strong> is a blueprint. It defines what data something holds and what it can do. You write the blueprint once, then create as many objects from it as you need.</p>
+    <p>An <strong>object</strong> is one specific instance built from that blueprint. If <code>Motor</code> is a class, then <code>leftDriveMotor</code> and <code>rightDriveMotor</code> are two separate objects — each with their own ID and speed.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">java — a simple Motor class</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+      <pre><span class="kw">public class</span> <span class="cls">Motor</span> {
+
+    <span class="cmt">// Instance variables — data each Motor object holds</span>
+    <span class="kw">private</span> <span class="type">int</span> id;
+    <span class="kw">private</span> <span class="type">double</span> speed;
+    <span class="kw">private</span> <span class="type">boolean</span> isInverted;
+
+    <span class="cmt">// Constructor — runs when you create a new Motor</span>
+    <span class="kw">public</span> <span class="fn">Motor</span>(<span class="type">int</span> id, <span class="type">boolean</span> isInverted) {
+        <span class="kw">this</span>.id = id;
+        <span class="kw">this</span>.isInverted = isInverted;
+        <span class="kw">this</span>.speed = <span class="num">0.0</span>; <span class="cmt">// motors start stopped</span>
+    }
+
+    <span class="cmt">// Method — something a Motor can do</span>
+    <span class="kw">public void</span> <span class="fn">setSpeed</span>(<span class="type">double</span> newSpeed) {
+        <span class="kw">this</span>.speed = isInverted ? -newSpeed : newSpeed;
+    }
+
+    <span class="kw">public double</span> <span class="fn">getSpeed</span>() {
+        <span class="kw">return</span> speed;
+    }
+}
+</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">java — creating objects from the class</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+      <pre><span class="cmt">// Create two Motor objects — each is its own independent instance</span>
+<span class="cls">Motor</span> leftMotor = <span class="kw">new</span> <span class="fn">Motor</span>(<span class="num">1</span>, <span class="kw">false</span>);
+<span class="cls">Motor</span> rightMotor = <span class="kw">new</span> <span class="fn">Motor</span>(<span class="num">2</span>, <span class="kw">true</span>); <span class="cmt">// inverted</span>
+
+leftMotor.<span class="fn">setSpeed</span>(<span class="num">0.5</span>);
+rightMotor.<span class="fn">setSpeed</span>(<span class="num">0.5</span>);
+
+System.out.<span class="fn">println</span>(leftMotor.<span class="fn">getSpeed</span>());  <span class="cmt">// 0.5</span>
+System.out.<span class="fn">println</span>(rightMotor.<span class="fn">getSpeed</span>()); <span class="cmt">// -0.5 (inverted!)</span></pre>
+    </div>
+
+    <!-- PARTS OF A CLASS -->
+    <h2 class="section-title">Parts of a Class</h2>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="cc-label">Instance Variables</div>
+        <div class="cc-title">Data the object stores</div>
+        <div class="cc-desc">Each object gets its own copy. <code>leftMotor.id</code> and <code>rightMotor.id</code> are different numbers.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-label">Constructor</div>
+        <div class="cc-title">Runs when you use <code>new</code></div>
+        <div class="cc-desc">Same name as the class. No return type (not even void). Used to set initial values.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-label">Methods</div>
+        <div class="cc-title">Things the object can do</div>
+        <div class="cc-desc">Behaviors. <code>setSpeed()</code>, <code>stop()</code>, <code>getPosition()</code> — all methods.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-label"><code>this</code> keyword</div>
+        <div class="cc-title">Refers to the current object</div>
+        <div class="cc-desc"><code>this.speed</code> means the instance variable. Needed when a parameter has the same name.</div>
+      </div>
+    </div>
+
+    <!-- ACCESS MODIFIERS -->
+    <h2 class="section-title">Access Modifiers &amp; Encapsulation</h2>
+    <p><strong>Encapsulation</strong> means keeping a class's data private and only allowing access through its methods. This protects your data — nobody can accidentally set a motor speed to 500 if you validate it in <code>setSpeed()</code>.</p>
+
+    <table>
+      <thead><tr><th>Modifier</th><th>Who can access it</th><th>When to use</th></tr></thead>
+      <tbody>
+        <tr><td>public</td><td>Anyone, anywhere</td><td>Methods you want others to call</td></tr>
+        <tr><td>private</td><td>Only inside this class</td><td>Instance variables (almost always)</td></tr>
+        <tr><td>protected</td><td>This class + subclasses</td><td>When you expect inheritance</td></tr>
+      </tbody>
+    </table>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">java — encapsulation with getters and setters</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+      <pre><span class="kw">public class</span> <span class="cls">Shooter</span> {
+    <span class="kw">private</span> <span class="type">double</span> targetRPM; <span class="cmt">// private — can't set from outside directly</span>
+
+    <span class="cmt">// GETTER — read the value</span>
+    <span class="kw">public double</span> <span class="fn">getTargetRPM</span>() {
+        <span class="kw">return</span> targetRPM;
+    }
+
+    <span class="cmt">// SETTER — set the value, with validation</span>
+    <span class="kw">public void</span> <span class="fn">setTargetRPM</span>(<span class="type">double</span> rpm) {
+        <span class="kw">if</span> (rpm &lt; <span class="num">0</span> || rpm &gt; <span class="num">6000</span>) {
+            System.out.<span class="fn">println</span>(<span class="str">"Invalid RPM, ignoring"</span>);
+            <span class="kw">return</span>;
+        }
+        <span class="kw">this</span>.targetRPM = rpm;
+    }
+}</pre>
+    </div>
+
+    <!-- INTERACTIVE CLASS BUILDER -->
+    <h2 class="section-title">Class Builder</h2>
+    <p>Add fields and methods below and watch the class get generated in real time.</p>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.5rem;margin:1.25rem 0">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem">
+        <div>
+          <label style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);display:block;margin-bottom:6px">Class name</label>
+          <input id="cls-name" value="Subsystem" oninput="buildClass()" style="width:100%;padding:8px;background:var(--surface);border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:var(--font-mono);font-size:14px">
+        </div>
+        <div>
+          <label style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);display:block;margin-bottom:6px">Fields (comma separated, e.g. <code>int id, double speed</code>)</label>
+          <input id="cls-fields" value="int id, double speed, boolean isEnabled" oninput="buildClass()" style="width:100%;padding:8px;background:var(--surface);border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:var(--font-mono);font-size:13px">
+        </div>
+      </div>
+      <div id="cls-output" style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:1rem;font-family:var(--font-mono);font-size:13px;line-height:1.7;white-space:pre;overflow-x:auto;color:var(--text)"></div>
+    </div>
+
+    <!-- FILL IN THE BLANK -->
+    <h2 class="section-title">Fill in the Blanks</h2>
+    <div id="fill5">
+      <div class="fill-container">
+        <span class="cmt">// 1. Declare a private instance variable for motor speed</span><br>
+        <input class="fill-blank" data-answer="private" placeholder="???"> <span class="type">double</span> motorSpeed;
+      </div>
+      <div class="fill-container">
+        <span class="cmt">// 2. Constructor for a Subsystem class taking an int id</span><br>
+        <span class="kw">public</span> <input class="fill-blank" data-answer="Subsystem" placeholder="???"> (<span class="type">int</span> id) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">this</span>.id = id;<br>
+        }
+      </div>
+      <div class="fill-container">
+        <span class="cmt">// 3. Create a new Motor object with id=3, inverted=false</span><br>
+        <span class="cls">Motor</span> m = <input class="fill-blank" data-answer="new Motor(3, false)|new Motor(3,false)" placeholder="???????????">
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;margin-top:10px">
+      <button class="btn btn-amber btn-sm" onclick="checkFills('fill5')">Check Answers</button>
+      <span id="fill5-result" style="font-family:var(--font-mono);font-size:12px;display:none"></span>
+    </div>
+
+    <!-- QUIZ -->
+    <h2 class="section-title">Knowledge Check</h2>
+    <div id="quiz-w5"></div>
+
+    <!-- CHALLENGE -->
+    <h2 class="section-title">Coding Challenge</h2>
+    <div class="challenge-box">
+      <div class="challenge-header">
+        <div class="challenge-title">⚡ Challenge — Build a Subsystem Class</div>
+        <div class="challenge-desc">Design a complete class the way you'd actually write it in robot code</div>
+      </div>
+      <div class="challenge-body">
+        <p class="challenge-prompt">
+          Write a class called <code>Intake</code> that represents an intake subsystem. It should have:<br><br>
+          <strong>Private fields:</strong> <code>int motorID</code>, <code>double speed</code>, <code>boolean isRunning</code><br><br>
+          <strong>Constructor:</strong> Takes a <code>motorID</code>, sets speed to 0.0 and isRunning to false<br><br>
+          <strong>Methods:</strong><br>
+          — <code>start(double speed)</code> — sets the speed and marks isRunning as true<br>
+          — <code>stop()</code> — sets speed to 0.0 and isRunning to false<br>
+          — <code>isRunning()</code> — returns the boolean<br>
+          — <code>getSpeed()</code> — returns the current speed<br><br>
+          Then create two Intake objects and test your methods.
+        </p>
+        <textarea class="code-input" placeholder="public class Intake { ... }"></textarea>
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <button class="btn btn-amber btn-sm" onclick="showSolution('sol5')">Show Solution</button>
+        </div>
+        <div id="sol5" style="display:none;margin-top:1rem">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">solution</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+            <pre><span class="kw">public class</span> <span class="cls">Intake</span> {
+    <span class="kw">private</span> <span class="type">int</span> motorID;
+    <span class="kw">private</span> <span class="type">double</span> speed;
+    <span class="kw">private</span> <span class="type">boolean</span> isRunning;
+
+    <span class="kw">public</span> <span class="fn">Intake</span>(<span class="type">int</span> motorID) {
+        <span class="kw">this</span>.motorID = motorID;
+        <span class="kw">this</span>.speed = <span class="num">0.0</span>;
+        <span class="kw">this</span>.isRunning = <span class="kw">false</span>;
+    }
+
+    <span class="kw">public void</span> <span class="fn">start</span>(<span class="type">double</span> speed) {
+        <span class="kw">this</span>.speed = speed;
+        <span class="kw">this</span>.isRunning = <span class="kw">true</span>;
+    }
+
+    <span class="kw">public void</span> <span class="fn">stop</span>() {
+        <span class="kw">this</span>.speed = <span class="num">0.0</span>;
+        <span class="kw">this</span>.isRunning = <span class="kw">false</span>;
+    }
+
+    <span class="kw">public boolean</span> <span class="fn">isRunning</span>() { <span class="kw">return</span> isRunning; }
+    <span class="kw">public double</span> <span class="fn">getSpeed</span>() { <span class="kw">return</span> speed; }
+}
+
+<span class="cmt">// Testing it:</span>
+<span class="cls">Intake</span> frontIntake = <span class="kw">new</span> <span class="fn">Intake</span>(<span class="num">5</span>);
+<span class="cls">Intake</span> backIntake  = <span class="kw">new</span> <span class="fn">Intake</span>(<span class="num">6</span>);
+
+frontIntake.<span class="fn">start</span>(<span class="num">0.8</span>);
+System.out.<span class="fn">println</span>(frontIntake.<span class="fn">isRunning</span>()); <span class="cmt">// true</span>
+System.out.<span class="fn">println</span>(backIntake.<span class="fn">isRunning</span>());  <span class="cmt">// false — separate object!</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+      <button class="btn btn-outline" id="complete-btn" onclick="markComplete('summer-w5')">Mark as Complete</button>
+    </div>
+
+    <div class="page-nav">
+      <a href="week4.html" class="nav-arrow">
+        <span class="na-label">← Previous</span>
+        <span class="na-title">Week 4 — Arrays &amp; Methods</span>
+      </a>
+      <a href="week6.html" class="nav-arrow" style="text-align:right">
+        <span class="na-label">Next →</span>
+        <span class="na-title">Week 6 — Inheritance &amp; Polymorphism</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<script src="../../js/quiz.js"></script>
+<script>
+const quiz_quiz_w5 = new Quiz('quiz-w5', [
+  {
+    question: "What is the difference between a class and an object?",
+    options: [
+      "They're the same thing, just different names",
+      "A class is the blueprint; an object is one specific instance built from that blueprint",
+      "A class holds data; an object holds methods",
+      "An object is defined with the class keyword"
+    ],
+    correct: 1,
+    explanation: "Class = blueprint. Object = built thing. <code>Motor</code> is the class (blueprint). <code>leftMotor = new Motor(1, false)</code> creates an object (instance). You can make many objects from one class."
+  },
+  {
+    question: "What makes a constructor different from a regular method?",
+    options: [
+      "Constructors are always private",
+      "Constructors use the void return type",
+      "Constructors have the same name as the class and no return type",
+      "Constructors can't take parameters"
+    ],
+    correct: 2,
+    explanation: "Constructors have the same name as the class and no return type — not even void. They run automatically when you use the <code>new</code> keyword."
+  },
+  {
+    question: "Why should instance variables almost always be <code>private</code>?",
+    options: [
+      "Private variables run faster",
+      "To enforce encapsulation — control how data is accessed and validated",
+      "Because Java requires it",
+      "Private variables use less memory"
+    ],
+    correct: 1,
+    explanation: "Private + getters/setters = encapsulation. You can validate input in a setter (<code>if (speed > 1.0) return;</code>) instead of letting anyone set a motor to 9999. This prevents bugs and makes the codebase safer to modify."
+  },
+  {
+    question: "What does <code>this.speed = speed;</code> mean inside a constructor?",
+    options: [
+      "An error — you can't use 'this' in constructors",
+      "Set the local variable 'speed' equal to itself",
+      "Set the instance variable 'speed' (this object's speed) equal to the constructor parameter 'speed'",
+      "Create a new variable called 'this.speed'"
+    ],
+    correct: 2,
+    explanation: "<code>this</code> refers to the current object. When the parameter and instance variable share a name, <code>this.speed</code> refers to the instance variable, and plain <code>speed</code> refers to the parameter. Without <code>this</code>, you'd be assigning the parameter to itself — a silent bug."
+  },
+  {
+    question: "You create <code>Motor a = new Motor(1, false);</code> and <code>Motor b = new Motor(2, true);</code>. Are <code>a</code> and <code>b</code> sharing the same data?",
+    options: [
+      "Yes — they're both Motor objects so they share instance variables",
+      "No — each object has its own independent copy of instance variables",
+      "Only if you declare the variables static",
+      "It depends on the constructor"
+    ],
+    correct: 1,
+    explanation: "Each object is independent. Changing <code>a.speed</code> has zero effect on <code>b.speed</code>. This is the whole point — you can have 4 motors in a drivetrain, each their own object with their own ID and speed."
+  }
+]);
+
+function buildClass() {
+  const name = document.getElementById('cls-name').value || 'MyClass';
+  const fieldsRaw = document.getElementById('cls-fields').value;
+  const fields = fieldsRaw.split(',').map(f => f.trim()).filter(Boolean);
+
+  const fieldLines = fields.map(f => `    private ${f};`).join('\n');
+  const constructorParams = fields.map(f => {
+    const parts = f.trim().split(' ');
+    return parts.join(' ');
+  }).join(', ');
+  const constructorAssigns = fields.map(f => {
+    const varName = f.trim().split(' ').pop();
+    return `        this.${varName} = ${varName};`;
+  }).join('\n');
+  const getters = fields.map(f => {
+    const parts = f.trim().split(' ');
+    const type = parts[0], varName = parts[1];
+    const capName = varName.charAt(0).toUpperCase() + varName.slice(1);
+    return `    public ${type} get${capName}() { return ${varName}; }`;
+  }).join('\n');
+
+  document.getElementById('cls-output').innerHTML =
+    `<span class="kw">public class</span> <span class="cls">${name}</span> {\n\n${fieldLines ? fieldLines + '\n\n' : ''}    <span class="kw">public</span> <span class="fn">${name}</span>(${constructorParams}) {\n${constructorAssigns}\n    }\n\n${getters}\n}`;
+}
+
+function showSolution(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildClass();
+  const completed = JSON.parse(localStorage.getItem('wrc-progress') || '{}');
+  if (completed['summer-w5']) {
+    const btn = document.getElementById('complete-btn');
+    if (btn) { btn.textContent = '✓ Completed'; btn.disabled = true; btn.style.opacity = '0.6'; }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 3 — Loops | Walton Robotics</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="site-wrapper">
+
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="team-tag">Team 2974</div>
+      <h1>Walton Robotics<br>Programming Course</h1>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Start Here</div>
+      <a class="nav-link" href="../../index.html">Home</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Summer — Java Foundations</div>
+      <a class="nav-link" href="week1.html"><span class="week-num">W1</span> The Basics</a>
+      <a class="nav-link" href="week2.html"><span class="week-num">W2</span> Logic &amp; Control Flow</a>
+      <a class="nav-link active" href="week3.html"><span class="week-num">W3</span> Loops</a>
+      <a class="nav-link" href="week4.html"><span class="week-num">W4</span> Arrays &amp; Methods</a>
+      <a class="nav-link" href="week5.html"><span class="week-num">W5</span> OOP — Classes &amp; Objects</a>
+      <a class="nav-link" href="week6.html"><span class="week-num">W6</span> Inheritance &amp; Polymorphism</a>
+      <a class="nav-link" href="week7.html"><span class="week-num">W7</span> Advanced Classes</a>
+      <a class="nav-link" href="week8.html"><span class="week-num">W8</span> Bridge — XRP &amp; WPILib</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Offseason — FRC Training</div>
+      <a class="nav-link" href="../offseason/week1.html"><span class="week-num">O1</span> Git &amp; GitHub</a>
+      <a class="nav-link" href="../offseason/week2.html"><span class="week-num">O2</span> WPILib Setup</a>
+      <a class="nav-link" href="../offseason/week3.html"><span class="week-num">O3</span> Command-Based</a>
+      <a class="nav-link" href="../offseason/week4.html"><span class="week-num">O4</span> Motors &amp; Sensors</a>
+      <a class="nav-link" href="../offseason/week5.html"><span class="week-num">O5</span> PID Control</a>
+      <a class="nav-link" href="../offseason/week6.html"><span class="week-num">O6</span> Autonomous</a>
+      <a class="nav-link" href="../offseason/week7.html"><span class="week-num">O7</span> Subsystem Ownership</a>
+      <a class="nav-link" href="../offseason/week8.html"><span class="week-num">O8</span> Build Season Prep</a>
+    </div>
+    <div class="sidebar-footer"><div>2974 · Walton Robotics</div><div>2026–27 Season</div></div>
+  </nav>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a><span>/</span>
+        <a href="#">Summer</a><span>/</span>
+        <span>Week 3</span>
+      </div>
+      <div class="week-badge badge-summer">Summer · Week 3 of 8</div>
+      <h1 class="page-title">Loops</h1>
+      <p class="page-subtitle">For loops, foreach loops, and the very important reason while loops are banned from robot code.</p>
+    </div>
+
+    <h2 class="section-title">What is a Loop?</h2>
+    <p>A loop repeats a block of code until some condition is no longer true. Instead of writing the same line 50 times, you write it once and tell Java how many times to run it.</p>
+    <p>In robot code, loops show up everywhere — scanning through arrays of sensor values, running a set of motor configs at startup, iterating over a list of auto steps. You need to be comfortable with all of them.</p>
+
+    <!-- FOR LOOPS -->
+    <h2 class="section-title">For Loops</h2>
+    <p>The <code>for</code> loop is the workhorse. Use it when you know exactly how many times you want to repeat something.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">java</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+      <pre><span class="cmt">// Structure: for (start; condition; step)</span>
+<span class="kw">for</span> (<span class="type">int</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i++) {
+    System.out.<span class="fn">println</span>(<span class="str">"Loop #"</span> + i);
+}
+<span class="cmt">// Output: Loop #0, Loop #1, Loop #2, Loop #3, Loop #4</span></pre>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="cc-label">Init</div>
+        <div class="cc-title">int i = 0</div>
+        <div class="cc-desc">Runs once at the start. Declares the loop variable. Almost always starts at 0 because arrays are zero-indexed.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-label">Condition</div>
+        <div class="cc-title">i &lt; 5</div>
+        <div class="cc-desc">Checked before each iteration. Loop keeps going while this is <code>true</code>. When it's <code>false</code>, the loop exits.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-label">Step</div>
+        <div class="cc-title">i++</div>
+        <div class="cc-desc">Runs after each iteration. Usually increments. Can decrement (<code>i--</code>) to loop backwards.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-danger">
+      <p><strong>Infinite loop warning:</strong> If your condition never becomes <code>false</code>, the loop runs forever and your program freezes. <code>for (int i = 0; i &gt;= 0; i++)</code> — notice the condition never fails. This is a common mistake. Always double-check your condition.</p>
+    </div>
+
+    <!-- FOREACH -->
+    <h2 class="section-title">Foreach Loops</h2>
+    <p>The foreach loop is a cleaner way to loop through every item in an array when you don't need the index. It's less code and harder to mess up.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">java</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+      <pre><span class="type">double</span>[] motorSpeeds = {<span class="num">0.5</span>, <span class="num">0.75</span>, <span class="num">1.0</span>, <span class="num">-0.5</span>};
+
+<span class="cmt">// Foreach — read each value, can't change the array</span>
+<span class="kw">for</span> (<span class="type">double</span> speed : motorSpeeds) {
+    System.out.<span class="fn">println</span>(<span class="str">"Speed: "</span> + speed);
+}
+
+<span class="cmt">// Normal for — use this if you need to MODIFY the array</span>
+<span class="kw">for</span> (<span class="type">int</span> i = <span class="num">0</span>; i &lt; motorSpeeds.length; i++) {
+    motorSpeeds[i] = motorSpeeds[i] * <span class="num">0.8</span>; <span class="cmt">// reduce all speeds by 20%</span>
+}</pre>
+    </div>
+
+    <div class="callout callout-warning">
+      <p><strong>Foreach gotcha:</strong> The foreach loop gives you a copy of each element, not the actual array slot. Modifying the copy doesn't change the original array. If you need to change values, use a regular for loop with an index.</p>
+    </div>
+
+    <!-- WHILE LOOP BAN -->
+    <h2 class="section-title">The While Loop — and Why It's Banned</h2>
+    <p>A while loop repeats as long as a condition is true. In theory, nothing wrong with it. In robot code, it's a trap.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">java — how a while loop works</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+      <pre><span class="type">int</span> i = <span class="num">0</span>;
+<span class="kw">while</span> (i &lt; <span class="num">5</span>) {
+    System.out.<span class="fn">println</span>(<span class="str">"i = "</span> + i);
+    i++;
+}
+<span class="cmt">// Works fine in regular Java programs</span></pre>
+    </div>
+
+    <div class="callout callout-danger">
+      <p><strong>DO NOT use while loops in robot code.</strong> Here's why: FRC robots run on a loop-based framework. The robot's main loop calls your code every 20ms. If your code has a while loop inside it that gets stuck — waiting for a sensor, waiting for a button — it blocks the entire robot loop. The robot stops responding to the driver. Motors don't update. The watchdog timer fires. The robot dies.<br><br>
+      This is not a theoretical concern. It has happened. Don't be the person who learns this during a match.</p>
+    </div>
+
+    <div class="callout callout-tip">
+      <p><strong>What to use instead:</strong> State machines, command-based architecture, and boolean flags. You'll learn all of this in the offseason FRC phase. For now, just remember: <strong>for loops only in robot code.</strong></p>
+    </div>
+
+    <!-- INTERACTIVE LOOP VISUALIZER -->
+    <h2 class="section-title">Visualize a For Loop</h2>
+    <p>Adjust the values below and watch how the loop executes step by step.</p>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.5rem;margin:1.25rem 0">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:1.25rem">
+        <div>
+          <label style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);display:block;margin-bottom:6px">START (i = ?)</label>
+          <input type="number" id="loop-start" value="0" min="0" max="5" style="width:100%;padding:8px;background:var(--surface);border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:var(--font-mono);font-size:14px">
+        </div>
+        <div>
+          <label style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);display:block;margin-bottom:6px">END (i &lt; ?)</label>
+          <input type="number" id="loop-end" value="5" min="1" max="10" style="width:100%;padding:8px;background:var(--surface);border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:var(--font-mono);font-size:14px">
+        </div>
+        <div>
+          <label style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);display:block;margin-bottom:6px">STEP</label>
+          <select id="loop-step" style="width:100%;padding:8px;background:var(--surface);border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:var(--font-mono);font-size:14px">
+            <option value="1">i++ (add 1)</option>
+            <option value="2">i += 2 (add 2)</option>
+            <option value="-1">i-- (subtract 1)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="runViz()">Run Loop</button>
+      <div id="viz-output" style="margin-top:1rem;font-family:var(--font-mono);font-size:13px;min-height:40px"></div>
+      <div id="viz-code" style="margin-top:0.75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:0.75rem 1rem;font-family:var(--font-mono);font-size:12.5px;color:var(--green)"></div>
+    </div>
+
+    <!-- FILL IN THE BLANK -->
+    <h2 class="section-title">Fill in the Blanks</h2>
+
+    <div id="fill3">
+      <div class="fill-container">
+        <span class="cmt">// 1. Loop from 0 to 9 (10 iterations)</span><br>
+        <span class="kw">for</span> (<span class="type">int</span> i = <span class="num">0</span>; i <input class="fill-blank" data-answer="&lt; 10|<10" placeholder="??" style="min-width:60px">; i++) { }
+      </div>
+      <div class="fill-container">
+        <span class="cmt">// 2. Foreach loop over a double array called readings</span><br>
+        <span class="kw">for</span> (<span class="type">double</span> <input class="fill-blank" data-answer="value|val|reading|r|d" placeholder="???"> : readings) { }
+      </div>
+      <div class="fill-container">
+        <span class="cmt">// 3. Loop that counts DOWN from 5 to 1</span><br>
+        <span class="kw">for</span> (<span class="type">int</span> i = <span class="num">5</span>; i &gt; <span class="num">0</span>; <input class="fill-blank" data-answer="i--|i -= 1|i=i-1" placeholder="???">){ }
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;margin-top:10px">
+      <button class="btn btn-amber btn-sm" onclick="checkFills('fill3')">Check Answers</button>
+      <span id="fill3-result" style="font-family:var(--font-mono);font-size:12px;display:none"></span>
+    </div>
+
+    <!-- QUIZ -->
+    <h2 class="section-title">Knowledge Check</h2>
+    <div id="quiz-w3"></div>
+
+    <!-- CHALLENGE -->
+    <h2 class="section-title">Coding Challenge</h2>
+    <div class="challenge-box">
+      <div class="challenge-header">
+        <div class="challenge-title">⚡ Challenge — Sensor Average</div>
+        <div class="challenge-desc">Use a for loop to process a real FRC-style array</div>
+      </div>
+      <div class="challenge-body">
+        <p class="challenge-prompt">
+          Given an array of distance sensor readings (in inches):<br>
+          <code>double[] readings = {12.4, 13.1, 11.8, 14.0, 12.7};</code><br><br>
+          Using a <strong>regular for loop</strong> (not foreach):<br>
+          1. Calculate the sum of all readings<br>
+          2. Calculate and print the average<br>
+          3. Find and print the maximum reading<br><br>
+          Bonus: Print a warning if any reading is below 12.0 inches.
+        </p>
+        <textarea class="code-input" placeholder="// Write your code here..."></textarea>
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <button class="btn btn-amber btn-sm" onclick="showSolution('sol3')">Show Solution</button>
+        </div>
+        <div id="sol3" style="display:none;margin-top:1rem">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">solution</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+            <pre><span class="type">double</span>[] readings = {<span class="num">12.4</span>, <span class="num">13.1</span>, <span class="num">11.8</span>, <span class="num">14.0</span>, <span class="num">12.7</span>};
+
+<span class="type">double</span> sum = <span class="num">0</span>;
+<span class="type">double</span> max = readings[<span class="num">0</span>]; <span class="cmt">// start with first value</span>
+
+<span class="kw">for</span> (<span class="type">int</span> i = <span class="num">0</span>; i &lt; readings.length; i++) {
+    sum += readings[i];
+
+    <span class="kw">if</span> (readings[i] &gt; max) {
+        max = readings[i];
+    }
+
+    <span class="cmt">// Bonus: warn if below 12 inches</span>
+    <span class="kw">if</span> (readings[i] &lt; <span class="num">12.0</span>) {
+        System.out.<span class="fn">println</span>(<span class="str">"Warning: reading ["</span> + i + <span class="str">"] is low: "</span> + readings[i]);
+    }
+}
+
+<span class="type">double</span> average = sum / readings.length;
+System.out.<span class="fn">println</span>(<span class="str">"Average: "</span> + average);
+System.out.<span class="fn">println</span>(<span class="str">"Max: "</span> + max);</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+      <button class="btn btn-outline" id="complete-btn" onclick="markComplete('summer-w3')">Mark as Complete</button>
+    </div>
+
+    <div class="page-nav">
+      <a href="week2.html" class="nav-arrow">
+        <span class="na-label">← Previous</span>
+        <span class="na-title">Week 2 — Logic &amp; Control Flow</span>
+      </a>
+      <a href="week4.html" class="nav-arrow" style="text-align:right">
+        <span class="na-label">Next →</span>
+        <span class="na-title">Week 4 — Arrays &amp; Methods</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<script src="../../js/quiz.js"></script>
+<script>
+const quiz_quiz_w3 = new Quiz('quiz-w3', [
+  {
+    question: "How many times does this loop execute? <code>for (int i = 2; i &lt; 7; i++)</code>",
+    options: ["4 times", "5 times", "6 times", "7 times"],
+    correct: 1,
+    explanation: "i takes values 2, 3, 4, 5, 6 — that's 5 iterations. The loop stops when i reaches 7 (condition i &lt; 7 fails). Off-by-one errors are super common — count carefully."
+  },
+  {
+    question: "What's the main difference between a for loop and a foreach loop when iterating an array?",
+    options: [
+      "Foreach is faster",
+      "For loop gives you the index; foreach only gives you the value",
+      "Foreach can iterate non-arrays; for can't",
+      "They're identical"
+    ],
+    correct: 1,
+    explanation: "The foreach loop gives you each element's value, but you don't have access to its index. If you need to know which slot you're on (or modify the array), you need a regular for loop."
+  },
+  {
+    question: "Why are while loops banned in FRC robot code?",
+    options: [
+      "They use more memory than for loops",
+      "Java doesn't support while loops in WPILib projects",
+      "A stuck while loop blocks the robot's main loop, causing the robot to freeze and the watchdog to fire",
+      "They are slower than for loops"
+    ],
+    correct: 2,
+    explanation: "The FRC robot framework calls your code every 20ms. If a while loop inside your code gets stuck waiting for something, it blocks that entire 20ms cycle. The robot stops updating, motors don't change, and the watchdog timer trips — disabling the robot."
+  },
+  {
+    question: "Given <code>double[] arr = {10.0, 20.0, 30.0};</code>, what does a foreach loop over <code>arr</code> give you in each iteration?",
+    options: [
+      "The index (0, 1, 2)",
+      "A copy of each double value (10.0, then 20.0, then 30.0)",
+      "A reference to each slot you can modify",
+      "The length of the array"
+    ],
+    correct: 1,
+    explanation: "A foreach loop gives you a copy of each element's value — not a reference to the original slot. That's why you can't modify the array through a foreach loop."
+  },
+  {
+    question: "This loop: <code>for (int i = 0; i &gt;= 0; i++)</code> — what happens?",
+    options: [
+      "Runs once, then stops",
+      "Never runs",
+      "Runs forever (infinite loop)",
+      "Compiler error"
+    ],
+    correct: 2,
+    explanation: "The condition is <code>i &gt;= 0</code>. Since i starts at 0 and keeps increasing, it is always &gt;= 0. The condition never becomes false, so the loop never exits. Infinite loop."
+  },
+  {
+    question: "You want to loop through an array and double every value. Which loop type should you use?",
+    options: [
+      "Foreach loop — it's cleaner",
+      "Regular for loop with an index — so you can write back to the array",
+      "While loop — most flexible",
+      "Either works identically"
+    ],
+    correct: 1,
+    explanation: "To modify array contents, you need the index. <code>arr[i] = arr[i] * 2</code>. A foreach loop gives you a copy of the value, not a reference to the slot — changes don't stick."
+  }
+]);
+
+function runViz() {
+  const start = parseInt(document.getElementById('loop-start').value);
+  const end = parseInt(document.getElementById('loop-end').value);
+  const step = parseInt(document.getElementById('loop-step').value);
+  const stepLabel = step === 1 ? 'i++' : step === 2 ? 'i += 2' : 'i--';
+
+  document.getElementById('viz-code').textContent =
+    `for (int i = ${start}; i ${step < 0 ? '>' : '<'} ${end}; ${stepLabel}) { ... }`;
+
+  const output = document.getElementById('viz-output');
+  const iterations = [];
+  let i = start;
+  let count = 0;
+  const maxIter = 20;
+
+  while (count < maxIter) {
+    const cond = step < 0 ? i > end : i < end;
+    if (!cond) break;
+    iterations.push(i);
+    i += step;
+    count++;
+  }
+
+  if (iterations.length === 0) {
+    output.innerHTML = `<span style="color:var(--red)">Loop never runs — condition is false from the start.</span>`;
+  } else {
+    const boxes = iterations.map((v, idx) => `
+      <span style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:5px;background:var(--green-subtle);border:1px solid var(--border-bright);color:var(--green);font-family:var(--font-mono);font-size:13px;margin:2px;animation:fadeIn 0.15s ${idx*0.05}s both">${v}</span>
+    `).join('');
+    output.innerHTML = `<div style="margin-bottom:6px;font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">${iterations.length} iteration${iterations.length !== 1 ? 's' : ''} — i values:</div>${boxes}`;
+  }
+}
+
+function showSolution(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  runViz();
+  const completed = JSON.parse(localStorage.getItem('wrc-progress') || '{}');
+  if (completed['summer-w3']) {
+    const btn = document.getElementById('complete-btn');
+    if (btn) { btn.textContent = '✓ Completed'; btn.disabled = true; btn.style.opacity = '0.6'; }
+  }
+});
+</script>
+</body>
+</html>

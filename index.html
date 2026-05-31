@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walton Robotics — Programming Course</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+
+<div class="site-wrapper">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="team-tag">Team 2974</div>
+      <h1>Walton Robotics<br>Programming Course</h1>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Start Here</div>
+      <a class="nav-link active" href="index.html">Home</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Summer — Java Foundations</div>
+      <a class="nav-link" href="weeks/summer/week1.html"><span class="week-num">W1</span> The Basics</a>
+      <a class="nav-link" href="weeks/summer/week2.html"><span class="week-num">W2</span> Logic &amp; Control Flow</a>
+      <a class="nav-link" href="weeks/summer/week3.html"><span class="week-num">W3</span> Loops</a>
+      <a class="nav-link" href="weeks/summer/week4.html"><span class="week-num">W4</span> Arrays &amp; Methods</a>
+      <a class="nav-link" href="weeks/summer/week5.html"><span class="week-num">W5</span> OOP — Classes &amp; Objects</a>
+      <a class="nav-link" href="weeks/summer/week6.html"><span class="week-num">W6</span> Inheritance &amp; Polymorphism</a>
+      <a class="nav-link" href="weeks/summer/week7.html"><span class="week-num">W7</span> Advanced Classes</a>
+      <a class="nav-link" href="weeks/summer/week8.html"><span class="week-num">W8</span> Bridge — XRP &amp; WPILib</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Offseason — FRC Training</div>
+      <a class="nav-link" href="weeks/offseason/week1.html"><span class="week-num">O1</span> Git &amp; GitHub</a>
+      <a class="nav-link" href="weeks/offseason/week2.html"><span class="week-num">O2</span> WPILib Setup</a>
+      <a class="nav-link" href="weeks/offseason/week3.html"><span class="week-num">O3</span> Command-Based</a>
+      <a class="nav-link" href="weeks/offseason/week4.html"><span class="week-num">O4</span> Motors &amp; Sensors</a>
+      <a class="nav-link" href="weeks/offseason/week5.html"><span class="week-num">O5</span> PID Control</a>
+      <a class="nav-link" href="weeks/offseason/week6.html"><span class="week-num">O6</span> Autonomous</a>
+      <a class="nav-link" href="weeks/offseason/week7.html"><span class="week-num">O7</span> Subsystem Ownership</a>
+      <a class="nav-link" href="weeks/offseason/week8.html"><span class="week-num">O8</span> Build Season Prep</a>
+    </div>
+    <div class="sidebar-footer">
+      <div>2974 · Walton Robotics</div>
+      <div>2026–27 Season</div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="hero">
+      <div class="hero-eyebrow">Walton Robotics · Team 2974</div>
+      <h1>Learn to program<br>a <span>real robot.</span></h1>
+      <p>Two phases. Eight weeks of Java foundations, then eight weeks of FRC-specific training. By the end of this course, you'll own a subsystem.</p>
+      <div class="hero-actions">
+        <a href="weeks/summer/week1.html" class="btn btn-primary">Start Week 1 →</a>
+        <a href="weeks/offseason/week1.html" class="btn btn-outline">Skip to FRC Training</a>
+      </div>
+    </div>
+
+    <h2 class="section-title">Two Phases</h2>
+    <div class="phase-cards">
+      <div class="phase-card">
+        <div class="pc-phase phase-green">Phase 1 — Summer</div>
+        <h3>Java Foundations</h3>
+        <p>Pure Java, no robot required. Build up from variables and logic to full OOP. The bridge week at the end puts your code on an XRP.</p>
+        <ul class="week-list">
+          <li>Variables, types &amp; operators</li>
+          <li>Logic &amp; control flow</li>
+          <li>Loops (and why while loops get you yelled at)</li>
+          <li>Arrays &amp; methods</li>
+          <li>OOP — classes &amp; objects</li>
+          <li>Inheritance &amp; polymorphism</li>
+          <li>Enums, interfaces, ArrayLists</li>
+          <li>Bridge week — XRP + WPILib intro</li>
+        </ul>
+        <br>
+        <a href="weeks/summer/week1.html" class="btn btn-outline btn-sm">Begin Phase 1 →</a>
+      </div>
+      <div class="phase-card">
+        <div class="pc-phase phase-blue">Phase 2 — Offseason</div>
+        <h3>FRC Training</h3>
+        <p>Git workflow, WPILib, command-based architecture, PID, autos, and hands-on subsystem ownership on Watergate, Oasis, and Shosty.</p>
+        <ul class="week-list">
+          <li>Git &amp; the team's GitHub workflow</li>
+          <li>WPILib setup &amp; project structure</li>
+          <li>Command-based architecture</li>
+          <li>Motor controllers &amp; sensors</li>
+          <li>PID control &amp; tuning</li>
+          <li>Autonomous &amp; PathPlanner</li>
+          <li>Subsystem ownership capstone</li>
+          <li>Build season prep &amp; SCRUM</li>
+        </ul>
+        <br>
+        <a href="weeks/offseason/week1.html" class="btn btn-outline btn-sm">Begin Phase 2 →</a>
+      </div>
+    </div>
+
+    <h2 class="section-title">How This Works</h2>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="cc-label">Format</div>
+        <div class="cc-title">Read → Code → Quiz</div>
+        <div class="cc-desc">Each week has content, interactive code examples, fill-in-the-blank exercises, and a quiz at the end. Do them in order.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-label">Questions</div>
+        <div class="cc-title">Ask the team first</div>
+        <div class="cc-desc">Ask Hrehaan, Sohan, or Alexandra before going to Google. Real humans > Stack Overflow.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-label">Tools</div>
+        <div class="cc-title">VS Code + JDK 17</div>
+        <div class="cc-desc">Install VS Code with the Java Extension Pack. WPILib installs its own JDK — use that once you're in Phase 2.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-label">Rule #1</div>
+        <div class="cc-title">No while loops in robot code</div>
+        <div class="cc-desc">You'll learn exactly why in Week 3. Don't forget it. Banks will yell at you.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <p><strong>New this year:</strong> The course now lives on GitHub Pages instead of Canvas. If you find a mistake or want to contribute a better explanation, open a PR on the <a href="https://github.com/WaltonRobotics/programming-course" style="color:var(--green)">course repo</a>.</p>
+    </div>
+  </main>
+</div>
+
+<script src="js/quiz.js"></script>
+</body>
+</html>
