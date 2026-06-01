@@ -10,9 +10,9 @@ title: Home
       <img src="{{ '/assets/images/logo.jpeg' | relative_url }}" alt="Walton Robotics" class="hh-logo">
     </div>
     <div class="hh-text">
-      <div class="hh-eyebrow">Walton Robotics · Team 2974 · 2026–27</div>
+      <div class="hh-eyebrow">Walton Robotics · Team 2974 · 2026-27</div>
       <h1 class="hh-title">WRT Programming Course</h1>
-      <p class="hh-sub">Learn Java from scratch, write real FRC robot code, and contribute to Team 2974 starting Day 1 of build season. 16 weeks of structured curriculum, quizzes, and hands-on coding challenges.</p>
+      <p class="hh-sub">learn java from scratch, write real FRC robot code, and be ready to contribute to team 2974 from day 1 of build season :D 16 weeks of content, quizzes, and hands-on challenges. let's get it!!</p>
       <div class="hh-actions">
         <a href="{{ '/weeks/summer/week1' | relative_url }}" class="btn btn-primary">Start Week 1 →</a>
         <a href="#modules" class="btn btn-outline-white">View All Modules</a>
@@ -41,29 +41,29 @@ title: Home
 <div class="home-section">
   <div class="hs-inner">
     <div class="hs-header">
-      <div class="hs-eyebrow">Before You Start</div>
-      <h2 class="hs-title">Meet the Programming Leads</h2>
-      <p class="hs-sub">Short intro videos from the people running this course. Watch these first — they'll tell you what to expect, what the team builds, and how to get the most out of the next 16 weeks.</p>
+      <div class="hs-eyebrow">before you start</div>
+      <h2 class="hs-title">meet the programming leads :)</h2>
+      <p class="hs-sub">short intro videos from the people actually running this thing. watch these first!! they'll tell you what to expect, what the team builds, and honestly just vibe check you lol. we don't bite fr.</p>
     </div>
 
-    <div class="leads-grid">
+    <div class="leads-grid leads-grid--4">
 
-      <!-- Lead 1 — Chief Programmer -->
+      <!-- Lead 1 — replace VIDEO_ID with your actual YouTube video ID -->
       <div class="lead-card">
-        <div class="lc-video-wrap" id="lc-vid-1">
+        <div class="lc-video-wrap">
           <div class="lc-video-placeholder" data-slot="1">
             <div class="lv-icon">▶</div>
             <div class="lv-name">Chief Programmer</div>
-            <div class="lv-sub">Add YouTube URL below</div>
+            <div class="lv-sub">video coming soon :)</div>
           </div>
-          <!-- To embed: replace the placeholder div above with:
+          <!-- swap the div above for this once you have a video URL:
           <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
           -->
         </div>
         <div class="lc-body">
           <div class="lc-role">Chief Programmer</div>
-          <div class="lc-name" id="lead-name-1">Your Name</div>
-          <div class="lc-bio" id="lead-bio-1">Brief intro — your role on the team, what you're most excited to build this season, and your advice for new programmers.</div>
+          <div class="lc-name">Sohan Shaik</div>
+          <div class="lc-bio">hey!! i'm sohan, the chief programmer for team 2974. i've been coding robots since sophomore year and tbh it's lowkey my whole personality at this point lol. this course is basically everything i wish someone had sat me down and taught me when i joined. gl &lt;3</div>
         </div>
       </div>
 
@@ -73,36 +73,52 @@ title: Home
           <div class="lc-video-placeholder" data-slot="2">
             <div class="lv-icon">▶</div>
             <div class="lv-name">Programming Lead</div>
-            <div class="lv-sub">Add YouTube URL below</div>
+            <div class="lv-sub">video coming soon :)</div>
           </div>
         </div>
         <div class="lc-body">
           <div class="lc-role">Programming Lead</div>
-          <div class="lc-name" id="lead-name-2">Your Name</div>
-          <div class="lc-bio" id="lead-bio-2">Brief intro — your speciality (vision, drivetrain, auto, etc.) and one thing you wish you'd known when you started.</div>
+          <div class="lc-name">Hrehaan Bedi</div>
+          <div class="lc-bio">what's up, i'm hrehaan!! i mainly do auto and vision stuff. if you ever see a PathPlanner path that's kinda unhinged, that was probably me. come find me if you're confused about anything — no dumb questions fr :D</div>
         </div>
       </div>
 
-      <!-- Lead 3 / Mentor -->
+      <!-- Lead 3 -->
       <div class="lead-card">
         <div class="lc-video-wrap">
           <div class="lc-video-placeholder" data-slot="3">
             <div class="lv-icon">▶</div>
+            <div class="lv-name">Programming Lead</div>
+            <div class="lv-sub">video coming soon :)</div>
+          </div>
+        </div>
+        <div class="lc-body">
+          <div class="lc-role">Programming Lead</div>
+          <div class="lc-name">Alexandra Chau</div>
+          <div class="lc-bio">hi!! i'm alexandra and i mostly handle subsystem ownership + PR reviews. if your code review has a lot of comments... that's probably me :] i promise it comes from a good place. ask me anything about command-based or WPILib!!</div>
+        </div>
+      </div>
+
+      <!-- Lead 4 -->
+      <div class="lead-card">
+        <div class="lc-video-wrap">
+          <div class="lc-video-placeholder" data-slot="4">
+            <div class="lv-icon">▶</div>
             <div class="lv-name">Programming Mentor</div>
-            <div class="lv-sub">Add YouTube URL below</div>
+            <div class="lv-sub">video coming soon :)</div>
           </div>
         </div>
         <div class="lc-body">
           <div class="lc-role">Programming Mentor</div>
-          <div class="lc-name" id="lead-name-3">Mentor Name</div>
-          <div class="lc-bio" id="lead-bio-3">What you look for when reviewing code, your experience with FRC, and how to ask good questions when you're stuck.</div>
+          <div class="lc-name">Mentor Name</div>
+          <div class="lc-bio">add your intro here!! record a quick 2-3 min video on your phone, upload it to youtube as unlisted, and replace the placeholder div above with an iframe embed. easy :)</div>
         </div>
       </div>
 
     </div>
 
-    <div class="callout info" style="margin-top:1.5rem">
-      <p><strong>To add your intro video:</strong> Record a 2–3 min video on your phone or laptop, upload it to YouTube as unlisted, then replace the placeholder <code>div</code> in <code>index.md</code> with <code>&lt;iframe src="https://www.youtube.com/embed/YOUR_ID"...&gt;</code>. Update <code>id="lead-name-X"</code> and <code>id="lead-bio-X"</code> spans too.</p>
+    <div class="callout tip" style="margin-top:1.5rem">
+      <p><strong>to add your video:</strong> record a 2-3 min intro on your phone or laptop, upload it to youtube as unlisted, grab the video ID from the URL, and swap the placeholder div for <code>&lt;iframe src="https://www.youtube.com/embed/YOUR_ID" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</code> in index.md!!</p>
     </div>
   </div>
 </div>
@@ -111,46 +127,46 @@ title: Home
 <div class="home-section home-section--alt">
   <div class="hs-inner">
     <div class="hs-header">
-      <div class="hs-eyebrow">Course Structure</div>
-      <h2 class="hs-title">How It Works</h2>
+      <div class="hs-eyebrow">how it all works</div>
+      <h2 class="hs-title">the vibe :D</h2>
     </div>
 
     <div class="how-grid">
       <div class="how-card">
         <div class="how-num">01</div>
         <div class="how-icon">📖</div>
-        <div class="how-title">Read & Watch</div>
-        <div class="how-desc">Each week has explanations, diagrams, and code examples. Read everything before starting the quiz — context matters.</div>
+        <div class="how-title">read the content</div>
+        <div class="how-desc">each week has explanations, code examples, and FRC context. actually read it before jumping to the quiz, i promise it matters lol</div>
       </div>
       <div class="how-card">
         <div class="how-num">02</div>
         <div class="how-icon">✏️</div>
-        <div class="how-title">Fill in the Blanks</div>
-        <div class="how-desc">Short exercises to confirm you understand the syntax. Get these right before moving to the MCQ section.</div>
+        <div class="how-title">fill in the blanks</div>
+        <div class="how-desc">short syntax exercises to make sure stuff is clicking. if you're guessing these, go back and re-read. it's okay!!</div>
       </div>
       <div class="how-card">
         <div class="how-num">03</div>
         <div class="how-icon">🧠</div>
-        <div class="how-title">Take the Quiz</div>
-        <div class="how-desc">5–6 MCQ questions per week. Scores are saved locally. You need ≥70% to unlock the complete-week badge.</div>
+        <div class="how-title">topic quizzes</div>
+        <div class="how-desc">quick MCQ checks after each concept section. scores get saved to your account :) need 70%+ to mark the week complete</div>
       </div>
       <div class="how-card">
         <div class="how-num">04</div>
-        <div class="how-icon">⚡</div>
-        <div class="how-title">Coding Challenge</div>
-        <div class="how-desc">Apply what you learned in a realistic FRC scenario. A hidden solution is available — try it yourself first.</div>
+        <div class="how-icon">📝</div>
+        <div class="how-title">weekly test</div>
+        <div class="how-desc">covers everything from that week. this one actually gets reported to the programming leads so uh... try your best lol</div>
       </div>
       <div class="how-card">
         <div class="how-num">05</div>
-        <div class="how-icon">🔁</div>
-        <div class="how-title">Repeat Weekly</div>
-        <div class="how-desc">Summer = 8 weeks of pure Java. Offseason = 8 weeks of FRC-specific content. One week per training session.</div>
+        <div class="how-icon">⚡</div>
+        <div class="how-title">coding challenge</div>
+        <div class="how-desc">apply what you learned in a real FRC scenario. there's a solution you can peek at, but try it yourself first!!</div>
       </div>
       <div class="how-card">
         <div class="how-num">06</div>
         <div class="how-icon">🤖</div>
-        <div class="how-title">Build Season</div>
-        <div class="how-desc">Complete all 16 weeks and you'll be ready to write real competition code from Day 1 of the build season.</div>
+        <div class="how-title">survive build season</div>
+        <div class="how-desc">16 weeks = day 1 ready. seriously. students who finish this course write actual competition code. no cap</div>
       </div>
     </div>
   </div>
@@ -161,9 +177,9 @@ title: Home
   <div class="hs-inner">
 
     <div class="hs-header">
-      <div class="hs-eyebrow">Phase 1 · 8 Weeks</div>
-      <h2 class="hs-title">Summer — Java Foundations</h2>
-      <p class="hs-sub">No robot required. Pure Java on your laptop. By the end you'll have the OOP fundamentals needed to read and write real WPILib code.</p>
+      <div class="hs-eyebrow">phase 1 - 8 weeks</div>
+      <h2 class="hs-title">summer - java foundations</h2>
+      <p class="hs-sub">no robot needed!! pure java on your laptop. by the end you'll have the OOP fundamentals to actually read and write WPILib code without dying inside :)</p>
     </div>
 
     <div class="module-list">
@@ -211,9 +227,9 @@ title: Home
 
     <div class="phase-divider">
       <div class="hs-header" style="margin-top:3rem">
-        <div class="hs-eyebrow">Phase 2 · 8 Weeks</div>
-        <h2 class="hs-title">Offseason — FRC Training</h2>
-        <p class="hs-sub">Robot-specific content. Git workflow, WPILib, command-based architecture, motors, PID, PathPlanner. This is the real stuff.</p>
+        <div class="hs-eyebrow">phase 2 - 8 weeks</div>
+        <h2 class="hs-title">offseason - FRC training</h2>
+        <p class="hs-sub">robot stuff!! git, WPILib, command-based, motors, PID, PathPlanner. this is the part that actually matters for build season so don't skip it :D</p>
       </div>
     </div>
 
@@ -267,8 +283,8 @@ title: Home
 <div class="home-section home-section--alt">
   <div class="hs-inner">
     <div class="hs-header">
-      <div class="hs-eyebrow">Helpful Links</div>
-      <h2 class="hs-title">Resources</h2>
+      <div class="hs-eyebrow">stuff you'll need</div>
+      <h2 class="hs-title">resources :)</h2>
     </div>
     <div class="resources-grid">
       <a class="resource-card" href="https://docs.wpilib.org" target="_blank" rel="noopener">

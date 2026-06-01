@@ -370,6 +370,30 @@ textarea.code-input {
   }
 }
 
+// ── WEEKLY TEST ──────────────────────────────────────────────
+.weekly-test-block {
+  border: 2px solid $navy;
+  border-radius: 10px;
+  margin: 2rem 0;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+
+  .wt-header {
+    background: linear-gradient(135deg, $navy 0%, darken($navy, 8%) 100%);
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 3px solid $red;
+  }
+  .wt-icon  { font-size: 1.75rem; flex-shrink: 0; }
+  .wt-title { font-size: 15px; font-weight: 900; color: $white; }
+  .wt-sub   { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+  .quiz-wrap  { margin: 0; border: none; border-radius: 0; box-shadow: none; }
+  .score-card { margin: 0; border-radius: 0; border: none; border-top: 1px solid $gray-200; }
+}
+
 // ── SITE FOOTER ──────────────────────────────────────────────
 .site-footer {
   margin-left: $sidebar-w;
@@ -534,6 +558,10 @@ textarea.code-input {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
+
+  &--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 .lead-card {
   background: $white;

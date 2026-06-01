@@ -1,7 +1,7 @@
 ---
 layout: week
 title: "Loops"
-subtitle: "For loops, foreach loops, and the very important reason while loops are banned from robot code."
+subtitle: "for loops, foreach loops, and the very important reason while loops are banned from robot code :D"
 badge: "Summer · Week 3 of 8"
 phase: summer
 phase_label: Summer

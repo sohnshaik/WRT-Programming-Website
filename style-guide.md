@@ -1,171 +1,292 @@
 ---
 layout: default
-title: Style Guide
+title: Java Style Guide
 permalink: /style-guide/
+no_auth_guard: true
 ---
 
 <div class="page-hero" style="border-bottom:4px solid #C41230">
-  <div class="ph-breadcrumb"><a href="{{ '/' | relative_url }}">Home</a><span>/</span><span>Style Guide</span></div>
-  <div class="ph-badge badge-summer">Reference</div>
-  <h1>Course Style Guide</h1>
-  <p>Every component used in this course, documented in one place. Use this when building new weeks or reviewing existing ones.</p>
+  <div class="ph-breadcrumb"><a href="{{ '/' | relative_url }}">home</a><span>/</span><span>style guide</span></div>
+  <div class="ph-badge badge-summer">reference</div>
+  <h1>WRT Java Style Guide</h1>
+  <p>how we write code on team 2974. read this before writing a single line for a real robot :)</p>
 </div>
 
 <div class="content-wrap">
 
-<h2 class="sh">Color Palette</h2>
-<div class="concept-grid">
-  <div class="concept-card" style="border-top-color:#C41230">
-    <div class="cc-label" style="color:#C41230">Primary</div>
-    <div class="cc-title" style="color:#C41230">#C41230</div>
-    <div class="cc-desc">Walton Red — callouts, active states, accents, primary buttons</div>
-  </div>
-  <div class="concept-card" style="border-top-color:#1B2A4A">
-    <div class="cc-label" style="color:#1B2A4A">Navy</div>
-    <div class="cc-title" style="color:#1B2A4A">#1B2A4A</div>
-    <div class="cc-desc">Walton Navy — topbar, code headers, tables, navy buttons</div>
-  </div>
-  <div class="concept-card" style="border-top-color:#00875A">
-    <div class="cc-label" style="color:#00875A">Green</div>
-    <div class="cc-title" style="color:#00875A">#00875A</div>
-    <div class="cc-desc">Correct answers, completed states, success callouts</div>
-  </div>
-  <div class="concept-card" style="border-top-color:#b45309">
-    <div class="cc-label" style="color:#b45309">Amber</div>
-    <div class="cc-title" style="color:#b45309">#b45309</div>
-    <div class="cc-desc">Warnings, in-progress states, caution callouts</div>
-  </div>
-</div>
+<div class="callout danger"><p><strong>this is not optional!!</strong> PRs that don't follow these conventions will get review comments and sent back. it's not personal, it's just how we keep 8+ programmers from losing their minds during build season :D</p></div>
 
-<h2 class="sh">Callout Boxes</h2>
-<div class="callout tip"><p><strong>Tip</strong> — Use <code>.callout.tip</code> for helpful hints, FRC connections, and best practices. Green left border.</p></div>
-<div class="callout info"><p><strong>Info</strong> — Use <code>.callout.info</code> for neutral context, background information. Blue left border.</p></div>
-<div class="callout warning"><p><strong>Warning</strong> — Use <code>.callout.warning</code> for gotchas, common mistakes, things to double-check. Amber left border.</p></div>
-<div class="callout danger"><p><strong>Danger</strong> — Use <code>.callout.danger</code> for bans, breaking rules, things that will crash the robot. Red left border. Use sparingly.</p></div>
+<h2 class="sh">naming conventions</h2>
+<p>we use specific prefixes so you can tell what kind of thing a variable is just by looking at its name. no guessing required.</p>
 
-<h2 class="sh">Code Blocks</h2>
-<p>All code blocks use a dark surface (<code>#1e2638</code>) with the <code>.code-block</code> wrapper. The header shows the language and a copy button. Hand-rolled syntax highlighting uses span classes.</p>
+<table>
+<thead><tr><th>prefix</th><th>what it's for</th><th>example</th></tr></thead>
+<tbody>
+<tr><td>k</td><td>constants (final static values, usually in a Constants.java nested class)</td><td><code>kShooterMotorID</code>, <code>kMaxTranslationSpeed_mps</code></td></tr>
+<tr><td>m_</td><td>member/instance variables (fields on a class)</td><td><code>m_drivetrain</code>, <code>m_shooter</code>, <code>m_isRunning</code></td></tr>
+<tr><td>trg_</td><td>Trigger objects (WPILib button bindings)</td><td><code>trg_shoot</code>, <code>trg_intakeIn</code></td></tr>
+<tr><td>log_</td><td>logging/telemetry objects (AdvantageKit, DataLog)</td><td><code>log_robotPose</code>, <code>log_shooterRPM</code></td></tr>
+<tr><td>sig_</td><td>Phoenix 6 StatusSignal objects</td><td><code>sig_velocity</code>, <code>sig_appliedVolts</code></td></tr>
+</tbody>
+</table>
 
 <div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — example</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
-<pre><span class="cmt">// This is a comment</span>
-<span class="kw">public class</span> <span class="cls">Example</span> {
-    <span class="kw">private</span> <span class="type">double</span> speed = <span class="num">0.5</span>;
-    <span class="kw">public void</span> <span class="fn">run</span>() {
-        System.out.<span class="fn">println</span>(<span class="str">"Running at: "</span> + speed);
+<div class="cb-header"><span class="cb-lang">java — naming in practice</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">public class</span> <span class="cls">ShooterSubsystem</span> <span class="kw">extends</span> <span class="cls">SubsystemBase</span> {
+
+    <span class="cmt">// m_ prefix for instance fields</span>
+    <span class="kw">private final</span> <span class="cls">CANSparkFlex</span> m_shooterMotor;
+    <span class="kw">private</span> <span class="type">double</span> m_targetRPS = <span class="num">0.0</span>;
+    <span class="kw">private</span> <span class="type">boolean</span> m_isSpunUp = <span class="kw">false</span>;
+
+    <span class="kw">public</span> <span class="cls">ShooterSubsystem</span>() {
+        <span class="cmt">// k prefix for constants from Constants.java</span>
+        m_shooterMotor = <span class="kw">new</span> <span class="cls">CANSparkFlex</span>(ShooterK.kMotorID, <span class="cls">MotorType</span>.kBrushless);
     }
 }</pre>
 </div>
 
-<table>
-<thead><tr><th>Span class</th><th>Color</th><th>Use for</th></tr></thead>
-<tbody>
-<tr><td>.kw</td><td>#f472b6 pink</td><td>Keywords: public, private, class, extends, new, if, return</td></tr>
-<tr><td>.type</td><td>#93c5fd blue</td><td>Primitive types: int, double, boolean, void</td></tr>
-<tr><td>.str</td><td>#fbbf24 amber</td><td>String literals: "hello"</td></tr>
-<tr><td>.num</td><td>#c4b5fd purple</td><td>Numeric literals: 0, 1.5, 100</td></tr>
-<tr><td>.cmt</td><td>#64748b gray</td><td>Comments: // and /* */</td></tr>
-<tr><td>.fn</td><td>#6ee7b7 green</td><td>Method calls: println(), set(), calculate()</td></tr>
-<tr><td>.cls</td><td>#fde68a yellow</td><td>Class names: Motor, SubsystemBase, ArrayList</td></tr>
-</tbody>
-</table>
+<h2 class="sh">constants file structure</h2>
+<p>all constants live in <code>Constants.java</code> using nested static classes with the <code>K</code> suffix (short for "constants" -- yes it's a convention, just roll with it lol).</p>
 
-<h2 class="sh">Concept Grid</h2>
-<p>Use <code>.concept-grid</code> + <code>.concept-card</code> for 3–4 related concepts side by side. Auto-fits to available width.</p>
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — Constants.java structure</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">public final class</span> <span class="cls">Constants</span> {
+
+    <span class="cmt">// one nested class per subsystem</span>
+    <span class="kw">public static final class</span> <span class="cls">ShooterK</span> {
+        <span class="kw">public static final int</span>    kMotorID    = <span class="num">11</span>;
+        <span class="kw">public static final double</span> kIdleRPS    = <span class="num">0.0</span>;
+        <span class="kw">public static final double</span> kShootRPS   = <span class="num">80.0</span>;
+        <span class="kw">public static final String</span> kLogTab     = <span class="str">"Shooter"</span>;
+    }
+
+    <span class="kw">public static final class</span> <span class="cls">DriveK</span> {
+        <span class="cmt">// include units in the name to avoid conversion bugs!!</span>
+        <span class="kw">public static final double</span> kMaxTranslation_mps = <span class="num">4.5</span>;
+        <span class="kw">public static final double</span> kMaxRotation_radps  = <span class="num">9.42</span>;
+        <span class="kw">public static final double</span> kWheelRadius_m      = <span class="num">0.0508</span>;
+    }
+
+    <span class="kw">public static final class</span> <span class="cls">ControllerK</span> {
+        <span class="kw">public static final int</span> kDriverPort   = <span class="num">0</span>;
+        <span class="kw">public static final int</span> kOperatorPort = <span class="num">1</span>;
+    }
+}</pre>
+</div>
+
+<div class="callout tip"><p><strong>unit suffixes!!</strong> always include the unit in the constant name for any physical value. <code>kShootSpeed</code> is ambiguous. <code>kShootRPS</code> (rotations per second) or <code>kMaxTranslation_mps</code> (meters per second) is not. this has literally prevented robot crashes. not joking.</p></div>
+
+<h2 class="sh">casing rules</h2>
 <div class="concept-grid">
-  <div class="concept-card"><div class="cc-label">Label</div><div class="cc-title">Card Title</div><div class="cc-desc">Short description. One idea per card. 2–3 sentences max.</div></div>
-  <div class="concept-card"><div class="cc-label">Label</div><div class="cc-title">Card Title</div><div class="cc-desc">Short description. One idea per card. 2–3 sentences max.</div></div>
-  <div class="concept-card"><div class="cc-label">Label</div><div class="cc-title">Card Title</div><div class="cc-desc">Short description. One idea per card. 2–3 sentences max.</div></div>
-  <div class="concept-card"><div class="cc-label">Label</div><div class="cc-title">Card Title</div><div class="cc-desc">Short description. One idea per card. 2–3 sentences max.</div></div>
-</div>
-
-<h2 class="sh">Tables</h2>
-<p>Navy header, zebra-hover rows, mono font on first column for code values.</p>
-<table>
-<thead><tr><th>Column A</th><th>Column B</th><th>Column C</th></tr></thead>
-<tbody>
-<tr><td>value-one</td><td>Description of value one</td><td>Notes</td></tr>
-<tr><td>value-two</td><td>Description of value two</td><td>Notes</td></tr>
-<tr><td>value-three</td><td>Description of value three</td><td>Notes</td></tr>
-</tbody>
-</table>
-
-<h2 class="sh">Buttons</h2>
-<div style="display:flex;gap:10px;flex-wrap:wrap;margin:1rem 0">
-  <button class="btn btn-primary">Primary</button>
-  <button class="btn btn-navy">Navy</button>
-  <button class="btn btn-outline">Outline</button>
-  <button class="btn btn-success">Success</button>
-  <button class="btn btn-primary btn-sm">Primary Small</button>
-  <button class="btn btn-outline btn-sm">Outline Small</button>
-  <button class="btn btn-navy" disabled>Disabled</button>
-</div>
-
-<h2 class="sh">Fill-in-the-Blank</h2>
-<div id="fill-sg">
-  <div class="fill-container">
-    <span class="cmt">// Type the missing keyword</span><br>
-    <span class="kw">public</span> <input class="fill-blank" data-answer="static" placeholder="??????"> <span class="type">void</span> <span class="fn">main</span>(<span class="type">String</span>[] args) { }
+  <div class="concept-card">
+    <div class="cc-label">camelCase</div>
+    <div class="cc-title">variables + methods</div>
+    <div class="cc-desc"><code>motorSpeed</code>, <code>isRunning</code>, <code>getTargetAngle()</code>. first word lowercase, each new word capitalized.</div>
   </div>
-</div>
-<div style="display:flex;align-items:center;gap:12px;margin-top:10px">
-  <button class="btn btn-navy btn-sm" onclick="checkFills('fill-sg')">Check</button>
-  <span id="fill-sg-result" style="font-size:13px;font-weight:700;display:none"></span>
-</div>
-
-<h2 class="sh">Quiz Engine</h2>
-<div id="quiz-sg"></div>
-
-<h2 class="sh">Coding Challenge</h2>
-<div class="challenge">
-  <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Challenge Title</div><div class="ch-sub">Scenario or context</div></div></div>
-  <div class="ch-body">
-    <p class="ch-prompt">Challenge instructions go here. Be specific — reference exact variable names, expected outputs, and constraints.</p>
-    <textarea class="code-input" placeholder="// Your code here..."></textarea>
-    <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-sg')">Show Solution</button></div>
-    <div id="sol-sg" style="display:none;margin-top:1rem">
-      <div class="code-block"><div class="cb-header"><span class="cb-lang">solution</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
-<pre><span class="cmt">// Solution goes here</span>
-System.out.<span class="fn">println</span>(<span class="str">"Hello, WRT!"</span>);</pre>
-      </div>
-    </div>
+  <div class="concept-card">
+    <div class="cc-label">PascalCase</div>
+    <div class="cc-title">classes + interfaces</div>
+    <div class="cc-desc"><code>ShooterSubsystem</code>, <code>DriveCommand</code>, <code>RobotContainer</code>. every word capitalized.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">k + PascalCase</div>
+    <div class="cc-title">constants</div>
+    <div class="cc-desc"><code>kMotorID</code>, <code>kMaxSpeed_mps</code>. always <code>k</code> lowercase, then PascalCase. <strong>not</strong> SCREAMING_SNAKE on this team.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">m_ + camelCase</div>
+    <div class="cc-title">member variables</div>
+    <div class="cc-desc"><code>m_shooter</code>, <code>m_isSpunUp</code>. the underscore is part of the prefix, not the name.</div>
   </div>
 </div>
 
-<h2 class="sh">Page Navigation</h2>
-<div class="page-nav">
-  <a href="#" class="pn-link">
-    <span class="pn-label">← Previous</span>
-    <span class="pn-title">Previous Week Title</span>
-  </a>
-  <a href="#" class="pn-link pn-next">
-    <span class="pn-label">Next →</span>
-    <span class="pn-title">Next Week Title</span>
-  </a>
+<div class="callout warning"><p><strong>we don't use SCREAMING_SNAKE_CASE</strong> for constants on this team. i know java tutorials use it. we don't. use <code>k</code> prefix + PascalCase. yes this is different from standard java conventions. no we don't care lol</p></div>
+
+<h2 class="sh">comments</h2>
+<p>comments explain <em>why</em>, not <em>what</em>. the code already says what it does. you explain why it's doing that specific thing, especially if it looks weird.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — bad vs good comments</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// BAD: just restates the code, adds nothing</span>
+<span class="cmt">// set motor speed to 0.5</span>
+m_motor.set(<span class="num">0.5</span>);
+
+<span class="cmt">// GOOD: explains why 0.5, what this achieves</span>
+<span class="cmt">// ramp slowly to avoid current spike on enable</span>
+m_motor.set(<span class="num">0.5</span>);
+
+<span class="cmt">// ALSO GOOD: explains a non-obvious workaround</span>
+<span class="cmt">// inverted because motor is mounted backwards on Oasis (but not Watergate)</span>
+m_motor.setInverted(<span class="kw">true</span>);</pre>
 </div>
 
-<h2 class="sh">Typography Rules</h2>
+<h3 class="sub">javadoc for public methods</h3>
+<p>any public method that's non-trivial needs a javadoc. especially anything other subsystems or commands will call.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — javadoc format</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">/**
+ * Sets the shooter target speed and begins spinning up.
+ *
+ * @param targetRPS desired flywheel speed in rotations per second
+ */</span>
+<span class="kw">public void</span> <span class="fn">setTargetRPS</span>(<span class="type">double</span> targetRPS) {
+    m_targetRPS = targetRPS;
+    m_controller.setSetpoint(targetRPS);
+}</pre>
+</div>
+
+<h2 class="sh">magic numbers = banned :)</h2>
+<p>a magic number is a raw number in your code with no explanation. they're basically bugs waiting to happen because nobody knows what they mean 6 months later.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — magic numbers</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// BAD -- what is 11? what is 80? who knows!!</span>
+m_motor = <span class="kw">new</span> <span class="cls">CANSparkFlex</span>(<span class="num">11</span>, <span class="cls">MotorType</span>.kBrushless);
+m_controller.setSetpoint(<span class="num">80.0</span>);
+
+<span class="cmt">// GOOD -- self-documenting, easy to change from one place</span>
+m_motor = <span class="kw">new</span> <span class="cls">CANSparkFlex</span>(ShooterK.kMotorID, <span class="cls">MotorType</span>.kBrushless);
+m_controller.setSetpoint(ShooterK.kShootRPS);</pre>
+</div>
+
+<h2 class="sh">subsystem structure</h2>
+<p>all subsystems extend <code>SubsystemBase</code> and follow the same section layout. makes it easier to jump between files without getting lost.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — subsystem template</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">package</span> frc.robot.subsystems;
+
+<span class="kw">import</span> edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+<span class="kw">public class</span> <span class="cls">ExampleSubsystem</span> <span class="kw">extends</span> <span class="cls">SubsystemBase</span> {
+
+    <span class="cmt">// ---- HARDWARE -----------------------------------------------</span>
+    <span class="kw">private final</span> <span class="cls">CANSparkFlex</span> m_motor;
+
+    <span class="cmt">// ---- STATE --------------------------------------------------</span>
+    <span class="kw">private</span> <span class="type">double</span> m_targetRPS = <span class="num">0.0</span>;
+
+    <span class="cmt">// ---- CONSTRUCTOR --------------------------------------------</span>
+    <span class="kw">public</span> <span class="cls">ExampleSubsystem</span>() {
+        m_motor = <span class="kw">new</span> <span class="cls">CANSparkFlex</span>(ExampleK.kMotorID, <span class="cls">MotorType</span>.kBrushless);
+        configureMotor();
+    }
+
+    <span class="kw">private void</span> <span class="fn">configureMotor</span>() {
+        m_motor.restoreFactoryDefaults();
+        m_motor.setInverted(<span class="kw">false</span>);
+        m_motor.burnFlash(); <span class="cmt">// saves config to motor controller NVRAM</span>
+    }
+
+    <span class="cmt">// ---- PUBLIC API ---------------------------------------------</span>
+    <span class="kw">public void</span> <span class="fn">setSpeed</span>(<span class="type">double</span> rps) { m_targetRPS = rps; }
+
+    <span class="kw">public boolean</span> <span class="fn">isAtTarget</span>() {
+        <span class="kw">return</span> Math.abs(m_motor.getEncoder().getVelocity() - m_targetRPS) &lt; ExampleK.kTolerance_rps;
+    }
+
+    <span class="cmt">// ---- PERIODIC -----------------------------------------------</span>
+    <span class="kw">@Override</span>
+    <span class="kw">public void</span> <span class="fn">periodic</span>() {
+        <span class="cmt">// runs every 20ms. telemetry + closed-loop control goes here</span>
+        m_motor.set(m_targetRPS / ExampleK.kMaxRPS);
+    }
+}</pre>
+</div>
+
+<h2 class="sh">no while loops in robot code</h2>
+<div class="callout danger"><p><strong>seriously, no while loops.</strong> the robot runs a 20ms control loop managed by WPILib. a blocking while loop freezes that loop and the watchdog kills the robot. use commands, state machines, or periodic methods instead.</p></div>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — while loop vs command-based</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// NEVER DO THIS in robot code</span>
+<span class="kw">while</span> (!m_shooter.isAtTarget()) {
+    <span class="cmt">// blocks the entire robot loop. watchdog WILL fire. robot dies.</span>
+}
+
+<span class="cmt">// CORRECT: use a command with isFinished()</span>
+<span class="kw">new</span> <span class="cls">WaitUntilCommand</span>(m_shooter::isAtTarget)
+    .andThen(<span class="kw">new</span> <span class="cls">ShootCommand</span>(m_shooter));</pre>
+</div>
+
+<h2 class="sh">git conventions</h2>
+<p>check O1 for the full git workflow. these are the non-negotiables:</p>
+
 <table>
-<thead><tr><th>Element</th><th>Class / Tag</th><th>Use</th></tr></thead>
+<thead><tr><th>rule</th><th>why</th></tr></thead>
 <tbody>
-<tr><td>Section heading</td><td><code>h2.sh</code></td><td>Every major section. Gets red left border + navy text.</td></tr>
-<tr><td>Sub-heading</td><td><code>h3.sub</code></td><td>Subsections within a topic.</td></tr>
-<tr><td>Body text</td><td><code>p</code></td><td>Explanations, context. Keep under 4 sentences before a code example.</td></tr>
-<tr><td>Inline code</td><td><code>code</code></td><td>Variable names, method names, keywords inline in text.</td></tr>
+<tr><td>never commit directly to <code>main</code></td><td>main = always working. one bad push during competition is a crisis</td></tr>
+<tr><td>branch name: <code>type/short-desc</code></td><td><code>feature/shooter-pid</code>, <code>fix/intake-stall</code>, <code>refactor/constants-cleanup</code></td></tr>
+<tr><td>commit messages: imperative tense</td><td>"add shooter PID" not "added shooter PID" or "adding shooter PID"</td></tr>
+<tr><td>keep PRs small and focused</td><td>one feature per PR. giant PRs are painful to review and silently break things</td></tr>
+<tr><td>needs at least one approval</td><td>sohan, hrehaan, or alexandra reviews before merging to main</td></tr>
 </tbody>
 </table>
 
-<h2 class="sh">Writing Rules</h2>
-<div class="callout tip"><p><strong>Keep explanations short.</strong> One paragraph of context, then a code example. Programmers learn by reading code, not prose. If you need more than 4 sentences to explain something, it probably needs a code example.</p></div>
-<div class="callout tip"><p><strong>Always include an FRC connection.</strong> Every concept should connect to something real on the robot. "In FRC you'll use this for..." makes the material land.</p></div>
-<div class="callout warning"><p><strong>Don't use while loops in any example robot code.</strong> Even as a "bad example" — new programmers will copy it. If you need to show a while loop, clearly label it "Not in robot code — pure Java only."</p></div>
-<div class="callout warning"><p><strong>Quiz questions should be specific, not trick questions.</strong> Each question tests one concept. Wrong answers should be plausibly wrong, not obviously absurd.</p></div>
+<h2 class="sh">WPILib 2025 notes</h2>
+<p>WPILib updates every year and things get deprecated. here's what matters for 2025:</p>
 
+<div class="concept-grid">
+  <div class="concept-card">
+    <div class="cc-label">Java 17</div>
+    <div class="cc-title">still required</div>
+    <div class="cc-desc">WPILib 2025 uses Java 17. WPILib installer sets this up automatically. don't mess with the JDK path.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">REVLib 2025</div>
+    <div class="cc-title">SparkFlex added</div>
+    <div class="cc-desc">CANSparkFlex is the Spark MAX successor. we use both. config API is nearly identical so it's not too bad.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">Phoenix 6</div>
+    <div class="cc-title">use this, not Phoenix 5</div>
+    <div class="cc-desc">Phoenix 6 is the current CTRE library. Phoenix 5 / old TalonSRX API is deprecated. if you see Phoenix 5 in old code, don't copy it.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">Commands</div>
+    <div class="cc-title">no big changes</div>
+    <div class="cc-desc">command-based architecture is stable. SubsystemBase, CommandBase, Scheduler all work the same as before.</div>
+  </div>
 </div>
 
-<script>
-const quiz_sg = new Quiz('quiz-sg', [
-  { question: "Which <code>.callout</code> variant should you use when warning about something that could crash the robot?", options: [".callout.warning",".callout.danger",".callout.info",".callout.tip"], correct: 1, explanation: "<code>.callout.danger</code> is for bans and robot-breaking rules. Use it sparingly — if everything is marked danger, nothing feels urgent." },
-  { question: "Which span class makes a method call green in a code block?", options: [".fn",".kw",".type",".cls"], correct: 0, explanation: "<code>.fn</code> is the method/function color (#6ee7b7 green). It applies to method names like <code>set()</code>, <code>println()</code>, <code>calculate()</code>." }
-], null);
-</script>
+<div class="callout info"><p><strong>not sure what version we're on?</strong> check <code>build.gradle</code> in the robot repo. look for the wpilib version string. if you're confused just ask before changing anything :)</p></div>
+
+<h2 class="sh">pre-PR checklist</h2>
+<p>run through this before opening a pull request. if you can't check all of these, fix it first!!</p>
+
+<div class="concept-grid">
+  <div class="concept-card">
+    <div class="cc-label">naming</div>
+    <div class="cc-title">prefixes used correctly?</div>
+    <div class="cc-desc">k, m_, trg_, log_ where appropriate. no raw magic numbers. no SCREAMING_SNAKE.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">comments</div>
+    <div class="cc-title">public methods documented?</div>
+    <div class="cc-desc">any public non-trivial method has a javadoc. workarounds have inline comments explaining why.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">constants</div>
+    <div class="cc-title">in Constants.java?</div>
+    <div class="cc-desc">no hardcoded IDs, speeds, or PID values in subsystem files. all in the relevant K class.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">loops</div>
+    <div class="cc-title">no while loops?</div>
+    <div class="cc-desc">no blocking loops anywhere in robot code. check commands, periodic methods, and auto routines.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">burnFlash</div>
+    <div class="cc-title">called after config?</div>
+    <div class="cc-desc">any SparkMAX/SparkFlex config needs <code>burnFlash()</code> to persist through power cycles. easy to forget.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">sim</div>
+    <div class="cc-title">doesn't crash in sim?</div>
+    <div class="cc-desc">run in simulation mode. it doesn't need to work perfectly, it just shouldn't throw exceptions.</div>
+  </div>
+</div>
+
+</div>

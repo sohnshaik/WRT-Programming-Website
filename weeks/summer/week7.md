@@ -1,7 +1,7 @@
 ---
 layout: week
 title: "Advanced Classes"
-subtitle: "Enums, nested classes, ArrayLists, and wrapper classes — the patterns you'll see constantly in robot code."
+subtitle: "enums, nested classes, ArrayLists, and wrapper classes. patterns you'll see constantly in real robot code :)"
 badge: "Summer · Week 7 of 8"
 phase: summer
 phase_label: Summer

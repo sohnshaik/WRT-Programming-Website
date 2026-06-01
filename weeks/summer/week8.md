@@ -1,7 +1,7 @@
 ---
 layout: week
 title: "Bridge Week — XRP & WPILib"
-subtitle: "Java meets robot code. Write your first WPILib program and run it on an XRP."
+subtitle: "java meets robot code!! write your first WPILib program and run it on an actual XRP. it's so real :D"
 badge: "Summer · Week 8 of 8"
 phase: bridge
 phase_label: Summer

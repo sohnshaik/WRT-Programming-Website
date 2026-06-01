@@ -134,13 +134,38 @@ next_title: "Week 2 — Logic & Control Flow"
   </div>
 </div>
 
+<h2 class="sh">Weekly Test</h2>
+<p>this covers everything from week 1. it's a bit longer than the topic quizzes and your score gets sent to the leads :) try it without looking back at the content first!!</p>
+<div class="weekly-test-block">
+  <div class="wt-header">
+    <div class="wt-icon">📋</div>
+    <div>
+      <div class="wt-title">week 1 test</div>
+      <div class="wt-sub">variables, types, operators, naming conventions. 8 questions. good luck!!</div>
+    </div>
+  </div>
+  <div id="test-summer-w1"></div>
+</div>
+
 <script>
 const quiz_w1 = new Quiz('quiz-w1', [
-  { question: "What is the correct way to declare a constant integer in Java?", options: ["const int MAX = 10;","final int MAX = 10;","int final MAX = 10;","static int MAX = 10;"], correct: 1, explanation: "<code>final</code> is the Java keyword for constants. <code>const</code> doesn't exist in Java — that's C/C++." },
-  { question: "You cast <code>double speed = 3.9</code> to int. What value do you get?", options: ["4 (rounds up)","3 (truncates)","3.9 (unchanged)","Compile error"], correct: 1, explanation: "Java truncates toward zero when casting double → int. <code>(int) 3.9 = 3</code>, not 4. This trips people up with encoder conversions." },
-  { question: "Which variable name follows Java conventions for a non-constant?", options: ["MotorSpeed","motorspeed","motorSpeed","motor_speed"], correct: 2, explanation: "Non-constant variables use camelCase — lowercase first letter, capital at the start of each new word. <code>MotorSpeed</code> is PascalCase (used for class names)." },
-  { question: "What does the <code>%</code> operator return?", options: ["A percentage","The remainder after division","Division rounded to int","None of the above"], correct: 1, explanation: "<code>%</code> is modulo — returns the remainder. <code>7 % 3 = 1</code>. In FRC it's useful for cycling through slots: <code>index % arrayLength</code> wraps around." },
-  { question: "A variable declared inside an if block is accessible...", options: ["Anywhere in the file","Anywhere in the method","Only inside that if block","Only in the class"], correct: 2, explanation: "Scope. Variables live and die within their enclosing curly braces. Declare inside an if? It's gone when that block ends. Classic 'cannot find symbol' compiler error." },
+  { question: "What is the correct way to declare a constant integer in Java?", options: ["const int MAX = 10;","final int MAX = 10;","int final MAX = 10;","static int MAX = 10;"], correct: 1, explanation: "<code>final</code> is the Java keyword for constants. <code>const</code> doesn't exist in Java -- that's C/C++." },
+  { question: "You cast <code>double speed = 3.9</code> to int. What value do you get?", options: ["4 (rounds up)","3 (truncates)","3.9 (unchanged)","Compile error"], correct: 1, explanation: "Java truncates toward zero when casting double to int. <code>(int) 3.9 = 3</code>, not 4. This trips people up with encoder conversions." },
+  { question: "Which variable name follows Java conventions for a non-constant?", options: ["MotorSpeed","motorspeed","motorSpeed","motor_speed"], correct: 2, explanation: "Non-constant variables use camelCase. <code>MotorSpeed</code> is PascalCase (for class names). <code>motor_speed</code> is snake_case (not java)." },
+  { question: "What does the <code>%</code> operator return?", options: ["A percentage","The remainder after division","Division rounded to int","None of the above"], correct: 1, explanation: "<code>%</code> is modulo -- returns the remainder. <code>7 % 3 = 1</code>. In FRC it's useful for cycling through array slots." },
+  { question: "A variable declared inside an if block is accessible...", options: ["Anywhere in the file","Anywhere in the method","Only inside that if block","Only in the class"], correct: 2, explanation: "Scope!! Variables live and die within their enclosing curly braces. Declare inside an if? Gone when that block ends. Classic 'cannot find symbol' compiler error." },
   { question: "Output of: <code>int x = 10; x += 3; System.out.println(x);</code>", options: ["10","3","13","103"], correct: 2, explanation: "<code>x += 3</code> means <code>x = x + 3</code>. Starts at 10, becomes 13." }
 ], 'summer-w1');
+
+// ── WEEK 1 TEST ───────────────────────────────────────────────
+const test_w1 = new Quiz('test-summer-w1', [
+  { question: "On team 2974, constants are named with which prefix?", options: ["SCREAMING_SNAKE_CASE","k prefix (e.g. kMotorID)","m_ prefix","no prefix, just final"], correct: 1, explanation: "WRT uses <code>k</code> prefix for constants -- <code>kMotorID</code>, <code>kMaxSpeed_mps</code>, etc. SCREAMING_SNAKE is standard java but not our convention." },
+  { question: "Which type would you use for a motor speed between -1.0 and 1.0?", options: ["int","boolean","double","String"], correct: 2, explanation: "<code>double</code> handles decimal values. Motor speeds are almost always doubles like 0.75 or -1.0." },
+  { question: "What is the output of <code>(int) 7.99</code>?", options: ["8","7","8.0","Compile error"], correct: 1, explanation: "Casting truncates toward zero, it doesn't round. <code>(int) 7.99 = 7</code>." },
+  { question: "Why do we use <code>final</code> for motor IDs in Constants.java?", options: ["Makes the code faster","Prevents accidental reassignment","Required by WPILib","Makes the variable public"], correct: 1, explanation: "<code>final</code> means the value can never be changed after assignment. Motor IDs should never change at runtime, so making them final prevents accidents." },
+  { question: "Which is valid Java syntax for a member variable on team 2974?", options: ["private double targetSpeed;","private double m_targetSpeed;","private double kTargetSpeed;","private double TARGET_SPEED;"], correct: 1, explanation: "We use <code>m_</code> prefix for instance/member variables. So <code>m_targetSpeed</code> is correct." },
+  { question: "What does <code>11 % 4</code> evaluate to?", options: ["2","2.75","3","0"], correct: 2, explanation: "11 divided by 4 is 2 with a remainder of 3. <code>%</code> returns that remainder. So <code>11 % 4 = 3</code>." },
+  { question: "Which of these follows camelCase correctly?", options: ["isShooterRunning","IsShooterRunning","is_shooter_running","ISSHOOTERRUNNING"], correct: 0, explanation: "camelCase: first word lowercase, each subsequent word starts with a capital. <code>isShooterRunning</code> is correct." },
+  { question: "A <code>final</code> variable that has never been assigned a value will...", options: ["Default to 0","Default to null","Cause a compile error","Work fine"], correct: 2, explanation: "Java requires <code>final</code> variables to be assigned exactly once. Declaring without assigning is a compile error." }
+], 'summer-w1-test');
 </script>

@@ -38,6 +38,7 @@
   .home-hero .hh-inner { grid-template-columns: auto 1fr; }
   .home-hero .hh-stats-card { display: none; }
   .leads-grid    { grid-template-columns: repeat(2, 1fr); }
+  .leads-grid--4 { grid-template-columns: repeat(2, 1fr); }
   .how-grid      { grid-template-columns: repeat(2, 1fr); }
   .resources-grid { grid-template-columns: repeat(2, 1fr); }
 }

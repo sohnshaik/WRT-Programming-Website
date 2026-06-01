@@ -14,15 +14,17 @@ const WRC = {
     catch (e) { console.warn('WRC: localStorage unavailable', e); }
   },
   markComplete(pageId, score, total) {
+    const pct = total > 0 ? Math.round((score / total) * 100) : 100;
     const p = this.getProgress();
-    p[pageId] = {
-      complete: true,
-      score, total,
-      pct: total > 0 ? Math.round((score / total) * 100) : 100,
-      date: new Date().toISOString()
-    };
+    p[pageId] = { complete: true, score, total, pct, date: new Date().toISOString() };
     this.saveProgress(p);
     this.updateSidebar();
+
+    // Sync to Firestore if a user is signed in
+    const uid = localStorage.getItem('wrc-uid');
+    if (uid && typeof window._wrcSaveToFirestore === 'function') {
+      window._wrcSaveToFirestore(uid, pageId, score, total, pct);
+    }
   },
   getScore(pageId) {
     return this.getProgress()[pageId] || null;

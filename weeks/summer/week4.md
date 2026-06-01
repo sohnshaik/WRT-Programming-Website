@@ -1,7 +1,7 @@
 ---
 layout: week
 title: "Arrays & Methods"
-subtitle: "Storing lists of data and writing reusable blocks of code."
+subtitle: "storing lists of data and writing reusable blocks of code. methods are your best friend :)"
 badge: "Summer · Week 4 of 8"
 phase: summer
 phase_label: Summer

@@ -1,0 +1,15 @@
+<!-- ── WEEKLY TEST ───────────────────────────────────────────
+     Include with: {% include week-test.html test_id="summer-w1-test" page_id="summer-w1" %}
+     The actual questions are defined in a <script> block after the include.
+     Uses the same Quiz engine as topic quizzes but marks as a "test" in Firestore.
+-->
+<div class="weekly-test-block">
+  <div class="wt-header">
+    <div class="wt-icon">📋</div>
+    <div>
+      <div class="wt-title">weekly test</div>
+      <div class="wt-sub">covers everything from this week. score gets sent to the programming leads :)</div>
+    </div>
+  </div>
+  <div id="{{ include.test_id }}"></div>
+</div>

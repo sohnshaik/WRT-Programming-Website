@@ -63,15 +63,17 @@ defaults:
   - scope:
       path: "weeks/summer"
     values:
-      layout:      "week"
-      phase:       "summer"
-      phase_label: "Summer"
+      layout:       "week"
+      phase:        "summer"
+      phase_label:  "Summer"
+      require_auth: true
   - scope:
       path: "weeks/offseason"
     values:
-      layout:      "week"
-      phase:       "offseason"
-      phase_label: "Offseason"
+      layout:       "week"
+      phase:        "offseason"
+      phase_label:  "Offseason"
+      require_auth: true
 
 # ── EXCLUDE ──────────────────────────────────────────────────
 exclude:

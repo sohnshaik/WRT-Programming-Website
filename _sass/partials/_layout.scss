@@ -63,6 +63,15 @@
     cursor: pointer; padding: 4px 8px;
     line-height: 1;
   }
+
+  .topbar-signin-btn {
+    font-size: 12px; font-weight: 700;
+    background: $red; color: $white;
+    padding: 5px 12px; border-radius: 4px;
+    text-decoration: none; flex-shrink: 0;
+    transition: background $t-fast;
+    &:hover { background: $red-dark; text-decoration: none; }
+  }
 }
 
 // ── SIDEBAR ──────────────────────────────────────────────────
@@ -173,6 +182,14 @@
   margin-left: $sidebar-w;
   flex: 1;
   min-height: calc(100vh - #{$topbar-h});
+
+  &--full {
+    margin-left: 0;
+  }
+}
+
+.shell--no-sidebar {
+  .main { margin-left: 0; }
 }
 
 .content-wrap {

@@ -3,13 +3,13 @@
 <head>
   {% include head.html %}
 </head>
-<body{% if page.page_id %} data-page-id="{{ page.page_id }}"{% endif %}>
+<body{% if page.page_id %} data-page-id="{{ page.page_id }}"{% endif %}{% if page.require_role %} data-require-role="{{ page.require_role }}"{% endif %}{% if page.require_auth %} data-require-auth="1"{% endif %}{% if page.no_sidebar %} class="no-sidebar"{% endif %}>
 
 {% include topbar.html %}
 
-<div class="shell">
-  {% include sidebar.html %}
-  <main class="main" id="main-content">
+<div class="shell{% if page.no_sidebar %} shell--no-sidebar{% endif %}">
+  {% unless page.no_sidebar %}{% include sidebar.html %}{% endunless %}
+  <main class="main{% if page.no_sidebar %} main--full{% endif %}" id="main-content">
     {{ content }}
   </main>
 </div>
@@ -17,6 +17,7 @@
 {% include footer.html %}
 
 <script src="{{ '/assets/js/wrc.js' | relative_url }}"></script>
+<script type="module" src="{{ '/assets/js/auth.js' | relative_url }}"></script>
 {% if page.extra_js %}
 <script>{{ page.extra_js }}</script>
 {% endif %}

@@ -121,6 +121,31 @@ const quiz_w2 = new Quiz('quiz-w2', [
   { question: "What does <code>!isRunning</code> evaluate to when <code>isRunning = true</code>?", options: ["true","false","null","Compile error"], correct: 1, explanation: "<code>!</code> flips the boolean. <code>!true = false</code>. This is used constantly for guard conditions: <code>if (!isRunning) { start(); }</code>" },
   { question: "What happens in a switch statement if you forget <code>break</code>?", options: ["Nothing — break is optional","Compile error","Fall-through: execution continues into the next case","The switch restarts"], correct: 2, explanation: "Without break, Java falls through into the next case and executes it too, even if it didn't match. Almost always a bug." },
   { question: "Which expression is true when speed is between 0.3 and 0.8?", options: ["speed > 0.3 || speed < 0.8","speed > 0.3 && speed < 0.8","speed == 0.3 && speed == 0.8","!(speed < 0.3 && speed > 0.8)"], correct: 1, explanation: "Use && to require both conditions simultaneously. OR would be wrong — almost everything satisfies 'greater than 0.3 OR less than 0.8'." },
-  { question: "Which is true about if-else vs switch?", options: ["Switch can handle ranges like speed > 0.5","If-else can only handle integers","Switch is cleaner for many fixed values of one variable; if-else handles ranges and complex conditions","They're identical in capability"], correct: 2, explanation: "Switch is great when one variable maps to many exact values (button IDs, enum states). If-else handles anything — ranges, multiple variables, complex logic." }
+  { question: "Which is true about if-else vs switch?", options: ["Switch can handle ranges like speed > 0.5","If-else can only handle integers","Switch is cleaner for many fixed values of one variable; if-else handles ranges and complex conditions","They're identical in capability"], correct: 2, explanation: "Switch is great when one variable maps to many exact values (button IDs, enum states). If-else handles anything -- ranges, multiple variables, complex logic." }
 ], 'summer-w2');
+
+// ── WEEK 2 TEST ───────────────────────────────────────────────
+const test_w2 = new Quiz('test-summer-w2', [
+  { question: "What does <code>||</code> (OR) return when both sides are false?", options: ["true","false","null","Compile error"], correct: 1, explanation: "OR returns true if at least one side is true. If both are false, the result is false." },
+  { question: "In robot code, you want to check if the robot is enabled AND has a game piece. Which is correct?", options: ["isEnabled || hasGamePiece","isEnabled && hasGamePiece","!isEnabled && hasGamePiece","isEnabled != hasGamePiece"], correct: 1, explanation: "You need BOTH conditions true simultaneously. Use <code>&&</code> (AND)." },
+  { question: "What does <code>!isAtTarget</code> mean?", options: ["isAtTarget is null","isAtTarget is true","isAtTarget is false (the value gets flipped)","Compile error"], correct: 2, explanation: "<code>!</code> is the NOT operator, it flips the boolean. If isAtTarget is false, !isAtTarget is true." },
+  { question: "A switch statement without a <code>break</code> at the end of a case will...", options: ["Stop at the end of that case","Jump to the default case","Fall through into the next case","Throw a runtime error"], correct: 2, explanation: "Fall-through!! Without break, Java keeps executing into the next case. Almost always a bug unless you intended it." },
+  { question: "Which if-else structure correctly checks if robot is disabled first?", options: ["if (!hasGamePiece) {} else if (!isEnabled) {}","if (!isEnabled) {} else if (!hasGamePiece) {}","if (isEnabled) {} else {}","switch(isEnabled) { case true: }"], correct: 1, explanation: "Check isEnabled first since it gate-keeps everything else. <code>if (!isEnabled)</code> handles the disabled case first." },
+  { question: "What is the result of <code>true && false</code>?", options: ["true","false","null","1"], correct: 1, explanation: "AND requires both sides to be true. true && false = false." },
+  { question: "What is the result of <code>true || false</code>?", options: ["true","false","null","1"], correct: 0, explanation: "OR requires at least one side to be true. true || false = true." },
+  { question: "When is a switch statement preferred over if-else?", options: ["When you need to check ranges (speed > 0.5)","When one variable maps to many exact fixed values","When you have complex boolean logic","When you need multiple variables compared"], correct: 1, explanation: "Switch shines when one variable has many exact values to check -- like button IDs or enum states. For ranges and complex logic, use if-else." }
+], 'summer-w2-test');
 </script>
+
+<h2 class="sh">Weekly Test</h2>
+<p>covers everything from week 2. score gets sent to the leads!! try without looking back first :)</p>
+<div class="weekly-test-block">
+  <div class="wt-header">
+    <div class="wt-icon">📋</div>
+    <div>
+      <div class="wt-title">week 2 test</div>
+      <div class="wt-sub">booleans, logical operators, if/else, switch. 8 questions!!</div>
+    </div>
+  </div>
+  <div id="test-summer-w2"></div>
+</div>

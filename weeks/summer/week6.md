@@ -1,7 +1,7 @@
 ---
 layout: week
 title: "Inheritance & Polymorphism"
-subtitle: "Building class hierarchies, reusing code, and the OOP features behind WPILib itself."
+subtitle: "building class hierarchies, reusing code, and the OOP stuff that makes WPILib make sense :D"
 badge: "Summer · Week 6 of 8"
 phase: summer
 phase_label: Summer

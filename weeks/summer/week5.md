@@ -1,7 +1,7 @@
 ---
 layout: week
-title: "OOP — Classes & Objects"
-subtitle: "The most important week in this course. Everything in FRC robot code is a class."
+title: "OOP - Classes & Objects"
+subtitle: "the most important week in this course fr. everything in FRC robot code is a class. don't skip this!!"
 badge: "Summer · Week 5 of 8"
 phase: summer
 phase_label: Summer
