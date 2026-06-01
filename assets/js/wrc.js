@@ -106,6 +106,41 @@ const WRC = {
     });
   },
 
+  loadDashboardCards() {
+    const p = this.getProgress();
+    const cards = document.querySelectorAll('.cdwc[data-page]');
+    if (!cards.length) return;
+
+    let firstIncomplete = null;
+
+    cards.forEach(card => {
+      const pageId = card.dataset.page;
+      const s = p[pageId];
+      const statusText = card.querySelector('.cdwc-status-text');
+
+      if (s?.complete) {
+        card.classList.add('cdwc--completed');
+        if (statusText) statusText.textContent = 'Completed';
+      } else if (!firstIncomplete) {
+        firstIncomplete = { card, statusText };
+      }
+    });
+
+    const continueBtn = document.getElementById('dash-continue-btn');
+    if (firstIncomplete) {
+      firstIncomplete.card.classList.add('cdwc--active');
+      if (firstIncomplete.statusText) firstIncomplete.statusText.textContent = 'Up next';
+      if (continueBtn) {
+        const href = firstIncomplete.card.getAttribute('href');
+        if (href) continueBtn.setAttribute('href', href);
+        const hasProgress = Object.values(p).some(v => v.complete);
+        continueBtn.textContent = hasProgress ? 'Continue \u2192' : 'Start learning \u2192';
+      }
+    } else if (Object.keys(p).length > 0 && continueBtn) {
+      continueBtn.textContent = 'All done! \uD83C\uDF89';
+    }
+  },
+
   maybeShowBanner(pageId) {
     const s = this.getScore(pageId);
     const banner = document.getElementById('complete-banner');
@@ -353,6 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   WRC.updateSidebar();
   WRC.loadModuleScores();
+  WRC.loadDashboardCards();
 
   const pageId = document.body.dataset.pageId;
   if (pageId) WRC.maybeShowBanner(pageId);
