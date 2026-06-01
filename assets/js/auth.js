@@ -33,6 +33,17 @@ function dismissOverlay() {
   }
 }
 
+// For pages that don't require auth, dismiss overlay immediately —
+// no need to wait for Firebase before showing public content.
+// (For auth-gated pages, the overlay stays until the check resolves.)
+if (!document.body.dataset.requireAuth) {
+  dismissOverlay();
+}
+
+// Safety timeout: dismiss overlay after 5s even if Firebase never responds
+// (covers auth-gated pages on slow/blocked connections)
+setTimeout(dismissOverlay, 5000);
+
 // ── AUTH STATE ────────────────────────────────────────────────
 onAuthStateChanged(auth, async (user) => {
   const body         = document.body;

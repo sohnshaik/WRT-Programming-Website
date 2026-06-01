@@ -159,13 +159,18 @@ const firebaseConfig = {
   appId: "1:241876848170:web:c471b9407abd661d477d53"
 };
 
-// Access codes define what role gets assigned on registration
-// STUDENT_CODE = any WRT student, TEACHER_CODE = programming leads only
-const ACCESS_CODES = {
-  'tiramisu4life':    'student',   // hand this out to all students
-  'banksbegoateds':       'leads',   // only give to programming leads
-  'weluvhre': 'admin',    // keep this one secret
+// Access codes are SHA-256 hashed — plaintext codes are never stored in source.
+// To generate a new hash: https://emn178.github.io/online-tools/sha256.html
+const ACCESS_CODE_HASHES = {
+  'fda533469e66a6f2da73b3e0ea0ad14284eebf37766de4114dab47d9ef49d84f': 'student',
+  '9a35bddd63a3420651ecc6bdcb99260af7130e51b0f66d6b2a77fcdbb4217414': 'leads',
+  '360835c8908fde77b297a90cfd838461fca6bfe22e428e3f845c0180c6d9032a': 'admin',
 };
+
+async function hashCode(raw) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw.trim()));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
 
 const app  = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -225,7 +230,8 @@ window.handleRegister = async (e) => {
   const password = document.getElementById('reg-password').value;
   const code     = document.getElementById('reg-code').value.trim();
 
-  const role = ACCESS_CODES[code];
+  const hash = await hashCode(code);
+  const role = ACCESS_CODE_HASHES[hash];
   if (!role) {
     showError("that access code isn't right :( ask a programming lead for the correct one!!");
     btn.disabled = false; btn.textContent = 'create account';
