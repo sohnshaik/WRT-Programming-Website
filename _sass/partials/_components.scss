@@ -680,18 +680,18 @@ textarea.code-input {
   top: calc(#{$topbar-h} + 60px);
   left: calc(#{$sidebar-w} - 12px);
   width: 22px; height: 40px;
-  background: $navy-light;
-  border: 1px solid $navy-mid;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
   border-left: none;
   border-radius: 0 6px 6px 0;
-  color: $navy;
+  color: rgba(255,255,255,0.45);
   font-size: 13px;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   z-index: 101;
-  transition: left $t-base, background $t-fast;
+  transition: left $t-base, background $t-fast, color $t-fast;
   padding: 0;
-  &:hover { background: $navy-mid; }
+  &:hover { background: rgba(255,255,255,0.16); color: rgba(255,255,255,0.9); }
 }
 
 .sidebar-search-btn {
@@ -701,23 +701,23 @@ textarea.code-input {
   width: 100%;
   margin-top: 10px;
   padding: 7px 10px;
-  background: $gray-100;
-  border: 1px solid $gray-200;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 5px;
   cursor: pointer;
   font-size: 12px;
-  color: $gray-500;
+  color: rgba(255,255,255,0.38);
   transition: all $t-fast;
-  &:hover { background: $gray-200; color: $gray-700; }
+  &:hover { background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.7); }
   .ssb-icon { font-size: 13px; }
   .ssb-text { flex: 1; text-align: left; }
   kbd {
     font-size: 10px;
-    background: $white;
-    border: 1px solid $gray-300;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
     border-radius: 3px;
     padding: 1px 5px;
-    color: $gray-400;
+    color: rgba(255,255,255,0.25);
     font-family: $font-mono;
   }
 }
@@ -900,6 +900,140 @@ textarea.code-input {
     border-radius: 3px; padding: 1px 5px;
     font-family: $font-mono; font-size: 10px; color: $gray-500;
   }
+}
+
+// ── COURSE DASHBOARD ─────────────────────────────────────────
+.course-dash {
+  min-height: 100vh;
+  background: $gray-50;
+}
+
+.cd-banner {
+  background: $navy;
+  border-bottom: 3px solid $red;
+  padding: 1.5rem 2.5rem;
+
+  .cdb-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; gap: 1.25rem;
+  }
+  .cdb-logo {
+    width: 44px; height: 44px; object-fit: contain;
+    border-radius: 6px; flex-shrink: 0;
+  }
+  .cdb-text {
+    flex: 1;
+    h1 { font-size: 1.15rem; font-weight: 900; color: $white; line-height: 1.2; margin-bottom: 3px; }
+    .cdb-season { font-size: 12px; color: rgba(255,255,255,0.4); }
+  }
+  .cdb-progress {
+    display: flex; align-items: center; gap: 12px;
+    .cdbp-label { font-size: 12px; color: rgba(255,255,255,0.45); white-space: nowrap; }
+    .cdbp-track { width: 140px; height: 5px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+    .cdbp-fill  { height: 100%; background: $red; border-radius: 3px; transition: width 0.4s ease; }
+  }
+}
+
+.cd-phase {
+  max-width: 1100px; margin: 0 auto; padding: 2rem 2.5rem 0.5rem;
+  &:last-of-type { padding-bottom: 2.5rem; }
+}
+
+.cd-phase-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 1.1rem;
+  h2 { font-size: 1rem; font-weight: 800; color: $navy; letter-spacing: -0.01em; margin: 0; }
+  .cdph-badge {
+    padding: 3px 9px; border-radius: 4px; font-size: 10px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    &--summer    { background: $red-light;  color: $red-dark; }
+    &--offseason { background: $navy-light; color: $navy; }
+  }
+  .cdph-count { font-size: 12px; color: $gray-400; margin-left: auto; }
+}
+
+.cd-weeks-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.cdwc {
+  background: $white;
+  border: 1px solid $gray-200;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: box-shadow $t-base, transform $t-base, border-color $t-base;
+  display: flex; flex-direction: column;
+
+  &:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    border-color: $navy-mid;
+    transform: translateY(-2px);
+    text-decoration: none;
+    .cdwc-go { color: $red-dark; }
+  }
+  &.cdwc--completed {
+    .cdwc-top { border-top: 3px solid $green; }
+    .cdwc-status-dot { background: $green; }
+    .cdwc-status-text { color: rgba(255,255,255,0.7); }
+  }
+  &.cdwc--active {
+    border-color: $navy-mid;
+    .cdwc-top { border-top: 3px solid $amber; }
+    .cdwc-status-dot { background: $amber; }
+    .cdwc-status-text { color: rgba(255,255,255,0.7); }
+  }
+}
+
+.cdwc-top {
+  background: $navy; padding: 11px 13px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 3px solid transparent;
+}
+.cd-phase--offseason .cdwc .cdwc-top { background: darken($navy, 5%); }
+
+.cdwc-num {
+  font-size: 11px; font-weight: 900; color: rgba(255,255,255,0.9);
+  font-family: $font-mono; letter-spacing: 0.04em;
+  background: rgba(255,255,255,0.1); padding: 2px 7px; border-radius: 4px;
+}
+.cdwc-status { display: flex; align-items: center; gap: 5px; }
+.cdwc-status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.2); flex-shrink: 0;
+}
+.cdwc-status-text {
+  font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: rgba(255,255,255,0.3);
+}
+
+.cdwc-body { padding: 13px 13px 9px; flex: 1; }
+.cdwc-title {
+  font-size: 13px; font-weight: 700; color: $gray-800;
+  line-height: 1.35; margin-bottom: 4px;
+}
+.cdwc-topics { font-size: 11px; color: $gray-400; }
+
+.cdwc-footer {
+  padding: 7px 13px 11px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid $gray-100;
+}
+.cdwc-go   { font-size: 11px; font-weight: 700; color: $red; transition: color $t-fast; }
+.cdwc-done { font-size: 12px; color: $green; }
+
+// ── COURSE DASHBOARD LEADS ────────────────────────────────────
+.cd-leads {
+  background: $white; border-top: 1px solid $gray-200;
+  padding: 2.5rem 2.5rem;
+  .cd-leads-inner { max-width: 1100px; margin: 0 auto; }
+}
+.cd-leads-header {
+  margin-bottom: 1.5rem;
+  .cdlh-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: $red; margin-bottom: 4px; }
+  .cdlh-title { font-size: 1.1rem; font-weight: 900; color: $navy; margin-bottom: 4px; }
+  .cdlh-sub   { font-size: 13px; color: $gray-500; max-width: 540px; line-height: 1.65; }
 }
 
 // ── Week layout (canvas-style) ────────────────────────────────────────────────
