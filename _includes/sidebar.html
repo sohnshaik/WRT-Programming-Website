@@ -1,32 +1,30 @@
 <nav class="sidebar" id="sidebar">
 
   <div class="sidebar-course-header">
-    <div class="sch-header-top">
+    <div class="sch-top">
       <div>
         <div class="sch-label">WRT Programming</div>
         <div class="sch-title">Java &amp; FRC Course<br>2026–27 Season</div>
       </div>
-      <button class="sidebar-collapse-btn" onclick="toggleSidebarWidth()" title="Collapse sidebar">
-        <span class="scb-icon">‹</span>
-      </button>
+      <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" onclick="toggleSidebarWidth()" title="Collapse sidebar">‹</button>
     </div>
     <div class="sch-progress">
       <div class="sp-label">
-        <span>Course Progress</span>
+        <span>Progress</span>
         <span class="sp-pct-text">0%</span>
       </div>
       <div class="sp-track"><div class="sp-fill" style="width:0%"></div></div>
     </div>
+    <button class="sidebar-search-btn" onclick="openSearch()">
+      <span class="ssb-icon">🔍</span>
+      <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+    </button>
   </div>
-
-  <button class="sidebar-search-btn" onclick="openSearch()" title="Search topics">
-    <span>🔍</span>
-    <span class="ssb-text">Search</span>
-  </button>
 
   <div class="nav-group">
     <div class="nav-group-label">
-      Summer — Java Foundations
+      <span class="ngl-icon">☀️</span>
+      <span class="ngl-text">Summer — Java Foundations</span>
       <span class="ngl-arrow">▾</span>
     </div>
     <div class="nav-items">
@@ -75,7 +73,8 @@
 
   <div class="nav-group">
     <div class="nav-group-label">
-      Offseason — FRC Training
+      <span class="ngl-icon">🤖</span>
+      <span class="ngl-text">Offseason — FRC Training</span>
       <span class="ngl-arrow">▾</span>
     </div>
     <div class="nav-items">
@@ -123,3 +122,22 @@
   </div>
 
 </nav>
+
+<!-- Search Modal -->
+<div class="search-overlay" id="search-overlay" onclick="closeSearch()">
+  <div class="search-modal" onclick="event.stopPropagation()">
+    <div class="sm-header">
+      <span class="sm-icon">🔍</span>
+      <input type="text" id="search-input" class="sm-input" placeholder="Search topics, concepts, keywords…" oninput="searchTopics(this.value)" autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="sm-close" onclick="closeSearch()">✕</button>
+    </div>
+    <div class="sm-results" id="search-results">
+      <div class="sm-empty">Start typing to search across all 16 weeks…</div>
+    </div>
+    <div class="sm-footer">
+      <span><kbd>↑↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> open</span>
+      <span><kbd>Esc</kbd> close</span>
+    </div>
+  </div>
+</div>

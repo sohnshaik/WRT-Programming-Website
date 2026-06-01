@@ -300,113 +300,8 @@ function closeSidebar() {
 
 // Close sidebar on ESC
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeSidebar();
-    closeSearch();
-  }
+  if (e.key === 'Escape') closeSidebar();
 });
-
-// ── SIDEBAR WIDTH TOGGLE (DESKTOP COLLAPSE) ──────────────────
-function toggleSidebarWidth() {
-  const sb = document.getElementById('sidebar');
-  if (!sb) return;
-  const isCollapsed = sb.classList.toggle('collapsed');
-  const btn = sb.querySelector('.sidebar-collapse-btn .scb-icon');
-  if (btn) btn.textContent = isCollapsed ? '›' : '‹';
-  localStorage.setItem('sidebar-collapsed', isCollapsed);
-  
-  const main = document.querySelector('.main');
-  if (main) main.classList.toggle('sidebar-narrow');
-}
-
-// Restore collapsed state on page load
-document.addEventListener('DOMContentLoaded', () => {
-  const wasCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
-  if (wasCollapsed) {
-    const sb = document.getElementById('sidebar');
-    const btn = sb?.querySelector('.sidebar-collapse-btn .scb-icon');
-    if (sb) sb.classList.add('collapsed');
-    if (btn) btn.textContent = '›';
-    const main = document.querySelector('.main');
-    if (main) main.classList.add('sidebar-narrow');
-  }
-});
-
-// ── SEARCH FUNCTIONALITY ─────────────────────────────────────
-const SEARCH_INDEX = [
-  { title: 'The Basics', url: '/weeks/summer/week1', tags: ['variables', 'types', 'scope', 'java'] },
-  { title: 'Logic & Control Flow', url: '/weeks/summer/week2', tags: ['boolean', 'if', 'switch', 'operators'] },
-  { title: 'Loops', url: '/weeks/summer/week3', tags: ['for', 'foreach', 'while', 'iteration'] },
-  { title: 'Arrays & Methods', url: '/weeks/summer/week4', tags: ['array', 'arraylist', 'method', 'parameters'] },
-  { title: 'OOP — Classes & Objects', url: '/weeks/summer/week5', tags: ['class', 'object', 'oop', 'encapsulation'] },
-  { title: 'Inheritance & Polymorphism', url: '/weeks/summer/week6', tags: ['inherit', 'extends', 'interface', 'override'] },
-  { title: 'Advanced Classes', url: '/weeks/summer/week7', tags: ['enum', 'abstract', 'nested', 'generics'] },
-  { title: 'Bridge Week — XRP & WPILib', url: '/weeks/summer/week8', tags: ['wpilibx', 'robot', 'xrp', 'hardware'] },
-  { title: 'Git & GitHub', url: '/weeks/offseason/os-week1', tags: ['git', 'github', 'branch', 'pull request'] },
-  { title: 'WPILib Setup', url: '/weeks/offseason/os-week2', tags: ['setup', 'environment', 'wpilib', 'robotcontainer'] },
-  { title: 'Command-Based Architecture', url: '/weeks/offseason/os-week3', tags: ['command', 'subsystem', 'scheduler', 'trigger'] },
-  { title: 'Motors & Sensors', url: '/weeks/offseason/os-week4', tags: ['motor', 'encoder', 'sensor', 'smartdashboard'] },
-  { title: 'PID Control', url: '/weeks/offseason/os-week5', tags: ['pid', 'control', 'tuning', 'feedforward'] },
-  { title: 'Autonomous & PathPlanner', url: '/weeks/offseason/os-week6', tags: ['autonomous', 'pathplanner', 'odometry', 'field'] },
-  { title: 'Subsystem Ownership', url: '/weeks/offseason/os-week7', tags: ['subsystem', 'architecture', 'design', 'code review'] },
-  { title: 'Build Season Prep', url: '/weeks/offseason/os-week8', tags: ['build', 'sprint', 'scrum', 'advantagekit'] }
-];
-
-function openSearch() {
-  const modal = document.getElementById('search-modal') || createSearchModal();
-  modal.style.display = 'flex';
-  modal.querySelector('.search-input')?.focus();
-}
-
-function closeSearch() {
-  const modal = document.getElementById('search-modal');
-  if (modal) modal.style.display = 'none';
-}
-
-function createSearchModal() {
-  const modal = document.createElement('div');
-  modal.id = 'search-modal';
-  modal.className = 'search-modal';
-  modal.innerHTML = `
-    <div class="search-modal-bg" onclick="closeSearch()"></div>
-    <div class="search-modal-content">
-      <div class="search-header">
-        <input type="text" class="search-input" placeholder="Search topics, keywords..." 
-               onkeyup="performSearch(this.value)">
-        <button onclick="closeSearch()" class="search-close">✕</button>
-      </div>
-      <div id="search-results" class="search-results"></div>
-    </div>
-  `;
-  document.body.appendChild(modal);
-  modal.querySelector('.search-modal-bg').addEventListener('click', closeSearch);
-  return modal;
-}
-
-function performSearch(query) {
-  const results = document.getElementById('search-results');
-  if (!query.trim()) {
-    results.innerHTML = '<div class="sr-empty">Start typing to search...</div>';
-    return;
-  }
-
-  const q = query.toLowerCase();
-  const matches = SEARCH_INDEX.filter(item =>
-    item.title.toLowerCase().includes(q) ||
-    item.tags.some(tag => tag.includes(q))
-  );
-
-  if (matches.length === 0) {
-    results.innerHTML = '<div class="sr-empty">No results found.</div>';
-  } else {
-    results.innerHTML = matches.map(item => `
-      <a href="${item.url}" class="search-result-item" onclick="closeSearch()">
-        <span class="sri-title">${item.title}</span>
-        <span class="sri-tags">${item.tags.slice(0, 2).join(' • ')}</span>
-      </a>
-    `).join('');
-  }
-}
 
 // ── NAV GROUP COLLAPSE ───────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -427,15 +322,113 @@ document.addEventListener('DOMContentLoaded', () => {
   // Show complete banner if already done
   const pageId = document.body.dataset.pageId;
   if (pageId) WRC.maybeShowBanner(pageId);
+});
 
-  // Create search modal
-  createSearchModal();
+// ── SIDEBAR COLLAPSE (DESKTOP) ────────────────────────────────
+function toggleSidebarWidth() {
+  const sb     = document.getElementById('sidebar');
+  const main   = document.getElementById('main-content');
+  const footer = document.querySelector('.site-footer');
+  if (!sb) return;
+  const isCollapsed = sb.classList.toggle('collapsed');
+  if (main)   main.classList.toggle('sidebar-collapsed', isCollapsed);
+  if (footer) footer.classList.toggle('sidebar-collapsed', isCollapsed);
+  try { localStorage.setItem('wrc-sidebar-collapsed', isCollapsed ? '1' : '0'); } catch {}
+}
 
-  // Search via Ctrl+K
-  document.addEventListener('keydown', e => {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-      e.preventDefault();
-      openSearch();
+// Restore collapse state on load
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    const collapsed = localStorage.getItem('wrc-sidebar-collapsed') === '1';
+    if (collapsed) {
+      const sb     = document.getElementById('sidebar');
+      const main   = document.getElementById('main-content');
+      const footer = document.querySelector('.site-footer');
+      if (sb) sb.classList.add('collapsed');
+      if (main) main.classList.add('sidebar-collapsed');
+      if (footer) footer.classList.add('sidebar-collapsed');
     }
-  });
+  } catch {}
+});
+
+// ── SEARCH ────────────────────────────────────────────────────
+const SEARCH_INDEX = [
+  // Summer
+  { id:'summer-w1', badge:'W1', title:'The Basics', sub:'Variables, data types, casting, operators, scope, readability, constants', url:'/weeks/summer/week1' },
+  { id:'summer-w2', badge:'W2', title:'Logic & Control Flow', sub:'Booleans, if/else, switch, logical operators, &&, ||, !', url:'/weeks/summer/week2' },
+  { id:'summer-w3', badge:'W3', title:'Loops', sub:'For loops, foreach, while loop ban, FRC 20ms cycle, watchdog, infinite loops', url:'/weeks/summer/week3' },
+  { id:'summer-w4', badge:'W4', title:'Arrays & Methods', sub:'Arrays, ArrayLists, method signatures, parameters, return types, Javadocs, void', url:'/weeks/summer/week4' },
+  { id:'summer-w5', badge:'W5', title:'OOP — Classes & Objects', sub:'Classes, objects, constructors, encapsulation, private, getters, setters, this keyword', url:'/weeks/summer/week5' },
+  { id:'summer-w6', badge:'W6', title:'Inheritance & Polymorphism', sub:'extends, super, Override, abstract classes, interfaces, implements, SubsystemBase, Command', url:'/weeks/summer/week6' },
+  { id:'summer-w7', badge:'W7', title:'Advanced Classes', sub:'Enums, enum switch, ArrayList, wrapper classes, Integer, Double, autoboxing', url:'/weeks/summer/week7' },
+  { id:'summer-w8', badge:'W8', title:'Bridge Week — XRP & WPILib', sub:'XRP robot, TimedRobot, teleopPeriodic, WPILib, first robot code, git commit', url:'/weeks/summer/week8' },
+  // Offseason
+  { id:'offseason-o1', badge:'O1', title:'Git & GitHub', sub:'Branches, pull requests, commits, branch naming, feature branches, conflict resolution', url:'/weeks/offseason/os-week1' },
+  { id:'offseason-o2', badge:'O2', title:'WPILib Setup', sub:'Install WPILib, VS Code, RobotContainer, Constants.java, project structure, simulation', url:'/weeks/offseason/os-week2' },
+  { id:'offseason-o3', badge:'O3', title:'Command-Based Architecture', sub:'Subsystems, Commands, Scheduler, Triggers, addRequirements, execute, isFinished, sequence, parallel', url:'/weeks/offseason/os-week3' },
+  { id:'offseason-o4', badge:'O4', title:'Motors & Sensors', sub:'SparkMax, TalonFX, CANSparkMax, encoders, conversion factor, NavX, gyroscope, SmartDashboard', url:'/weeks/offseason/os-week4' },
+  { id:'offseason-o5', badge:'O5', title:'PID Control', sub:'Proportional, Integral, Derivative, kP kI kD, PIDController, setpoint, feedforward, tuning, oscillation', url:'/weeks/offseason/os-week5' },
+  { id:'offseason-o6', badge:'O6', title:'Autonomous & PathPlanner', sub:'Auto routines, sequence, WaitCommand, PathPlanner, odometry, field coordinates, auto chooser', url:'/weeks/offseason/os-week6' },
+  { id:'offseason-o7', badge:'O7', title:'Subsystem Ownership', sub:'Code reading, Javadoc, @param, @return, magic numbers, Constants, capstone, PR review', url:'/weeks/offseason/os-week7' },
+  { id:'offseason-o8', badge:'O8', title:'Build Season Prep', sub:'SCRUM, sprint planning, standup, backlog, code freeze, AdvantageKit, logging, GitHub Issues', url:'/weeks/offseason/os-week8' },
+];
+
+function openSearch() {
+  const overlay = document.getElementById('search-overlay');
+  if (!overlay) return;
+  overlay.classList.add('open');
+  setTimeout(() => {
+    const input = document.getElementById('search-input');
+    if (input) { input.value = ''; input.focus(); }
+    renderSearchResults('');
+  }, 50);
+}
+
+function closeSearch() {
+  const overlay = document.getElementById('search-overlay');
+  if (overlay) overlay.classList.remove('open');
+}
+
+function searchTopics(query) {
+  renderSearchResults(query.trim().toLowerCase());
+}
+
+function renderSearchResults(q) {
+  const container = document.getElementById('search-results');
+  if (!container) return;
+
+  const matches = q.length === 0
+    ? SEARCH_INDEX
+    : SEARCH_INDEX.filter(item =>
+        item.title.toLowerCase().includes(q) ||
+        item.sub.toLowerCase().includes(q) ||
+        item.badge.toLowerCase().includes(q)
+      );
+
+  if (matches.length === 0) {
+    container.innerHTML = `<div class="sm-empty">No results for "<strong>${q}</strong>"</div>`;
+    return;
+  }
+
+  container.innerHTML = matches.map((item, i) => `
+    <a class="sm-result" href="${item.url}" onclick="closeSearch()">
+      <span class="sr-badge">${item.badge}</span>
+      <div class="sr-body">
+        <div class="sr-title">${item.title}</div>
+        <div class="sr-sub">${item.sub.split(',').slice(0,4).join(' · ')}</div>
+      </div>
+      <span class="sr-arrow">→</span>
+    </a>
+  `).join('');
+}
+
+// Keyboard shortcut: Cmd/Ctrl+K
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    const overlay = document.getElementById('search-overlay');
+    if (overlay?.classList.contains('open')) closeSearch();
+    else openSearch();
+  }
+  if (e.key === 'Escape') closeSearch();
 });
