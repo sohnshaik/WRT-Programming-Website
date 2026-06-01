@@ -7,13 +7,18 @@ phase: summer
 phase_label: Summer
 week_label: Week 2
 page_id: summer-w2
+weekly_test: true
+topics:
+  - Booleans & Logical Operators
+  - If / Else
+  - Switch Statements
 prev_url: /weeks/summer/week1
 prev_title: "Week 1 — The Basics"
 next_url: /weeks/summer/week3
 next_title: "Week 3 — Loops"
 ---
 
-<h2 class="sh">Booleans & Logical Operators</h2>
+<h2 class="sh" id="topic-1">Booleans &amp; Logical Operators</h2>
 <p>A boolean holds exactly one of two values: <code>true</code> or <code>false</code>. Robot code is basically one giant decision tree — is the button pressed? Is the sensor triggered? Is the robot in auto? All booleans.</p>
 
 <div class="concept-grid">
@@ -23,7 +28,7 @@ next_title: "Week 3 — Loops"
   <div class="concept-card"><div class="cc-label">Comparison</div><div class="cc-title">== &nbsp;!= &nbsp;&lt; &nbsp;&gt;</div><div class="cc-desc">These return a boolean. <code>speed &gt; 0.5</code> evaluates to true or false.</div></div>
 </div>
 
-<h2 class="sh">If / Else</h2>
+<h2 class="sh" id="topic-2">If / Else</h2>
 <p>Run code only when a condition is true. The most fundamental control structure in any language.</p>
 
 <div class="code-block">
@@ -41,7 +46,7 @@ next_title: "Week 3 — Loops"
 
 <div class="callout tip"><p><strong>FRC connection:</strong> Almost every autonomous decision in robot code is an if/else chain. "If the sensor reads X, do Y. Otherwise do Z." That's it. This is the core logic pattern.</p></div>
 
-<h2 class="sh">Switch Statements</h2>
+<h2 class="sh" id="topic-3">Switch Statements</h2>
 <p>When you have one variable that could be many specific values, a switch is cleaner than a long if-else chain. In FRC we use these constantly for game states, robot modes, and enum-based control.</p>
 
 <div class="code-block">
@@ -137,7 +142,7 @@ const test_w2 = new Quiz('test-summer-w2', [
 ], 'summer-w2-test');
 </script>
 
-<h2 class="sh">Weekly Test</h2>
+<h2 class="sh" id="weekly-test">Weekly Test</h2>
 <p>covers everything from week 2. score gets sent to the leads!! try without looking back first :)</p>
 <div class="weekly-test-block">
   <div class="wt-header">

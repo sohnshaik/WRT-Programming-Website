@@ -1,5 +1,33 @@
 // ── WRT PROGRAMMING — COURSE JS ──────────────────────────────
-// Quiz engine, fill-in-the-blank, progress tracking, sidebar.
+// Quiz engine, fill-in-the-blank, progress tracking, sidebar,
+// dark mode, and answer tracking.
+
+// ── DARK MODE ────────────────────────────────────────────────
+(function() {
+  try {
+    const saved = localStorage.getItem('wrc-dark');
+    if (saved === '1') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  } catch {}
+})();
+
+function toggleDark() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  try { localStorage.setItem('wrc-dark', isDark ? '0' : '1'); } catch {}
+  const btn = document.getElementById('dark-toggle');
+  if (btn) btn.textContent = isDark ? '🌙' : '☀️';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('dark-toggle');
+  if (btn) {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    btn.textContent = isDark ? '☀️' : '🌙';
+  }
+});
 
 // ── PROGRESS & SCORE STORAGE ─────────────────────────────────
 const WRC = {
@@ -20,7 +48,6 @@ const WRC = {
     this.saveProgress(p);
     this.updateSidebar();
 
-    // Sync to Firestore if a user is signed in
     const uid = localStorage.getItem('wrc-uid');
     if (uid && typeof window._wrcSaveToFirestore === 'function') {
       window._wrcSaveToFirestore(uid, pageId, score, total, pct);
@@ -33,12 +60,10 @@ const WRC = {
     return Object.values(this.getProgress()).filter(v => v.complete).length;
   },
 
-  // Update sidebar progress bar + checkmarks
   updateSidebar() {
     const p    = this.getProgress();
-    const total = 16;
     const done  = this.totalComplete();
-    const pct   = Math.round((done / total) * 100);
+    const pct   = Math.round((done / 16) * 100);
 
     const fill  = document.querySelector('.sp-fill');
     const label = document.querySelector('.sp-pct-text');
@@ -58,7 +83,6 @@ const WRC = {
     if (statsEl) statsEl.textContent = done;
   },
 
-  // Update dashboard module items with saved scores
   loadModuleScores() {
     const p = this.getProgress();
     document.querySelectorAll('.module-item[data-page]').forEach(el => {
@@ -82,7 +106,6 @@ const WRC = {
     });
   },
 
-  // Show score if already completed (page re-visit)
   maybeShowBanner(pageId) {
     const s = this.getScore(pageId);
     const banner = document.getElementById('complete-banner');
@@ -111,6 +134,7 @@ class Quiz {
     const letters = ['A', 'B', 'C', 'D'];
     const pct     = Math.round((this.current / this.questions.length) * 100);
     const cid     = this.containerId;
+    const isAdmin = ['admin', 'leads', 'teacher'].includes(window._wrcRole);
 
     this.el.innerHTML = `
       <div class="quiz-wrap" id="qwrap-${cid}">
@@ -123,9 +147,10 @@ class Quiz {
         </div>
         <div class="quiz-body">
           <div class="quiz-q">${q.question}</div>
+          ${isAdmin ? `<div class="quiz-admin-note">✏️ admin view — correct answer is <strong>${letters[q.correct]}</strong></div>` : ''}
           <div class="quiz-options">
             ${q.options.map((opt, i) => `
-              <button class="quiz-option" data-idx="${i}"
+              <button class="quiz-option${isAdmin && i === q.correct ? ' admin-correct-hint' : ''}" data-idx="${i}"
                 onclick="window._quiz_${cid}.select(${i})">
                 <span class="opt-letter">${letters[i]}</span>
                 <span>${opt}</span>
@@ -167,6 +192,17 @@ class Quiz {
       : `<strong>✗ Not quite.</strong> ${q.explanation}`;
 
     document.getElementById(`qnext-${this.containerId}`).disabled = false;
+
+    // Save per-question answer for admin review
+    if (this.pageId && typeof window._wrcSaveAnswer === 'function') {
+      window._wrcSaveAnswer(this.pageId, this.current, {
+        question:  q.question,
+        selected:  idx,
+        correct:   q.correct,
+        wasCorrect: isRight,
+        options:   q.options
+      });
+    }
   }
 
   next() {
@@ -262,7 +298,6 @@ function copyCode(btn) {
     btn.textContent = 'copied ✓';
     setTimeout(() => btn.textContent = orig, 1800);
   }).catch(() => {
-    // fallback for older browsers
     const ta = document.createElement('textarea');
     ta.value = pre.innerText;
     document.body.appendChild(ta);
@@ -300,9 +335,8 @@ function closeSidebar() {
   document.body.style.overflow = '';
 }
 
-// Close sidebar on ESC
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeSidebar();
+  if (e.key === 'Escape') { closeSidebar(); closeSearch(); }
 });
 
 // ── NAV GROUP COLLAPSE ───────────────────────────────────────
@@ -317,11 +351,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Init
   WRC.updateSidebar();
   WRC.loadModuleScores();
 
-  // Show complete banner if already done
   const pageId = document.body.dataset.pageId;
   if (pageId) WRC.maybeShowBanner(pageId);
 });
@@ -331,10 +363,12 @@ function toggleSidebarWidth() {
   const sb     = document.getElementById('sidebar');
   const main   = document.getElementById('main-content');
   const footer = document.querySelector('.site-footer');
+  const btn    = document.getElementById('sidebar-collapse-btn');
   if (!sb) return;
   const isCollapsed = sb.classList.toggle('collapsed');
   if (main)   main.classList.toggle('sidebar-collapsed', isCollapsed);
   if (footer) footer.classList.toggle('sidebar-collapsed', isCollapsed);
+  if (btn)    btn.textContent = isCollapsed ? '›' : '‹';
   try { localStorage.setItem('wrc-sidebar-collapsed', isCollapsed ? '1' : '0'); } catch {}
 }
 
@@ -346,17 +380,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const sb     = document.getElementById('sidebar');
       const main   = document.getElementById('main-content');
       const footer = document.querySelector('.site-footer');
+      const btn    = document.getElementById('sidebar-collapse-btn');
       if (sb) sb.classList.add('collapsed');
       if (main) main.classList.add('sidebar-collapsed');
       if (footer) footer.classList.add('sidebar-collapsed');
+      if (btn) btn.textContent = '›';
     }
   } catch {}
 });
 
 // ── SEARCH ────────────────────────────────────────────────────
 const SEARCH_INDEX = [
-  // Summer
-  { id:'summer-w1', badge:'W1', title:'The Basics', sub:'Variables, data types, casting, operators, scope, readability, constants', url:'/weeks/summer/week1' },
+  { id:'summer-w1', badge:'W1', title:'The Basics', sub:'Variables, data types, casting, operators, scope, readability, constants, String methods', url:'/weeks/summer/week1' },
   { id:'summer-w2', badge:'W2', title:'Logic & Control Flow', sub:'Booleans, if/else, switch, logical operators, &&, ||, !', url:'/weeks/summer/week2' },
   { id:'summer-w3', badge:'W3', title:'Loops', sub:'For loops, foreach, while loop ban, FRC 20ms cycle, watchdog, infinite loops', url:'/weeks/summer/week3' },
   { id:'summer-w4', badge:'W4', title:'Arrays & Methods', sub:'Arrays, ArrayLists, method signatures, parameters, return types, Javadocs, void', url:'/weeks/summer/week4' },
@@ -364,11 +399,10 @@ const SEARCH_INDEX = [
   { id:'summer-w6', badge:'W6', title:'Inheritance & Polymorphism', sub:'extends, super, Override, abstract classes, interfaces, implements, SubsystemBase, Command', url:'/weeks/summer/week6' },
   { id:'summer-w7', badge:'W7', title:'Advanced Classes', sub:'Enums, enum switch, ArrayList, wrapper classes, Integer, Double, autoboxing', url:'/weeks/summer/week7' },
   { id:'summer-w8', badge:'W8', title:'Bridge Week — XRP & WPILib', sub:'XRP robot, TimedRobot, teleopPeriodic, WPILib, first robot code, git commit', url:'/weeks/summer/week8' },
-  // Offseason
   { id:'offseason-o1', badge:'O1', title:'Git & GitHub', sub:'Branches, pull requests, commits, branch naming, feature branches, conflict resolution', url:'/weeks/offseason/os-week1' },
   { id:'offseason-o2', badge:'O2', title:'WPILib Setup', sub:'Install WPILib, VS Code, RobotContainer, Constants.java, project structure, simulation', url:'/weeks/offseason/os-week2' },
-  { id:'offseason-o3', badge:'O3', title:'Command-Based Architecture', sub:'Subsystems, Commands, Scheduler, Triggers, addRequirements, execute, isFinished, sequence, parallel', url:'/weeks/offseason/os-week3' },
-  { id:'offseason-o4', badge:'O4', title:'Motors & Sensors', sub:'SparkMax, TalonFX, CANSparkMax, encoders, conversion factor, NavX, gyroscope, SmartDashboard', url:'/weeks/offseason/os-week4' },
+  { id:'offseason-o3', badge:'O3', title:'Command-Based Architecture', sub:'Subsystems, Commands, Scheduler, Triggers, addRequirements, execute, isFinished, sequence, parallel, TalonFX, CANSparkMax', url:'/weeks/offseason/os-week3' },
+  { id:'offseason-o4', badge:'O4', title:'Motors & Sensors', sub:'TalonFX, CANSparkMax, encoders, conversion factor, NavX, gyroscope, SmartDashboard, VelocityTorqueCurrentFOC, MotionMagic', url:'/weeks/offseason/os-week4' },
   { id:'offseason-o5', badge:'O5', title:'PID Control', sub:'Proportional, Integral, Derivative, kP kI kD, PIDController, setpoint, feedforward, tuning, oscillation', url:'/weeks/offseason/os-week5' },
   { id:'offseason-o6', badge:'O6', title:'Autonomous & PathPlanner', sub:'Auto routines, sequence, WaitCommand, PathPlanner, odometry, field coordinates, auto chooser', url:'/weeks/offseason/os-week6' },
   { id:'offseason-o7', badge:'O7', title:'Subsystem Ownership', sub:'Code reading, Javadoc, @param, @return, magic numbers, Constants, capstone, PR review', url:'/weeks/offseason/os-week7' },
@@ -412,7 +446,7 @@ function renderSearchResults(q) {
     return;
   }
 
-  container.innerHTML = matches.map((item, i) => `
+  container.innerHTML = matches.map(item => `
     <a class="sm-result" href="${item.url}" onclick="closeSearch()">
       <span class="sr-badge">${item.badge}</span>
       <div class="sr-body">
@@ -424,7 +458,6 @@ function renderSearchResults(q) {
   `).join('');
 }
 
-// Keyboard shortcut: Cmd/Ctrl+K
 document.addEventListener('keydown', e => {
   if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
     e.preventDefault();
@@ -432,5 +465,4 @@ document.addEventListener('keydown', e => {
     if (overlay?.classList.contains('open')) closeSearch();
     else openSearch();
   }
-  if (e.key === 'Escape') closeSearch();
 });

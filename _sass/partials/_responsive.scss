@@ -14,6 +14,12 @@
   .page-hero     { padding: 1.5rem 1.25rem; h1 { font-size: 1.4rem; } }
   .module-section{ padding: 1.5rem 1.25rem; }
   .concept-grid  { grid-template-columns: 1fr 1fr; }
+
+  // Topic nav collapses on mobile — pills still visible in hero
+  .week-layout {
+    grid-template-columns: 1fr;
+  }
+  .topic-nav { display: none; }
 }
 
 @media (max-width: 600px) {

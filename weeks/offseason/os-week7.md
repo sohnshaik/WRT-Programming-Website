@@ -7,6 +7,10 @@ phase: offseason
 phase_label: Offseason
 week_label: "Week O7"
 page_id: "offseason-o7"
+topics:
+  - Reading Unfamiliar Code
+  - Documentation Checklist
+  - Capstone Assignment
 prev_url: "/weeks/offseason/os-week6"
 prev_title: "O6 — Autonomous"
 next_url: "/weeks/offseason/os-week8"

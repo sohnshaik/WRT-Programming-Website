@@ -15,5 +15,6 @@
     <a href="{{ '/style-guide' | relative_url }}" {% if page.url contains 'style-guide' %}class="active"{% endif %}>Style Guide</a>
   </nav>
   <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)">🔍</button>
+  <button class="topbar-dark-btn" id="dark-toggle" onclick="toggleDark()" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
   <a href="{{ '/login/' | relative_url }}" class="topbar-signin-btn" id="topbar-signin-static">sign in</a>
 </header>

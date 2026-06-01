@@ -7,6 +7,10 @@ phase: summer
 phase_label: Summer
 week_label: Week 7
 page_id: summer-w7
+topics:
+  - Enums
+  - ArrayList
+  - Wrapper Classes
 prev_url: /weeks/summer/week6
 prev_title: "Week 6 — Inheritance & Polymorphism"
 next_url: /weeks/summer/week8

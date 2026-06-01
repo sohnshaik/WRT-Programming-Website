@@ -7,6 +7,10 @@ phase: offseason
 phase_label: Offseason
 week_label: Week O1
 page_id: offseason-o1
+topics:
+  - Core Concepts
+  - Daily Workflow
+  - Branch Naming & Commits
 prev_url: /weeks/summer/week8
 prev_title: "Week 8 — Bridge: XRP & WPILib"
 next_url: /weeks/offseason/os-week2

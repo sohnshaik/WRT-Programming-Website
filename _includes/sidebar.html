@@ -1,12 +1,9 @@
 <nav class="sidebar" id="sidebar">
 
   <div class="sidebar-course-header">
-    <div class="sch-top">
-      <div>
-        <div class="sch-label">WRT Programming</div>
-        <div class="sch-title">Java &amp; FRC Course<br>2026-27 season :)</div>
-      </div>
-      <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" onclick="toggleSidebarWidth()" title="Collapse sidebar">‹</button>
+    <div class="sch-title-area">
+      <div class="sch-label">WRT Programming</div>
+      <div class="sch-title">Java &amp; FRC Course · 2026-27</div>
     </div>
     <div class="sch-progress">
       <div class="sp-label">
@@ -120,6 +117,10 @@
       </a>
     </div>
   </div>
+
+  <!-- Collapse tab — fixed to right edge of sidebar, no overlap with progress bar -->
+  <button class="sidebar-collapse-btn" id="sidebar-collapse-btn"
+    onclick="toggleSidebarWidth()" title="Collapse sidebar">‹</button>
 
 </nav>
 

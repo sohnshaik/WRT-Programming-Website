@@ -7,4 +7,5 @@
 @import "partials/layout";      // Topbar, sidebar, shell, content wrapper
 @import "partials/components";  // Everything else: cards, quiz, dashboard, etc.
 @import "partials/responsive";  // Breakpoints
+@import "partials/dark";        // Dark mode overrides ([data-theme="dark"])
 

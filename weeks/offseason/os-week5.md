@@ -7,6 +7,10 @@ phase: offseason
 phase_label: Offseason
 week_label: "Week O5"
 page_id: "offseason-o5"
+topics:
+  - What is PID?
+  - The P, I, D Terms
+  - Tuning Process
 prev_url: "/weeks/offseason/os-week4"
 prev_title: "O4 — Motors & Sensors"
 next_url: "/weeks/offseason/os-week6"

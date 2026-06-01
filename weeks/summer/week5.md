@@ -7,6 +7,11 @@ phase: summer
 phase_label: Summer
 week_label: Week 5
 page_id: summer-w5
+topics:
+  - Classes vs Objects
+  - Constructors & Fields
+  - Access Modifiers
+  - Methods & Encapsulation
 prev_url: /weeks/summer/week4
 prev_title: "Week 4 — Arrays & Methods"
 next_url: /weeks/summer/week6

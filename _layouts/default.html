@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'en' }}">
+<html lang="{{ site.lang | default: 'en' }}" data-theme="light">
 <head>
   {% include head.html %}
 </head>
 <body{% if page.page_id %} data-page-id="{{ page.page_id }}"{% endif %}{% if page.require_role %} data-require-role="{{ page.require_role }}"{% endif %}{% if page.require_auth %} data-require-auth="1"{% endif %}{% if page.no_sidebar %} class="no-sidebar"{% endif %}>
 
+<!-- Auth loading overlay — hidden once auth check resolves -->
+<div id="wrc-auth-overlay" aria-hidden="true">
+  <div class="wao-inner">
+    <div class="wao-spinner"></div>
+  </div>
+</div>
+
 {% include topbar.html %}
+
+<!-- wrc.js must load BEFORE main content so Quiz class is defined for inline scripts -->
+<script src="{{ '/assets/js/wrc.js' | relative_url }}"></script>
 
 <div class="shell{% if page.no_sidebar %} shell--no-sidebar{% endif %}">
   {% unless page.no_sidebar %}{% include sidebar.html %}{% endunless %}
@@ -16,7 +26,6 @@
 
 {% include footer.html %}
 
-<script src="{{ '/assets/js/wrc.js' | relative_url }}"></script>
 <script type="module" src="{{ '/assets/js/auth.js' | relative_url }}"></script>
 {% if page.extra_js %}
 <script>{{ page.extra_js }}</script>

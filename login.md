@@ -162,9 +162,9 @@ const firebaseConfig = {
 // Access codes define what role gets assigned on registration
 // STUDENT_CODE = any WRT student, TEACHER_CODE = programming leads only
 const ACCESS_CODES = {
-  'ROBOTICS2974':    'student',   // hand this out to all students
-  'LEADS2974':       'weluvhre',   // only give to programming leads
-  'SOHAN_ADMIN_CODE': 'WRT2974_ADM_7x9k',    // keep this one secret
+  'tiramisu4life':    'student',   // hand this out to all students
+  'banksbegoateds':       'leads',   // only give to programming leads
+  'weluvhre': 'admin',    // keep this one secret
 };
 
 const app  = initializeApp(firebaseConfig);
@@ -223,7 +223,7 @@ window.handleRegister = async (e) => {
   const name     = document.getElementById('reg-name').value.trim();
   const email    = document.getElementById('reg-email').value.trim();
   const password = document.getElementById('reg-password').value;
-  const code     = document.getElementById('reg-code').value.trim().toUpperCase();
+  const code     = document.getElementById('reg-code').value.trim();
 
   const role = ACCESS_CODES[code];
   if (!role) {

@@ -7,6 +7,10 @@ phase: bridge
 phase_label: Summer
 week_label: Week 8
 page_id: summer-w8
+topics:
+  - How WPILib Wraps Java
+  - Folder Structure
+  - Your First Git Commit
 prev_url: /weeks/summer/week7
 prev_title: "Week 7 — Advanced Classes"
 next_url: /weeks/offseason/os-week1

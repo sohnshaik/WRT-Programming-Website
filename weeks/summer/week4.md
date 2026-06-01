@@ -7,6 +7,10 @@ phase: summer
 phase_label: Summer
 week_label: Week 4
 page_id: summer-w4
+topics:
+  - Arrays
+  - Methods
+  - Javadocs & Code Documentation
 prev_url: /weeks/summer/week3
 prev_title: "Week 3 — Loops"
 next_url: /weeks/summer/week5

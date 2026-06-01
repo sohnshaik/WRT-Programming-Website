@@ -7,6 +7,10 @@ phase: offseason
 phase_label: Offseason
 week_label: "Week O8"
 page_id: "offseason-o8"
+topics:
+  - SCRUM for FRC
+  - Build Season Git Workflow
+  - AdvantageKit & Logging
 prev_url: "/weeks/offseason/os-week7"
 prev_title: "O7 — Subsystem Ownership"
 next_url: ""

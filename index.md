@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Home
+no_sidebar: true
 ---
 
 <!-- ── HERO ─────────────────────────────────────────────── -->

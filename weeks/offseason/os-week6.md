@@ -7,6 +7,10 @@ phase: offseason
 phase_label: Offseason
 week_label: "Week O6"
 page_id: "offseason-o6"
+topics:
+  - Autonomous Period
+  - PathPlanner
+  - Auto Chooser
 prev_url: "/weeks/offseason/os-week5"
 prev_title: "O5 — PID Control"
 next_url: "/weeks/offseason/os-week7"

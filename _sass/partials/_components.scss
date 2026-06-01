@@ -672,27 +672,28 @@ textarea.code-input {
 }
 
 // ── COLLAPSIBLE SIDEBAR ───────────────────────────────────────
-.sch-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 0.75rem;
-}
+// Collapse tab is a fixed element on the right edge of the sidebar.
+// It never overlaps with the progress bar because it's outside the
+// sidebar header flow entirely.
 .sidebar-collapse-btn {
-  background: none;
+  position: fixed;
+  top: calc(#{$topbar-h} + 60px);
+  left: calc(#{$sidebar-w} - 12px);
+  width: 22px; height: 40px;
+  background: $navy-light;
   border: 1px solid $navy-mid;
+  border-left: none;
+  border-radius: 0 6px 6px 0;
   color: $navy;
-  width: 26px; height: 26px;
-  border-radius: 4px;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
-  flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  transition: all $t-fast;
-  margin-top: 2px;
-  &:hover { background: $navy-light; }
+  z-index: 101;
+  transition: left $t-base, background $t-fast;
+  padding: 0;
+  &:hover { background: $navy-mid; }
 }
+
 .sidebar-search-btn {
   display: flex;
   align-items: center;
@@ -722,17 +723,10 @@ textarea.code-input {
 }
 
 // Collapsed sidebar state
-.sidebar-nav-icon {
-  display: none;
-  font-size: 14px;
-  text-align: center;
-}
 .sidebar.collapsed {
   width: 60px;
 
-  .sch-label, .sch-title, .sch-progress, .sidebar-search-btn { display: none; }
-  .sch-top { justify-content: center; }
-  .sidebar-collapse-btn { transform: rotate(180deg); }
+  .sch-title-area, .sch-progress, .sidebar-search-btn { display: none; }
 
   .ngl-text, .ngl-arrow { display: none; }
   .ngl-icon { font-size: 16px; }
@@ -741,11 +735,60 @@ textarea.code-input {
   .ni-text, .ni-check { display: none; }
   .ni-num { margin: 6px auto; }
   .nav-item { justify-content: center; }
+
+  & ~ * .sidebar-collapse-btn,
+  .sidebar-collapse-btn {
+    left: calc(60px - 12px);
+  }
 }
 
 .main.sidebar-collapsed,
 .site-footer.sidebar-collapsed {
   margin-left: 60px;
+}
+
+// ── AUTH LOADING OVERLAY ──────────────────────────────────────
+#wrc-auth-overlay {
+  position: fixed; inset: 0;
+  background: $navy;
+  z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.25s ease;
+}
+.wao-inner { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.wao-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid rgba(255,255,255,0.15);
+  border-top-color: $red;
+  border-radius: 50%;
+  animation: wao-spin 0.7s linear infinite;
+}
+@keyframes wao-spin { to { transform: rotate(360deg); } }
+
+// ── QUIZ ADMIN HINTS ─────────────────────────────────────────
+.quiz-admin-note {
+  font-size: 12px; color: $amber; background: $amber-light;
+  border: 1px solid $amber; border-radius: 4px;
+  padding: 5px 10px; margin-bottom: 0.75rem;
+}
+.admin-correct-hint {
+  border-color: $green !important;
+  background: rgba(0,135,90,0.06) !important;
+}
+
+// ── TOPBAR DARK MODE BUTTON ───────────────────────────────────
+.topbar-dark-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 5px;
+  color: rgba(255,255,255,0.8);
+  font-size: 15px;
+  width: 34px; height: 34px;
+  padding: 0;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all $t-fast;
+  &:hover { background: rgba(255,255,255,0.18); }
 }
 
 // ── TOPBAR SEARCH BUTTON ──────────────────────────────────────
@@ -856,5 +899,106 @@ textarea.code-input {
     background: $gray-100; border: 1px solid $gray-300;
     border-radius: 3px; padding: 1px 5px;
     font-family: $font-mono; font-size: 10px; color: $gray-500;
+  }
+}
+
+// ── Week layout (canvas-style) ────────────────────────────────────────────────
+.week-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0;
+  align-items: start;
+  &.week-layout--notopics {
+    grid-template-columns: 1fr;
+    .content-wrap { max-width: 860px; margin: 0 auto; }
+  }
+}
+
+// Topic pills in page hero
+.ph-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.ph-topic-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.9);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background $t-fast;
+  &:hover { background: rgba(255,255,255,0.28); color: #fff; }
+  &.ph-topic-test { background: rgba(196,18,48,0.35); }
+}
+
+// Sticky topic nav sidebar
+.topic-nav {
+  position: sticky;
+  top: calc(#{$topbar-h} + 20px);
+  padding: 1rem 0 1rem 1.5rem;
+  .tn-header {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $gray-400;
+    margin-bottom: 0.6rem;
+    padding-left: 4px;
+  }
+  .tn-list {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .tn-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    color: $gray-600;
+    transition: background $t-fast, color $t-fast;
+    &:hover { background: $gray-50; color: $gray-800; }
+    &.tn-active {
+      background: rgba($red,0.08);
+      color: $red;
+      .tn-num { background: $red; color: #fff; }
+    }
+    &.tn-test { margin-top: 6px; }
+  }
+  .tn-num {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    background: $gray-100;
+    color: $gray-500;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    transition: background $t-fast, color $t-fast;
+  }
+  .tn-label { flex: 1; line-height: 1.3; }
+}
+
+// Dark mode for topic nav
+[data-theme="dark"] {
+  .ph-topic-pill { background: rgba(255,255,255,0.12); }
+  .topic-nav {
+    .tn-link { color: #8892a8;
+      &:hover { background: #1f2337; color: #dce1ec; }
+      &.tn-active { background: rgba(196,18,48,0.2); color: #f08090;
+        .tn-num { background: #C41230; color: #fff; }
+      }
+    }
+    .tn-num { background: #2a2f47; color: #9fabc4; }
+    .tn-header { color: #5a6480; }
   }
 }

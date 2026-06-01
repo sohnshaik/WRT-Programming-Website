@@ -13,32 +13,96 @@ layout: default
   <div class="ph-badge badge-{{ page.phase }}">{{ page.badge }}</div>
   <h1>{{ page.title }}</h1>
   <p>{{ page.subtitle }}</p>
+  {% if page.topics %}
+  <div class="ph-topics">
+    {% for topic in page.topics %}
+    <a href="#topic-{{ forloop.index }}" class="ph-topic-pill">{{ topic }}</a>
+    {% endfor %}
+    {% if page.weekly_test %}<a href="#weekly-test" class="ph-topic-pill ph-topic-test">📋 Weekly Test</a>{% endif %}
+  </div>
+  {% endif %}
 </div>
 
-<div class="content-wrap">
-  {{ content }}
+<div class="week-layout{% unless page.topics %} week-layout--notopics{% endunless %}">
 
-  <div class="complete-banner" id="complete-banner" style="display:none">
-    <span class="cb-icon">🏆</span>
-    <div class="cb-text">
-      <div class="cb-title">week complete!!</div>
-      <div class="cb-sub">score saved :) keep it up!!</div>
+  {% if page.topics %}
+  <nav class="topic-nav" id="topic-nav">
+    <div class="tn-header">this week</div>
+    <ul class="tn-list">
+      {% for topic in page.topics %}
+      <li>
+        <a class="tn-link" href="#topic-{{ forloop.index }}" data-tn="{{ forloop.index }}">
+          <span class="tn-num">{{ forloop.index }}</span>
+          <span class="tn-label">{{ topic }}</span>
+        </a>
+      </li>
+      {% endfor %}
+      {% if page.weekly_test %}
+      <li>
+        <a class="tn-link tn-test" href="#weekly-test" data-tn="test">
+          <span class="tn-num">📋</span>
+          <span class="tn-label">Weekly Test</span>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+
+  <div class="content-wrap">
+    {{ content }}
+
+    <div class="complete-banner" id="complete-banner" style="display:none">
+      <span class="cb-icon">🏆</span>
+      <div class="cb-text">
+        <div class="cb-title">week complete!!</div>
+        <div class="cb-sub">score saved :) keep it up!!</div>
+      </div>
+      <a href="{{ page.next_url | relative_url }}" class="btn btn-success btn-sm">next week →</a>
     </div>
-    <a href="{{ page.next_url | relative_url }}" class="btn btn-success btn-sm">next week →</a>
+
+    <div class="page-nav">
+      {% if page.prev_url %}
+      <a href="{{ page.prev_url | relative_url }}" class="pn-link">
+        <span class="pn-label">← Previous</span>
+        <span class="pn-title">{{ page.prev_title }}</span>
+      </a>
+      {% else %}<div></div>{% endif %}
+      {% if page.next_url %}
+      <a href="{{ page.next_url | relative_url }}" class="pn-link pn-next">
+        <span class="pn-label">Next →</span>
+        <span class="pn-title">{{ page.next_title }}</span>
+      </a>
+      {% endif %}
+    </div>
   </div>
 
-  <div class="page-nav">
-    {% if page.prev_url %}
-    <a href="{{ page.prev_url | relative_url }}" class="pn-link">
-      <span class="pn-label">← Previous</span>
-      <span class="pn-title">{{ page.prev_title }}</span>
-    </a>
-    {% else %}<div></div>{% endif %}
-    {% if page.next_url %}
-    <a href="{{ page.next_url | relative_url }}" class="pn-link pn-next">
-      <span class="pn-label">Next →</span>
-      <span class="pn-title">{{ page.next_title }}</span>
-    </a>
-    {% endif %}
-  </div>
 </div>
+
+{% if page.topics %}
+<script>
+(function() {
+  // Highlight active topic in side nav on scroll
+  var links = document.querySelectorAll('.tn-link[data-tn]');
+  var anchors = [];
+  links.forEach(function(l) {
+    var t = l.getAttribute('data-tn');
+    var target = t === 'test' ? document.getElementById('weekly-test') : document.getElementById('topic-' + t);
+    if (target) anchors.push({ el: target, link: l });
+  });
+
+  function onScroll() {
+    var scrollY = window.scrollY + 120;
+    var active = null;
+    anchors.forEach(function(a) {
+      if (a.el.getBoundingClientRect().top + window.scrollY <= scrollY) active = a;
+    });
+    links.forEach(function(l) { l.classList.remove('tn-active'); });
+    if (active) active.link.classList.add('tn-active');
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+{% endif %}

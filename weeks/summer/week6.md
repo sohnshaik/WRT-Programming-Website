@@ -7,6 +7,10 @@ phase: summer
 phase_label: Summer
 week_label: Week 6
 page_id: summer-w6
+topics:
+  - Inheritance
+  - Abstract Classes
+  - Interfaces
 prev_url: /weeks/summer/week5
 prev_title: "Week 5 — OOP: Classes & Objects"
 next_url: /weeks/summer/week7

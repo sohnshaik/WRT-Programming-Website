@@ -7,6 +7,10 @@ phase: offseason
 phase_label: Offseason
 week_label: "Week O2"
 page_id: "offseason-o2"
+topics:
+  - Install WPILib
+  - Project Structure
+  - Simulating Without Hardware
 prev_url: "/weeks/offseason/os-week1"
 prev_title: "O1 — Git & GitHub"
 next_url: "/weeks/offseason/os-week3"

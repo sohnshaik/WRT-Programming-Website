@@ -7,6 +7,10 @@ phase: summer
 phase_label: Summer
 week_label: Week 3
 page_id: summer-w3
+topics:
+  - For Loops
+  - Foreach Loops
+  - While Loops & Why They're Banned
 prev_url: /weeks/summer/week2
 prev_title: "Week 2 — Logic & Control Flow"
 next_url: /weeks/summer/week4
