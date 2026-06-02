@@ -17,17 +17,7 @@ function toggleDark() {
   const isDark = html.getAttribute('data-theme') === 'dark';
   html.setAttribute('data-theme', isDark ? 'light' : 'dark');
   try { localStorage.setItem('wrc-dark', isDark ? '0' : '1'); } catch {}
-  const btn = document.getElementById('dark-toggle');
-  if (btn) btn.textContent = isDark ? '🌙' : '☀️';
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  const btn = document.getElementById('dark-toggle');
-  if (btn) {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    btn.textContent = isDark ? '☀️' : '🌙';
-  }
-});
 
 // ── PROGRESS & SCORE STORAGE ─────────────────────────────────
 const WRC = {

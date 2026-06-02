@@ -67,6 +67,7 @@ onAuthStateChanged(auth, async (user) => {
     window._wrcUid  = user.uid;
 
     renderUserChip(user, currentRole);
+    window.dispatchEvent(new CustomEvent('wrc-auth-ready', { detail: { user, role: currentRole } }));
 
     // Role gate: teacher/admin pages
     if (requiredRole && !['teacher', 'admin', 'leads'].includes(currentRole)) {
@@ -115,7 +116,7 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-// ── USER CHIP ─────────────────────────────────────────────────
+// ── USER CHIP & DROPDOWN ──────────────────────────────────────
 function renderUserChip(user, role) {
   const existing = document.getElementById('wrc-user-chip');
   if (existing) existing.remove();
@@ -126,25 +127,78 @@ function renderUserChip(user, role) {
   if (!topbar) return;
 
   const chip = document.createElement('div');
-  chip.id = 'wrc-user-chip';
-  chip.style.cssText = 'display:flex;align-items:center;gap:8px;margin-left:8px;';
+  chip.id    = 'wrc-user-chip';
+  chip.className = 'user-chip';
 
   if (user) {
-    const isDashRole = ['teacher', 'admin', 'leads'].includes(role);
-    const badge = role === 'admin' ? '👑' : isDashRole ? '🎓' : '';
+    const isDashRole  = ['teacher', 'admin', 'leads'].includes(role);
+    const roleLabel   = role === 'admin' ? 'Admin' : role === 'teacher' ? 'Teacher' : role === 'leads' ? 'Leads' : 'Student';
+    const roleBadge   = role === 'admin' ? ' 👑' : isDashRole ? ' 🎓' : '';
+    const initials    = (user.displayName || user.email || '?').charAt(0).toUpperCase();
+    const name        = user.displayName || user.email.split('@')[0];
+
     chip.innerHTML = `
-      <span style="font-size:12px;color:rgba(255,255,255,0.7)">${badge} ${user.displayName || user.email.split('@')[0]}</span>
-      ${isDashRole
-        ? `<a href="/dashboard-teacher/" style="font-size:12px;color:#fff;background:rgba(255,255,255,0.1);padding:4px 10px;border-radius:4px;text-decoration:none;border:1px solid rgba(255,255,255,0.2)">dashboard</a>`
-        : ''}
-      <button onclick="wrcSignOut()" style="font-size:12px;color:rgba(255,255,255,0.6);background:none;border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:4px 10px;cursor:pointer;font-family:inherit">sign out</button>
+      <button class="uc-trigger" aria-expanded="false" aria-haspopup="true">
+        <span class="uc-avatar">${initials}</span>
+        <span class="uc-name">${name}</span>
+        <span class="uc-caret" aria-hidden="true"></span>
+      </button>
+      <div class="uc-dropdown" role="menu">
+        <div class="ucd-profile">
+          <div class="ucd-avatar">${initials}</div>
+          <div class="ucd-info">
+            <div class="ucd-fullname">${user.displayName || name}</div>
+            <div class="ucd-email">${user.email}</div>
+          </div>
+        </div>
+        <div class="ucd-role-row">
+          <span class="ucd-role-badge">${roleLabel}${roleBadge}</span>
+        </div>
+        <div class="ucd-sep"></div>
+        <a href="/settings/" class="ucd-item" role="menuitem">
+          <span class="ucd-item-icon">⚙</span>Settings
+        </a>
+        ${isDashRole ? `<a href="/dashboard-teacher/" class="ucd-item" role="menuitem"><span class="ucd-item-icon">📊</span>Dashboard</a>` : ''}
+        <div class="ucd-sep"></div>
+        <button class="ucd-item ucd-signout" role="menuitem" onclick="wrcSignOut()">
+          <span class="ucd-item-icon">↪</span>Sign out
+        </button>
+      </div>
     `;
   } else {
-    chip.innerHTML = `<a href="/login/" style="font-size:12px;color:#fff;background:#C41230;padding:5px 12px;border-radius:4px;text-decoration:none;font-weight:700">sign in</a>`;
+    chip.innerHTML = `<a href="/login/" class="uc-signin">sign in</a>`;
   }
 
   topbar.appendChild(chip);
+
+  const trigger  = chip.querySelector('.uc-trigger');
+  const dropdown = chip.querySelector('.uc-dropdown');
+  if (trigger && dropdown) {
+    trigger.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.contains('uc-open');
+      closeAllDropdowns();
+      if (!isOpen) {
+        dropdown.classList.add('uc-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+    // Clicks inside dropdown don't bubble up to the outside-click handler
+    dropdown.addEventListener('click', e => e.stopPropagation());
+  }
 }
+
+function closeAllDropdowns() {
+  document.querySelectorAll('.uc-dropdown.uc-open').forEach(d => {
+    d.classList.remove('uc-open');
+    const t = d.previousElementSibling;
+    if (t) t.setAttribute('aria-expanded', 'false');
+  });
+}
+
+// Module-level listeners — added once, handle all dropdowns
+document.addEventListener('click', closeAllDropdowns);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllDropdowns(); });
 
 // ── SIGN OUT ─────────────────────────────────────────────────
 window.wrcSignOut = async () => {
