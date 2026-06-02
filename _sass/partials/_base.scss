@@ -1,5 +1,5 @@
 // ── BASE & RESET ─────────────────────────────────────────────
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Source+Code+Pro:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Source+Code+Pro:wght@400;600&display=swap');
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -14,12 +14,18 @@ html {
 
 body {
   font-family: $font-body;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: $text-base;
+  line-height: 1.65;
   background: $gray-50;
   color: $gray-800;
   -webkit-font-smoothing: antialiased;
+  font-optical-sizing: auto;
+  font-kerning: normal;
 }
+
+// Heading and prose typographic defaults
+h1, h2, h3 { text-wrap: balance; }
+p, li       { text-wrap: pretty; }
 
 img { max-width: 100%; height: auto; display: block; }
 a { color: $red; text-decoration: none; }

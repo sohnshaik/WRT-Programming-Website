@@ -1,6 +1,6 @@
 // ── TYPOGRAPHY ───────────────────────────────────────────────
 h2.sh {
-  font-size: 1.1rem; font-weight: 700; color: $navy;
+  font-size: $text-xl; font-weight: 700; color: $navy;
   margin: 2.25rem 0 0.9rem;
   padding-bottom: 0.5rem; border-bottom: 2px solid $gray-200;
   display: flex; align-items: center; gap: 8px;
@@ -11,7 +11,7 @@ h2.sh {
   }
 }
 h3.sub {
-  font-size: 0.95rem; font-weight: 700; color: $gray-800;
+  font-size: $text-lg; font-weight: 700; color: $gray-800;
   margin: 1.5rem 0 0.5rem;
 }
 p {
@@ -42,8 +42,9 @@ li { margin-bottom: 0.2rem; }
     &.badge-bridge    { background: rgba(180,83,9,0.35);  color: #fcd19c; }
   }
   h1 {
-    font-size: 1.9rem; font-weight: 900; color: $white;
-    line-height: 1.2; margin-bottom: 0.5rem;
+    font-size: $text-2xl; font-weight: 800; color: $white;
+    line-height: 1.15; margin-bottom: 0.5rem;
+    text-wrap: balance;
   }
   p {
     font-size: 1rem; color: rgba(255,255,255,0.65);
@@ -138,7 +139,7 @@ tr:hover td { background: $gray-50; }
     &::before {
       content: '?'; width: 22px; height: 22px; background: $red;
       border-radius: 50%; display: flex; align-items: center;
-      justify-content: center; font-size: 12px; font-weight: 900; flex-shrink: 0;
+      justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0;
     }
   }
   .qh-progress { font-size: 12px; color: rgba(255,255,255,0.5); font-family: $font-mono; }
@@ -200,7 +201,7 @@ tr:hover td { background: $gray-50; }
     margin: 0 auto 1rem;
     display: flex; align-items: center; justify-content: center;
     flex-direction: column; position: relative;
-    .sc-pct { font-size: 1.9rem; font-weight: 900; color: $navy; line-height: 1; }
+    .sc-pct { font-size: $text-2xl; font-weight: 800; color: $navy; line-height: 1; }
     .sc-pct-label { font-size: 11px; color: $gray-400; }
   }
   .sc-score { font-size: 15px; color: $gray-500; margin-bottom: 0.5rem; }
@@ -213,7 +214,7 @@ tr:hover td { background: $gray-50; }
   font-family: $font-mono; font-size: 13.5px;
   background: $code-bg; border: 1px solid $gray-700;
   border-radius: 6px; padding: 1.1rem 1.25rem; margin: 0.75rem 0;
-  line-height: 2.4; color: #94a3b8;
+  line-height: 1.7; color: #94a3b8;
 }
 .fill-blank {
   display: inline-block; min-width: 90px;
@@ -320,7 +321,7 @@ textarea.code-input {
     border-bottom: 3px solid $red;
   }
   .wt-icon  { font-size: 1.75rem; flex-shrink: 0; }
-  .wt-title { font-size: 15px; font-weight: 900; color: $white; }
+  .wt-title { font-size: $text-base; font-weight: 800; color: $white; }
   .wt-sub   { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
 
   .quiz-wrap  { margin: 0; border: none; border-radius: 0; box-shadow: none; }
@@ -670,7 +671,7 @@ textarea.code-input {
   }
   .cdb-text {
     flex: 1;
-    h1 { font-size: 1.5rem; font-weight: 900; color: $white; line-height: 1.2; margin-bottom: 3px; }
+    h1 { font-size: $text-3xl; font-weight: 800; color: $white; line-height: 1.15; margin-bottom: 3px; }
     .cdb-season { font-size: 12px; color: rgba(255,255,255,0.65); }
   }
   .cdb-progress {
@@ -741,7 +742,7 @@ textarea.code-input {
 .cd-phase--offseason .cdwc .cdwc-top { background: darken($navy, 5%); }
 
 .cdwc-num {
-  font-size: 11px; font-weight: 900; color: rgba(255,255,255,0.9);
+  font-size: $text-xs; font-weight: 700; color: rgba(255,255,255,0.9);
   font-family: $font-mono; letter-spacing: 0.04em;
   background: rgba(255,255,255,0.1); padding: 2px 7px; border-radius: 4px;
 }
@@ -779,7 +780,7 @@ textarea.code-input {
 .cd-leads-header {
   margin-bottom: 1.5rem;
   .cdlh-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: $red; margin-bottom: 4px; }
-  .cdlh-title { font-size: 1.1rem; font-weight: 900; color: $navy; margin-bottom: 4px; }
+  .cdlh-title { font-size: $text-xl; font-weight: 800; color: $navy; margin-bottom: 4px; }
   .cdlh-sub   { font-size: 13px; color: $gray-500; max-width: 540px; line-height: 1.65; }
 }
 
