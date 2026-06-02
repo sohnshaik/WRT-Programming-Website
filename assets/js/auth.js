@@ -133,7 +133,7 @@ function renderUserChip(user, role) {
   if (user) {
     const isDashRole  = ['teacher', 'admin', 'leads'].includes(role);
     const roleLabel   = role === 'admin' ? 'Admin' : role === 'teacher' ? 'Teacher' : role === 'leads' ? 'Leads' : 'Student';
-    const roleBadge   = role === 'admin' ? ' 👑' : isDashRole ? ' 🎓' : '';
+    const roleBadge   = role === 'admin' ? ' <i data-lucide="crown" style="width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em;"></i>' : isDashRole ? ' <i data-lucide="mortarboard" style="width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em;"></i>' : '';
     const initials    = (user.displayName || user.email || '?').charAt(0).toUpperCase();
     const name        = user.displayName || user.email.split('@')[0];
 
@@ -156,12 +156,12 @@ function renderUserChip(user, role) {
         </div>
         <div class="ucd-sep"></div>
         <a href="/settings/" class="ucd-item" role="menuitem">
-          <span class="ucd-item-icon">⚙</span>Settings
+          <span class="ucd-item-icon"><i data-lucide="settings"></i></span>Settings
         </a>
-        ${isDashRole ? `<a href="/dashboard-teacher/" class="ucd-item" role="menuitem"><span class="ucd-item-icon">📊</span>Dashboard</a>` : ''}
+        ${isDashRole ? `<a href="/dashboard-teacher/" class="ucd-item" role="menuitem"><span class="ucd-item-icon"><i data-lucide="bar-chart-3"></i></span>Dashboard</a>` : ''}
         <div class="ucd-sep"></div>
         <button class="ucd-item ucd-signout" role="menuitem" onclick="wrcSignOut()">
-          <span class="ucd-item-icon">↪</span>Sign out
+          <span class="ucd-item-icon"><i data-lucide="arrow-right-from-bracket"></i></span>Sign out
         </button>
       </div>
     `;
@@ -185,6 +185,8 @@ function renderUserChip(user, role) {
     });
     // Clicks inside dropdown don't bubble up to the outside-click handler
     dropdown.addEventListener('click', e => e.stopPropagation());
+    // Reinitialize icons after rendering user chip
+    if (typeof initIcons === 'function') initIcons();
   }
 }
 

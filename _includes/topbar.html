@@ -1,5 +1,5 @@
 <header class="topbar">
-  <button class="hamburger" onclick="toggleSidebar()" aria-label="Open sidebar">☰</button>
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Open sidebar"><i data-lucide="menu"></i></button>
   <a href="{{ '/' | relative_url }}" class="topbar-logo">
     <img src="{{ '/assets/images/logo.jpeg' | relative_url }}" alt="Walton Robotics">
     <div>
@@ -10,10 +10,11 @@
   <div class="topbar-sep"></div>
   <nav class="topbar-links">
     <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
+    <a href="{{ '/training' | relative_url }}" {% if page.page_id == 'training' %}class="active"{% endif %}>Training</a>
     <a href="{{ '/weeks/summer/week1' | relative_url }}" {% if page.phase == 'summer' or page.phase == 'bridge' %}class="active"{% endif %}>Summer</a>
     <a href="{{ '/weeks/offseason/os-week1' | relative_url }}" {% if page.phase == 'offseason' %}class="active"{% endif %}>Offseason</a>
     <a href="{{ '/style-guide' | relative_url }}" {% if page.url contains 'style-guide' %}class="active"{% endif %}>Style Guide</a>
   </nav>
-  <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)">🔍</button>
+  <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)"><i data-lucide="search"></i></button>
   <a href="{{ '/login/' | relative_url }}" class="topbar-signin-btn" id="topbar-signin-static">sign in</a>
 </header>

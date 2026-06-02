@@ -18,7 +18,7 @@ layout: default
     {% for topic in page.topics %}
     <a href="#topic-{{ forloop.index }}" class="ph-topic-pill">{{ topic }}</a>
     {% endfor %}
-    {% if page.weekly_test %}<a href="#weekly-test" class="ph-topic-pill ph-topic-test">📋 Weekly Test</a>{% endif %}
+      {% if page.weekly_test %}<a href="#weekly-test" class="ph-topic-pill ph-topic-test"><i data-lucide="clipboard-list"></i> Weekly Test</a>{% endif %}
   </div>
   {% endif %}
 </div>
@@ -40,7 +40,7 @@ layout: default
       {% if page.weekly_test %}
       <li>
         <a class="tn-link tn-test" href="#weekly-test" data-tn="test">
-          <span class="tn-num">📋</span>
+          <span class="tn-num"><i data-lucide="clipboard-list"></i></span>
           <span class="tn-label">Weekly Test</span>
         </a>
       </li>
@@ -53,7 +53,7 @@ layout: default
     {{ content }}
 
     <div class="complete-banner" id="complete-banner" style="display:none">
-      <span class="cb-icon">🏆</span>
+      <span class="cb-icon"><i data-lucide="trophy"></i></span>
       <div class="cb-text">
         <div class="cb-title">week complete!!</div>
         <div class="cb-sub">score saved :) keep it up!!</div>

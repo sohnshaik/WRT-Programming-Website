@@ -30,6 +30,12 @@
 {% if page.extra_js %}
 <script>{{ page.extra_js }}</script>
 {% endif %}
+<script>
+  // Initialize Lucide icons after all content is in the DOM.
+  // Called again by auth.js after the user chip is injected.
+  function initIcons() { if (typeof lucide !== 'undefined') lucide.createIcons(); }
+  document.addEventListener('DOMContentLoaded', initIcons);
+</script>
 
 </body>
 </html>
