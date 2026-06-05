@@ -69,7 +69,7 @@
       </a>
       <a class="nav-item {% if page.page_id == 'summer-w8' %}active{% endif %}" href="{{ '/weeks/summer/week8' | relative_url }}" data-page="summer-w8">
         <span class="ni-num">W8</span>
-        <span class="ni-text">Bridge — XRP &amp; WPILib</span>
+        <span class="ni-text">Recap &amp; Resources</span>
         <span class="ni-check">○</span>
       </a>
     </div>
@@ -135,9 +135,9 @@
 <div class="search-overlay" id="search-overlay" onclick="closeSearch()">
   <div class="search-modal" onclick="event.stopPropagation()">
     <div class="sm-header">
-      <span class="sm-icon">🔍</span>
+      <span class="sm-icon"><i data-lucide="search"></i></span>
       <input type="text" id="search-input" class="sm-input" placeholder="Search topics, concepts, keywords…" oninput="searchTopics(this.value)" autocomplete="off" autocorrect="off" spellcheck="false">
-      <button class="sm-close" onclick="closeSearch()">✕</button>
+      <button class="sm-close" onclick="closeSearch()"><i data-lucide="x"></i></button>
     </div>
     <div class="sm-results" id="search-results">
       <div class="sm-empty">Start typing to search across all 16 weeks…</div>

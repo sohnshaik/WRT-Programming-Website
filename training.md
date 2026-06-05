@@ -137,8 +137,8 @@ no_sidebar: true
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
         </div>
         <div class="cdwc-body">
-          <div class="cdwc-title">Bridge — XRP &amp; WPILib</div>
-          <div class="cdwc-topics">4 topics</div>
+          <div class="cdwc-title">Recap &amp; Resources</div>
+          <div class="cdwc-topics">3 topics + final project</div>
         </div>
         <div class="cdwc-footer">
           <span class="cdwc-go">Open →</span>

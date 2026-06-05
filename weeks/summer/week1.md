@@ -13,6 +13,7 @@ topics:
   - Operators
   - Scope & Naming
   - Type Casting
+  - Comments & Code Syntax
 prev_url:
 prev_title:
 next_url: /weeks/summer/week2
@@ -333,11 +334,122 @@ System.out.println(speed); <span class="cmt">// prints: 0</span></pre>
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
+<h2 class="sh" id="topic-5">Comments &amp; Code Syntax</h2>
+<p>Java has strict rules about how code is structured. getting these right means the compiler stops yelling at you. understanding comments means your teammates (and future you) can actually read what you wrote.</p>
+
+<h3 class="sub">The Three Comment Types</h3>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — all three comment types</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// Single-line comment — explain a tricky line inline
+// Everything after // on this line is ignored by the compiler</span>
+
+<span class="cmt">/*
+ * Block comment — spans multiple lines.
+ * Use when you want to describe a section of code
+ * or temporarily disable a chunk during debugging.
+ */</span>
+
+<span class="cmt">/**
+ * Javadoc comment — generates HTML documentation.
+ * Use above every public class and public method.
+ *
+ * @param speed the target motor speed (-1.0 to 1.0)
+ * @return true if the motor reached the target speed
+ */</span>
+<span class="kw">public boolean</span> <span class="fn">setSpeed</span>(<span class="type">double</span> speed) {
+    <span class="cmt">// implementation here...</span>
+    <span class="kw">return</span> <span class="kw">true</span>;
+}</pre>
+</div>
+
+<div class="callout tip"><p><strong>WRT rule:</strong> every <code>public</code> method gets a Javadoc. every tricky piece of logic gets an inline comment explaining <em>why</em>, not just <em>what</em>. "// set speed" is useless. "// clamp to safe range — motor faults above 1.0" is not.</p></div>
+
+<h3 class="sub">Java Code Structure</h3>
+<p>every Java file follows this exact structure. if something is in the wrong order, the compiler refuses to compile it.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — anatomy of a class file</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">package</span> frc.robot.subsystems;   <span class="cmt">// 1. package declaration (optional, but always present in FRC)</span>
+
+<span class="kw">import</span> edu.wpi.first.wpilibj2.command.SubsystemBase; <span class="cmt">// 2. imports</span>
+
+<span class="cmt">/** Javadoc for the class */</span>
+<span class="kw">public class</span> <span class="cls">ShooterSubsystem</span> <span class="kw">extends</span> <span class="cls">SubsystemBase</span> { <span class="cmt">// 3. class declaration</span>
+
+    <span class="cmt">// 4. fields (member variables)</span>
+    <span class="kw">private final</span> <span class="type">int</span> m_motorID;
+
+    <span class="cmt">// 5. constructor</span>
+    <span class="kw">public</span> <span class="cls">ShooterSubsystem</span>() {
+        m_motorID = <span class="num">5</span>;
+    }
+
+    <span class="cmt">// 6. methods</span>
+    <span class="kw">public int</span> <span class="fn">getMotorID</span>() {
+        <span class="kw">return</span> m_motorID;
+    }
+
+} <span class="cmt">// end of class — no semicolon after the closing brace!!</span></pre>
+</div>
+
+<h3 class="sub">The Semicolon Rule</h3>
+<p>every statement ends with <code>;</code>. the compiler treats a semicolon as "end of instruction." forgetting one is the #1 beginner compile error.</p>
+
+<div class="concept-grid">
+  <div class="concept-card"><div class="cc-label">Needs ;</div><div class="cc-title">Variable declarations</div><div class="cc-desc"><code>int x = 5;</code> — every variable declaration and assignment.</div></div>
+  <div class="concept-card"><div class="cc-label">Needs ;</div><div class="cc-title">Method calls</div><div class="cc-desc"><code>motor.set(0.5);</code> — every standalone method call is a statement.</div></div>
+  <div class="concept-card"><div class="cc-label">No ;</div><div class="cc-title">Block headers</div><div class="cc-desc"><code>if (x > 0) {</code> — no semicolon. The <code>{ }</code> wraps the body.</div></div>
+  <div class="concept-card"><div class="cc-label">No ;</div><div class="cc-title">Class / method signatures</div><div class="cc-desc"><code>public class Robot {</code> — no semicolon. Body follows in { }.</div></div>
+</div>
+
+<h3 class="sub">Case Sensitivity &amp; Reserved Keywords</h3>
+<p>Java is case-sensitive. <code>Speed</code>, <code>speed</code>, and <code>SPEED</code> are three different variables. keywords like <code>class</code>, <code>int</code>, <code>if</code>, <code>return</code>, <code>final</code>, <code>void</code> are reserved — you can't use them as variable names.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — common beginner mistakes</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// WRONG — 'Class' is not the same as 'class'</span>
+<span class="type">Class</span> myClass = <span class="kw">new</span> <span class="type">Class</span>();  <span class="cmt">// compile error: Class is a different thing</span>
+
+<span class="cmt">// WRONG — can't name a variable 'class' (reserved keyword)</span>
+<span class="type">int</span> class = <span class="num">5</span>;  <span class="cmt">// compile error: 'class' is a keyword</span>
+
+<span class="cmt">// CORRECT</span>
+<span class="type">int</span> myClass = <span class="num">5</span>;
+<span class="type">String</span> className = <span class="str">"Shooter"</span>;</pre>
+</div>
+
+<div class="callout info"><p><strong>Helpful tip from W3Schools:</strong> <a href="https://www.w3schools.com/java/java_syntax.asp" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">w3schools.com/java/java_syntax.asp</a> has a clean breakdown of Java syntax rules with runnable examples — good bookmark for when you hit a weird compiler error.</p></div>
+
+<h3 class="sub">Topic 5 — Quick Check</h3>
+<div id="quiz-w1-t5"></div>
+
+<div class="project-task">
+  <div class="pt-header">
+    <div class="pt-icon"><i data-lucide="wrench"></i></div>
+    <div class="pt-header-title">Project Task — Week 1</div>
+    <div class="pt-filename">Constants.java</div>
+  </div>
+  <div class="pt-body">
+    <p>Create your <code>Constants.java</code> file. This is the foundation of your whole MiniBot project — every number goes here.</p>
+    <ul>
+      <li>Create two <code>public static final class</code> inner classes: <code>DriveK</code> and <code>ShooterK</code></li>
+      <li>Inside <code>DriveK</code>: four motor IDs (FL, FR, BL, BR), a max speed constant in m/s, and a gear ratio</li>
+      <li>Inside <code>ShooterK</code>: two motor IDs (top and bottom flywheel), a max RPS, and a speed threshold for "at speed" detection</li>
+      <li>All constants use <code>k</code> prefix and are <code>public static final</code></li>
+      <li>Add a Javadoc comment to the class and each inner class</li>
+    </ul>
+    <span class="pt-note">you'll add to this file in later weeks as you need more constants. keep it tidy.</span>
+  </div>
+</div>
+
+<hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
+
 <h2 class="sh" id="weekly-test">Weekly Test</h2>
 <p>covers everything from week 1. a bit longer than the topic quizzes and your score gets sent to the leads :) try it without looking back at the content first!!</p>
 <div class="weekly-test-block">
   <div class="wt-header">
-    <div class="wt-icon">📋</div>
+    <div class="wt-icon"><i data-lucide="clipboard-list"></i></div>
     <div>
       <div class="wt-title">week 1 test</div>
       <div class="wt-sub">variables, types, operators, scope, naming conventions · 8 questions · good luck!!</div>
@@ -377,6 +489,14 @@ const quiz_w1_t4 = new Quiz('quiz-w1-t4', [
   { question: "Which of these is a widening conversion (automatic, no data loss)?", options: ["double to int","int to boolean","int to double","double to String"], correct: 2, explanation: "<code>int</code> → <code>double</code> is widening. An int (32-bit) fits perfectly inside a double (64-bit). Java does this automatically. The others lose information or require explicit casts." },
   { question: "What is <code>(int) -2.8</code>?", options: ["-3","-2","2","3"], correct: 1, explanation: "Truncation toward zero: -2.8 becomes -2 (not -3). Java always chops toward zero regardless of whether the number is positive or negative." },
   { question: "How do you convert an int to a String for a Shuffleboard label?", options: ["(String) myInt","myInt.toString()","Integer.parseString(myInt)","\"\" + myInt  OR  Integer.toString(myInt)"], correct: 3, explanation: "Two common ways: concatenate with empty string (<code>\"\" + 42</code> gives <code>\"42\"</code>), or use <code>Integer.toString(42)</code>. Both work." }
+], 'summer-w1');
+
+// ── TOPIC 5 QUIZ: Comments & Code Syntax ─────────────────────
+const quiz_w1_t5 = new Quiz('quiz-w1-t5', [
+  { question: "Which comment type generates HTML documentation when you run Javadoc?", options: ["// single-line","/* block */","/** javadoc */","<!-- html -->"], correct: 2, explanation: "<code>/** ... */</code> is Javadoc syntax. IDEs (VS Code, IntelliJ) show these as hover tooltips. Every public method and class in WRT code should have one." },
+  { question: "Which statement correctly ends with a semicolon?", options: ["if (x > 0) {","public class Robot {","int speed = 5;","public void periodic() {"], correct: 2, explanation: "Statements (declarations, assignments, method calls) end with <code>;</code>. Block headers like class signatures, if, for, and method signatures do NOT get semicolons — they're followed by <code>{ }</code>." },
+  { question: "What do curly braces { } indicate in Java?", options: ["The start of a comment","A code block (method body, if body, class body)","The end of a file","An array literal"], correct: 1, explanation: "Curly braces delimit blocks. A method body lives inside <code>{ }</code>, as do if/else branches, loops, and class bodies. Everything inside a pair of braces is one 'scope'." },
+  { question: "Which identifier would cause a compile error in Java?", options: ["mySpeed","m_targetVelocity","class","kMotorID"], correct: 2, explanation: "<code>class</code> is a reserved keyword in Java — you can't use it as a variable name. Java has ~50 reserved keywords: <code>if</code>, <code>int</code>, <code>return</code>, <code>final</code>, <code>void</code>... your IDE highlights them." }
 ], 'summer-w1');
 
 // ── WEEK 1 TEST ────────────────────────────────────────────────

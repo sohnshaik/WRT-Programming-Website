@@ -13,6 +13,7 @@
     <a href="{{ '/training' | relative_url }}" {% if page.page_id == 'training' %}class="active"{% endif %}>Training</a>
     <a href="{{ '/weeks/summer/week1' | relative_url }}" {% if page.phase == 'summer' or page.phase == 'bridge' %}class="active"{% endif %}>Summer</a>
     <a href="{{ '/weeks/offseason/os-week1' | relative_url }}" {% if page.phase == 'offseason' %}class="active"{% endif %}>Offseason</a>
+    <a href="{{ '/project' | relative_url }}" {% if page.page_id == 'project' %}class="active"{% endif %}>Project</a>
     <a href="{{ '/style-guide' | relative_url }}" {% if page.url contains 'style-guide' %}class="active"{% endif %}>Style Guide</a>
   </nav>
   <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)"><i data-lucide="search"></i></button>
