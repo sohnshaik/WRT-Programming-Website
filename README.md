@@ -11,38 +11,33 @@ A two-phase FRC programming course built with Jekyll and hosted on GitHub Pages.
 
 ```mermaid
 graph TD
-    ROOT["wrtprogramming.com"] --> SUMMER["Phase 1: Java Foundations\nweeks/summer/"]
-    ROOT --> OFFSEASON["Phase 2: FRC Training\nweeks/offseason/"]
+    ROOT["wrtprogramming.com"] --> PHASE1["Phase 1: Java Foundations\nweeks/summer/"]
+    ROOT --> PHASE2["Phase 2: FRC Training\nweeks/offseason/"]
     ROOT --> AUTH["Auth & Dashboards"]
     ROOT --> INFRA["Infrastructure"]
 
-    SUMMER --> S1["W1 · The Basics"]
-    SUMMER --> S2["W2 · Logic & Control Flow"]
-    SUMMER --> S3["W3 · Loops"]
-    SUMMER --> S4["W4 · Arrays & Methods"]
-    SUMMER --> S5["W5 · Classes & Objects"]
-    SUMMER --> S6["W6 · Inheritance & Polymorphism"]
-    SUMMER --> S7["W7 · Advanced Classes"]
-    SUMMER --> S8["W8 · Recap & Resources"]
-
-    OFFSEASON --> O1["O1 · Git & GitHub"]
-    OFFSEASON --> O2["O2 · WPILib Setup & Project Structure"]
-    OFFSEASON --> O3["O3 · Command-Based Architecture"]
-    OFFSEASON --> O4["O4 · Motor Controllers & Sensors"]
-    OFFSEASON --> O5["O5 · PID Control"]
-    OFFSEASON --> O6["O6 · Autonomous & Choreo"]
-    OFFSEASON --> O7["O7 · Subsystem Capstone"]
-    OFFSEASON --> O8["O8 · Build Season Prep"]
-
     AUTH --> LOGIN["login.md"]
     AUTH --> DASH["dashboard-teacher.md"]
-    AUTH --> FB["Firebase Auth + Firestore\n(accounts & score sync)"]
+    AUTH --> FB["Firebase Auth + Firestore"]
 
-    INFRA --> JEKYLL["Jekyll + _layouts/ + _includes/"]
-    INFRA --> SCSS["_sass/partials/\n(tokens, components, dark mode)"]
-    INFRA --> WRC["assets/js/wrc.js\n(quiz engine, progress tracking)"]
-    INFRA --> AUTHJS["assets/js/auth.js\n(Firebase auth module)"]
+    INFRA --> JEKYLL["Jekyll + GitHub Pages\n_layouts/  _includes/  _data/"]
+    INFRA --> SCSS["_sass/partials/\ntokens · components · dark mode"]
+    INFRA --> WRC["assets/js/wrc.js\nquiz engine + progress tracking"]
+    INFRA --> AUTHJS["assets/js/auth.js\nFirebase auth module"]
 ```
+
+### Course Weeks
+
+| # | Phase 1 — Java Foundations (`weeks/summer/`) | # | Phase 2 — FRC Training (`weeks/offseason/`) |
+|---|---|---|---|
+| W1 | The Basics | O1 | Git & GitHub |
+| W2 | Logic & Control Flow | O2 | WPILib Setup & Project Structure |
+| W3 | Loops | O3 | Command-Based Architecture |
+| W4 | Arrays & Methods | O4 | Motor Controllers & Sensors |
+| W5 | Classes & Objects | O5 | PID Control |
+| W6 | Inheritance & Polymorphism | O6 | Autonomous & Choreo |
+| W7 | Advanced Classes (Enums, Interfaces) | O7 | Subsystem Capstone |
+| W8 | Recap & Resources | O8 | Build Season Prep |
 
 ---
 
@@ -51,7 +46,7 @@ graph TD
 | Layer | Tool |
 |-------|------|
 | Site generator | Jekyll (Ruby) |
-| Styles | SCSS → compiled by Jekyll |
+| Styles | SCSS compiled by Jekyll |
 | Auth & data | Firebase Auth + Firestore |
 | Quiz engine | Vanilla JS (`wrc.js`) |
 | Hosting | GitHub Pages |
@@ -93,6 +88,7 @@ Found a mistake or want to improve an explanation?
 3. Open a PR with a short description
 4. Tag Sohan for review
 
+Fixing course content is itself a Git exercise — that's intentional.
 
 ---
 
