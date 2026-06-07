@@ -87,7 +87,7 @@ page_id: home
           <div class="lc-body">
             <div class="lc-role">Programming Lead</div>
             <div class="lc-name">Alexandra Ding</div>
-            <div class="lc-bio">something something ice skate boba cats :D</div>
+            <div class="lc-bio">something something ice skate boba cats (kitties :D)</div>
           </div>
         </div>
 
@@ -102,7 +102,7 @@ page_id: home
           <div class="lc-body">
             <div class="lc-role">Programming Lead</div>
             <div class="lc-name">Saarth Pandya</div>
-            <div class="lc-bio">something something brawl stars dr house something </div>
+            <div class="lc-bio">something something brawl stars dr house something</div>
           </div>
         </div>
       </div>
