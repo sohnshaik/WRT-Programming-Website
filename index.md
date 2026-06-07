@@ -29,7 +29,8 @@ page_id: home
     <div class="ci-header">
       <div class="cih-label">welcome to wrt programming</div>
       <h2>Learn Java &amp; FRC from the ground up</h2>
-      <p class="cih-sub">this course takes you from writing your first &quot;Hello World&quot; through advanced robotics programming. whether you're new to coding or brushing up, we've built a structured path that matches how walton robotics actually builds robots. expect hands-on projects, real team scenarios, and plenty of helpful guidance along the way.</p>
+      <p class="cih-sub">This course takes you from writing your first &quot;Hello World&quot; through advanced robotics programming. Whether you're new to coding or brushing up, we've built a structured path that matches how Walton Robotics actually builds robots. Expect hands-on projects, real team scenarios, and plenty of helpful guidance along the way.</p>
+      <p class="cih-sub"> The course itself is split into two halves - the summer and the offseason. I will explain the offseason tasks once we *get* to the offseason lol, but for now, feel free to take a gander if you feel curious.
     </div>
   </div>
 
@@ -45,7 +46,7 @@ page_id: home
       <div class="cd-leads-header">
         <div class="cdlh-label">before you start</div>
         <div class="cdlh-title">meet the programming leads :)</div>
-        <div class="cdlh-sub">short intro videos from the people actually running this thing. watch these first — they'll tell you what to expect, what the team builds, and honestly just vibe check you lol. we don't bite fr.</div>
+        <div class="cdlh-sub">short intro videos from the people actually running this thing. watch these first — they'll tell you what to expect, what the team builds, and honestly just vibe check you lol. we don't bite LOL.</div>
       </div>
 
       <div class="leads-grid leads-grid--4">
@@ -61,7 +62,22 @@ page_id: home
           <div class="lc-body">
             <div class="lc-role">Chief Programmer</div>
             <div class="lc-name">Sohan Shaik</div>
-            <div class="lc-bio">hey!! i'm sohan, the chief programmer for team 2974. i've been coding robots since sophomore year and tbh it's lowkey my whole personality at this point lol. this course is basically everything i wish someone had sat me down and taught me when i joined. gl &lt;3</div>
+            <div class="lc-bio">Hey!! I'm sohan, the Chief Programmer, Software Lead, or whatever you want to call it, for team 2974. I've been lucky enough to be coding FRC robots since sophomore year and it's lowkey taken up a whoooleeee lot of my time, and fortunately, programming (not the idea but the people around me from programming) is my personality at this point lol. This course is basically everything I wish someone had sat me down and taught me when i joined. gl and i hope y'all will reach out with questions! &lt;3 (srsly tho please ask questions i wish i did so so so much)</div>
+          </div>
+        </div>
+
+        <div class="lead-card">
+          <div class="lc-video-wrap">
+            <div class="lc-video-placeholder" data-slot="3">
+              <div class="lv-icon">▶</div>
+              <div class="lv-name">Assistant Chief Programmer</div>
+              <div class="lv-sub">video coming soon :)</div>
+            </div>
+          </div>
+          <div class="lc-body">
+            <div class="lc-role">Assistant Chief Programmer</div>
+            <div class="lc-name">Alex An</div>
+            <div class="lc-bio">something something brainrot lowkirkentological something</div>
           </div>
         </div>
 
@@ -75,8 +91,8 @@ page_id: home
           </div>
           <div class="lc-body">
             <div class="lc-role">Programming Lead</div>
-            <div class="lc-name">Hrehaan Bedi</div>
-            <div class="lc-bio">what's up, i'm hrehaan!! i mainly do auto and vision stuff. if you ever see a PathPlanner path that's kinda unhinged, that was probably me. come find me if you're confused about anything — no dumb questions fr :D</div>
+            <div class="lc-name">Alexandra Ding</div>
+            <div class="lc-bio">something something ice skate boba cats :D</div>
           </div>
         </div>
 
@@ -90,13 +106,10 @@ page_id: home
           </div>
           <div class="lc-body">
             <div class="lc-role">Programming Lead</div>
-            <div class="lc-name">Alexandra Chau</div>
-            <div class="lc-bio">hi!! i'm alexandra and i mostly handle subsystem ownership + PR reviews. if your code review has a lot of comments... that's probably me :] i promise it comes from a good place. ask me anything about command-based or WPILib!!</div>
+            <div class="lc-name">Saarth Pandya</div>
+            <div class="lc-bio">something something brawl stars dr house something </div>
           </div>
         </div>
-
-        {% comment %}mentor card — add when video is ready{% endcomment %}
-
       </div>
     </div>
   </div>
