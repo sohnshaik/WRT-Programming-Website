@@ -30,7 +30,7 @@ page_id: home
       <div class="cih-label">welcome to wrt programming</div>
       <h2>Learn Java &amp; FRC from the ground up</h2>
       <p class="cih-sub">This course takes you from writing your first &quot;Hello World&quot; through advanced robotics programming. Whether you're new to coding or brushing up, we've built a structured path that matches how Walton Robotics actually builds robots. Expect hands-on projects, real team scenarios, and plenty of helpful guidance along the way.</p>
-      <p class="cih-sub"> The course itself is split into two halves - the summer and the offseason. I will explain the offseason tasks once we *get* to the offseason lol, but for now, feel free to take a gander if you feel curious.
+      <p class="cih-sub"> The course itself is split into two halves - the summer and the offseason. I will explain the offseason tasks once we *get* to the offseason lol, but for now, feel free to take a gander if you feel curious. </p>
     </div>
   </div>
 
