@@ -22,7 +22,7 @@ next_title: "Week 5 — OOP: Classes & Objects"
 
 <p>ok so before last week you learned loops, and you were probably thinking "ok cool, i can repeat stuff." but repeat stuff on WHAT? loops are way more useful when you have a collection of data to work through. that's where arrays come in. an array is just a fixed-size list where every slot holds the same type of thing.</p>
 
-<p>once you have arrays AND loops together, you can do things like "apply this formula to all four drivetrain motors" in four lines instead of sixteen. that combo is one of the most used patterns in all of FRC code.</p>
+<p>once you have arrays AND loops together, you can do things like "apply this formula to all four drivetrain (the drivetrain is the system of motors and wheels that makes the robot move) motors" in four lines instead of sixteen. that combo is one of the most used patterns in all of FRC code.</p>
 
 <h3 class="sub">what even IS an array?</h3>
 
@@ -30,7 +30,7 @@ next_title: "Week 5 — OOP: Classes & Objects"
 
 <p>that number painted on the door is called the <strong>index</strong>. the thing inside the locker is the <strong>value</strong>. you get to the value by specifying which locker number you want: <code>lockers[2]</code> means "open locker number 2 and give me what's inside."</p>
 
-<p>now think about real FRC code. a swerve drivetrain has four modules. each module has a motor with a CAN ID. before arrays, you'd track each one with a separate variable:</p>
+<p>now think about real FRC code. a swerve drivetrain (swerve = drivetrain where each wheel steers independently) has four modules. each module has a motor with a CAN ID (CAN ID = the unique number that identifies each motor on the robot's wiring network). before arrays, you'd track each one with a separate variable:</p>
 
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java — the messy way</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
@@ -520,7 +520,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Total modules: "</
  * Contains static methods for converting between encoder ticks, RPM, and
  * real-world speeds and distances. All methods are stateless (no instance needed).
  *
- * Used by: DriveSubsystem, autonomous routines, telemetry dashboards.
+ * Used by: DriveSubsystem, autonomous routines, telemetry dashboards (telemetry = real-time data from the robot displayed on the driver's dashboard).
  */</span>
 <span class="kw">public class</span> <span class="cls">DriveCalculator</span> {
 

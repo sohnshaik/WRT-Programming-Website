@@ -195,7 +195,7 @@ tr:hover td { background: $gray-50; }
   display: none; text-align: center;
   padding: 2.5rem 2rem; background: $white;
   border: 1px solid $gray-200; border-radius: 8px; margin: 1.5rem 0;
-  &.show { display: block; }
+  &.show { display: flex; flex-direction: column; align-items: center; }
   .sc-ring {
     width: 110px; height: 110px; border-radius: 50%;
     margin: 0 auto 1rem;

@@ -22,7 +22,7 @@ next_title: "O1 — Git & GitHub"
 <p>Seven weeks of content, distilled. use this as a reference when you're writing code and forget something — that's what it's here for. no shame in checking :)</p>
 
 <h3 class="sub">Week 1 — The Basics</h3>
-<p>Week 1 gave you the atoms that everything else is built from. types, variables, naming, casting. none of it feels exciting in isolation, but when you're deep in a subsystem at 11pm during build season and a casting bug is silently giving you the wrong encoder position, you'll be really glad you understand how this works. these are the rules that never go away.</p>
+<p>Week 1 gave you the atoms that everything else is built from. types, variables, naming, casting. none of it feels exciting in isolation, but when you're deep in a subsystem at 11pm during build season and a casting bug is silently giving you the wrong encoder (encoders measure how far a motor shaft has rotated, giving you position and velocity data) position, you'll be really glad you understand how this works. these are the rules that never go away.</p>
 
 <table>
 <thead><tr><th>Concept</th><th>Key Syntax</th><th>WRT Rule</th></tr></thead>
@@ -78,7 +78,7 @@ next_title: "O1 — Git & GitHub"
 <tbody>
 <tr><td>Subsystem class</td><td><code>public class Shooter extends SubsystemBase</code></td><td>One class per mechanism, in subsystems/</td></tr>
 <tr><td>Constructor</td><td><code>public Shooter() { m_motor = new TalonFX(kMotorID); }</code></td><td>Initialize hardware, apply configs</td></tr>
-<tr><td>periodic()</td><td><code>@Override public void periodic()</code></td><td>Logging, odometry, state updates — runs every 20ms</td></tr>
+<tr><td>periodic()</td><td><code>@Override public void periodic()</code></td><td>Logging, odometry (estimating where the robot is on the field by tracking motor rotations and gyro angle over time), state updates — runs every 20ms</td></tr>
 <tr><td>Inheritance</td><td><code>extends SubsystemBase</code></td><td>WPILib gives you the scheduler loop for free</td></tr>
 <tr><td>Interfaces</td><td><code>implements ISensor</code></td><td>Used for vision targets, sensor abstraction</td></tr>
 <tr><td>Enums</td><td><code>enum State { IDLE, SPINNING, AT_SPEED }</code></td><td>Subsystem state machines — very common</td></tr>
@@ -236,7 +236,7 @@ trg_shootButton.<span class="fn">whileTrue</span>(m_shooter.<span class="fn">sho
     <div class="rc-icon rc-icon--red"><i data-lucide="bot"></i></div>
     <div class="rc-body">
       <div class="rc-title">WPILib Docs</div>
-      <div class="rc-desc">Command-based framework, SubsystemBase, TimedRobot, motor controllers. The FRC bible.</div>
+      <div class="rc-desc">Command-based framework, SubsystemBase, TimedRobot (TimedRobot is the WPILib base class for the main Robot.java file — it calls periodic() methods on a 20ms schedule), motor controllers. The FRC bible.</div>
       <div class="rc-tag">docs.wpilib.org</div>
     </div>
   </a>
@@ -244,7 +244,7 @@ trg_shootButton.<span class="fn">whileTrue</span>(m_shooter.<span class="fn">sho
     <div class="rc-icon rc-icon--orange"><i data-lucide="zap"></i></div>
     <div class="rc-body">
       <div class="rc-title">CTRE Phoenix 6 API</div>
-      <div class="rc-desc">TalonFX, CANcoder, Pigeon 2 Java API. We use Phoenix 6 exclusively on WRT hardware.</div>
+      <div class="rc-desc">TalonFX, CANcoder (CANcoder is a CTRE magnetic encoder that plugs directly onto the CAN bus, used to measure absolute wheel angle in swerve modules), Pigeon 2 (Pigeon 2 is a CTRE IMU/gyro that measures the robot's rotation and tilt — we use it to know which direction the robot is facing) Java API. We use Phoenix 6 exclusively on WRT hardware.</div>
       <div class="rc-tag">ctr-electronics.com</div>
     </div>
   </a>
@@ -260,7 +260,7 @@ trg_shootButton.<span class="fn">whileTrue</span>(m_shooter.<span class="fn">sho
     <div class="rc-icon rc-icon--blue"><i data-lucide="map"></i></div>
     <div class="rc-body">
       <div class="rc-title">Choreo</div>
-      <div class="rc-desc">Path planner we use for autonomous. You'll use this in offseason once you understand subsystems.</div>
+      <div class="rc-desc">Choreo (Choreo is a path-planning tool for FRC — you draw the robot's autonomous route on a field diagram and it generates the code) — path planner we use for autonomous. You'll use this in offseason once you understand subsystems.</div>
       <div class="rc-tag">choreo.autos</div>
     </div>
   </a>
@@ -290,7 +290,7 @@ trg_shootButton.<span class="fn">whileTrue</span>(m_shooter.<span class="fn">sho
     └── WaltCamera.java          <span class="cmt">// AprilTag / note detection</span></pre>
 </div>
 
-<div class="callout info"><p><strong>No RobotContainer.</strong> Unlike some WPILib templates, we don't use a <code>RobotContainer</code> class. Subsystem instantiation and button bindings happen directly in <code>Robot.java</code>. That said — the command-based concepts you learned still apply. <code>SubsystemBase</code>, <code>Commands.sequence()</code>, <code>Triggers</code> — all of it is real.</p></div>
+<div class="callout info"><p><strong>No RobotContainer.</strong> Unlike some WPILib templates, we don't use a <code>RobotContainer</code> class. Subsystem instantiation and button bindings (button bindings = code that says "when this controller button is pressed, run this Command") happen directly in <code>Robot.java</code>. That said — the command-based concepts you learned still apply. <code>SubsystemBase</code>, <code>Commands.sequence()</code>, <code>Triggers</code> (WPILib Triggers watch for any condition — like a button press or a sensor reading — and run a Command when it becomes true) — all of it is real.</p></div>
 
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java — Robot.java pattern (simplified)</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>

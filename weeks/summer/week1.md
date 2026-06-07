@@ -32,7 +32,7 @@ next_title: "Week 2 — Logic & Control Flow"
 
 <div class="callout info"><p><strong>what's RAM?</strong> when your program runs, Java grabs a chunk of your computer's RAM (random access memory) to work with. RAM is super fast but temporary — it only exists while the program is running. every variable you declare takes up a little piece of that RAM. when the robot reboots, poof, it's all gone. that's totally fine for us, because the robot starts fresh every time anyway.</p></div>
 
-<p><strong>why does it matter in FRC?</strong> your robot needs to remember TONS of stuff at once — what speed the motor is running at, whether a button is being pressed, what the encoder is reading, what subsystem is active. every single one of those is a variable. you literally cannot write robot code without them.</p>
+<p><strong>why does it matter in FRC?</strong> your robot needs to remember TONS of stuff at once — what speed the motor is running at, whether a button is being pressed, what the encoder (an encoder is a sensor that measures how far a motor shaft has rotated) is reading, what subsystem (a subsystem is one distinct part of the robot — intake, drivetrain, shooter, etc. — represented as a class) is active. every single one of those is a variable. you literally cannot write robot code without them.</p>
 
 <h3 class="sub">declaring a variable</h3>
 
@@ -66,8 +66,8 @@ next_title: "Week 2 — Logic & Control Flow"
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="cmt">// shooter subsystem variables</span>
-<span class="type">int</span>     topMotorID     = <span class="num">7</span>;      <span class="cmt">// CAN bus ID for top flywheel motor</span>
-<span class="type">int</span>     bottomMotorID  = <span class="num">8</span>;      <span class="cmt">// CAN bus ID for bottom flywheel motor</span>
+<span class="type">int</span>     topMotorID     = <span class="num">7</span>;      <span class="cmt">// the unique number that identifies this motor on the robot's wiring system</span>
+<span class="type">int</span>     bottomMotorID  = <span class="num">8</span>;      <span class="cmt">// same idea — unique ID for the bottom flywheel motor on the CAN bus</span>
 <span class="type">double</span>  targetSpeed    = <span class="num">0.85</span>;   <span class="cmt">// desired flywheel speed (0.0 to 1.0)</span>
 <span class="type">boolean</span> isAtSpeed      = <span class="kw">false</span>;  <span class="cmt">// whether shooter has reached target speed</span>
 <span class="type">String</span>  subsystemName  = <span class="str">"Shooter"</span>; <span class="cmt">// used for logging and dashboard display</span></pre>
@@ -666,11 +666,11 @@ count--;  <span class="cmt">// count is now 1 — shorthand for count = count - 
                                  <span class="cmt">//    always matches the folder path. always first line.</span>
 
 <span class="kw">import</span> edu.wpi.first.wpilibj2.command.<span class="cls">SubsystemBase</span>; <span class="cmt">// 2. imports — bring in other classes you need</span>
-<span class="kw">import</span> com.ctre.phoenix6.hardware.<span class="cls">TalonFX</span>;           <span class="cmt">//    one import per line, before the class</span>
+<span class="kw">import</span> com.ctre.phoenix6.hardware.<span class="cls">TalonFX</span>;           <span class="cmt">// TalonFX = the motor controller our team uses (made by CTRE)</span>
 
 <span class="cmt">/** 3. Javadoc for the class — what does this subsystem do? */</span>
 <span class="kw">public class</span> <span class="cls">ShooterSubsystem</span> <span class="kw">extends</span> <span class="cls">SubsystemBase</span> {  <span class="cmt">// 3. class declaration</span>
-                                                          <span class="cmt">//    'extends SubsystemBase' = this is a WPILib subsystem</span>
+                                                          <span class="cmt">//    'extends SubsystemBase' = this is a WPILib (the Java library all FRC teams use for robot programming) subsystem</span>
 
     <span class="cmt">// 4. fields (instance variables) — the "state" of this subsystem</span>
     <span class="kw">private final</span> <span class="cls">TalonFX</span> m_motor;

@@ -19,7 +19,7 @@ next_url: /weeks/summer/week6
 next_title: "Week 6 — Inheritance & Polymorphism"
 ---
 
-<div class="callout info"><p><strong>Why this matters:</strong> every subsystem on 2974's robot is a class. <code>Drivetrain.java</code>, <code>Shooter.java</code>, <code>Coral.java</code>, <code>Finger.java</code> — all classes. understanding this week means you can read and write real robot code. OOP is confusing at first ngl but once it clicks it clicks fr.</p></div>
+<div class="callout info"><p><strong>Why this matters:</strong> every subsystem (a distinct part of the robot — intake, drivetrain, shooter — represented as a Java class) on 2974's robot is a class. <code>Drivetrain.java</code>, <code>Shooter.java</code>, <code>Coral.java</code>, <code>Finger.java</code> — all classes. understanding this week means you can read and write real robot code. OOP is confusing at first ngl but once it clicks it clicks fr.</p></div>
 
 <h2 class="sh" id="topic-1">Classes vs Objects</h2>
 
@@ -37,7 +37,7 @@ next_title: "Week 6 — Inheritance & Polymorphism"
 
 <p>on team 2974, every single mechanism on the robot is modeled as a class. <code>DriveSubsystem.java</code> is a class — it's the blueprint. when the robot boots up, it builds ONE object from that blueprint: <code>new DriveSubsystem()</code>. that one object represents your actual robot's drivetrain. same exact deal for <code>Shooter.java</code>, <code>Intake.java</code>, <code>Climber.java</code> — every subsystem file you'll ever write is a class, and each file gets instantiated into exactly one object that lives for the entire match.</p>
 
-<p>this is the moment in this course where things go from "learning Java syntax" to "actually understanding how robot code is structured." classes and objects aren't just an academic concept — they ARE the architecture of every WPILib-based robot program ever written.</p>
+<p>this is the moment in this course where things go from "learning Java syntax" to "actually understanding how robot code is structured." classes and objects aren't just an academic concept — they ARE the architecture of every WPILib (WPILib is the Java library all FRC teams use for robot programming — it gives you SubsystemBase, Commands, Triggers, and tons of utilities)-based robot program ever written.</p>
 
 <div class="callout tip"><p><strong>WRT connection:</strong> look at the actual Rebuilt repo. every file in the <code>subsystems/</code> folder is a class. <code>Robot.java</code> creates ONE instance of each subsystem using <code>new</code>. those instances get passed around to commands so everything has access to the actual hardware objects. the class is just the design — <code>new</code> is what builds the real thing.</p></div>
 
@@ -57,7 +57,7 @@ next_title: "Week 6 — Inheritance & Polymorphism"
     // declared inside the class but outside any method
     // every Motor object you create gets its OWN copy of these three values
     // "private" = only code written inside Motor.java can access these directly</span>
-    <span class="kw">private</span> <span class="type">int</span>     m_id;          <span class="cmt">// which motor port this one is wired to</span>
+    <span class="kw">private</span> <span class="type">int</span>     m_id;          <span class="cmt">// CAN ID — the unique number identifying this motor on the robot's wiring system</span>
     <span class="kw">private</span> <span class="type">double</span>  m_speed;       <span class="cmt">// current speed (-1.0 to 1.0)</span>
     <span class="kw">private</span> <span class="type">boolean</span> m_isInverted;  <span class="cmt">// whether positive speed means backward</span>
 
@@ -103,7 +103,7 @@ leftMotor.<span class="fn">setSpeed</span>(<span class="num">0.5</span>);
 rightMotor.<span class="fn">setSpeed</span>(<span class="num">0.5</span>);
 
 <span class="cmt">// rightMotor is INVERTED, so 0.5 becomes -0.5 — they spin in opposite directions
-// this is exactly how a real tank drive works on an FRC robot!!</span>
+// this is exactly how a real tank drive (tank drive = the simple drivetrain style where left stick controls left wheels, right stick controls right wheels) works on an FRC robot!!</span>
 System.out.<span class="fn">println</span>(leftMotor.<span class="fn">getSpeed</span>());  <span class="cmt">//  0.5</span>
 System.out.<span class="fn">println</span>(rightMotor.<span class="fn">getSpeed</span>()); <span class="cmt">// -0.5</span>
 
@@ -213,7 +213,7 @@ System.out.<span class="fn">println</span>(rightMotor.<span class="fn">getSpeed<
     // "m_" prefix = WRT convention: m stands for "member variable"
     //   this makes fields visually distinct from local variables at a glance
     //   when you see m_speed in a method, you immediately know: that's a field</span>
-    <span class="kw">private</span> <span class="type">int</span>     m_motorID;    <span class="cmt">// which CAN bus port this motor is on</span>
+    <span class="kw">private</span> <span class="type">int</span>     m_motorID;    <span class="cmt">// CAN ID — the unique number identifying this motor on the robot's wiring system</span>
     <span class="kw">private</span> <span class="type">double</span>  m_speed;      <span class="cmt">// current commanded speed (-1.0 to 1.0)</span>
     <span class="kw">private</span> <span class="type">boolean</span> m_isRunning;  <span class="cmt">// whether the motor is actively spinning</span>
 

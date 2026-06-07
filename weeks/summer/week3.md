@@ -22,7 +22,7 @@ next_title: "Week 4 — Arrays & Methods"
 
 <p>ok so imagine your teacher gives you a punishment: write the sentence "I will not throw a gear across the shop" 10 times. you COULD write it out 10 separate times — copy paste it, tab over, repeat. or you could just say "do this 10 times" and let something handle the repetition automatically. that's literally what a loop is. it takes a piece of code and runs it over and over without you writing it out each time.</p>
 
-<p>the <code>for</code> loop is the workhorse. it's what you'll reach for the most in Java, and especially in FRC code. it's built for situations where you know (or can figure out) exactly how many times you want to loop — like "go through all 4 drive motors" or "check each of the 8 sensor readings" or "process every module in my swerve drive." when the count is known, <code>for</code> is your guy.</p>
+<p>the <code>for</code> loop is the workhorse. it's what you'll reach for the most in Java, and especially in FRC code. it's built for situations where you know (or can figure out) exactly how many times you want to loop — like "go through all 4 drive motors" or "check each of the 8 sensor readings" or "process every module in my swerve drive (swerve is a drivetrain where each wheel can spin and rotate independently, letting the robot move in any direction without turning first)." when the count is known, <code>for</code> is your guy.</p>
 
 <h3 class="sub">what even IS a for loop?</h3>
 
@@ -87,7 +87,7 @@ next_title: "Week 4 — Arrays & Methods"
 
 <h3 class="sub">FRC example — iterating over swerve modules</h3>
 
-<p>here's where this actually matters in robot code. a swerve drivetrain has 4 modules: front-left, front-right, back-left, back-right. when you initialize the drive system, you need to configure each module. instead of copying the same code 4 times:</p>
+<p>here's where this actually matters in robot code. a swerve drivetrain has 4 modules (each of the 4 corners of the robot; each module has a drive wheel and a steering mechanism): front-left, front-right, back-left, back-right. when you initialize the drive system, you need to configure each module. instead of copying the same code 4 times:</p>
 
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
@@ -391,7 +391,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Sum: "</span> + su
 
 <h3 class="sub">the FRC problem — the 20ms loop</h3>
 
-<p>here's what you need to understand about how FRC robots actually run. your robot's control loop runs on a 20 millisecond cycle. every 20ms, WPILib (the FRC framework) calls your code to say "hey, update yourself." it reads the latest joystick input from the driver station, updates motor commands, reads sensors, updates dashboards — all of that runs 50 times per second, like clockwork.</p>
+<p>here's what you need to understand about how FRC robots actually run. your robot's control loop runs on a 20 millisecond cycle. every 20ms, WPILib (the FRC framework) calls your code to say "hey, update yourself." it reads the latest joystick input from the driver station (the laptop at the driver's station running the FRC Driver Station software -- it connects wirelessly to the robot), updates motor commands, reads sensors, updates dashboards — all of that runs 50 times per second, like clockwork.</p>
 
 <p>the framework EXPECTS your code to run fast and return control within that 20ms window. run, return. run, return. over and over. every piece of your robot's responsiveness — joystick response, motor updates, safety checks — depends on your code completing quickly every single cycle and handing control back.</p>
 
@@ -422,9 +422,9 @@ System.out.<span class="fn">println</span>(<span class="str">"Sum: "</span> + su
 
 <h3 class="sub">a real story — while loops at competition</h3>
 
-<p>this isn't hypothetical. during a regional qualification match, a team's autonomous routine had a while loop waiting for an arm encoder to reach a target position. the encoder was slow to settle due to mechanical slop in the gearbox. the while loop kept running. 50ms. 100ms. 200ms. the watchdog fired. the robot disabled for the rest of the auto period.</p>
+<p>this isn't hypothetical. during a regional qualification match, a team's autonomous (the 15-second period at the start of a match where the robot runs without driver input) routine had a while loop waiting for an arm encoder to reach a target position. the encoder was slow to settle due to mechanical slop in the gearbox. the while loop kept running. 50ms. 100ms. 200ms. the watchdog fired. the robot disabled for the rest of the auto period.</p>
 
-<p>when teleop started, the robot was oriented the wrong direction because auto never finished. it drove forward and immediately hit a field element. the team got a foul. they missed playoffs by one match. one while loop. one competition. don't be that team.</p>
+<p>when teleop (teleop = the 2-minute driver-controlled period of the match) started, the robot was oriented the wrong direction because auto never finished. it drove forward and immediately hit a field element. the team got a foul. they missed playoffs by one match. one while loop. one competition. don't be that team.</p>
 
 <div class="callout warning"><p><strong>to be fair:</strong> while loops are completely fine in the console programs this course has you build. the ban is specific to FRC robot periodic methods where the 20ms cycle is sacred. you'll write plenty of while loops this course — just never inside <code>teleopPeriodic()</code>, <code>autonomousPeriodic()</code>, or any method that runs on the robot's loop.</p></div>
 

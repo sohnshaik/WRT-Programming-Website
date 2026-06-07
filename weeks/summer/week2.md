@@ -22,15 +22,15 @@ next_title: "Week 3 — Loops"
 
 <p>a boolean is the simplest piece of information in computing. it can only be two things: <code>true</code> or <code>false</code>. that's it. like a light switch — on or off, nothing in between.</p>
 
-<p>that might sound too simple to be useful, but booleans are actually the backbone of everything a robot does. every decision the robot makes — every "should i do this right now?" question — is a boolean under the hood. is the robot allowed to move? is the intake holding something? has the shooter wheel spun up to speed? all booleans. all the time.</p>
+<p>that might sound too simple to be useful, but booleans are actually the backbone of everything a robot does. every decision the robot makes — every "should i do this right now?" question — is a boolean under the hood. is the robot allowed to move? is the intake (the intake is the mechanism that picks up game pieces) holding something? has the shooter (the shooter launches game pieces into scoring targets) wheel spun up to speed? all booleans. all the time.</p>
 
 <h3 class="sub">what even IS a boolean?</h3>
 
-<p>ok so imagine you have a yes/no checklist. "is the robot enabled?" yes. "does the intake have a game piece?" no. "is the shooter at target speed?" yes. each of those answers is exactly one bit of information — true or false. that's what a boolean is.</p>
+<p>ok so imagine you have a yes/no checklist. "is the robot enabled?" yes. "does the intake have a game piece (game pieces are the objects FRC robots pick up and score each season — changes every year)?" no. "is the shooter at target speed?" yes. each of those answers is exactly one bit of information — true or false. that's what a boolean is.</p>
 
 <p>at a hardware level, a boolean is literally just 1 bit of memory. the whole entire concept boils down to: is this bit a 1 (true) or a 0 (false)? everything your robot decides — every motion command, every state transition, every safety check — eventually collapses into a bunch of these yes/no decisions chained together.</p>
 
-<p><strong>why does it matter in FRC?</strong> your robot code is FULL of state. is the shooter running? is the limit switch pressed? is the robot in auto or teleop? is the alliance station red or blue? every single one of those is a boolean. state machines also rely on boolean-reliant things, known as triggers. state machines are one of the more complex things in FRC, so I won't burden y'all with that quite yet. (those who know)</p>
+<p><strong>why does it matter in FRC?</strong> your robot code is FULL of state. is the shooter running? is the limit switch pressed? is the robot in auto or teleop (teleop = the 2-minute period where drivers control the robot manually)? is the alliance station red or blue? every single one of those is a boolean. state machines (a design pattern where the robot switches between named modes like INTAKING, SHOOTING, IDLE) also rely on boolean-reliant things, known as triggers. state machines are one of the more complex things in FRC, so I won't burden y'all with that quite yet. (those who know)</p>
 
 <h3 class="sub">declaring a boolean</h3>
 
@@ -71,7 +71,7 @@ next_title: "Week 3 — Loops"
 <div class="cb-header"><span class="cb-lang">java</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="type">double</span> distanceInches = <span class="num">18.5</span>;
 <span class="type">double</span> motorSpeed     = <span class="num">0.72</span>;
-<span class="type">int</span>    encoderTicks   = <span class="num">4096</span>;
+<span class="type">int</span>    encoderTicks   = <span class="num">4096</span>;  <span class="cmt">// encoder ticks — raw count of how many pulses the encoder has measured (more ticks = more rotation)</span>
 
 <span class="cmt">// each of these evaluates to true or false</span>
 <span class="type">boolean</span> inRange     = distanceInches &lt;= <span class="num">24.0</span>;   <span class="cmt">// true — 18.5 is less than 24</span>

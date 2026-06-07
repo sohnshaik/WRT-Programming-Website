@@ -89,6 +89,15 @@
     background: #1f2337; border-color: #2a2f47; color: #bec5d6;
     &:hover:not(:disabled) { background: #252840; border-color: #4a5280; }
     .opt-letter { background: #2a2f47; color: #9fabc4; }
+    &.correct { background: #0d2a1f; border-color: #00875A; color: #6ee7b7; }
+    &.wrong   { background: #2a0d14; border-color: #C41230; color: #fca5a5; }
+    &.correct .opt-letter { background: #00875A; color: #fff; }
+    &.wrong   .opt-letter { background: #C41230; color: #fff; }
+  }
+  .quiz-feedback {
+    &.fb-correct { background: #0d2a1f; border-color: #00875A; color: #6ee7b7; }
+    &.fb-wrong   { background: #2a0d14; border-color: #C41230; color: #fca5a5; }
+    code { background: rgba(255,255,255,0.08); color: #fca5a5; }
   }
   .quiz-score { color: #6b7690; }
 

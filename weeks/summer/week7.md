@@ -20,7 +20,7 @@ next_title: "Week 8 — Recap & Resources"
 
 <h2 class="sh" id="topic-1">Enums</h2>
 
-<div class="callout danger"><p><strong>we use enums constantly on 2974.</strong> robot states, game piece types, scoring positions, arm positions — all enums. if you forget this week, you won't be able to read our codebase. ngl this is one of the most important weeks.</p></div>
+<div class="callout danger"><p><strong>we use enums constantly on 2974.</strong> robot states, game piece types (whatever object robots pick up and score in that year's FRC game), scoring positions, arm positions — all enums. if you forget this week, you won't be able to read our codebase. ngl this is one of the most important weeks.</p></div>
 
 <p>before we get into syntax, let's talk about the problem enums solve, because the "why" here is way more important than the "how."</p>
 
@@ -154,7 +154,7 @@ next_title: "Week 8 — Recap & Resources"
 
 <h3 class="sub">enums in FRC — the WRT state machine pattern</h3>
 
-<p>on 2974, enums power our state machines. a subsystem has a "current state" (stored as an enum field), and the periodic loop checks that state and runs the right code. this replaces spaghetti if/else chains with a clean, readable, extensible pattern. when we need to add a new state, we add one value to the enum — we don't hunt through a chain of conditions trying to figure out where to insert a new branch.</p>
+<p>on 2974, enums power our state machines (a state machine tracks what "mode" the robot is in — like INTAKING, SHOOTING, or IDLE — and behaves differently in each). a subsystem has a "current state" (stored as an enum field), and the periodic loop checks that state and runs the right code. this replaces spaghetti if/else chains with a clean, readable, extensible pattern. when we need to add a new state, we add one value to the enum — we don't hunt through a chain of conditions trying to figure out where to insert a new branch.</p>
 
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java — simplified WRT pattern</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
@@ -266,13 +266,13 @@ next_title: "Week 8 — Recap & Resources"
 
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java — when to use which</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
-<pre><span class="cmt">// ARRAY: exactly 4 swerve modules, always exactly 4 — fixed forever</span>
-<span class="type">int</span>[] kModuleCanIDs = {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>};
+<pre><span class="cmt">// ARRAY: exactly 4 swerve modules (each of the 4 wheel assemblies on a swerve robot — each one can drive and steer independently), always exactly 4 — fixed forever</span>
+<span class="type">int</span>[] kModuleCanIDs = {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>}; <span class="cmt">// CAN ID — each motor on the robot needs a unique number so the code knows which one to talk to</span>
 
 <span class="cmt">// ARRAYLIST: unknown number of vision targets — changes every frame</span>
 <span class="cls">ArrayList</span>&lt;<span class="cls">String</span>&gt; detectedTargets = <span class="kw">new</span> <span class="cls">ArrayList</span>&lt;&gt;();
 
-<span class="cmt">// ARRAY: exactly 3 PID constants (kP, kI, kD) — fixed</span>
+<span class="cmt">// ARRAY: exactly 3 PID constants — fixed (kP = how aggressively to correct error, kI = correction for persistent error, kD = dampens overshooting)</span>
 <span class="type">double</span>[] kPIDConstants = {<span class="num">0.5</span>, <span class="num">0.0</span>, <span class="num">0.1</span>};
 
 <span class="cmt">// ARRAYLIST: log of recent state transitions — grows over time</span>

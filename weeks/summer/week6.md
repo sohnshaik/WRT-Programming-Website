@@ -125,7 +125,7 @@ c.<span class="fn">getName</span>();  <span class="cmt">// "Luna"  — same inhe
 <span class="kw">public class</span> <span class="cls">SubsystemBase</span> {
 
     <span class="kw">public</span> <span class="fn">SubsystemBase</span>() {
-        <span class="cmt">// registers THIS subsystem with the CommandScheduler automatically</span>
+        <span class="cmt">// registers THIS subsystem with the CommandScheduler (CommandScheduler = the WPILib engine that runs all your Commands and calls periodic() on every subsystem every 20ms) automatically</span>
         <span class="cmt">// this is why your subsystem gets periodic() called every 20ms without you doing anything</span>
         CommandScheduler.<span class="fn">getInstance</span>().<span class="fn">registerSubsystem</span>(<span class="kw">this</span>);
     }
@@ -147,7 +147,7 @@ c.<span class="fn">getName</span>();  <span class="cmt">// "Luna"  — same inhe
 
     <span class="kw">@Override</span>
     <span class="kw">public void</span> <span class="fn">periodic</span>() {
-        <span class="cmt">// runs every 20ms — this is where you'd update SmartDashboard, run PID loops, etc.</span>
+        <span class="cmt">// runs every 20ms — this is where you'd update SmartDashboard (the display on the driver's laptop that shows live robot data), run PID loops (PID = a control algorithm that calculates how much power to apply to reach a target value, like a target speed), etc.</span>
         <span class="fn">updateDashboard</span>();
     }
 
@@ -233,7 +233,7 @@ c.<span class="fn">getName</span>();  <span class="cmt">// "Luna"  — same inhe
   <li>Constants IS-A Robot — definitely no. constants are just data, not a kind of robot.</li>
 </ul>
 
-<p>when the is-a test fails, it usually means you want <strong>composition</strong> instead — you store the other thing as a field (has-a relationship). DriveSubsystem HAS-A TalonFX motor. it doesn't extend TalonFX.</p>
+<p>when the is-a test fails, it usually means you want <strong>composition</strong> instead — you store the other thing as a field (has-a relationship). DriveSubsystem HAS-A TalonFX (TalonFX = the motor controller our team uses, made by CTRE) motor. it doesn't extend TalonFX.</p>
 
 <div class="callout warning"><p><strong>one important limit:</strong> in Java, a class can only extend ONE parent class. this is called single inheritance. so <code>DriveSubsystem extends SubsystemBase</code> is fine, but you can't write <code>DriveSubsystem extends SubsystemBase, SomeOtherClass</code>. Java doesn't allow it. if you need multiple capabilities, that's what interfaces are for — topic 3!</p></div>
 
@@ -412,7 +412,7 @@ r.<span class="fn">describe</span>();   <span class="cmt">// "I am a shape with 
 <span class="cmt">// Your command overrides only what matters for this specific command</span>
 <span class="kw">public class</span> <span class="cls">DriveCommand</span> <span class="kw">extends</span> <span class="cls">Command</span> {
     <span class="kw">private final</span> <span class="cls">DriveSubsystem</span> m_drive;
-    <span class="kw">private final</span> <span class="cls">Joystick</span>       m_joystick;
+    <span class="kw">private final</span> <span class="cls">Joystick</span>       m_joystick;   <span class="cmt">// Joystick = the controller the driver uses during matches</span>
 
     <span class="kw">public</span> <span class="fn">DriveCommand</span>(<span class="cls">DriveSubsystem</span> drive, <span class="cls">Joystick</span> joystick) {
         m_drive    = drive;
@@ -642,7 +642,7 @@ logger.<span class="fn">log</span>(shoot);   <span class="cmt">// "Shooter — f
 
 <p>here's the cool part: <code>SubsystemBase</code> already implements <code>Sendable</code>. so when you extend SubsystemBase, your subsystem inherits Sendable behavior too. that's why your subsystems show up on Shuffleboard without you having to do any extra work. it's inheritance and interfaces both working together at the same time.</p>
 
-<p>WPILib also has interfaces like <code>MotorController</code> (a contract for anything that controls a motor — TalonFX, SparkMax, etc.), and <code>Encoder</code>. writing code against those interfaces means your code works with any hardware that implements the contract, not just one specific brand of motor controller.</p>
+<p>WPILib also has interfaces like <code>MotorController</code> (a contract for anything that controls a motor — TalonFX, SparkMax, etc.), and <code>Encoder</code>. writing code against those interfaces means your code works with any hardware that implements the contract, not just one specific brand of motor controller (motor controller = the hardware that takes commands from the robot's computer and controls the motor's speed).</p>
 
 <h3 class="sub">interface vs abstract class — the comparison table</h3>
 
