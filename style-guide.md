@@ -310,7 +310,7 @@ m_controller.setSetpoint(ShooterK.kShootRPS);</pre>
   </div>
   <div class="concept-card">
     <div class="cc-label">constants</div>
-    <div class="cc-title">in Constants.java?</div>
+    <div class="cc-title">constants in Constants.java?</div>
     <div class="cc-desc">no hardcoded IDs, speeds, or PID values in subsystem files. all in the relevant K class.</div>
   </div>
   <div class="concept-card">
