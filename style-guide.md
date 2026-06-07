@@ -223,6 +223,7 @@ m_controller.setSetpoint(ShooterK.kShootRPS);</pre>
 <span class="kw">while</span> (!m_shooter.isAtTarget()) {
     <span class="cmt">// blocks the entire robot loop. watchdog WILL fire. robot dies.</span>
 }
+</div>
 
 <h2 class="sh">git conventions</h2>
 <p>check O1 for the full git workflow. these are the non-negotiables:</p>
