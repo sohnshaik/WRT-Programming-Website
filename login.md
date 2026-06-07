@@ -115,7 +115,7 @@ no_auth_guard: true
           <input type="password" id="login-password" placeholder="••••••••" required>
         </div>
         <button class="auth-submit" type="submit" id="login-btn">sign in</button>
-        <p class="auth-note">forgot your password? ask sohan or hrehaan lol</p>
+        <p class="auth-note">forgot your password? ask (SLACK) sohan lol</p>
       </form>
 
       <!-- Register form -->
@@ -135,7 +135,7 @@ no_auth_guard: true
         <div class="auth-field">
           <label>access code</label>
           <input type="text" id="reg-code" placeholder="ask your programming lead" required>
-          <p style="font-size:11px;color:#94a3b8;margin:4px 0 0">get this from sohan, hrehaan, or alexandra at the first meeting!!</p>
+          <p style="font-size:11px;color:#94a3b8;margin:4px 0 0">slack sohan for this please!!</p>
         </div>
         <button class="auth-submit" type="submit" id="register-btn">create account</button>
       </form>
@@ -163,7 +163,6 @@ const firebaseConfig = {
 // To generate a new hash: https://emn178.github.io/online-tools/sha256.html
 const ACCESS_CODE_HASHES = {
   'fda533469e66a6f2da73b3e0ea0ad14284eebf37766de4114dab47d9ef49d84f': 'student',
-  '9a35bddd63a3420651ecc6bdcb99260af7130e51b0f66d6b2a77fcdbb4217414': 'leads',
   '360835c8908fde77b297a90cfd838461fca6bfe22e428e3f845c0180c6d9032a': 'admin',
 };
 
@@ -213,7 +212,7 @@ window.handleLogin = async (e) => {
     localStorage.setItem('wrc-uid',  cred.user.uid);
     localStorage.setItem('wrc-name', cred.user.displayName || email);
     showSuccess('welcome back!! redirecting...');
-    setTimeout(() => { window.location.href = role === 'teacher' || role === 'admin' ? '/dashboard-teacher/' : '/'; }, 900);
+    setTimeout(() => { window.location.href = role === 'admin' ? '/dashboard-teacher/' : '/'; }, 900);
   } catch(err) {
     showError(friendlyError(err.code));
     btn.disabled = false; btn.textContent = 'sign in';

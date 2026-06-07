@@ -21,7 +21,7 @@ next_title: "Week 2 — Logic & Control Flow"
 ---
 
 <h2 class="sh" id="topic-1">Variables &amp; Data Types</h2>
-<p>A variable is a named container for a value. You give it a type, a name, and optionally a starting value. In FRC you use variables everywhere — motor IDs, speeds, sensor readings, on/off flags. Getting good at naming and typing them is literally half of writing good robot code.</p>
+<p>A variable is a named container for a value. You give it a type, a name, and optionally a starting value. In FRC you use variables everywhere - motor IDs, speeds, sensor readings, on/off flags. Getting good at naming and typing them is literally half of writing good robot code.</p>
 
 <h3 class="sub">Declaring Variables</h3>
 

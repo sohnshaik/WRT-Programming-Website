@@ -69,8 +69,8 @@ onAuthStateChanged(auth, async (user) => {
     renderUserChip(user, currentRole);
     window.dispatchEvent(new CustomEvent('wrc-auth-ready', { detail: { user, role: currentRole } }));
 
-    // Role gate: teacher/admin pages
-    if (requiredRole && !['teacher', 'admin', 'leads'].includes(currentRole)) {
+    // Role gate: admin pages
+    if (requiredRole && !['admin', 'leads'].includes(currentRole)) {
       window.location.replace('/');
       return;
     }
@@ -85,8 +85,8 @@ onAuthStateChanged(auth, async (user) => {
       WRC.loadModuleScores();
     }
 
-    // Admins/leads get answer-key overlays on quizzes
-    if (['admin', 'leads', 'teacher'].includes(currentRole)) {
+    // Admins get answer-key overlays on quizzes
+    if (['admin', 'leads'].includes(currentRole)) {
       document.querySelectorAll('.quiz-wrap, .weekly-test-block').forEach(el => {
         el.dataset.adminView = '1';
       });
@@ -131,8 +131,8 @@ function renderUserChip(user, role) {
   chip.className = 'user-chip';
 
   if (user) {
-    const isDashRole  = ['teacher', 'admin', 'leads'].includes(role);
-    const roleLabel   = role === 'admin' ? 'Admin' : role === 'teacher' ? 'Teacher' : role === 'leads' ? 'Leads' : 'Student';
+    const isDashRole  = ['admin', 'leads'].includes(role);
+    const roleLabel   = ['admin', 'leads'].includes(role) ? 'Admin' : 'Student';
     const roleBadge   = role === 'admin' ? ' <i data-lucide="crown" style="width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em;"></i>' : isDashRole ? ' <i data-lucide="mortarboard" style="width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em;"></i>' : '';
     const initials    = (user.displayName || user.email || '?').charAt(0).toUpperCase();
     const name        = user.displayName || user.email.split('@')[0];

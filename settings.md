@@ -131,9 +131,7 @@ function settingsResetProgress() {
 }
 
 function roleLabel(raw) {
-  if (raw === 'admin')   return 'Admin';
-  if (raw === 'teacher') return 'Teacher';
-  if (raw === 'leads')   return 'Leads';
+  if (raw === 'admin' || raw === 'leads' || raw === 'teacher') return 'Admin';
   if (raw === 'student') return 'Student';
   return raw || '—'; // fallback for unrecognized / missing values
 }
@@ -173,7 +171,6 @@ async function settingsFixRole() {
 
   var ACCESS_CODE_HASHES = {
     'fda533469e66a6f2da73b3e0ea0ad14284eebf37766de4114dab47d9ef49d84f': 'student',
-    '9a35bddd63a3420651ecc6bdcb99260af7130e51b0f66d6b2a77fcdbb4217414': 'leads',
     '360835c8908fde77b297a90cfd838461fca6bfe22e428e3f845c0180c6d9032a': 'admin',
   };
 

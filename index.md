@@ -41,6 +41,7 @@ page_id: home
         <div class="cdlh-label">before you start</div>
         <div class="cdlh-title">meet the programming leads :)</div>
         <div class="cdlh-sub">short intro videos from the people actually running this thing. watch these first — they'll tell you what to expect, what the team builds, and honestly just vibe check you lol. we don't bite LOL.</div>
+        <div class="cdlh-scroll-hint"><span class="cdlh-arrow">↓</span> keep scrolling to meet everyone</div>
       </div>
 
       <div class="leads-stack">
