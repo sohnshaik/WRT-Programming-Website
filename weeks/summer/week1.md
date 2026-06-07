@@ -14,6 +14,7 @@ topics:
   - Scope & Naming
   - Type Casting
   - Comments & Code Syntax
+  - Project Task
 prev_url:
 prev_title:
 next_url: /weeks/summer/week2
@@ -616,7 +617,7 @@ count--;  <span class="cmt">// count is now 1 — shorthand for count = count - 
 
 <p>a comment is text in your code that the compiler completely ignores — it's purely there for humans to read. think of it like sticky notes you leave on your code explaining what's going on.</p>
 
-<p>here's the scenario: it's 1am at a regional. your robot is broken. some sub has weird behavior in autonomous and no one knows why. the programmer who wrote that code graduated last year. the code has zero comments. the variable names are <code>x1</code>, <code>y</code>, and <code>val2</code>. nobody can fix it in time. that's the horror story that motivates good commenting habits.</p>
+<p>here's the scenario: it's 1am at a regional. your robot is broken. some subsystem has weird behavior in autonomous and no one knows why. the programmer who wrote that code graduated last year. the code has zero comments. the variable names are <code>x1</code>, <code>y</code>, and <code>val2</code>. nobody can fix it in time. that's the horror story that motivates good commenting habits.</p>
 
 <p><strong>why does it matter in FRC?</strong> FRC is a team sport. other people WILL read your code. you WILL read your own code six months later and have no memory of what you were thinking. comments are how you leave a trail of breadcrumbs for everyone who comes after you — including yourself.</p>
 
@@ -742,21 +743,34 @@ count--;  <span class="cmt">// count is now 1 — shorthand for count = count - 
 <h3 class="sub">Topic 5 — Quick Check</h3>
 <div id="quiz-w1-t5"></div>
 
-<div class="project-task">
+<div class="project-task" id="topic-6">
   <div class="pt-header">
     <div class="pt-icon"><i data-lucide="wrench"></i></div>
     <div class="pt-header-title">Project Task — Week 1</div>
     <div class="pt-filename">Constants.java</div>
   </div>
   <div class="pt-body">
-    <p>Create your <code>Constants.java</code> file. This is the foundation of your entire MiniBot project — every magic number that appears in your robot code will live here, named and typed properly so nothing is mysterious to anyone reading it later.</p>
+    <p><strong>first time only — set up your project environment:</strong></p>
+    <ol>
+      <li><strong>install VS Code</strong> if you don't have it → <a href="https://code.visualstudio.com" target="_blank" rel="noopener noreferrer">code.visualstudio.com</a></li>
+      <li><strong>install the Java extension:</strong> open VS Code → press <kbd>Ctrl+Shift+X</kbd> → search <code>Extension Pack for Java</code> → Install</li>
+      <li><strong>get the project folder:</strong>
+        <ul>
+          <li><em>if you have a repo link:</em> open a terminal (<kbd>Ctrl+`</kbd> in VS Code) and run <code>git clone [URL your lead gives you] minibot-project</code></li>
+          <li><em>if starting from scratch:</em> create a new folder called <code>minibot-project</code> anywhere on your computer</li>
+        </ul>
+      </li>
+      <li><strong>open the folder in VS Code:</strong> File → Open Folder → select <code>minibot-project</code></li>
+    </ol>
+    <p>now create <code>Constants.java</code> directly inside your <code>minibot-project</code> folder. this is the foundation of your entire MiniBot project — every magic number in your robot code lives here, named and typed properly so nothing is mysterious to anyone reading it later.</p>
     <ul>
       <li>Create two <code>public static final class</code> inner classes: <code>DriveK</code> and <code>ShooterK</code></li>
       <li>Inside <code>DriveK</code>: four motor CAN IDs (FL, FR, BL, BR as <code>kFrontLeftID</code> etc.), a max speed constant in m/s, and a gear ratio</li>
       <li>Inside <code>ShooterK</code>: two motor CAN IDs (top and bottom flywheel), a max RPS target, and a speed threshold double for "at speed" detection</li>
       <li>All constants use <code>k</code> prefix and are <code>public static final</code> — no bare numbers anywhere</li>
       <li>Add a Javadoc <code>/** ... */</code> comment above the outer <code>Constants</code> class and each inner class explaining what goes in each</li>
-      <li>Include unit suffixes in any constant where the unit matters (speeds in _mps, lengths in _in, etc.)</li>
+      <li>Include unit suffixes where the unit matters (speeds in _mps, lengths in _in, etc.)</li>
+      <li>Reference: <a href="https://github.com/WaltonRobotics/Rebuilt/blob/codebase-rewrite/src/main/java/frc/robot/Constants.java" target="_blank" rel="noopener noreferrer">Constants.java from the 2026 season</a></li>
     </ul>
     <span class="pt-note">you'll keep adding to this file every week as you need new constants. start clean and organized — future you at 1am will be grateful.</span>
   </div>

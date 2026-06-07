@@ -17,6 +17,7 @@ topics:
   - Fill in the Blanks
   - Knowledge Check
   - Coding Challenge
+  - Project Task
 prev_url: /weeks/summer/week4
 prev_title: "Week 4 — Arrays & Methods"
 next_url: /weeks/summer/week6
@@ -894,14 +895,14 @@ System.out.<span class="fn">println</span>(back.<span class="fn">isRunning</span
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<div class="project-task">
+<div class="project-task" id="topic-9">
   <div class="pt-header">
     <div class="pt-icon"><i data-lucide="wrench"></i></div>
     <div class="pt-header-title">Project Task — Week 5</div>
     <div class="pt-filename">DriveSubsystem.java</div>
   </div>
   <div class="pt-body">
-    <p>Create <code>DriveSubsystem.java</code> — the heart of your MiniBot project. This models how a real FRC drivetrain subsystem is structured on team 2974.</p>
+    <p>Create <code>DriveSubsystem.java</code> in your <code>minibot-project</code> folder — the heart of your MiniBot project. This models how a real FRC drivetrain subsystem is structured on team 2974. <em>You're writing plain Java here (no WPILib needed) — just simulate the data and behavior.</em></p>
     <ul>
       <li>Private fields: <code>int[] m_motorIDs</code> (4 motors: FL, FR, BL, BR), <code>double m_currentSpeed</code>, <code>boolean m_isInverted</code></li>
       <li>Constructor takes no parameters — initialize <code>m_motorIDs</code> from your <code>Constants.DriveK</code> values (use the IDs you defined in week 1)</li>
@@ -912,7 +913,7 @@ System.out.<span class="fn">println</span>(back.<span class="fn">isRunning</span
       <li><code>public String getStatusString()</code> — returns a formatted string like "Drive: 0.75 m/s | MOVING"</li>
       <li>Full Javadoc on the class and every public method</li>
     </ul>
-    <span class="pt-note">note: don't worry about actual WPILib motor objects yet — just model the data and logic. we'll wire it up properly later.</span>
+    <span class="pt-note">no WPILib needed — your file will compile and run with just the Java extension in VS Code. the goal is the structure and logic, not real hardware control. wiring it to actual motors happens in the offseason phase.</span>
   </div>
 </div>
 

@@ -15,6 +15,7 @@ topics:
   - Fill in the Blanks
   - Knowledge Check
   - Coding Challenge
+  - Project Task
 prev_url: /weeks/summer/week3
 prev_title: "Week 3 — Loops"
 next_url: /weeks/summer/week5
@@ -751,14 +752,14 @@ System.out.<span class="fn">println</span>(<span class="str">"Total modules: "</
   </div>
 </div>
 
-<div class="project-task">
+<div class="project-task" id="topic-7">
   <div class="pt-header">
     <div class="pt-icon"><i data-lucide="wrench"></i></div>
     <div class="pt-header-title">Project Task — Week 4</div>
     <div class="pt-filename">DriveCalculator.java</div>
   </div>
   <div class="pt-body">
-    <p>Create <code>DriveCalculator.java</code>. This utility class handles all the math your drivetrain needs — converting between encoder ticks, RPMs, and real-world distances.</p>
+    <p>Create <code>DriveCalculator.java</code> in your <code>minibot-project</code> folder. This utility class handles all the math your drivetrain needs — converting between encoder ticks (raw sensor counts), RPMs, and real-world distances.</p>
     <ul>
       <li><code>static double ticksToRevolutions(int ticks, int ticksPerRev)</code> — divide ticks by ticksPerRev, return as double</li>
       <li><code>static double revolutionsToInches(double revolutions, double wheelDiameterInches)</code> — multiply by Math.PI * diameter</li>

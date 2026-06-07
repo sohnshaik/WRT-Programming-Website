@@ -15,6 +15,7 @@ topics:
   - Fill in the Blanks
   - Knowledge Check
   - Coding Challenge
+  - Project Task
 prev_url: /weeks/summer/week6
 prev_title: "Week 6 — Inheritance & Polymorphism"
 next_url: /weeks/summer/week8
@@ -712,14 +713,14 @@ System.out.<span class="fn">println</span>(list.<span class="fn">contains</span>
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<div class="project-task">
+<div class="project-task" id="topic-7">
   <div class="pt-header">
     <div class="pt-icon"><i data-lucide="wrench"></i></div>
     <div class="pt-header-title">Project Task — Week 7</div>
     <div class="pt-filename">RobotState.java</div>
   </div>
   <div class="pt-body">
-    <p>Create <code>RobotState.java</code> — the glue that brings your MiniBot's subsystems together. This class tracks what the robot is currently doing and what it should do next.</p>
+    <p>Create <code>RobotState.java</code> in your <code>minibot-project</code> folder — the glue that brings your MiniBot's subsystems together. This class tracks what the robot is currently doing and what it should do next.</p>
     <ul>
       <li>Define an inner enum: <code>public enum State { IDLE, INTAKING, DRIVING, SHOOTING, STOPPED }</code></li>
       <li>Private fields: <code>State m_currentState</code>, <code>ArrayList&lt;String&gt; m_stateHistory</code></li>

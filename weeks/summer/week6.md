@@ -14,6 +14,7 @@ topics:
   - Interfaces
   - Fill in the Blanks
   - Knowledge Check
+  - Project Task
 prev_url: /weeks/summer/week5
 prev_title: "Week 5 — OOP: Classes & Objects"
 next_url: /weeks/summer/week7
@@ -794,16 +795,16 @@ System.out.<span class="fn">println</span>(intake.<span class="fn">getStatus</sp
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<div class="project-task">
+<div class="project-task" id="topic-6">
   <div class="pt-header">
     <div class="pt-icon"><i data-lucide="wrench"></i></div>
     <div class="pt-header-title">Project Task — Week 6</div>
     <div class="pt-filename">ShooterSubsystem.java</div>
   </div>
   <div class="pt-body">
-    <p>Create <code>ShooterSubsystem.java</code>. Like <code>DriveSubsystem</code>, this models a real FRC shooter. This week you'll use what you learned about inheritance to structure it the way WPILib expects.</p>
+    <p>Create <code>ShooterSubsystem.java</code> in your <code>minibot-project</code> folder. Like <code>DriveSubsystem</code>, this models a real FRC shooter using plain Java — no WPILib needed. This week you'll use inheritance to structure it the way WPILib expects so the pattern is familiar when you get to the offseason.</p>
     <ul>
-      <li>Class signature: <code>public class ShooterSubsystem</code> — it should conceptually extend SubsystemBase (write the extends, even if SubsystemBase isn't imported in your standalone file)</li>
+      <li>Class signature: <code>public class ShooterSubsystem extends SubsystemBase</code> — add a comment <code>// SubsystemBase is a WPILib class; write the extends now so the pattern sticks</code> and just don't import it for now (your plain Java file won't compile with it, and that's fine)</li>
       <li>Private fields: <code>int m_topMotorID</code>, <code>int m_bottomMotorID</code>, <code>double m_targetRPS</code>, <code>boolean m_isSpinning</code></li>
       <li>Constructor: initialize motor IDs from <code>Constants.ShooterK</code></li>
       <li><code>public void spinUp(double targetRPS)</code> — sets target, sets isSpinning to true</li>

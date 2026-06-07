@@ -14,6 +14,7 @@ topics:
   - Switch Statements
   - Ternary Operator
   - Knowledge Check
+  - Project Task
 prev_url: /weeks/summer/week1
 prev_title: "Week 1 — The Basics"
 next_url: /weeks/summer/week3
@@ -914,14 +915,14 @@ System.out.<span class="fn">println</span>(<span class="str">"directionLabel: "<
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<div class="project-task">
+<div class="project-task" id="topic-6">
   <div class="pt-header">
     <div class="pt-icon"><i data-lucide="wrench"></i></div>
     <div class="pt-header-title">Project Task — Week 2</div>
     <div class="pt-filename">AutoLogic.java</div>
   </div>
   <div class="pt-body">
-    <p>Create <code>AutoLogic.java</code>. This class simulates autonomous decision making — the logic the robot uses when it's driving itself.</p>
+    <p>Create <code>AutoLogic.java</code> in your <code>minibot-project</code> folder. This class simulates autonomous decision making — the logic your robot uses when it's driving itself without a driver.</p>
     <ul>
       <li>Write a <code>static String decideAction(boolean hasGamePiece, double distanceInches, boolean isEnabled)</code> method</li>
       <li>Returns "DISABLED" if not enabled</li>

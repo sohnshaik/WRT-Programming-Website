@@ -16,6 +16,7 @@ topics:
   - Fill in the Blanks
   - Knowledge Check
   - Coding Challenge
+  - Project Task
 prev_url: /weeks/summer/week2
 prev_title: "Week 2 — Logic & Control Flow"
 next_url: /weeks/summer/week4
@@ -571,14 +572,14 @@ System.out.<span class="fn">println</span>(<span class="str">"Max: "</span> + ma
   </div>
 </div>
 
-<div class="project-task">
+<div class="project-task" id="topic-8">
   <div class="pt-header">
     <div class="pt-icon"><i data-lucide="wrench"></i></div>
     <div class="pt-header-title">Project Task — Week 3</div>
     <div class="pt-filename">SensorProcessor.java</div>
   </div>
   <div class="pt-body">
-    <p>Create <code>SensorProcessor.java</code>. This class processes a batch of sensor readings — simulating how a robot might analyze distance sensor data from multiple sensors.</p>
+    <p>Create <code>SensorProcessor.java</code> in your <code>minibot-project</code> folder. This class processes a batch of sensor readings — simulating how a robot analyzes data from multiple distance sensors at once.</p>
     <ul>
       <li>Declare a <code>static double[] processSensorReadings(double[] rawReadings)</code> method</li>
       <li>Use a regular for loop to iterate through all readings</li>
