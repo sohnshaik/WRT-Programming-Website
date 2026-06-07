@@ -12,6 +12,8 @@ topics:
   - Booleans & Logical Operators
   - If / Else
   - Switch Statements
+  - Ternary Operator
+  - Knowledge Check
 prev_url: /weeks/summer/week1
 prev_title: "Week 1 — The Basics"
 next_url: /weeks/summer/week3
@@ -933,7 +935,7 @@ System.out.<span class="fn">println</span>(<span class="str">"directionLabel: "<
   </div>
 </div>
 
-<h2 class="sh">Knowledge Check</h2>
+<h2 class="sh" id="topic-5">Knowledge Check</h2>
 <div id="quiz-w2"></div>
 
 <script>

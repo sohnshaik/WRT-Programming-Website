@@ -12,6 +12,10 @@ topics:
   - For Loops
   - Foreach Loops
   - While Loops & Why They're Banned
+  - Loop Visualizer
+  - Fill in the Blanks
+  - Knowledge Check
+  - Coding Challenge
 prev_url: /weeks/summer/week2
 prev_title: "Week 2 — Logic & Control Flow"
 next_url: /weeks/summer/week4
@@ -489,7 +493,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Sum: "</span> + su
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<h2 class="sh">Loop Visualizer</h2>
+<h2 class="sh" id="topic-4">Loop Visualizer</h2>
 <p>adjust the values and watch the loop execute.</p>
 <div class="interactive-box">
   <div class="ib-header">Interactive — For Loop Visualizer</div>
@@ -518,7 +522,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Sum: "</span> + su
   </div>
 </div>
 
-<h2 class="sh">Fill in the Blanks</h2>
+<h2 class="sh" id="topic-5">Fill in the Blanks</h2>
 <div id="fill-w3">
   <div class="fill-container">
     <span class="cmt">// Loop 10 times (i = 0 to 9)</span><br>
@@ -538,10 +542,10 @@ System.out.<span class="fn">println</span>(<span class="str">"Sum: "</span> + su
   <span id="fill-w3-result" style="font-size:13px;font-weight:700;display:none"></span>
 </div>
 
-<h2 class="sh">Knowledge Check</h2>
+<h2 class="sh" id="topic-6">Knowledge Check</h2>
 <div id="quiz-w3"></div>
 
-<h2 class="sh">Coding Challenge</h2>
+<h2 class="sh" id="topic-7">Coding Challenge</h2>
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Sensor Array Analyzer</div><div class="ch-sub">Process a real FRC-style sensor array</div></div></div>
   <div class="ch-body">

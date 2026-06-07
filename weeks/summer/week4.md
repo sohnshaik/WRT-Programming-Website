@@ -12,6 +12,9 @@ topics:
   - Arrays
   - Methods
   - Javadocs & Code Documentation
+  - Fill in the Blanks
+  - Knowledge Check
+  - Coding Challenge
 prev_url: /weeks/summer/week3
 prev_title: "Week 3 — Loops"
 next_url: /weeks/summer/week5
@@ -664,7 +667,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Total modules: "</
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<h2 class="sh">Fill in the Blanks</h2>
+<h2 class="sh" id="topic-4">Fill in the Blanks</h2>
 <div id="fill-w4">
   <div class="fill-container">
     <span class="cmt">// Method that returns nothing, takes a double speed param</span><br>
@@ -684,10 +687,10 @@ System.out.<span class="fn">println</span>(<span class="str">"Total modules: "</
   <span id="fill-w4-result" style="font-size:13px;font-weight:700;display:none"></span>
 </div>
 
-<h2 class="sh">Knowledge Check</h2>
+<h2 class="sh" id="topic-5">Knowledge Check</h2>
 <div id="quiz-w4"></div>
 
-<h2 class="sh">Coding Challenge</h2>
+<h2 class="sh" id="topic-6">Coding Challenge</h2>
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Wheel Speed Calculator</div><div class="ch-sub">Write reusable methods for real FRC drivetrain math</div></div></div>
   <div class="ch-body">

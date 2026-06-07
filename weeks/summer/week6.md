@@ -12,6 +12,8 @@ topics:
   - Inheritance
   - Abstract Classes
   - Interfaces
+  - Fill in the Blanks
+  - Knowledge Check
 prev_url: /weeks/summer/week5
 prev_title: "Week 5 — OOP: Classes & Objects"
 next_url: /weeks/summer/week7
@@ -757,7 +759,7 @@ System.out.<span class="fn">println</span>(intake.<span class="fn">getStatus</sp
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<h2 class="sh">Fill in the Blanks</h2>
+<h2 class="sh" id="topic-4">Fill in the Blanks</h2>
 <div id="fill-w6">
   <div class="fill-container">
     <span class="cmt">// DriveSubsystem inherits from SubsystemBase</span><br>
@@ -786,7 +788,7 @@ System.out.<span class="fn">println</span>(intake.<span class="fn">getStatus</sp
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<h2 class="sh">Knowledge Check</h2>
+<h2 class="sh" id="topic-5">Knowledge Check</h2>
 <p>quick check on the concepts before the weekly test. no pressure!</p>
 <div id="quiz-w6"></div>
 

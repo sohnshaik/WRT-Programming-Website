@@ -12,6 +12,9 @@ topics:
   - Enums
   - ArrayList
   - Wrapper Classes
+  - Fill in the Blanks
+  - Knowledge Check
+  - Coding Challenge
 prev_url: /weeks/summer/week6
 prev_title: "Week 6 — Inheritance & Polymorphism"
 next_url: /weeks/summer/week8
@@ -647,7 +650,7 @@ System.out.<span class="fn">println</span>(motorIDs.<span class="fn">contains</s
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<h2 class="sh" id="fill">Fill in the Blanks</h2>
+<h2 class="sh" id="topic-4">Fill in the Blanks</h2>
 <div id="fill-w7">
   <div class="fill-container">
     <span class="cmt">// Declare a RobotState enum with TELEOP and AUTO</span><br>
@@ -677,12 +680,12 @@ System.out.<span class="fn">println</span>(motorIDs.<span class="fn">contains</s
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<h2 class="sh" id="quiz">Knowledge Check</h2>
+<h2 class="sh" id="topic-5">Knowledge Check</h2>
 <div id="quiz-w7"></div>
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<h2 class="sh" id="challenge">Coding Challenge</h2>
+<h2 class="sh" id="topic-6">Coding Challenge</h2>
 <p>practice the ArrayList operations before the project task. try to predict the output before running.</p>
 
 <div class="code-block">

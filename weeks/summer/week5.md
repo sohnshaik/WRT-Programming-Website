@@ -13,6 +13,10 @@ topics:
   - Constructors & Fields
   - Access Modifiers
   - Methods & Encapsulation
+  - Live Class Builder
+  - Fill in the Blanks
+  - Knowledge Check
+  - Coding Challenge
 prev_url: /weeks/summer/week4
 prev_title: "Week 4 — Arrays & Methods"
 next_url: /weeks/summer/week6
@@ -791,7 +795,7 @@ System.out.<span class="fn">println</span>(c.<span class="fn">isClimbing</span>(
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<h2 class="sh">Live Class Builder</h2>
+<h2 class="sh" id="topic-5">Live Class Builder</h2>
 <div class="interactive-box">
   <div class="ib-header">Type field declarations and watch the class generate</div>
   <div class="ib-body">
@@ -811,7 +815,7 @@ System.out.<span class="fn">println</span>(c.<span class="fn">isClimbing</span>(
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<h2 class="sh">Fill in the Blanks</h2>
+<h2 class="sh" id="topic-6">Fill in the Blanks</h2>
 <div id="fill-w5">
   <div class="fill-container">
     <span class="cmt">// Declare a private double field (WRT style)</span><br>
@@ -837,12 +841,12 @@ System.out.<span class="fn">println</span>(c.<span class="fn">isClimbing</span>(
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<h2 class="sh">Knowledge Check</h2>
+<h2 class="sh" id="topic-7">Knowledge Check</h2>
 <div id="quiz-w5"></div>
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<h2 class="sh">Coding Challenge</h2>
+<h2 class="sh" id="topic-8">Coding Challenge</h2>
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Build an Intake Class</div><div class="ch-sub">Write a real FRC subsystem class from scratch</div></div></div>
   <div class="ch-body">
