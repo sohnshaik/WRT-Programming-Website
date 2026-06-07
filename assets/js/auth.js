@@ -208,6 +208,21 @@ window.wrcSignOut = async () => {
   window.location.replace('/login/');
 };
 
+// ── ROLE UPDATE (dispatched from settings.md) ─────────────────
+window.addEventListener('wrc-update-role', async (e) => {
+  const { uid, role } = e.detail;
+  if (!uid || !role) return;
+  try {
+    await setDoc(doc(db, 'users', uid), { role }, { merge: true });
+    currentRole = role;
+    window._wrcRole = role;
+    localStorage.setItem('wrc-role', role);
+    if (currentUser) renderUserChip(currentUser, role);
+  } catch(err) {
+    console.warn('WRC: role update failed', err);
+  }
+});
+
 // ── SCORE SYNC ───────────────────────────────────────────────
 window._wrcSaveToFirestore = (...args) => saveScoreToFirestore(...args);
 

@@ -1044,6 +1044,9 @@ textarea.code-input {
   padding: 2rem 2.5rem 4rem;
   max-width: 680px;
   margin: 0 auto;
+  // white background so sections (gray-50) have clear contrast
+  background: $white;
+  min-height: calc(100vh - 56px);
 }
 
 .sett-hd {
@@ -1056,12 +1059,11 @@ textarea.code-input {
 }
 
 .sett-section {
-  background: $white;
-  border: 1px solid $gray-300;
+  background: $gray-50;
+  border: 1px solid $gray-200;
   border-radius: 10px;
   margin-bottom: 1.25rem;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02);
 }
 
 .sett-section-label {
@@ -1074,7 +1076,7 @@ textarea.code-input {
 .sett-row {
   display: flex; align-items: center; gap: 1rem;
   padding: 13px 18px;
-  border-top: 1px solid $gray-100;
+  border-top: 1px solid $gray-200;
 }
 
 .sett-row-label {
@@ -1162,6 +1164,7 @@ textarea.code-input {
   }
 
   // Settings page
+  .settings-page { background: #111d33; }
   .sett-section { background: #1a2236; border-color: #2d3752; }
   .sett-row     { border-top-color: #2d3752; }
   .sett-row-label {

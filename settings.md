@@ -45,15 +45,33 @@ page_id: settings
     <div class="sett-row">
       <div class="sett-row-label">
         <div class="sett-row-title">Role</div>
+        <div class="sett-row-sub">showing wrong? scroll down to fix it</div>
       </div>
       <div class="sett-row-value" id="sett-role">—</div>
     </div>
     <div class="sett-row">
       <div class="sett-row-label">
         <div class="sett-row-title">User ID</div>
-        <div class="sett-row-sub">Share with a lead if you need account help</div>
+        <div class="sett-row-sub">share with a lead if you need account help</div>
       </div>
       <div class="sett-row-value sett-row-mono" id="sett-uid">—</div>
+    </div>
+  </section>
+
+  <!-- FIX ROLE -->
+  <section class="sett-section">
+    <div class="sett-section-label">Fix Role</div>
+    <div class="sett-row" style="flex-wrap:wrap; gap: 0.75rem;">
+      <div class="sett-row-label">
+        <div class="sett-row-title">Re-verify access code</div>
+        <div class="sett-row-sub">if your role is wrong, enter your access code to update it in the database</div>
+      </div>
+      <div style="display:flex; gap: 8px; flex:1; min-width:200px;">
+        <input type="text" id="sett-role-code" placeholder="access code" autocomplete="off"
+          style="flex:1; padding: 8px 12px; border: 1px solid var(--sett-input-border, #d1d5db); border-radius: 6px; font-size: 13px; font-family: inherit; color: #1f2937; background: #fff; outline:none; min-width:0;">
+        <button class="btn btn-navy btn-sm" onclick="settingsFixRole()" id="sett-fix-role-btn">Update</button>
+      </div>
+      <div id="sett-role-msg" style="width:100%; font-size:13px; display:none; font-weight:600; padding: 0 0 4px;"></div>
     </div>
   </section>
 
@@ -112,19 +130,89 @@ function settingsResetProgress() {
   }
 }
 
+function roleLabel(raw) {
+  if (raw === 'admin')   return 'Admin';
+  if (raw === 'teacher') return 'Teacher';
+  if (raw === 'leads')   return 'Leads';
+  if (raw === 'student') return 'Student';
+  return raw || '—'; // fallback for unrecognized / missing values
+}
+
 function populateAccount(user, role) {
   var el;
   if (user) {
     if ((el = document.getElementById('sett-name')))  el.textContent = user.displayName || user.email.split('@')[0];
     if ((el = document.getElementById('sett-email'))) el.textContent = user.email;
-    if ((el = document.getElementById('sett-role')))  el.textContent = role || '—';
+    if ((el = document.getElementById('sett-role')))  el.textContent = roleLabel(role);
     if ((el = document.getElementById('sett-uid')))   el.textContent = user.uid;
   } else {
-    // Fallback from localStorage (already populated by auth.js for returning users)
-    if ((el = document.getElementById('sett-name')))  el.textContent = localStorage.getItem('wrc-name')  || '—';
-    if ((el = document.getElementById('sett-role')))  el.textContent = localStorage.getItem('wrc-role')  || '—';
-    if ((el = document.getElementById('sett-uid')))   el.textContent = localStorage.getItem('wrc-uid')   || '—';
+    if ((el = document.getElementById('sett-name')))  el.textContent = localStorage.getItem('wrc-name') || '—';
+    if ((el = document.getElementById('sett-role')))  el.textContent = roleLabel(localStorage.getItem('wrc-role'));
+    if ((el = document.getElementById('sett-uid')))   el.textContent = localStorage.getItem('wrc-uid')  || '—';
   }
+}
+
+async function settingsFixRole() {
+  var code = (document.getElementById('sett-role-code').value || '').trim();
+  var msg  = document.getElementById('sett-role-msg');
+  var btn  = document.getElementById('sett-fix-role-btn');
+  if (!code) { showRoleMsg('enter your access code first', false); return; }
+
+  btn.disabled = true; btn.textContent = 'checking...';
+
+  // Hash the code (same SHA-256 as login.md)
+  var hash;
+  try {
+    var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(code));
+    hash = Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2,'0'); }).join('');
+  } catch(e) {
+    showRoleMsg('error hashing code', false);
+    btn.disabled = false; btn.textContent = 'Update';
+    return;
+  }
+
+  var ACCESS_CODE_HASHES = {
+    'fda533469e66a6f2da73b3e0ea0ad14284eebf37766de4114dab47d9ef49d84f': 'student',
+    '9a35bddd63a3420651ecc6bdcb99260af7130e51b0f66d6b2a77fcdbb4217414': 'leads',
+    '360835c8908fde77b297a90cfd838461fca6bfe22e428e3f845c0180c6d9032a': 'admin',
+  };
+
+  var newRole = ACCESS_CODE_HASHES[hash];
+  if (!newRole) {
+    showRoleMsg("that code doesn't match any role :( ask a lead for the right one", false);
+    btn.disabled = false; btn.textContent = 'Update';
+    return;
+  }
+
+  var uid = localStorage.getItem('wrc-uid') || window._wrcUid;
+  if (!uid) {
+    showRoleMsg('not signed in — try refreshing the page', false);
+    btn.disabled = false; btn.textContent = 'Update';
+    return;
+  }
+
+  // Update Firestore via auth.js's exposed Firestore instance
+  // We use a fetch to the Firestore REST API since we don't have direct access here
+  // Alternatively: dispatch a custom event that auth.js can handle
+  window.dispatchEvent(new CustomEvent('wrc-update-role', { detail: { uid: uid, role: newRole } }));
+
+  // Optimistically update the display
+  localStorage.setItem('wrc-role', newRole);
+  window._wrcRole = newRole;
+  var roleEl = document.getElementById('sett-role');
+  if (roleEl) roleEl.textContent = roleLabel(newRole);
+  showRoleMsg('role updated to ' + roleLabel(newRole) + '! refresh the page to see it everywhere :)', true);
+  btn.disabled = false; btn.textContent = 'Update';
+  document.getElementById('sett-role-code').value = '';
+}
+
+function showRoleMsg(text, ok) {
+  var el = document.getElementById('sett-role-msg');
+  if (!el) return;
+  el.textContent = text;
+  el.style.display = 'block';
+  el.style.color = ok ? '#00875A' : '#C41230';
+  setTimeout(function() { el.style.display = 'none'; }, 5000);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
