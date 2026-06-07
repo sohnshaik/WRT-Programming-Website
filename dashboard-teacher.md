@@ -282,8 +282,8 @@ window.renderAnswerPanel = () => {
   const rows = qs.map(q => {
     const opts = (q.options||[]).map((opt,i) => {
       let cls = '';
-      if (i === q.correct)  cls = ' answer-key';
-      if (i === q.selected) cls = q.wasCorrect ? ' sel-correct' : ' sel-wrong';
+      if (i === q.correct && i !== q.selected) cls += ' answer-key';
+      if (i === q.selected) cls += q.wasCorrect ? ' sel-correct' : ' sel-wrong';
       return `<span class="ar-opt${cls}">${i===q.selected?'→ ':''}${letters[i]}: ${opt}</span>`;
     }).join('');
     const res = q.wasCorrect

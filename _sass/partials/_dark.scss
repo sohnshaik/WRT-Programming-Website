@@ -169,6 +169,18 @@
     td { border-color: #1f2337; color: #adb5c8; }
     tr:hover td { background: #1f2337; }
   }
+  .tab-bar { border-color: #2a2f47; }
+  .tab-btn { color: #5a6480; &.active { color: #dce1ec; } }
+  .answer-panel { background: #1a1d2e; border-color: #2a2f47; }
+  .ap-header h3 { color: #dce1ec; }
+  .answer-row { background: #1f2337; border-color: #2a2f47; }
+  .ar-q { color: #dce1ec; }
+  .ar-opt {
+    background: #252840; color: #8892a8; border-color: #2a2f47;
+    &.sel-correct { background: #0d2a1f; color: #6ee7b7; border-color: #00875A; }
+    &.sel-wrong   { background: #2a0d14; color: #fca5a5; border-color: #C41230; }
+    &.answer-key  { background: #0d1f3e; color: #93c5fd; border-color: #3b82f6; }
+  }
 
   // ── Course dashboard ─────────────────────────────────────
   .course-dash { background: #12141f; }

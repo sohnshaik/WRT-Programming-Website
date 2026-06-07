@@ -27,24 +27,27 @@ next_title: "O4 — Motors & Sensors"
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java — IntakeSubsystem.java (WRT style)</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="kw">import</span> edu.wpi.first.wpilibj2.command.<span class="cls">SubsystemBase</span>;
-<span class="kw">import</span> com.revrobotics.<span class="cls">CANSparkMax</span>;
-<span class="kw">import</span> com.revrobotics.CANSparkLowLevel.<span class="cls">MotorType</span>;
+<span class="kw">import</span> com.ctre.phoenix6.hardware.<span class="cls">TalonFX</span>;
+<span class="kw">import</span> com.ctre.phoenix6.configs.<span class="cls">TalonFXConfiguration</span>;
+<span class="kw">import</span> com.ctre.phoenix6.signals.<span class="cls">NeutralModeValue</span>;
 
 <span class="kw">public class</span> <span class="cls">IntakeSubsystem</span> <span class="kw">extends</span> <span class="cls">SubsystemBase</span> {
 
-    <span class="cmt">// ── Hardware ───────────────────────────────────────────────</span>
-    <span class="kw">private final</span> <span class="cls">CANSparkMax</span> m_rollerMotor;
+    <span class="cmt">// -- Hardware --</span>
+    <span class="kw">private final</span> <span class="cls">TalonFX</span> m_rollerMotor;
 
-    <span class="cmt">// ── Constants (from Constants.java) ───────────────────────</span>
-    <span class="kw">private static final int</span>    kMotorID    = <span class="num">9</span>;
-    <span class="kw">private static final double</span> kIntakeSpeed = <span class="num">0.8</span>;
+    <span class="cmt">// -- Constants --</span>
+    <span class="kw">private static final int</span>    kMotorID        = <span class="num">9</span>;
+    <span class="kw">private static final double</span> kIntakeSpeed    = <span class="num">0.8</span>;
+    <span class="kw">private static final int</span>    kCurrentLimit_A = <span class="num">40</span>;
 
     <span class="kw">public</span> <span class="fn">IntakeSubsystem</span>() {
-        m_rollerMotor = <span class="kw">new</span> <span class="cls">CANSparkMax</span>(kMotorID, MotorType.kBrushless);
-        m_rollerMotor.<span class="fn">restoreFactoryDefaults</span>();
-        m_rollerMotor.<span class="fn">setIdleMode</span>(CANSparkMax.IdleMode.kCoast);
-        m_rollerMotor.<span class="fn">setSmartCurrentLimit</span>(<span class="num">40</span>);
-        m_rollerMotor.<span class="fn">burnFlash</span>(); <span class="cmt">// save config to flash</span>
+        m_rollerMotor = <span class="kw">new</span> <span class="cls">TalonFX</span>(kMotorID);
+        var config = <span class="kw">new</span> <span class="cls">TalonFXConfiguration</span>();
+        config.MotorOutput.NeutralMode = <span class="cls">NeutralModeValue</span>.Coast;
+        config.CurrentLimits.StatorCurrentLimit = kCurrentLimit_A;
+        config.CurrentLimits.StatorCurrentLimitEnable = <span class="kw">true</span>;
+        m_rollerMotor.<span class="fn">getConfigurator</span>().<span class="fn">apply</span>(config);
     }
 
     <span class="cmt">// ── Public methods (Commands call these) ───────────────────</span>
@@ -54,7 +57,7 @@ next_title: "O4 — Motors & Sensors"
 
     <span class="cmt">// ── Sensor reads ───────────────────────────────────────────</span>
     <span class="kw">public double</span> <span class="fn">getCurrent_A</span>() {
-        <span class="kw">return</span> m_rollerMotor.<span class="fn">getOutputCurrent</span>();
+        <span class="kw">return</span> m_rollerMotor.<span class="fn">getStatorCurrent</span>().<span class="fn">getValueAsDouble</span>();
     }
 
     <span class="kw">@Override</span>
@@ -65,7 +68,7 @@ next_title: "O4 — Motors & Sensors"
 }</pre>
 </div>
 
-<div class="callout tip"><p><strong>burnFlash():</strong> SparkMax stores configuration in flash memory. Always call <code>burnFlash()</code> after setting up a SparkMax in the constructor so your settings survive a power cycle. Don't call it in loops — flash has a limited write lifespan.</p></div>
+<div class="callout tip"><p><strong>getConfigurator().apply():</strong> Phoenix 6 uses a configuration object pattern — build a <code>TalonFXConfiguration</code>, set all your options, then call <code>getConfigurator().apply(config)</code> once in the constructor. no burnFlash() needed.</p></div>
 
 <h3 class="sub">Superstructure Pattern</h3>
 <p>In Rebuilt, there's a <code>Superstructure</code> class that coordinates multiple subsystems. It's not a WPILib thing — it's a design pattern the team uses. Instead of commands reaching into multiple subsystems, the Superstructure has state-machine methods like <code>intake()</code>, <code>score()</code>, <code>stow()</code> that internally orchestrate the Intake, Indexer, and Shooter together.</p>
@@ -338,8 +341,8 @@ m_drive.<span class="fn">setDefaultCommand</span>(
 <script>
 // ── TOPIC 1: Subsystems ───────────────────────────────────────
 const quiz_o3_t1 = new Quiz('quiz-o3-t1', [
-  { question: "Where should motor hardware objects (like CANSparkMax) be declared?", options: ["In RobotContainer","As a static in Constants.java","As a private member variable inside the subsystem class","In a separate Hardware.java file"], correct: 2, explanation: "Hardware belongs inside the subsystem as a private member. Nothing outside should touch it directly — only through the subsystem's public methods." },
-  { question: "Why do we call burnFlash() on a SparkMax in the constructor?", options: ["It improves motor speed","It saves config to flash so it survives power cycles","It's required to start CAN communication","It resets the encoder to zero"], correct: 1, explanation: "SparkMax stores configuration in flash memory. burnFlash() writes your settings (idle mode, current limits, etc.) so they persist through power cycles." },
+  { question: "Where should motor hardware objects (like TalonFX) be declared?", options: ["In RobotContainer","As a static in Constants.java","As a private member variable inside the subsystem class","In a separate Hardware.java file"], correct: 2, explanation: "Hardware belongs inside the subsystem as a private member. Nothing outside should touch it directly — only through the subsystem's public methods." },
+  { question: "Why do we call <code>getConfigurator().apply(config)</code> in the TalonFX constructor?", options: ["Required to start CAN communication","Writes all motor settings (neutral mode, current limits, inversion) to the controller","It speeds up the motor","It resets the encoder to zero"], correct: 1, explanation: "Phoenix 6 uses a configuration object pattern. You build a TalonFXConfiguration, set all your options, then apply it once. Settings take effect immediately." },
   { question: "On WRT, what suffix do command factory methods use?", options: ["Command","Action","Cmd()","Run()"], correct: 2, explanation: "WRT uses the Cmd() suffix — <code>intakeCmd()</code>, <code>shootCmd()</code>, <code>spinUpCmd()</code>. This keeps commands co-located with the subsystem that owns the hardware." }
 ], 'offseason-o3');
 

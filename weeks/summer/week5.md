@@ -22,172 +22,266 @@ next_title: "Week 6 — Inheritance & Polymorphism"
 <div class="callout info"><p><strong>Why this matters:</strong> every subsystem on 2974's robot is a class. <code>Drivetrain.java</code>, <code>Shooter.java</code>, <code>Coral.java</code>, <code>Finger.java</code> — all classes. understanding this week means you can read and write real robot code. OOP is confusing at first ngl but once it clicks it clicks fr.</p></div>
 
 <h2 class="sh" id="topic-1">Classes vs Objects</h2>
-<p>here's the most important concept in this entire course: a <strong>class</strong> is a blueprint. an <strong>object</strong> is one specific thing you built from that blueprint. you write the class once. you can create as many objects from it as you want, each completely independent.</p>
 
-<h3 class="sub">Analogy 1 — Cookie Cutter</h3>
-<p>think of a class like a cookie cutter. the cutter defines the shape — it's just a template. each cookie you actually cut out is an object. you can make 100 cookies from one cutter and each cookie is separate. if you eat one cookie, the others are fine. if you frost one cookie, the others stay plain.</p>
+<p>here's the single most important concept in this entire course: a <strong>class</strong> is a blueprint. an <strong>object</strong> is one specific thing you built from that blueprint. you write the class once. you can create as many objects from it as you want, and each one is completely independent from the others.</p>
 
-<h3 class="sub">Analogy 2 — House Blueprint</h3>
-<p>or think of a class like a blueprint for a house. the blueprint says: 2 bedrooms, 1 bathroom, a kitchen. the actual house you build from it is an object. you can build 10 identical houses from one blueprint — each house is separate. what happens inside one house doesn't affect the others.</p>
+<h3 class="sub">what even IS the class/object distinction?</h3>
 
-<h3 class="sub">FRC Connection</h3>
-<p>on team 2974, <code>DriveSubsystem.java</code> is a class — a blueprint. when the robot starts, it builds ONE object from it: <code>new DriveSubsystem()</code>. that one object represents YOUR robot's drivetrain. same deal for <code>Shooter</code>, <code>Intake</code>, everything. every subsystem file you'll ever write is a class. this is why week 5 is so important.</p>
+<p>ok let's start with the cookie cutter analogy because it's genuinely the best one. a cookie cutter is just a piece of metal bent into a shape — a star, a gingerbread man, whatever. the cutter itself doesn't taste like anything. it doesn't have sprinkles. it just defines the shape. every cookie you actually cut out IS a cookie — it exists in the real world and it's its own separate thing. you can frost one cookie and leave the others plain. you can eat one and the rest are fine. changing one cookie does nothing to any other cookie.</p>
 
-<h3 class="sub">Anatomy of a Class — Every Part Labeled</h3>
-<p>let's look at a full class with every piece called out:</p>
+<p>the cookie cutter = the <strong>class</strong>. each individual cookie = an <strong>object</strong> (also called an instance). the class defines the template — what shape the thing has, what data it holds, what it can do. each object you create from that class is its own independent living thing with its own copy of all the data.</p>
+
+<p>second analogy just to make it stick: imagine a blueprint for a house. the blueprint lives in an architect's office. it says "2 bedrooms, 1 bathroom, open kitchen, attached garage." the blueprint itself isn't a house — you can't sleep in it. but from that ONE blueprint, a construction company can build 50 identical houses. each house is separate. what happens in one house doesn't affect any other house. if the family in house #7 paints their walls green, house #12 stays white. blueprint = class. each built house = an object.</p>
+
+<h3 class="sub">the FRC connection — why this is the most important week</h3>
+
+<p>on team 2974, every single mechanism on the robot is modeled as a class. <code>DriveSubsystem.java</code> is a class — it's the blueprint. when the robot boots up, it builds ONE object from that blueprint: <code>new DriveSubsystem()</code>. that one object represents your actual robot's drivetrain. same exact deal for <code>Shooter.java</code>, <code>Intake.java</code>, <code>Climber.java</code> — every subsystem file you'll ever write is a class, and each file gets instantiated into exactly one object that lives for the entire match.</p>
+
+<p>this is the moment in this course where things go from "learning Java syntax" to "actually understanding how robot code is structured." classes and objects aren't just an academic concept — they ARE the architecture of every WPILib-based robot program ever written.</p>
+
+<div class="callout tip"><p><strong>WRT connection:</strong> look at the actual Rebuilt repo. every file in the <code>subsystems/</code> folder is a class. <code>Robot.java</code> creates ONE instance of each subsystem using <code>new</code>. those instances get passed around to commands so everything has access to the actual hardware objects. the class is just the design — <code>new</code> is what builds the real thing.</p></div>
+
+<h3 class="sub">anatomy of a class — every part labeled</h3>
+
+<p>let's look at a complete class with every single element called out. don't just skim past the comments in this one — every line has a specific reason for being there.</p>
 
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java — class definition, every element annotated</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="cmt">// "public class Motor" — this is the CLASS DECLARATION
-// "public"  = anyone can use this class
-// "class"   = this is a class (not an interface, not an enum)
-// "Motor"   = the name of the class (always PascalCase)</span>
+// "public"  = anyone anywhere in the project can use this class
+// "class"   = this keyword tells Java this is a class definition (not an interface, not an enum)
+// "Motor"   = the name of the class (always PascalCase — capitalize first letter of every word)</span>
 <span class="kw">public class</span> <span class="cls">Motor</span> {
 
-    <span class="cmt">// FIELDS — the data each Motor object stores
-    // every Motor gets its OWN copy of these
-    // "private" = only code inside Motor can touch these directly</span>
-    <span class="kw">private</span> <span class="type">int</span>     m_id;
-    <span class="kw">private</span> <span class="type">double</span>  m_speed;
-    <span class="kw">private</span> <span class="type">boolean</span> m_isInverted;
+    <span class="cmt">// FIELDS (instance variables) — the data each Motor object stores
+    // declared inside the class but outside any method
+    // every Motor object you create gets its OWN copy of these three values
+    // "private" = only code written inside Motor.java can access these directly</span>
+    <span class="kw">private</span> <span class="type">int</span>     m_id;          <span class="cmt">// which motor port this one is wired to</span>
+    <span class="kw">private</span> <span class="type">double</span>  m_speed;       <span class="cmt">// current speed (-1.0 to 1.0)</span>
+    <span class="kw">private</span> <span class="type">boolean</span> m_isInverted;  <span class="cmt">// whether positive speed means backward</span>
 
     <span class="cmt">// CONSTRUCTOR — runs automatically when you write "new Motor(...)"
-    // same name as the class (Motor), no return type (not even void)
-    // this is where you set the starting state of the object</span>
+    // three rules: same name as the class (Motor), no return type (NOT void), set initial state</span>
     <span class="kw">public</span> <span class="fn">Motor</span>(<span class="type">int</span> id, <span class="type">boolean</span> isInverted) {
-        m_id         = id;
-        m_isInverted = isInverted;
-        m_speed      = <span class="num">0.0</span>; <span class="cmt">// starts at rest</span>
+        m_id         = id;           <span class="cmt">// save the port number</span>
+        m_isInverted = isInverted;   <span class="cmt">// save whether it needs to be flipped</span>
+        m_speed      = <span class="num">0.0</span>;         <span class="cmt">// always starts at rest — never spinning on creation</span>
     }
 
-    <span class="cmt">// METHODS — actions the Motor can do or info it can give you</span>
+    <span class="cmt">// METHODS — what this Motor can do, and what info it can give you
+    // instance methods belong to a specific object and can access its fields</span>
     <span class="kw">public void</span> <span class="fn">setSpeed</span>(<span class="type">double</span> speed) {
+        <span class="cmt">// apply inversion: if this motor is inverted, negate the speed
+        // this is why the left and right drivetrain motors spin correctly
+        // even though they're physically facing opposite directions</span>
         m_speed = m_isInverted ? -speed : speed;
     }
 
-    <span class="kw">public double</span> <span class="fn">getSpeed</span>() {
-        <span class="kw">return</span> m_speed;
+    <span class="kw">public</span> <span class="type">double</span> <span class="fn">getSpeed</span>() {
+        <span class="kw">return</span> m_speed;  <span class="cmt">// give back the current speed so other code can read it</span>
     }
 }</pre>
 </div>
 
-<h3 class="sub">Creating Objects and Using Them</h3>
-<p>once you have a class, you create objects with the <code>new</code> keyword. each object is completely independent — changing one does NOT change the other.</p>
+<h3 class="sub">creating objects and proving independence</h3>
+
+<p>once you have a class, you create objects with the <code>new</code> keyword. here's the critical thing to prove to yourself: once you have two objects, they are completely independent. changing one does NOT change the other. at all. ever.</p>
 
 <div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — creating two Motor objects</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
-<pre><span class="cmt">// "new Motor(1, false)" — creates a brand new Motor object
-// Java allocates memory for it, runs the constructor, gives you back a reference
-// leftMotor and rightMotor are TWO SEPARATE objects</span>
-<span class="cls">Motor</span> leftMotor  = <span class="kw">new</span> <span class="fn">Motor</span>(<span class="num">1</span>, <span class="kw">false</span>);
-<span class="cls">Motor</span> rightMotor = <span class="kw">new</span> <span class="fn">Motor</span>(<span class="num">2</span>, <span class="kw">true</span>); <span class="cmt">// this one inverts speed</span>
+<div class="cb-header"><span class="cb-lang">java — two independent Motor objects</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// "new Motor(1, false)" — creates a brand new Motor object in memory
+// Java allocates space for it, runs the constructor, returns a reference to it
+// leftMotor and rightMotor are TWO COMPLETELY SEPARATE objects
+// they happen to be the same "type" (Motor) but they are different things</span>
+<span class="cls">Motor</span> leftMotor  = <span class="kw">new</span> <span class="fn">Motor</span>(<span class="num">1</span>, <span class="num">false</span>);  <span class="cmt">// port 1, not inverted</span>
+<span class="cls">Motor</span> rightMotor = <span class="kw">new</span> <span class="fn">Motor</span>(<span class="num">2</span>, <span class="num">true</span>);   <span class="cmt">// port 2, INVERTED (right side of drive)</span>
 
-<span class="cmt">// dot notation — call methods ON a specific object
-// leftMotor.setSpeed(0.5) means "call setSpeed on leftMotor"</span>
+<span class="cmt">// dot notation: call methods ON a specific object
+// leftMotor.setSpeed(0.5) means "run setSpeed on the leftMotor object specifically"</span>
 leftMotor.<span class="fn">setSpeed</span>(<span class="num">0.5</span>);
 rightMotor.<span class="fn">setSpeed</span>(<span class="num">0.5</span>);
 
-System.out.<span class="fn">println</span>(leftMotor.<span class="fn">getSpeed</span>());  <span class="cmt">//  0.5 — not inverted</span>
-System.out.<span class="fn">println</span>(rightMotor.<span class="fn">getSpeed</span>()); <span class="cmt">// -0.5 — inverted!!</span>
+<span class="cmt">// rightMotor is INVERTED, so 0.5 becomes -0.5 — they spin in opposite directions
+// this is exactly how a real tank drive works on an FRC robot!!</span>
+System.out.<span class="fn">println</span>(leftMotor.<span class="fn">getSpeed</span>());  <span class="cmt">//  0.5</span>
+System.out.<span class="fn">println</span>(rightMotor.<span class="fn">getSpeed</span>()); <span class="cmt">// -0.5</span>
 
-<span class="cmt">// changing leftMotor doesn't affect rightMotor at all
-// they are independent objects — like two separate houses</span>
+<span class="cmt">// NOW: prove independence by stopping leftMotor only</span>
 leftMotor.<span class="fn">setSpeed</span>(<span class="num">0.0</span>);
-System.out.<span class="fn">println</span>(rightMotor.<span class="fn">getSpeed</span>()); <span class="cmt">// still -0.5, unchanged</span></pre>
+
+<span class="cmt">// leftMotor is stopped. rightMotor is COMPLETELY UNAFFECTED.
+// they are separate objects with separate copies of m_speed</span>
+System.out.<span class="fn">println</span>(leftMotor.<span class="fn">getSpeed</span>());  <span class="cmt">// 0.0 — stopped</span>
+System.out.<span class="fn">println</span>(rightMotor.<span class="fn">getSpeed</span>()); <span class="cmt">// -0.5 — still going!!</span></pre>
 </div>
 
-<h3 class="sub">What Does <code>new</code> Actually Do?</h3>
-<p>when you write <code>new Motor(1, false)</code>, three things happen in order:</p>
+<h3 class="sub">what does <code>new</code> actually do?</h3>
+
+<p>when you write <code>new Motor(1, false)</code>, three things happen in exact order and understanding all three will save you from so much confusion later:</p>
+
 <ol>
-  <li>Java allocates memory (a chunk of RAM) big enough to hold all of Motor's fields</li>
-  <li>Java runs the constructor — your code inside <code>Motor(int id, boolean isInverted)</code> runs, setting the initial values</li>
-  <li>Java gives you back a <strong>reference</strong> — an address in memory pointing to where that object lives</li>
+  <li><strong>allocate memory</strong> — Java finds a chunk of RAM big enough to hold all of Motor's fields (m_id, m_speed, m_isInverted) and reserves it for this object</li>
+  <li><strong>run the constructor</strong> — your code inside <code>Motor(int id, boolean isInverted)</code> executes, setting the initial values for that chunk of memory</li>
+  <li><strong>return a reference</strong> — Java gives you back an address (a reference) pointing to where in memory that object now lives. the variable <code>leftMotor</code> holds this address, not the object itself</li>
 </ol>
 
-<div class="callout tip"><p><strong>reference types:</strong> a variable like <code>Motor m</code> doesn't HOLD a Motor inside it — it holds an ADDRESS to where in memory the Motor lives. that's why these are called "reference types." if you're wondering why this matters, it'll click hard once you see null pointer exceptions ngl.</p></div>
+<div class="callout tip"><p><strong>reference types:</strong> a variable like <code>Motor m</code> doesn't HOLD a Motor object inside it — it holds an ADDRESS pointing to where in memory the Motor lives. that's why Motor, String, and all class types are called "reference types." primitives (int, double, boolean) store their actual value. objects store an address. this distinction will matter a lot when you hit null pointer exceptions ngl.</p></div>
+
+<h3 class="sub">the forgetting-new gotcha (this WILL bite you)</h3>
+
+<p>here's the most common mistake when you're first learning objects. you declare a variable of a class type, you plan to use it, but you forget the <code>new</code> keyword. the variable gets created... but it holds <code>null</code> — which means "no object, nothing, empty." then the moment you try to call a method on it, Java blows up with a <code>NullPointerException</code>. it's not a compile error so you won't catch it until the code actually runs.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — forgetting new: the NullPointerException setup</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// BAD — declared the variable but never created the object
+// leftMotor is null right now — it doesn't point to anything</span>
+<span class="cls">Motor</span> leftMotor;
+<span class="cmt">// or even worse — explicitly assigned null:</span>
+<span class="cls">Motor</span> leftMotor = <span class="num">null</span>;
+
+<span class="cmt">// now you try to use it...</span>
+leftMotor.<span class="fn">setSpeed</span>(<span class="num">0.5</span>); <span class="cmt">// CRASH: NullPointerException at runtime!!</span>
+                           <span class="cmt">// "you can't call a method on nothing"</span>
+
+<span class="cmt">// ─────────────────────────────────────────</span>
+<span class="cmt">// GOOD — actually create the object with new</span>
+<span class="cls">Motor</span> leftMotor = <span class="kw">new</span> <span class="fn">Motor</span>(<span class="num">1</span>, <span class="num">false</span>); <span class="cmt">// now it points to a real Motor object</span>
+leftMotor.<span class="fn">setSpeed</span>(<span class="num">0.5</span>);              <span class="cmt">// works perfectly</span></pre>
+</div>
 
 <div class="concept-grid">
-  <div class="concept-card"><div class="cc-label">Class</div><div class="cc-title">The Blueprint</div><div class="cc-desc">Written once. Defines what data each object stores and what actions it can do. <code>Motor.java</code> is a class.</div></div>
-  <div class="concept-card"><div class="cc-label">Object</div><div class="cc-title">The Instance</div><div class="cc-desc">Built from the class at runtime with <code>new</code>. Each object has its OWN independent copy of the fields.</div></div>
-  <div class="concept-card"><div class="cc-label">new</div><div class="cc-title">Allocate + Construct</div><div class="cc-desc">Allocates memory, runs the constructor, returns a reference to the new object. You need it to create any object.</div></div>
-  <div class="concept-card"><div class="cc-label">Dot Notation</div><div class="cc-title">objectName.method()</div><div class="cc-desc">How you call methods on a specific object. <code>leftMotor.setSpeed(0.5)</code> — calls setSpeed on leftMotor specifically.</div></div>
+  <div class="concept-card"><div class="cc-label">Class</div><div class="cc-title">The Blueprint</div><div class="cc-desc">Written once in a .java file. Defines what fields (data) and methods (actions) each object will have. <code>Motor.java</code> is a class.</div></div>
+  <div class="concept-card"><div class="cc-label">Object</div><div class="cc-title">The Instance</div><div class="cc-desc">Built from the class at runtime using <code>new</code>. Each object has its OWN independent copy of every field. Also called an "instance."</div></div>
+  <div class="concept-card"><div class="cc-label">new</div><div class="cc-title">Allocate + Construct</div><div class="cc-desc">Allocates memory for the object, runs the constructor to initialize it, returns a reference. You MUST use <code>new</code> to create any object.</div></div>
+  <div class="concept-card"><div class="cc-label">Dot Notation</div><div class="cc-title">objectName.method()</div><div class="cc-desc">How you call a method on a specific object. <code>leftMotor.setSpeed(0.5)</code> calls setSpeed specifically on leftMotor — not rightMotor.</div></div>
 </div>
+
+<h3 class="sub">Topic 1 — Coding Prompt</h3>
+<div class="challenge">
+  <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Two-Motor Drivetrain</div><div class="ch-sub">Create and work with multiple independent objects</div></div></div>
+  <div class="ch-body">
+    <p class="ch-prompt">Using the Motor class from above (pretend it's already defined), create a left motor (id=1, not inverted) and a right motor (id=2, inverted). Set both to 0.6. Print both speeds. Then stop ONLY the left motor and print both speeds again. Prove that stopping one didn't affect the other. Add comments explaining what each print statement will show.</p>
+    <textarea class="code-input" placeholder="// Write your two-motor demo here..."></textarea>
+    <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w5-t1')">Show Solution</button></div>
+    <div id="sol-w5-t1" style="display:none;margin-top:1rem">
+      <div class="code-block"><div class="cb-header"><span class="cb-lang">solution</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// create two separate Motor objects from the same class</span>
+<span class="cls">Motor</span> leftMotor  = <span class="kw">new</span> <span class="fn">Motor</span>(<span class="num">1</span>, <span class="num">false</span>); <span class="cmt">// id=1, not inverted</span>
+<span class="cls">Motor</span> rightMotor = <span class="kw">new</span> <span class="fn">Motor</span>(<span class="num">2</span>, <span class="num">true</span>);  <span class="cmt">// id=2, inverted</span>
+
+<span class="cmt">// set both to 0.6 — rightMotor will store -0.6 because it's inverted</span>
+leftMotor.<span class="fn">setSpeed</span>(<span class="num">0.6</span>);
+rightMotor.<span class="fn">setSpeed</span>(<span class="num">0.6</span>);
+
+System.out.<span class="fn">println</span>(leftMotor.<span class="fn">getSpeed</span>());  <span class="cmt">// prints: 0.6</span>
+System.out.<span class="fn">println</span>(rightMotor.<span class="fn">getSpeed</span>()); <span class="cmt">// prints: -0.6 (inverted)</span>
+
+<span class="cmt">// stop ONLY the left motor — rightMotor is completely unaffected</span>
+leftMotor.<span class="fn">setSpeed</span>(<span class="num">0.0</span>);
+
+System.out.<span class="fn">println</span>(leftMotor.<span class="fn">getSpeed</span>());  <span class="cmt">// prints: 0.0 — stopped</span>
+System.out.<span class="fn">println</span>(rightMotor.<span class="fn">getSpeed</span>()); <span class="cmt">// prints: -0.6 — still running, unchanged!!</span></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 class="sub">Topic 1 — Quick Check</h3>
+<div id="quiz-w5-t1"></div>
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
 <h2 class="sh" id="topic-2">Constructors &amp; Fields</h2>
-<p>fields are the <strong>state</strong> of an object — the things it knows about itself. the constructor is the thing that sets up that state when the object is first created.</p>
 
-<h3 class="sub">Fields (Instance Variables)</h3>
-<p>every object gets its OWN copy of the fields. they're declared inside the class but outside any method. on WRT we name them with an <code>m_</code> prefix (m for "member").</p>
+<p>fields are the <strong>state</strong> of an object — the things it knows about itself. the constructor is the code that runs when the object first comes to life. together they define what an object IS and what it starts as.</p>
+
+<h3 class="sub">what even ARE fields?</h3>
+
+<p>think of fields like a hospital patient wristband. the moment you check into a hospital, a nurse puts a bracelet on your wrist with your name, date of birth, blood type, and patient ID. that's YOUR data — not some generic person's data. every patient has their own bracelet with their own values. your wristband says your name, the next patient's wristband says their name. changing one bracelet doesn't touch any other bracelet in the whole hospital.</p>
+
+<p>fields work exactly the same way. when you create a Motor object, Java copies the field template from the class and gives THAT SPECIFIC OBJECT its own little chunk of memory to hold its own values for <code>m_id</code>, <code>m_speed</code>, and <code>m_isInverted</code>. leftMotor's <code>m_speed</code> is physically stored in a different place in memory than rightMotor's <code>m_speed</code>. they just happen to have the same names because they're the same type.</p>
+
+<p>fields are declared at class level — inside the class body, but outside any method. they exist for the entire life of the object. every time a method runs, it can see and modify these fields.</p>
 
 <div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — fields with WRT naming</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<div class="cb-header"><span class="cb-lang">java — fields with WRT naming conventions</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="kw">public class</span> <span class="cls">Motor</span> {
 
-    <span class="cmt">// fields — declared here, each object gets its OWN copy
-    // private = only this class can access them directly
-    // m_ prefix = WRT naming convention for member/instance vars</span>
-    <span class="kw">private</span> <span class="type">int</span>     m_motorID;
-    <span class="kw">private</span> <span class="type">double</span>  m_speed;
-    <span class="kw">private</span> <span class="type">boolean</span> m_isRunning;
+    <span class="cmt">// FIELDS — declared at class level, outside any method
+    // "private" = only Motor's own methods can touch these
+    // "m_" prefix = WRT convention: m stands for "member variable"
+    //   this makes fields visually distinct from local variables at a glance
+    //   when you see m_speed in a method, you immediately know: that's a field</span>
+    <span class="kw">private</span> <span class="type">int</span>     m_motorID;    <span class="cmt">// which CAN bus port this motor is on</span>
+    <span class="kw">private</span> <span class="type">double</span>  m_speed;      <span class="cmt">// current commanded speed (-1.0 to 1.0)</span>
+    <span class="kw">private</span> <span class="type">boolean</span> m_isRunning;  <span class="cmt">// whether the motor is actively spinning</span>
 
-    <span class="cmt">// ... constructor and methods go here</span>
+    <span class="cmt">// ... constructor and methods go below</span>
 }</pre>
 </div>
 
-<h3 class="sub">Constructors</h3>
-<p>a constructor runs automatically when you write <code>new ClassName(...)</code>. think of it as the object's birth certificate — it sets everything up when the object first comes into existence. two rules you MUST know:</p>
+<h3 class="sub">constructors — the object's birth certificate</h3>
+
+<p>a constructor runs automatically, exactly once, the moment you write <code>new ClassName(...)</code>. it's your one guaranteed chance to set up the object in a valid state before anything else can touch it. think of it as the birth certificate moment — the instant the object is born, it gets its starting values stamped in.</p>
+
+<p>two absolute rules you need to burn into memory:</p>
 <ul>
-  <li>the constructor name must be <strong>exactly the same</strong> as the class name</li>
-  <li>no return type — not <code>void</code>, not <code>int</code>, nothing. just the name and parentheses</li>
+  <li>the constructor name must be <strong>exactly the same</strong> as the class name — capital letters and all</li>
+  <li>constructors have <strong>no return type</strong> — not <code>void</code>, not <code>int</code>, not <code>double</code>. nothing. just the name and parentheses. if you add <code>void</code>, Java treats it as a regular method, not a constructor, and it will never run on <code>new</code></li>
 </ul>
 
 <div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — constructor examples</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<div class="cb-header"><span class="cb-lang">java — valid vs invalid constructors</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="kw">public class</span> <span class="cls">Motor</span> {
 
     <span class="kw">private</span> <span class="type">int</span>     m_motorID;
     <span class="kw">private</span> <span class="type">double</span>  m_speed;
     <span class="kw">private</span> <span class="type">boolean</span> m_isRunning;
 
-    <span class="cmt">// VALID constructor — same name as class, no return type
-    // takes an int parameter called motorID</span>
+    <span class="cmt">// VALID CONSTRUCTOR — same name as class, no return type
+    // Java calls this automatically when you write new Motor(5)</span>
     <span class="kw">public</span> <span class="fn">Motor</span>(<span class="type">int</span> motorID) {
-        m_motorID  = motorID;
-        m_speed    = <span class="num">0.0</span>;
-        m_isRunning = <span class="kw">false</span>;
+        m_motorID  = motorID;  <span class="cmt">// set initial state here</span>
+        m_speed    = <span class="num">0.0</span>;     <span class="cmt">// always starts stopped</span>
+        m_isRunning = <span class="num">false</span>;  <span class="cmt">// always starts not running</span>
     }
 
-    <span class="cmt">// INVALID — has "void" before the name, so Java treats this
-    // as a regular method named "Motor", not a constructor!!</span>
-    <span class="cmt">// public void Motor(int motorID) { ... } // do NOT do this</span>
+    <span class="cmt">// INVALID — has "void" before the name
+    // Java does NOT treat this as a constructor!! it's just a regular method
+    // calling new Motor(5) would NOT call this — your fields would stay at defaults</span>
+    <span class="cmt">// public void Motor(int motorID) { ... }  &lt;-- do NOT do this</span>
+
+    <span class="cmt">// INVALID — wrong capitalization (Java is case-sensitive)
+    // "motor" != "Motor" — this is also just a regular method</span>
+    <span class="cmt">// public motor(int motorID) { ... }  &lt;-- also wrong</span>
 }</pre>
 </div>
 
-<h3 class="sub">The <code>this</code> Keyword — Really Important</h3>
-<p>inside any method (or constructor), <code>this</code> refers to the specific object the method is running on. if you have <code>Motor leftMotor</code> and <code>Motor rightMotor</code> and you call <code>leftMotor.setSpeed(0.5)</code>, then inside <code>setSpeed</code>, <code>this</code> refers to <code>leftMotor</code>. if you call <code>rightMotor.setSpeed(0.5)</code>, <code>this</code> refers to <code>rightMotor</code>.</p>
+<h3 class="sub">the <code>this</code> keyword — "the current object"</h3>
 
-<p>the main reason you'll use <code>this</code> in constructors is to solve a naming conflict. what happens when a parameter has the same name as a field?</p>
+<p>inside any instance method or constructor, <code>this</code> is a reference to the object the code is currently running on. if you have <code>Motor leftMotor</code> and <code>Motor rightMotor</code> and you call <code>leftMotor.setSpeed(0.5)</code>, then inside <code>setSpeed</code>, <code>this</code> refers to <code>leftMotor</code>. call it on <code>rightMotor</code> instead, and <code>this</code> becomes <code>rightMotor</code>. <code>this</code> is always "the object right now."</p>
+
+<p>the most common place you'll write <code>this</code> is in constructors when a parameter has the same name as a field. without <code>this</code>, Java can't tell which one you mean:</p>
 
 <div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — the naming conflict problem</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<div class="cb-header"><span class="cb-lang">java — the naming conflict and how this solves it</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="kw">public class</span> <span class="cls">Motor</span> {
 
     <span class="kw">private</span> <span class="type">int</span> m_motorID;
 
-    <span class="cmt">// what if the parameter has the same name as the field?
-    // Java has to pick one -- it picks the LOCAL one (the parameter)
-    // so "motorID = motorID" just assigns the parameter to itself,
-    // and the field m_motorID stays 0 forever. silent bug!!</span>
+    <span class="cmt">// what if the parameter name exactly matches the field name?
+    // Java has to pick ONE — it picks the local one (the parameter)
+    // so "motorID = motorID" assigns the parameter to itself, doing nothing
+    // m_motorID stays 0. the bug is SILENT — no error, wrong behavior forever</span>
     <span class="kw">public</span> <span class="fn">Motor</span>(<span class="type">int</span> motorID) {
-        motorID = motorID; <span class="cmt">// WRONG — assigns param to itself!!</span>
+        motorID = motorID; <span class="cmt">// BUG: assigns parameter to itself, field never set!!</span>
     }
 }</pre>
 </div>
 
 <div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — the fix: use this to specify the field</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<div class="cb-header"><span class="cb-lang">java — fix: use this.fieldName to be explicit</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="kw">public class</span> <span class="cls">Motor</span> {
 
     <span class="kw">private</span> <span class="type">int</span>     m_motorID;
@@ -195,109 +289,294 @@ System.out.<span class="fn">println</span>(rightMotor.<span class="fn">getSpeed<
     <span class="kw">private</span> <span class="type">boolean</span> m_isInverted;
 
     <span class="kw">public</span> <span class="fn">Motor</span>(<span class="type">int</span> motorID, <span class="type">boolean</span> isInverted) {
-        <span class="cmt">// "this.m_motorID" = the field on THIS specific object
-        // "motorID"        = the parameter passed into the constructor
-        // using m_ prefix actually sidesteps this ambiguity most of the time,
-        // but it's still good to know why "this" exists</span>
-        <span class="kw">this</span>.m_motorID   = motorID;
+        <span class="cmt">// "this.m_motorID" = the field on THIS specific object (what we want to set)
+        // "motorID"        = the parameter that was passed in (the new value)
+        // left side is the destination, right side is the source — just like any assignment</span>
+        <span class="kw">this</span>.m_motorID   = motorID;    <span class="cmt">// field = parameter: correct!!</span>
         <span class="kw">this</span>.m_isInverted = isInverted;
-        <span class="kw">this</span>.m_speed      = <span class="num">0.0</span>;
+        <span class="kw">this</span>.m_speed      = <span class="num">0.0</span>;      <span class="cmt">// no conflict here but using this for clarity</span>
     }
 }</pre>
 </div>
 
-<div class="callout info"><p><strong>WRT tip:</strong> using the <code>m_</code> prefix on fields mostly avoids this problem — your field is <code>m_motorID</code> and your parameter is <code>motorID</code>, so they never clash. but you'll see <code>this</code> used constantly in Java code out in the wild, so make sure you know what it means.</p></div>
+<div class="callout info"><p><strong>WRT tip:</strong> using the <code>m_</code> prefix on fields mostly avoids the naming conflict problem entirely — your field is <code>m_motorID</code> and your parameter is <code>motorID</code>, so they never clash. but you will see <code>this</code> in tons of Java code in the wild (especially without the m_ convention), so make sure you know exactly what it means when you encounter it.</p></div>
+
+<h3 class="sub">the motorID = motorID gotcha (this WILL bite you)</h3>
+
+<p>let me tell you about a bug that has ruined many first Java projects. you write a class, you write a constructor, you test it — everything seems to work. but your object's fields are always 0, always false, always empty. you're setting them in the constructor, you swear you are. then you stare at this for 30 minutes and finally see it: <code>motorID = motorID</code>. assigning a parameter to itself. the field never got set. never a warning. never an error. just silent wrong behavior.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — the self-assignment silent bug in full context</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// BUGGY VERSION — field is never actually set</span>
+<span class="kw">public class</span> <span class="cls">Motor</span> {
+    <span class="kw">private</span> <span class="type">int</span> motorID;  <span class="cmt">// no m_ prefix (this sets up the name clash)</span>
+
+    <span class="kw">public</span> <span class="fn">Motor</span>(<span class="type">int</span> motorID) {
+        motorID = motorID;  <span class="cmt">// assigns the parameter to itself. field stays 0.</span>
+    }
+
+    <span class="kw">public int</span> <span class="fn">getID</span>() { <span class="kw">return</span> motorID; }
+}
+
+<span class="cls">Motor</span> m = <span class="kw">new</span> <span class="fn">Motor</span>(<span class="num">5</span>);
+System.out.<span class="fn">println</span>(m.<span class="fn">getID</span>()); <span class="cmt">// prints: 0 ... NOT 5. silent bug!!</span>
+
+<span class="cmt">// ─────────────────────────────────────────</span>
+<span class="cmt">// FIXED VERSION — use m_ prefix to prevent the name clash</span>
+<span class="kw">public class</span> <span class="cls">Motor</span> {
+    <span class="kw">private</span> <span class="type">int</span> m_motorID;  <span class="cmt">// m_ prefix = field, different name from parameter</span>
+
+    <span class="kw">public</span> <span class="fn">Motor</span>(<span class="type">int</span> motorID) {
+        m_motorID = motorID;  <span class="cmt">// unambiguous: left is field, right is parameter</span>
+    }
+
+    <span class="kw">public int</span> <span class="fn">getID</span>() { <span class="kw">return</span> m_motorID; }
+}
+
+<span class="cls">Motor</span> m = <span class="kw">new</span> <span class="fn">Motor</span>(<span class="num">5</span>);
+System.out.<span class="fn">println</span>(m.<span class="fn">getID</span>()); <span class="cmt">// prints: 5 — correct!!</span></pre>
+</div>
+
+<div class="callout warning"><p><strong>common gotcha:</strong> Java does NOT warn you about <code>motorID = motorID</code> unless your IDE has a specific lint rule for it. it's valid Java. it just does nothing useful. the fix: always use <code>m_</code> on instance variables on WRT. that way the field and the parameter can never have the same name.</p></div>
 
 <div class="concept-grid">
-  <div class="concept-card"><div class="cc-label">Fields</div><div class="cc-title">State of an object</div><div class="cc-desc">Declared at class level. Each object gets its own copy. Use <code>m_</code> prefix on WRT. Usually private.</div></div>
-  <div class="concept-card"><div class="cc-label">Constructor</div><div class="cc-title">Object's birth certificate</div><div class="cc-desc">Same name as class. No return type. Runs once when <code>new</code> is called. Sets up initial state.</div></div>
-  <div class="concept-card"><div class="cc-label">this</div><div class="cc-title">Current object</div><div class="cc-desc"><code>this</code> inside a method refers to the specific object the method was called on. Used to resolve naming conflicts.</div></div>
-  <div class="concept-card"><div class="cc-label">m_ prefix</div><div class="cc-title">WRT naming rule</div><div class="cc-desc">All instance variables on 2974 use <code>m_</code>: <code>m_speed</code>, <code>m_isRunning</code>, <code>m_motorID</code>. Keeps fields visually distinct from locals.</div></div>
+  <div class="concept-card"><div class="cc-label">Fields</div><div class="cc-title">State of an object</div><div class="cc-desc">Declared at class level. Each object gets its own independent copy. Use <code>m_</code> prefix on WRT. Usually private.</div></div>
+  <div class="concept-card"><div class="cc-label">Constructor</div><div class="cc-title">Object's birth certificate</div><div class="cc-desc">Same name as class. No return type — ever. Runs once on <code>new</code>. Sets initial state of the object.</div></div>
+  <div class="concept-card"><div class="cc-label">this</div><div class="cc-title">The current object</div><div class="cc-desc"><code>this</code> inside a method is the object the method was called on. Used to clarify field vs parameter when names clash.</div></div>
+  <div class="concept-card"><div class="cc-label">m_ prefix</div><div class="cc-title">WRT naming rule</div><div class="cc-desc">All instance variables on 2974 use <code>m_</code>: <code>m_speed</code>, <code>m_isRunning</code>, <code>m_motorID</code>. Visually distinct from local vars instantly.</div></div>
 </div>
+
+<h3 class="sub">Topic 2 — Coding Prompt</h3>
+<div class="challenge">
+  <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Build a Sensor Class</div><div class="ch-sub">Practice fields, constructors, and the m_ naming convention</div></div></div>
+  <div class="ch-body">
+    <p class="ch-prompt">Write a class called <code>LimitSwitch</code> with: private fields <code>int m_port</code>, <code>boolean m_isPressed</code>, <code>String m_name</code>. A constructor that takes <code>int port</code> and <code>String name</code>, sets m_port and m_name from parameters, and initializes m_isPressed to false. A method <code>void press()</code> that sets m_isPressed to true. A method <code>void release()</code> that sets it to false. A method <code>boolean isPressed()</code> that returns the current state. Then create two switches and show that pressing one doesn't affect the other.</p>
+    <textarea class="code-input" placeholder="public class LimitSwitch { ... }"></textarea>
+    <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w5-t2')">Show Solution</button></div>
+    <div id="sol-w5-t2" style="display:none;margin-top:1rem">
+      <div class="code-block"><div class="cb-header"><span class="cb-lang">solution</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">public class</span> <span class="cls">LimitSwitch</span> {
+    <span class="kw">private</span> <span class="type">int</span>     m_port;
+    <span class="kw">private</span> <span class="type">boolean</span> m_isPressed;
+    <span class="kw">private</span> <span class="cls">String</span>  m_name;
+
+    <span class="cmt">// constructor: same name as class, no return type</span>
+    <span class="kw">public</span> <span class="fn">LimitSwitch</span>(<span class="type">int</span> port, <span class="cls">String</span> name) {
+        m_port      = port;   <span class="cmt">// m_ on field = no name clash with parameter</span>
+        m_name      = name;
+        m_isPressed = <span class="num">false</span>; <span class="cmt">// always starts unpressed</span>
+    }
+
+    <span class="kw">public void</span> <span class="fn">press</span>()   { m_isPressed = <span class="num">true</span>; }
+    <span class="kw">public void</span> <span class="fn">release</span>() { m_isPressed = <span class="num">false</span>; }
+    <span class="kw">public</span> <span class="type">boolean</span> <span class="fn">isPressed</span>() { <span class="kw">return</span> m_isPressed; }
+}
+
+<span class="cmt">// create two SEPARATE switch objects</span>
+<span class="cls">LimitSwitch</span> frontSwitch = <span class="kw">new</span> <span class="fn">LimitSwitch</span>(<span class="num">0</span>, <span class="str">"Front"</span>);
+<span class="cls">LimitSwitch</span> backSwitch  = <span class="kw">new</span> <span class="fn">LimitSwitch</span>(<span class="num">1</span>, <span class="str">"Back"</span>);
+
+frontSwitch.<span class="fn">press</span>();
+System.out.<span class="fn">println</span>(frontSwitch.<span class="fn">isPressed</span>()); <span class="cmt">// true</span>
+System.out.<span class="fn">println</span>(backSwitch.<span class="fn">isPressed</span>());  <span class="cmt">// false — unaffected!!</span></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 class="sub">Topic 2 — Quick Check</h3>
+<div id="quiz-w5-t2"></div>
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
 <h2 class="sh" id="topic-3">Access Modifiers</h2>
-<p>access modifiers control who can see and use a field or method. they're how you protect your data from being messed with by other parts of the code.</p>
 
-<h3 class="sub">The Filing Cabinet Analogy</h3>
-<p>imagine each field is a filing cabinet in your class. <code>private</code> means only YOU (this class) can open that cabinet. <code>public</code> means anyone walking by can open it. <code>protected</code> means you and your family (subclasses — more on that in week 6) can open it.</p>
+<p>access modifiers are keywords that control who can see and use a field or method. they're how you protect your object's data from being incorrectly modified by other parts of the code. this is the "control" part of being in control of your own data.</p>
+
+<h3 class="sub">what even ARE access modifiers?</h3>
+
+<p>imagine a filing cabinet with three different drawers. the bottom drawer is locked with a key only you have — nobody else can open it. the middle drawer is unlocked but in your private office — only your family (people in the same building) can get to it. the top drawer sits in the lobby and literally anyone who walks in can open it.</p>
+
+<p>that's the three access modifiers you'll use. <code>private</code> is the bottom drawer — locked, only this class can open it. <code>protected</code> is the middle drawer — this class and its subclasses (more on that in week 6). <code>public</code> is the top drawer in the lobby — anyone anywhere in the project can touch it directly.</p>
 
 <table>
-<thead><tr><th>Modifier</th><th>Who can access it</th><th>When to use</th></tr></thead>
+<thead><tr><th>Modifier</th><th>Who can access it</th><th>When to use it</th></tr></thead>
 <tbody>
-<tr><td><code>public</code></td><td>Anyone, anywhere</td><td>Methods you want other classes to call</td></tr>
-<tr><td><code>private</code></td><td>Only inside this class</td><td>Instance variables — almost always</td></tr>
-<tr><td><code>protected</code></td><td>This class + subclasses</td><td>When you're designing for inheritance (week 6)</td></tr>
+<tr><td><code>public</code></td><td>Anyone, anywhere in the project</td><td>Methods you want other classes to call (getters, setters, actions)</td></tr>
+<tr><td><code>private</code></td><td>Only inside the class it's declared in</td><td>Instance variables — almost always. Use this as your default.</td></tr>
+<tr><td><code>protected</code></td><td>This class and its subclasses</td><td>When designing for inheritance (week 6 territory)</td></tr>
 </tbody>
 </table>
 
-<h3 class="sub">Why Private Fields?</h3>
-<p>what if someone set your motor's speed to 9999? if <code>m_speed</code> is public, any code anywhere can write <code>motor.m_speed = 9999.0</code> and there's nothing stopping it. if <code>m_speed</code> is private with a setter method, you can check before accepting the value:</p>
+<h3 class="sub">why private fields? the DangerousMotor story</h3>
+
+<p>imagine you're writing a motor wrapper class and you make <code>m_speed</code> public. "it's fine," you think, "I'll just be careful." three weeks later, someone on the team is writing drive code at 11pm during build season and they type <code>driveMotor.m_speed = 9999.0</code> instead of <code>driveMotor.setSpeed(0.99)</code>. compiles fine. deploys fine. robot arm goes full power to 9999 in a direction it shouldn't and now you're explaining to your parents why you need to buy a new motor. this is not a hypothetical. this is why we use private.</p>
 
 <div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — public field (dangerous) vs private + setter (safe)</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
-<pre><span class="cmt">// BAD — public field, anyone can set any value with no checking</span>
+<div class="cb-header"><span class="cb-lang">java — DangerousMotor vs SafeMotor</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// BAD — public field, anyone can bypass your logic and write garbage values</span>
 <span class="kw">public class</span> <span class="cls">DangerousMotor</span> {
-    <span class="kw">public</span> <span class="type">double</span> speed; <span class="cmt">// anyone can do: motor.speed = 9999.0</span>
+    <span class="kw">public</span> <span class="type">double</span> speed; <span class="cmt">// no protection at all!!</span>
 }
 
-<span class="cmt">// GOOD — private field + setter with validation</span>
+<span class="cmt">// anywhere in the project, someone can do this:</span>
+<span class="cls">DangerousMotor</span> m = <span class="kw">new</span> <span class="fn">DangerousMotor</span>();
+m.speed = <span class="num">9999.0</span>; <span class="cmt">// compiles fine. no error. your motor is cooked.</span>
+m.speed = -<span class="num">500.0</span>; <span class="cmt">// also fine. also bad.</span>
+m.speed = Double.NaN; <span class="cmt">// Java lets you. hardware does not appreciate this.</span>
+
+<span class="cmt">// ─────────────────────────────────────────────────────────────</span>
+<span class="cmt">// GOOD — private field with a setter that validates input</span>
 <span class="kw">public class</span> <span class="cls">SafeMotor</span> {
-    <span class="kw">private</span> <span class="type">double</span> m_speed;
+    <span class="kw">private</span> <span class="type">double</span> m_speed; <span class="cmt">// can only be changed through setSpeed()</span>
 
     <span class="kw">public void</span> <span class="fn">setSpeed</span>(<span class="type">double</span> speed) {
-        <span class="cmt">// clamp to safe range before storing — can't set 9999 now</span>
-        <span class="kw">if</span> (speed > <span class="num">1.0</span>)  speed = <span class="num">1.0</span>;
-        <span class="kw">if</span> (speed < <span class="num">-1.0</span>) speed = <span class="num">-1.0</span>;
-        m_speed = speed;
+        <span class="cmt">// Math.max(-1.0, ...) ensures speed is never below -1.0
+        // Math.min(1.0, ...)  ensures speed is never above  1.0
+        // this is called "clamping" — it's in every motor wrapper ever written</span>
+        m_speed = Math.<span class="fn">max</span>(-<span class="num">1.0</span>, Math.<span class="fn">min</span>(<span class="num">1.0</span>, speed));
     }
 
-    <span class="kw">public double</span> <span class="fn">getSpeed</span>() {
-        <span class="kw">return</span> m_speed;
+    <span class="kw">public</span> <span class="type">double</span> <span class="fn">getSpeed</span>() { <span class="kw">return</span> m_speed; }
+}
+
+<span class="cls">SafeMotor</span> m = <span class="kw">new</span> <span class="fn">SafeMotor</span>();
+m.<span class="fn">setSpeed</span>(<span class="num">9999.0</span>); <span class="cmt">// setSpeed clamps it to 1.0. motor is fine.</span>
+m.<span class="fn">setSpeed</span>(-<span class="num">500.0</span>); <span class="cmt">// clamped to -1.0. safe.</span>
+<span class="cmt">// m.m_speed = 9999.0; // COMPILE ERROR: m_speed has private access in SafeMotor</span></pre>
+</div>
+
+<h3 class="sub">encapsulation — the big picture</h3>
+
+<p>the pattern of private fields plus public methods is called <strong>encapsulation</strong>. it's one of the core principles of object-oriented programming. the idea: your object owns its data. other code can interact with it, but only through the doors you provide (the public methods). you control what goes in and what comes out. nobody can reach in and corrupt your state directly.</p>
+
+<p>on WRT, the rule is absolute: all instance variables are private. no exceptions. if another class needs to read the value, you write a getter. if it needs to change the value, you write a setter with validation. this isn't bureaucracy — it's what makes real robot code survive a full season without random crashes caused by someone setting a field to an invalid value on a tired Tuesday night during build season.</p>
+
+<div class="callout danger"><p><strong>WRT rule:</strong> ALL instance variables are private. period. always. no exceptions. if another class needs the value, write a public getter. if it needs to change the value, write a public setter with validation. this is non-negotiable on 2974.</p></div>
+
+<h3 class="sub">public methods — the intended interface</h3>
+
+<p>while fields should be private, most of your methods should be public. methods are HOW other code interacts with your object — they're the public interface. you want to make it easy for commands and other subsystems to call your methods, so keep the methods public. keep the data private.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — typical access pattern for a subsystem</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">public class</span> <span class="cls">Intake</span> {
+
+    <span class="cmt">// fields: PRIVATE — other classes cannot directly touch these</span>
+    <span class="kw">private</span> <span class="type">double</span>  m_speed;
+    <span class="kw">private</span> <span class="type">boolean</span> m_isRunning;
+
+    <span class="kw">public</span> <span class="fn">Intake</span>() {
+        m_speed    = <span class="num">0.0</span>;
+        m_isRunning = <span class="num">false</span>;
     }
+
+    <span class="cmt">// methods: PUBLIC — these are the "doors" other classes use to interact</span>
+    <span class="kw">public void</span> <span class="fn">run</span>(<span class="type">double</span> speed) {
+        m_speed    = Math.<span class="fn">max</span>(<span class="num">0.0</span>, Math.<span class="fn">min</span>(<span class="num">1.0</span>, speed)); <span class="cmt">// intake only goes forward</span>
+        m_isRunning = <span class="num">true</span>;
+    }
+
+    <span class="kw">public void</span> <span class="fn">stop</span>() {
+        m_speed    = <span class="num">0.0</span>;
+        m_isRunning = <span class="num">false</span>;
+    }
+
+    <span class="kw">public</span> <span class="type">boolean</span> <span class="fn">isRunning</span>() { <span class="kw">return</span> m_isRunning; }
+    <span class="kw">public</span> <span class="type">double</span>  <span class="fn">getSpeed</span>()   { <span class="kw">return</span> m_speed; }
 }</pre>
 </div>
 
-<p>this pattern — private fields with public getter/setter methods — is called <strong>encapsulation</strong>. it's one of the core ideas of OOP and it's why real FRC code works reliably.</p>
+<div class="concept-grid">
+  <div class="concept-card"><div class="cc-label">public</div><div class="cc-title">Open to everyone</div><div class="cc-desc">Any class anywhere can call this. Use for methods you want other code to invoke. Rarely use for fields.</div></div>
+  <div class="concept-card"><div class="cc-label">private</div><div class="cc-title">This class only</div><div class="cc-desc">Only code inside this exact class can access it. Always use for instance variables. Prevents uncontrolled changes.</div></div>
+  <div class="concept-card"><div class="cc-label">protected</div><div class="cc-title">Class + subclasses</div><div class="cc-desc">This class and any class that extends it (week 6). Rarely needed at your level but you'll see it in WPILib code.</div></div>
+  <div class="concept-card"><div class="cc-label">Encapsulation</div><div class="cc-title">private data + public methods</div><div class="cc-desc">The core OOP pattern. Private fields, public getters/setters that validate. Protects state from corruption.</div></div>
+</div>
 
-<div class="callout warning"><p><strong>WRT rule:</strong> all instance variables are private. period. no exceptions. if another class needs the value, you write a getter. if another class needs to change it, you write a setter with validation.</p></div>
+<h3 class="sub">Topic 3 — Coding Prompt</h3>
+<div class="challenge">
+  <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Safe Shooter Speed</div><div class="ch-sub">Apply encapsulation to protect a critical field</div></div></div>
+  <div class="ch-body">
+    <p class="ch-prompt">Write a <code>Shooter</code> class with a private double field <code>m_flywheelSpeed</code>. Write a public setter <code>setFlywheelSpeed(double speed)</code> that clamps the value to [0.0, 1.0] (shooters only go forward, 0 to full). Write a getter <code>getFlywheelSpeed()</code>. Write a method <code>isReadyToShoot()</code> that returns true if speed is above 0.8. Test it: try setting speed to 2.5 and confirm the getter returns 1.0, not 2.5.</p>
+    <textarea class="code-input" placeholder="public class Shooter { ... }"></textarea>
+    <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w5-t3')">Show Solution</button></div>
+    <div id="sol-w5-t3" style="display:none;margin-top:1rem">
+      <div class="code-block"><div class="cb-header"><span class="cb-lang">solution</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">public class</span> <span class="cls">Shooter</span> {
+    <span class="kw">private</span> <span class="type">double</span> m_flywheelSpeed; <span class="cmt">// private — nobody sets this directly</span>
+
+    <span class="kw">public</span> <span class="fn">Shooter</span>() {
+        m_flywheelSpeed = <span class="num">0.0</span>;
+    }
+
+    <span class="kw">public void</span> <span class="fn">setFlywheelSpeed</span>(<span class="type">double</span> speed) {
+        <span class="cmt">// clamp to [0.0, 1.0] — shooter never goes backward, never above 100%</span>
+        m_flywheelSpeed = Math.<span class="fn">max</span>(<span class="num">0.0</span>, Math.<span class="fn">min</span>(<span class="num">1.0</span>, speed));
+    }
+
+    <span class="kw">public</span> <span class="type">double</span>  <span class="fn">getFlywheelSpeed</span>()  { <span class="kw">return</span> m_flywheelSpeed; }
+    <span class="kw">public</span> <span class="type">boolean</span> <span class="fn">isReadyToShoot</span>()   { <span class="kw">return</span> m_flywheelSpeed > <span class="num">0.8</span>; }
+}
+
+<span class="cls">Shooter</span> s = <span class="kw">new</span> <span class="fn">Shooter</span>();
+s.<span class="fn">setFlywheelSpeed</span>(<span class="num">2.5</span>);
+System.out.<span class="fn">println</span>(s.<span class="fn">getFlywheelSpeed</span>());  <span class="cmt">// 1.0 — clamped, not 2.5!!</span>
+System.out.<span class="fn">println</span>(s.<span class="fn">isReadyToShoot</span>());    <span class="cmt">// true (1.0 > 0.8)</span></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 class="sub">Topic 3 — Quick Check</h3>
+<div id="quiz-w5-t3"></div>
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
 <h2 class="sh" id="topic-4">Methods &amp; Encapsulation</h2>
-<p>you learned methods in week 4. now they're inside a class, which makes them <strong>instance methods</strong> — methods that belong to a specific object and can access that object's fields directly.</p>
 
-<h3 class="sub">Static vs Instance Methods</h3>
-<p>in week 4, some methods were <code>static</code> — you could call them without creating an object (<code>Math.abs(-5)</code> — no <code>new Math()</code> needed). instance methods are different: you call them ON an object (<code>leftMotor.setSpeed(0.5)</code>), and they can access <code>this</code> and all the fields.</p>
+<p>you learned how to write methods in week 4. now they're inside a class, which makes them <strong>instance methods</strong> — methods that belong to a specific object and can directly access that object's private fields. this is where everything comes together.</p>
+
+<h3 class="sub">what even IS an instance method?</h3>
+
+<p>in week 4, some methods had the <code>static</code> keyword — <code>Math.abs(-5)</code>, <code>Math.max(a, b)</code>. you called those on the CLASS directly, no object needed. <code>static</code> methods are just utility functions that belong to the class as a whole, not to any particular object. they can't access fields because there's no "this object" when you call them.</p>
+
+<p>instance methods are completely different. they belong to a specific object. when you call <code>leftMotor.setSpeed(0.5)</code>, the <code>setSpeed</code> method runs in the context of <code>leftMotor</code>. it can see <code>m_speed</code>, <code>m_id</code>, <code>m_isInverted</code> — all of leftMotor's private fields directly. that's the whole point. the method knows which object it belongs to, so it can read and modify that object's state.</p>
 
 <div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — static vs instance method</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<div class="cb-header"><span class="cb-lang">java — static vs instance method side by side</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="kw">public class</span> <span class="cls">Motor</span> {
 
     <span class="kw">private</span> <span class="type">double</span> m_speed;
 
-    <span class="cmt">// INSTANCE method — belongs to each object
-    // can access this.m_speed, no need to pass fields as parameters
-    // called as: myMotor.setSpeed(0.5)</span>
+    <span class="cmt">// INSTANCE METHOD — belongs to each individual Motor object
+    // can access m_speed, m_id, m_isInverted — anything on "this"
+    // called as: someMotor.setSpeed(0.5)</span>
     <span class="kw">public void</span> <span class="fn">setSpeed</span>(<span class="type">double</span> speed) {
-        m_speed = speed; <span class="cmt">// accesses this object's field directly</span>
+        m_speed = speed; <span class="cmt">// this.m_speed = speed (this is implied)</span>
     }
 
-    <span class="cmt">// STATIC method — belongs to the CLASS, not any object
-    // cannot access m_speed or "this" — no object context
-    // called as: Motor.clamp(1.5)  (no object needed)</span>
-    <span class="kw">public static double</span> <span class="fn">clamp</span>(<span class="type">double</span> value) {
-        <span class="kw">return</span> Math.<span class="fn">max</span>(<span class="num">-1.0</span>, Math.<span class="fn">min</span>(<span class="num">1.0</span>, value));
+    <span class="cmt">// STATIC METHOD — belongs to the Motor CLASS, not any object
+    // no access to m_speed or "this" — there's no object context here
+    // called as: Motor.clamp(1.5)  — no object needed
+    // useful for pure utility functions that don't need object state</span>
+    <span class="kw">public static</span> <span class="type">double</span> <span class="fn">clamp</span>(<span class="type">double</span> value) {
+        <span class="kw">return</span> Math.<span class="fn">max</span>(-<span class="num">1.0</span>, Math.<span class="fn">min</span>(<span class="num">1.0</span>, value)); <span class="cmt">// pure math, no fields needed</span>
     }
-}</pre>
+}
+
+<span class="cmt">// calling them:</span>
+<span class="cls">Motor</span> m = <span class="kw">new</span> <span class="fn">Motor</span>(<span class="num">1</span>, <span class="num">false</span>);
+m.<span class="fn">setSpeed</span>(<span class="num">0.5</span>);            <span class="cmt">// instance method — need an object</span>
+<span class="type">double</span> safe = <span class="cls">Motor</span>.<span class="fn">clamp</span>(<span class="num">5.0</span>); <span class="cmt">// static method — called on the class directly</span></pre>
 </div>
 
-<h3 class="sub">The Full Encapsulation Pattern</h3>
-<p>here's the complete getter/setter pattern you'll use on literally every subsystem you write. private fields, public getters that return the value, public setters that validate before storing.</p>
+<h3 class="sub">the getter/setter pattern — using it correctly</h3>
+
+<p>the full getter/setter pattern shows up in literally every subsystem you will ever write on this team. private field. public getter that returns it. public setter that validates before storing. here's the naming convention: getters are <code>getX()</code>, but for booleans, use <code>isX()</code> instead (reads more naturally: <code>if (motor.isRunning())</code> vs <code>if (motor.getIsRunning())</code>). setters are always <code>setX(value)</code>.</p>
 
 <div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — full getter/setter pattern</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<div class="cb-header"><span class="cb-lang">java — complete getter/setter pattern with all naming conventions</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="kw">public class</span> <span class="cls">Motor</span> {
 
     <span class="kw">private</span> <span class="type">int</span>     m_motorID;
@@ -307,103 +586,208 @@ System.out.<span class="fn">println</span>(rightMotor.<span class="fn">getSpeed<
     <span class="kw">public</span> <span class="fn">Motor</span>(<span class="type">int</span> motorID) {
         m_motorID  = motorID;
         m_speed    = <span class="num">0.0</span>;
-        m_isRunning = <span class="kw">false</span>;
+        m_isRunning = <span class="num">false</span>;
     }
 
-    <span class="cmt">// GETTER — just returns the value, no parameters
-    // naming convention: getX() where X is the field name</span>
-    <span class="kw">public double</span> <span class="fn">getSpeed</span>() {
-        <span class="kw">return</span> m_speed;
-    }
+    <span class="cmt">// GETTERS — return the private value, no parameters, just return
+    // naming: getX() for most types, isX() for booleans (reads naturally)</span>
+    <span class="kw">public</span> <span class="type">double</span>  <span class="fn">getSpeed</span>()   { <span class="kw">return</span> m_speed; }
+    <span class="kw">public</span> <span class="type">int</span>     <span class="fn">getMotorID</span>() { <span class="kw">return</span> m_motorID; }
+    <span class="kw">public</span> <span class="type">boolean</span> <span class="fn">isRunning</span>()  { <span class="kw">return</span> m_isRunning; } <span class="cmt">// isX() for booleans!!</span>
 
-    <span class="kw">public int</span> <span class="fn">getMotorID</span>() {
-        <span class="kw">return</span> m_motorID;
-    }
-
-    <span class="kw">public boolean</span> <span class="fn">isRunning</span>() { <span class="cmt">// booleans often use "is" instead of "get"</span>
-        <span class="kw">return</span> m_isRunning;
-    }
-
-    <span class="cmt">// SETTER — takes the new value as a parameter, validates it
-    // naming convention: setX() where X is the field name</span>
+    <span class="cmt">// SETTERS — validate input, then store it
+    // naming: setX(value) where X matches the field name</span>
     <span class="kw">public void</span> <span class="fn">setSpeed</span>(<span class="type">double</span> speed) {
-        <span class="cmt">// Math.max and Math.min together clamp to [-1.0, 1.0]</span>
-        m_speed = Math.<span class="fn">max</span>(<span class="num">-1.0</span>, Math.<span class="fn">min</span>(<span class="num">1.0</span>, speed));
+        <span class="cmt">// clamp to [-1.0, 1.0] so nothing can set an unsafe value</span>
+        m_speed = Math.<span class="fn">max</span>(-<span class="num">1.0</span>, Math.<span class="fn">min</span>(<span class="num">1.0</span>, speed));
     }
 
-    <span class="cmt">// ACTION methods — verbs that do something meaningful</span>
+    <span class="cmt">// ACTION METHODS — verbs that do something meaningful using the object's state</span>
     <span class="kw">public void</span> <span class="fn">start</span>(<span class="type">double</span> speed) {
-        <span class="fn">setSpeed</span>(speed); <span class="cmt">// reuse the setter's validation!</span>
-        m_isRunning = <span class="kw">true</span>;
+        <span class="fn">setSpeed</span>(speed);      <span class="cmt">// call our own setter — reuse its validation!!</span>
+        m_isRunning = <span class="num">true</span>;
     }
 
     <span class="kw">public void</span> <span class="fn">stop</span>() {
         m_speed    = <span class="num">0.0</span>;
-        m_isRunning = <span class="kw">false</span>;
+        m_isRunning = <span class="num">false</span>;
+    }
+
+    <span class="cmt">/** returns a human-readable status line for logging */</span>
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">getStatusString</span>() {
+        <span class="kw">return</span> <span class="cls">String</span>.<span class="fn">format</span>(<span class="str">"Motor %d: %.2f | %s"</span>,
+            m_motorID, m_speed, m_isRunning ? <span class="str">"RUNNING"</span> : <span class="str">"STOPPED"</span>);
     }
 }</pre>
 </div>
 
-<h3 class="sub">A Real-Looking FRC Subsystem</h3>
-<p>here's what this all looks like assembled into something that genuinely resembles what you'd write in actual robot code:</p>
+<h3 class="sub">a real-looking FRC subsystem</h3>
+
+<p>ok here's the payoff. everything from this whole week — classes, fields, constructors, access modifiers, getters, setters, action methods — assembled into something that looks like actual robot code. this is basically what you'd write in a real match season if someone said "write the shooter subsystem."</p>
 
 <div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — ShooterSubsystem (simplified but real-looking)</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<div class="cb-header"><span class="cb-lang">java — ShooterSubsystem (simplified but genuinely real-looking)</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="cmt">/**
  * Models the shooter mechanism.
  * Manages flywheel speed and tracks whether we're at target velocity.
+ * On WRT, every subsystem class looks like this.
  */</span>
 <span class="kw">public class</span> <span class="cls">ShooterSubsystem</span> {
 
-    <span class="cmt">// fields — all private, all m_ prefixed</span>
+    <span class="cmt">// all fields: private, m_ prefixed — state owned by THIS object</span>
     <span class="kw">private</span> <span class="type">int</span>     m_topMotorID;
     <span class="kw">private</span> <span class="type">int</span>     m_bottomMotorID;
-    <span class="kw">private</span> <span class="type">double</span>  m_targetSpeed;
-    <span class="kw">private</span> <span class="type">boolean</span> m_isAtSpeed;
+    <span class="kw">private</span> <span class="type">double</span>  m_targetSpeed;   <span class="cmt">// what speed we're ASKING for (0.0 to 1.0)</span>
+    <span class="kw">private</span> <span class="type">boolean</span> m_isAtSpeed;     <span class="cmt">// whether flywheel has actually reached that speed</span>
 
+    <span class="cmt">// constructor: takes motor CAN IDs, sets safe starting state</span>
     <span class="kw">public</span> <span class="fn">ShooterSubsystem</span>(<span class="type">int</span> topID, <span class="type">int</span> bottomID) {
         m_topMotorID    = topID;
         m_bottomMotorID = bottomID;
-        m_targetSpeed   = <span class="num">0.0</span>;
-        m_isAtSpeed     = <span class="kw">false</span>;
+        m_targetSpeed   = <span class="num">0.0</span>;   <span class="cmt">// starts off — never spin on boot without being asked</span>
+        m_isAtSpeed     = <span class="num">false</span>; <span class="cmt">// definitely not at speed when we just turned on</span>
     }
 
-    <span class="cmt">/** Sets the target flywheel speed, clamped to [0.0, 1.0]. */</span>
+    <span class="cmt">/** Sets the desired flywheel speed, clamped to [0.0, 1.0]. Shooters don't go backward. */</span>
     <span class="kw">public void</span> <span class="fn">setTargetSpeed</span>(<span class="type">double</span> speed) {
         m_targetSpeed = Math.<span class="fn">max</span>(<span class="num">0.0</span>, Math.<span class="fn">min</span>(<span class="num">1.0</span>, speed));
     }
 
-    <span class="cmt">/** @return current target speed */</span>
-    <span class="kw">public double</span> <span class="fn">getTargetSpeed</span>() { <span class="kw">return</span> m_targetSpeed; }
+    <span class="cmt">/** Spins up the shooter to full power. Short for setTargetSpeed(1.0). */</span>
+    <span class="kw">public void</span> <span class="fn">spinUp</span>() {
+        <span class="fn">setTargetSpeed</span>(<span class="num">1.0</span>); <span class="cmt">// reuse the setter so we still get validation</span>
+    }
 
-    <span class="cmt">/** @return true if shooter is at target speed */</span>
-    <span class="kw">public boolean</span> <span class="fn">isAtSpeed</span>() { <span class="kw">return</span> m_isAtSpeed; }
-
-    <span class="cmt">/** Spins up the shooter to full power. */</span>
-    <span class="kw">public void</span> <span class="fn">spinUp</span>() { <span class="fn">setTargetSpeed</span>(<span class="num">1.0</span>); }
-
-    <span class="cmt">/** Stops the shooter and resets speed tracking. */</span>
+    <span class="cmt">/** Stops the flywheel and clears at-speed flag. */</span>
     <span class="kw">public void</span> <span class="fn">stop</span>() {
         m_targetSpeed = <span class="num">0.0</span>;
-        m_isAtSpeed   = <span class="kw">false</span>;
+        m_isAtSpeed   = <span class="num">false</span>; <span class="cmt">// if we're stopping, we're definitely not at speed anymore</span>
     }
 
-    <span class="cmt">/** @return a human-readable status string for dashboards */</span>
+    <span class="cmt">/** @return current target speed (0.0 to 1.0) */</span>
+    <span class="kw">public</span> <span class="type">double</span>  <span class="fn">getTargetSpeed</span>() { <span class="kw">return</span> m_targetSpeed; }
+
+    <span class="cmt">/** @return true if the flywheel has reached target velocity */</span>
+    <span class="kw">public</span> <span class="type">boolean</span> <span class="fn">isAtSpeed</span>()      { <span class="kw">return</span> m_isAtSpeed; }
+
+    <span class="cmt">/** @return formatted status string for Shuffleboard */</span>
     <span class="kw">public</span> <span class="cls">String</span> <span class="fn">getStatusString</span>() {
-        <span class="kw">return</span> String.<span class="fn">format</span>(<span class="str">"Shooter: %.2f | %s"</span>,
+        <span class="kw">return</span> <span class="cls">String</span>.<span class="fn">format</span>(<span class="str">"Shooter: %.2f | %s"</span>,
             m_targetSpeed, m_isAtSpeed ? <span class="str">"AT SPEED"</span> : <span class="str">"SPINNING UP"</span>);
     }
+}
+
+<span class="cmt">// usage in Robot.java — this is basically how it works in the real codebase</span>
+<span class="cls">ShooterSubsystem</span> m_shooter = <span class="kw">new</span> <span class="fn">ShooterSubsystem</span>(<span class="num">7</span>, <span class="num">8</span>); <span class="cmt">// motors on CAN 7 and 8</span>
+
+m_shooter.<span class="fn">spinUp</span>();
+System.out.<span class="fn">println</span>(m_shooter.<span class="fn">getTargetSpeed</span>()); <span class="cmt">// 1.0</span>
+System.out.<span class="fn">println</span>(m_shooter.<span class="fn">isAtSpeed</span>());       <span class="cmt">// false (in reality: updated by sensors)</span>
+System.out.<span class="fn">println</span>(m_shooter.<span class="fn">getStatusString</span>()); <span class="cmt">// "Shooter: 1.00 | SPINNING UP"</span></pre>
+</div>
+
+<div class="callout tip"><p><strong>WRT method conventions:</strong> getters are <code>getX()</code> (or <code>isX()</code> for booleans), setters are <code>setX(value)</code>, and action methods are descriptive verbs: <code>spinUp()</code>, <code>stop()</code>, <code>deploy()</code>, <code>retract()</code>. keep the names obvious. someone reading your code at 2am during build season should not have to think about what a method does.</p></div>
+
+<h3 class="sub">calling your own methods from inside the class</h3>
+
+<p>one thing that's easy to miss: methods inside a class can call OTHER methods inside the same class. you saw it above — <code>spinUp()</code> calls <code>setTargetSpeed(1.0)</code>. this is huge because it means you write the validation logic ONCE in the setter, and every other method that needs to set speed just calls the setter. you don't copy-paste the clamping math five places. one place, one set of logic, everything stays consistent.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — calling your own methods: write logic once, reuse everywhere</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">public class</span> <span class="cls">Intake</span> {
+
+    <span class="kw">private</span> <span class="type">double</span>  m_speed;
+    <span class="kw">private</span> <span class="type">boolean</span> m_isRunning;
+
+    <span class="kw">public</span> <span class="fn">Intake</span>() { m_speed = <span class="num">0.0</span>; m_isRunning = <span class="num">false</span>; }
+
+    <span class="cmt">// setter: all validation logic lives HERE and only here</span>
+    <span class="kw">public void</span> <span class="fn">setSpeed</span>(<span class="type">double</span> speed) {
+        m_speed = Math.<span class="fn">max</span>(<span class="num">0.0</span>, Math.<span class="fn">min</span>(<span class="num">1.0</span>, speed));
+    }
+
+    <span class="cmt">// action methods just call setSpeed() — they don't duplicate the clamping</span>
+    <span class="kw">public void</span> <span class="fn">runSlow</span>()  { <span class="fn">setSpeed</span>(<span class="num">0.4</span>); m_isRunning = <span class="num">true</span>; }
+    <span class="kw">public void</span> <span class="fn">runFast</span>()  { <span class="fn">setSpeed</span>(<span class="num">0.9</span>); m_isRunning = <span class="num">true</span>; }
+    <span class="kw">public void</span> <span class="fn">eject</span>()    { <span class="fn">setSpeed</span>(<span class="num">0.6</span>); m_isRunning = <span class="num">true</span>; } <span class="cmt">// same direction for now</span>
+
+    <span class="kw">public void</span> <span class="fn">stop</span>() {
+        m_speed    = <span class="num">0.0</span>;
+        m_isRunning = <span class="num">false</span>;
+    }
+
+    <span class="cmt">// now if clamping logic needs to change (e.g., to 0.0-0.8 for safety)
+    // you ONLY change it in setSpeed() and everywhere else just works</span>
 }</pre>
 </div>
 
-<div class="callout tip"><p><strong>WRT method conventions:</strong> getters are <code>getX()</code> (or <code>isX()</code> for booleans), setters are <code>setX()</code>, and action methods are descriptive verbs like <code>spinUp()</code>, <code>stop()</code>, <code>deploy()</code>. keep the names obvious — someone at 2am during build season needs to read this.</p></div>
-
 <div class="concept-grid">
-  <div class="concept-card"><div class="cc-label">Instance Method</div><div class="cc-title">Belongs to an object</div><div class="cc-desc">Can access all the object's fields via <code>this</code>. Called on an object: <code>motor.setSpeed(0.5)</code>.</div></div>
-  <div class="concept-card"><div class="cc-label">Getter</div><div class="cc-title">getX() / isX()</div><div class="cc-desc">Returns the value of a private field. No parameters. Just <code>return m_field;</code>.</div></div>
-  <div class="concept-card"><div class="cc-label">Setter</div><div class="cc-title">setX(value)</div><div class="cc-desc">Accepts a new value, validates it, stores it. This is where you catch bad inputs before they corrupt your state.</div></div>
-  <div class="concept-card"><div class="cc-label">Encapsulation</div><div class="cc-title">private + methods</div><div class="cc-desc">Wrapping private data with public methods that control access. The core OOP pattern. Every subsystem uses this.</div></div>
+  <div class="concept-card"><div class="cc-label">Instance Method</div><div class="cc-title">Belongs to an object</div><div class="cc-desc">Can access all the object's private fields via <code>this</code>. Called on an object: <code>motor.setSpeed(0.5)</code>.</div></div>
+  <div class="concept-card"><div class="cc-label">Getter</div><div class="cc-title">getX() / isX()</div><div class="cc-desc">Returns the value of a private field. No parameters, just <code>return m_field;</code>. Use <code>isX()</code> for boolean fields.</div></div>
+  <div class="concept-card"><div class="cc-label">Setter</div><div class="cc-title">setX(value)</div><div class="cc-desc">Accepts a new value, validates it (clamp, null check, range check), then stores it. Validation lives here and ONLY here.</div></div>
+  <div class="concept-card"><div class="cc-label">Action Method</div><div class="cc-title">Descriptive verbs</div><div class="cc-desc"><code>spinUp()</code>, <code>stop()</code>, <code>deploy()</code> — methods that DO something meaningful. Usually call setters internally.</div></div>
 </div>
+
+<h3 class="sub">Topic 4 — Coding Prompt</h3>
+<div class="challenge">
+  <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Complete Subsystem from Scratch</div><div class="ch-sub">Write a full class with all patterns applied</div></div></div>
+  <div class="ch-body">
+    <p class="ch-prompt">Write a <code>Climber</code> class with: private fields <code>double m_extendSpeed</code>, <code>boolean m_isExtended</code>, <code>boolean m_isClimbing</code>. Constructor initializes all to safe defaults (0.0, false, false). Methods: <code>extend(double speed)</code> sets extendSpeed (clamped 0-1) and isExtended to true; <code>retract()</code> sets speed to 0 and isExtended to false; <code>startClimb()</code> only works if isExtended is true (if not, do nothing); <code>stopClimb()</code> sets isClimbing to false. All getters: <code>getExtendSpeed()</code>, <code>isExtended()</code>, <code>isClimbing()</code>. Test it by calling extend(0.8) then startClimb() and checking isClimbing().</p>
+    <textarea class="code-input" placeholder="public class Climber { ... }"></textarea>
+    <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w5-t4')">Show Solution</button></div>
+    <div id="sol-w5-t4" style="display:none;margin-top:1rem">
+      <div class="code-block"><div class="cb-header"><span class="cb-lang">solution</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">public class</span> <span class="cls">Climber</span> {
+    <span class="kw">private</span> <span class="type">double</span>  m_extendSpeed;
+    <span class="kw">private</span> <span class="type">boolean</span> m_isExtended;
+    <span class="kw">private</span> <span class="type">boolean</span> m_isClimbing;
+
+    <span class="kw">public</span> <span class="fn">Climber</span>() {
+        m_extendSpeed = <span class="num">0.0</span>;
+        m_isExtended  = <span class="num">false</span>;
+        m_isClimbing  = <span class="num">false</span>;
+    }
+
+    <span class="kw">public void</span> <span class="fn">extend</span>(<span class="type">double</span> speed) {
+        m_extendSpeed = Math.<span class="fn">max</span>(<span class="num">0.0</span>, Math.<span class="fn">min</span>(<span class="num">1.0</span>, speed)); <span class="cmt">// clamp 0 to 1</span>
+        m_isExtended  = <span class="num">true</span>;
+    }
+
+    <span class="kw">public void</span> <span class="fn">retract</span>() {
+        m_extendSpeed = <span class="num">0.0</span>;
+        m_isExtended  = <span class="num">false</span>;
+    }
+
+    <span class="kw">public void</span> <span class="fn">startClimb</span>() {
+        <span class="cmt">// safety guard: only climb if the arm is actually extended</span>
+        <span class="kw">if</span> (m_isExtended) {
+            m_isClimbing = <span class="num">true</span>;
+        }
+        <span class="cmt">// if NOT extended: do nothing. silent no-op is safer than crashing.</span>
+    }
+
+    <span class="kw">public void</span> <span class="fn">stopClimb</span>() { m_isClimbing = <span class="num">false</span>; }
+
+    <span class="kw">public</span> <span class="type">double</span>  <span class="fn">getExtendSpeed</span>() { <span class="kw">return</span> m_extendSpeed; }
+    <span class="kw">public</span> <span class="type">boolean</span> <span class="fn">isExtended</span>()    { <span class="kw">return</span> m_isExtended; }
+    <span class="kw">public</span> <span class="type">boolean</span> <span class="fn">isClimbing</span>()   { <span class="kw">return</span> m_isClimbing; }
+}
+
+<span class="cmt">// test it</span>
+<span class="cls">Climber</span> c = <span class="kw">new</span> <span class="fn">Climber</span>();
+c.<span class="fn">startClimb</span>();                         <span class="cmt">// does nothing — not extended yet</span>
+System.out.<span class="fn">println</span>(c.<span class="fn">isClimbing</span>());   <span class="cmt">// false</span>
+
+c.<span class="fn">extend</span>(<span class="num">0.8</span>);
+c.<span class="fn">startClimb</span>();                         <span class="cmt">// now it works — arm is extended</span>
+System.out.<span class="fn">println</span>(c.<span class="fn">isClimbing</span>());   <span class="cmt">// true!!</span></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 class="sub">Topic 4 — Quick Check</h3>
+<div id="quiz-w5-t4"></div>
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
@@ -475,17 +859,17 @@ System.out.<span class="fn">println</span>(rightMotor.<span class="fn">getSpeed<
     <span class="kw">public</span> <span class="fn">Intake</span>(<span class="type">int</span> motorID) {
         m_motorID  = motorID;
         m_speed     = <span class="num">0.0</span>;
-        m_isRunning = <span class="kw">false</span>;
+        m_isRunning = <span class="num">false</span>;
     }
 
     <span class="kw">public void</span> <span class="fn">start</span>(<span class="type">double</span> speed) {
         m_speed     = speed;
-        m_isRunning = <span class="kw">true</span>;
+        m_isRunning = <span class="num">true</span>;
     }
 
     <span class="kw">public void</span> <span class="fn">stop</span>() {
         m_speed     = <span class="num">0.0</span>;
-        m_isRunning = <span class="kw">false</span>;
+        m_isRunning = <span class="num">false</span>;
     }
 
     <span class="kw">public boolean</span> <span class="fn">isRunning</span>() { <span class="kw">return</span> m_isRunning; }
@@ -555,6 +939,30 @@ function buildCls() {
   document.getElementById('cls-out').textContent =
     `public class ${name} {\n\n${fLines}\n\n    public ${name}(${cParams}) {\n${cAssigns}\n    }\n\n${getters}\n}`;
 }
+
+const quiz_w5_t1 = new Quiz('quiz-w5-t1', [
+  { question: "What is the difference between a class and an object?", options: ["They're the same thing","A class is the blueprint; an object is one specific instance built from it","An object is defined with the class keyword","A class can only make one object"], correct: 1, explanation: "Motor is the class — the blueprint. <code>new Motor(1, false)</code> creates an object — one specific instance. You can create many independent objects from one class." },
+  { question: "If you have two Motor objects m1 and m2, what happens to m2 when you call m1.setSpeed(0.0)?", options: ["m2 also stops — objects share fields","m2 is completely unaffected — each object has its own copy of m_speed","m2 throws a NullPointerException","m2 resets to its constructor defaults"], correct: 1, explanation: "Objects are independent. m1 and m2 each have their own copy of every field in memory. Calling a method on one NEVER affects the other. Like two separate houses from one blueprint." },
+  { question: "What does the <code>new</code> keyword do when you write <code>new Motor(1, false)</code>?", options: ["Declares the Motor type","Allocates memory, runs the constructor, returns a reference to the new object","Copies an existing Motor object","Deletes the previous Motor object"], correct: 1, explanation: "new does three things in order: allocates memory for the object's fields, runs the constructor to initialize them, and returns a reference (memory address) to that new object." }
+], 'summer-w5');
+
+const quiz_w5_t2 = new Quiz('quiz-w5-t2', [
+  { question: "What are the TWO absolute rules for constructors?", options: ["They must be private and take no parameters","Same name as the class, and no return type (not even void)","They must call super() and set all fields","They must be public and return the object"], correct: 1, explanation: "Rule 1: same name as the class (Motor constructor = Motor). Rule 2: no return type — not void, not anything. If you add void, Java treats it as a regular method and it will NOT run on new." },
+  { question: "What does <code>this</code> refer to inside an instance method?", options: ["The class definition","The specific object the method was called on","The parent class","The previous method that ran"], correct: 1, explanation: "this is the current object. If you call leftMotor.setSpeed(0.5), inside setSpeed, this refers to leftMotor specifically. Call it on rightMotor and this becomes rightMotor." },
+  { question: "Why does using the <code>m_</code> prefix on fields help prevent bugs?", options: ["It makes the code compile faster","It prevents name clashes between fields and constructor parameters, avoiding the self-assignment bug","It makes fields public automatically","It is required by the Java compiler"], correct: 1, explanation: "The field is m_motorID but the parameter is motorID — they have different names, so there's no ambiguity. Without m_, you might write motorID = motorID which assigns the param to itself and never sets the field." }
+], 'summer-w5');
+
+const quiz_w5_t3 = new Quiz('quiz-w5-t3', [
+  { question: "Why should instance variables almost always be private?", options: ["Private is faster","Encapsulation: private fields + public setters let you validate and control how data changes","Java requires it","It uses less memory"], correct: 1, explanation: "With a public field, anyone can write motor.speed = 9999.0 and there's nothing stopping it. With private + setter, you validate first (clamp, range check, etc). This is encapsulation." },
+  { question: "What is the difference between public and private access?", options: ["public is faster, private is slower","public can be accessed from anywhere; private can only be accessed from inside the class it was declared in","There is no real difference","private fields are on the stack, public fields are in RAM"], correct: 1, explanation: "private means ONLY code inside that exact class can access the field or method directly. public means any class anywhere in the project can call it. WRT rule: fields = private, public methods = the interface." },
+  { question: "A setter method for m_speed should...", options: ["Return the current speed","Accept any value and store it without checking","Accept a new value, validate it (clamp/check), then store it","Be marked private"], correct: 2, explanation: "The whole point of a setter is validation. Accept the value, check it (clamp to safe range, check for null, etc), then store. This is where you prevent invalid state from ever entering your object." }
+], 'summer-w5');
+
+const quiz_w5_t4 = new Quiz('quiz-w5-t4', [
+  { question: "What is the key difference between a static method and an instance method?", options: ["Static methods are faster","Instance methods belong to an object and can access its fields via this; static methods belong to the class and have no object context","Static methods take more parameters","There is no difference, just a keyword"], correct: 1, explanation: "Instance methods run on a specific object (leftMotor.setSpeed(0.5)) and can access all that object's private fields. Static methods (Motor.clamp(1.5)) belong to the class, no object needed, can't access fields." },
+  { question: "For a boolean field m_isRunning, the getter should be named...", options: ["getIsRunning()","getRunning()","isRunning()","returnRunning()"], correct: 2, explanation: "Boolean getters use isX() instead of getX() because it reads naturally: if (motor.isRunning()) reads like English. isRunning() is the convention for all boolean getter methods." },
+  { question: "Why should action methods like spinUp() call setTargetSpeed() internally rather than setting m_targetSpeed directly?", options: ["It is required by Java","So the validation logic in setTargetSpeed() is automatically applied — write the validation once, reuse it everywhere","It is faster","So the method is visible to subclasses"], correct: 1, explanation: "Write validation once in the setter. Action methods call the setter so they automatically get that validation without duplicating code. If you change the clamping logic later, you only change it in one place." }
+], 'summer-w5');
 
 const quiz_w5 = new Quiz('quiz-w5', [
   { question: "What is the difference between a class and an object?", options: ["They're the same thing with different names","A class is the blueprint; an object is one specific instance built from it","A class holds data; an object holds methods","An object is defined using the class keyword"], correct: 1, explanation: "<code>Motor</code> is a class (the blueprint). <code>leftMotor = new Motor(1, false)</code> creates an object. You can make many independent objects from one class — like many cookies from one cutter." },

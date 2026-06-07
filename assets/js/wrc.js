@@ -6,7 +6,7 @@
 (function() {
   try {
     const saved = localStorage.getItem('wrc-dark');
-    if (saved === '1') {
+    if (saved !== '0') {
       document.documentElement.setAttribute('data-theme', 'dark');
     }
   } catch {}
@@ -176,7 +176,7 @@ class Quiz {
           <div class="quiz-options">
             ${q.options.map((opt, i) => `
               <button class="quiz-option${isAdmin && i === q.correct ? ' admin-correct-hint' : ''}" data-idx="${i}"
-                onclick="window._quiz_${cid}.select(${i})">
+                onclick="window['_quiz_${cid}'].select(${i})">
                 <span class="opt-letter">${letters[i]}</span>
                 <span>${opt}</span>
               </button>
@@ -186,7 +186,7 @@ class Quiz {
           <div class="quiz-controls">
             <span class="quiz-score">Score: ${this.score} / ${this.questions.length}</span>
             <button class="btn btn-navy btn-sm" id="qnext-${cid}"
-              onclick="window._quiz_${cid}.next()" disabled>
+              onclick="window['_quiz_${cid}'].next()" disabled>
               ${this.current < this.questions.length - 1 ? 'Next Question →' : 'See Results →'}
             </button>
           </div>
@@ -274,7 +274,7 @@ class Quiz {
       <div class="sc-score">${this.score} of ${this.questions.length} correct</div>
       <div class="sc-msg">${msg}</div>
       ${this.pageId ? '<div class="sc-saved">✓ Score saved to your progress</div>' : ''}
-      <button class="btn btn-outline" onclick="window._quiz_${cid}.reset()">↺ Try Again</button>
+      <button class="btn btn-outline" onclick="window['_quiz_${cid}'].reset()">↺ Try Again</button>
     `;
 
     const banner = document.getElementById('complete-banner');
@@ -424,11 +424,11 @@ const SEARCH_INDEX = [
   { id:'summer-w5', badge:'W5', title:'OOP — Classes & Objects', sub:'Classes, objects, constructors, encapsulation, private, getters, setters, this keyword', url:'/weeks/summer/week5' },
   { id:'summer-w6', badge:'W6', title:'Inheritance & Polymorphism', sub:'extends, super, Override, abstract classes, interfaces, implements, SubsystemBase, Command', url:'/weeks/summer/week6' },
   { id:'summer-w7', badge:'W7', title:'Advanced Classes', sub:'Enums, enum switch, ArrayList, wrapper classes, Integer, Double, autoboxing', url:'/weeks/summer/week7' },
-  { id:'summer-w8', badge:'W8', title:'Bridge Week — XRP & WPILib', sub:'XRP robot, TimedRobot, teleopPeriodic, WPILib, first robot code, git commit', url:'/weeks/summer/week8' },
+  { id:'summer-w8', badge:'W8', title:'Recap & Resources', sub:'Java recap, FRC prep, command-based preview, WPILib resources, study checklist, what comes next', url:'/weeks/summer/week8' },
   { id:'offseason-o1', badge:'O1', title:'Git & GitHub', sub:'Branches, pull requests, commits, branch naming, feature branches, conflict resolution', url:'/weeks/offseason/os-week1' },
   { id:'offseason-o2', badge:'O2', title:'WPILib Setup', sub:'Install WPILib, VS Code, RobotContainer, Constants.java, project structure, simulation', url:'/weeks/offseason/os-week2' },
-  { id:'offseason-o3', badge:'O3', title:'Command-Based Architecture', sub:'Subsystems, Commands, Scheduler, Triggers, addRequirements, execute, isFinished, sequence, parallel, TalonFX, CANSparkMax', url:'/weeks/offseason/os-week3' },
-  { id:'offseason-o4', badge:'O4', title:'Motors & Sensors', sub:'TalonFX, CANSparkMax, encoders, conversion factor, NavX, gyroscope, SmartDashboard, VelocityTorqueCurrentFOC, MotionMagic', url:'/weeks/offseason/os-week4' },
+  { id:'offseason-o3', badge:'O3', title:'Command-Based Architecture', sub:'Subsystems, Commands, Scheduler, Triggers, addRequirements, execute, isFinished, sequence, parallel, TalonFX, Phoenix 6', url:'/weeks/offseason/os-week3' },
+  { id:'offseason-o4', badge:'O4', title:'Motors & Sensors', sub:'TalonFX, stator current detection, Debouncer, CANcoder, Pigeon 2, SmartDashboard, VelocityTorqueCurrentFOC, MotionMagic', url:'/weeks/offseason/os-week4' },
   { id:'offseason-o5', badge:'O5', title:'PID Control', sub:'Proportional, Integral, Derivative, kP kI kD, PIDController, setpoint, feedforward, tuning, oscillation', url:'/weeks/offseason/os-week5' },
   { id:'offseason-o6', badge:'O6', title:'Autonomous & PathPlanner', sub:'Auto routines, sequence, WaitCommand, PathPlanner, odometry, field coordinates, auto chooser', url:'/weeks/offseason/os-week6' },
   { id:'offseason-o7', badge:'O7', title:'Subsystem Ownership', sub:'Code reading, Javadoc, @param, @return, magic numbers, Constants, capstone, PR review', url:'/weeks/offseason/os-week7' },

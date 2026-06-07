@@ -108,7 +108,7 @@ no_auth_guard: true
       <form class="auth-form active" id="form-login" onsubmit="handleLogin(event)">
         <div class="auth-field">
           <label>email</label>
-          <input type="email" id="login-email" placeholder="your@email.com" required>
+          <input type="email" id="login-email" placeholder="your@waltonrobotics.com" required>
         </div>
         <div class="auth-field">
           <label>password</label>
@@ -126,7 +126,7 @@ no_auth_guard: true
         </div>
         <div class="auth-field">
           <label>email</label>
-          <input type="email" id="reg-email" placeholder="your@email.com" required>
+          <input type="email" id="reg-email" placeholder="your@waltonrobotics.com" required>
         </div>
         <div class="auth-field">
           <label>password</label>

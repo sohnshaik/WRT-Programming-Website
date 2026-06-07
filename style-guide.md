@@ -35,13 +35,13 @@ no_auth_guard: true
 <pre><span class="kw">public class</span> <span class="cls">ShooterSubsystem</span> <span class="kw">extends</span> <span class="cls">SubsystemBase</span> {
 
     <span class="cmt">// m_ prefix for instance fields</span>
-    <span class="kw">private final</span> <span class="cls">CANSparkFlex</span> m_shooterMotor;
+    <span class="kw">private final</span> <span class="cls">TalonFX</span> m_shooterMotor;
     <span class="kw">private</span> <span class="type">double</span> m_targetRPS = <span class="num">0.0</span>;
     <span class="kw">private</span> <span class="type">boolean</span> m_isSpunUp = <span class="kw">false</span>;
 
     <span class="kw">public</span> <span class="cls">ShooterSubsystem</span>() {
         <span class="cmt">// k prefix for constants from Constants.java</span>
-        m_shooterMotor = <span class="kw">new</span> <span class="cls">CANSparkFlex</span>(ShooterK.kMotorID, <span class="cls">MotorType</span>.kBrushless);
+        m_shooterMotor = <span class="kw">new</span> <span class="cls">TalonFX</span>(ShooterK.kMotorID);
     }
 }</pre>
 </div>
@@ -143,11 +143,11 @@ m_motor.setInverted(<span class="kw">true</span>);</pre>
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java — magic numbers</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="cmt">// BAD -- what is 11? what is 80? who knows!!</span>
-m_motor = <span class="kw">new</span> <span class="cls">CANSparkFlex</span>(<span class="num">11</span>, <span class="cls">MotorType</span>.kBrushless);
+m_motor = <span class="kw">new</span> <span class="cls">TalonFX</span>(<span class="num">11</span>);
 m_controller.setSetpoint(<span class="num">80.0</span>);
 
 <span class="cmt">// GOOD -- self-documenting, easy to change from one place</span>
-m_motor = <span class="kw">new</span> <span class="cls">CANSparkFlex</span>(ShooterK.kMotorID, <span class="cls">MotorType</span>.kBrushless);
+m_motor = <span class="kw">new</span> <span class="cls">TalonFX</span>(ShooterK.kMotorID);
 m_controller.setSetpoint(ShooterK.kShootRPS);</pre>
 </div>
 
@@ -159,32 +159,50 @@ m_controller.setSetpoint(ShooterK.kShootRPS);</pre>
 <pre><span class="kw">package</span> frc.robot.subsystems;
 
 <span class="kw">import</span> edu.wpi.first.wpilibj2.command.SubsystemBase;
+<span class="kw">import</span> com.ctre.phoenix6.hardware.<span class="cls">TalonFXS</span>;
+<span class="kw">import</span> com.ctre.phoenix6.configs.<span class="cls">TalonFXSConfiguration</span>;
+<span class="kw">import</span> com.ctre.phoenix6.configs.<span class="cls">CurrentLimitsConfigs</span>;
+<span class="kw">import</span> com.ctre.phoenix6.configs.<span class="cls">MotorOutputConfigs</span>;
+<span class="kw">import</span> com.ctre.phoenix6.signals.<span class="cls">NeutralModeValue</span>;
+<span class="kw">import</span> com.ctre.phoenix6.signals.<span class="cls">InvertedValue</span>;
 
 <span class="kw">public class</span> <span class="cls">ExampleSubsystem</span> <span class="kw">extends</span> <span class="cls">SubsystemBase</span> {
 
     <span class="cmt">// ---- HARDWARE -----------------------------------------------</span>
-    <span class="kw">private final</span> <span class="cls">CANSparkFlex</span> m_motor;
+    <span class="kw">private final</span> <span class="cls">TalonFXS</span> m_motor;
 
     <span class="cmt">// ---- STATE --------------------------------------------------</span>
     <span class="kw">private</span> <span class="type">double</span> m_targetRPS = <span class="num">0.0</span>;
 
     <span class="cmt">// ---- CONSTRUCTOR --------------------------------------------</span>
     <span class="kw">public</span> <span class="cls">ExampleSubsystem</span>() {
-        m_motor = <span class="kw">new</span> <span class="cls">CANSparkFlex</span>(ExampleK.kMotorID, <span class="cls">MotorType</span>.kBrushless);
+        m_motor = <span class="kw">new</span> <span class="cls">TalonFXS</span>(ExampleK.kMotorID);
         configureMotor();
     }
 
     <span class="kw">private void</span> <span class="fn">configureMotor</span>() {
-        m_motor.restoreFactoryDefaults();
-        m_motor.setInverted(<span class="kw">false</span>);
-        m_motor.burnFlash(); <span class="cmt">// saves config to motor controller NVRAM</span>
+        <span class="kw">var</span> currentCfg = <span class="kw">new</span> <span class="cls">CurrentLimitsConfigs</span>()
+            .<span class="fn">withStatorCurrentLimit</span>(ExampleK.kCurrentLimit_A)
+            .<span class="fn">withSupplyCurrentLimit</span>(<span class="num">15</span>)
+            .<span class="fn">withStatorCurrentLimitEnable</span>(<span class="kw">true</span>)
+            .<span class="fn">withSupplyCurrentLimitEnable</span>(<span class="kw">true</span>);
+
+        <span class="kw">var</span> outputCfg = <span class="kw">new</span> <span class="cls">MotorOutputConfigs</span>()
+            .<span class="fn">withInverted</span>(<span class="cls">InvertedValue</span>.CounterClockwise_Positive) <span class="cmt">// flip if needed</span>
+            .<span class="fn">withNeutralMode</span>(<span class="cls">NeutralModeValue</span>.Coast);
+
+        m_motor.<span class="fn">getConfigurator</span>().<span class="fn">apply</span>(
+            <span class="kw">new</span> <span class="cls">TalonFXSConfiguration</span>()
+                .<span class="fn">withCurrentLimits</span>(currentCfg)
+                .<span class="fn">withMotorOutput</span>(outputCfg)
+        );
     }
 
     <span class="cmt">// ---- PUBLIC API ---------------------------------------------</span>
     <span class="kw">public void</span> <span class="fn">setSpeed</span>(<span class="type">double</span> rps) { m_targetRPS = rps; }
 
     <span class="kw">public boolean</span> <span class="fn">isAtTarget</span>() {
-        <span class="kw">return</span> Math.abs(m_motor.getEncoder().getVelocity() - m_targetRPS) &lt; ExampleK.kTolerance_rps;
+        <span class="kw">return</span> Math.abs(m_motor.<span class="fn">getVelocity</span>().<span class="fn">getValueAsDouble</span>() - m_targetRPS) &lt; ExampleK.kTolerance_rps;
     }
 
     <span class="cmt">// ---- PERIODIC -----------------------------------------------</span>
@@ -206,11 +224,6 @@ m_controller.setSetpoint(ShooterK.kShootRPS);</pre>
     <span class="cmt">// blocks the entire robot loop. watchdog WILL fire. robot dies.</span>
 }
 
-<span class="cmt">// CORRECT: use a command with isFinished()</span>
-<span class="kw">new</span> <span class="cls">WaitUntilCommand</span>(m_shooter::isAtTarget)
-    .andThen(<span class="kw">new</span> <span class="cls">ShootCommand</span>(m_shooter));</pre>
-</div>
-
 <h2 class="sh">git conventions</h2>
 <p>check O1 for the full git workflow. these are the non-negotiables:</p>
 
@@ -219,39 +232,66 @@ m_controller.setSetpoint(ShooterK.kShootRPS);</pre>
 <tbody>
 <tr><td>never commit directly to <code>main</code></td><td>main = always working. one bad push during competition is a crisis</td></tr>
 <tr><td>branch name: <code>type/short-desc</code></td><td><code>feature/shooter-pid</code>, <code>fix/intake-stall</code>, <code>refactor/constants-cleanup</code></td></tr>
-<tr><td>commit messages: imperative tense</td><td>"add shooter PID" not "added shooter PID" or "adding shooter PID"</td></tr>
 <tr><td>keep PRs small and focused</td><td>one feature per PR. giant PRs are painful to review and silently break things</td></tr>
-<tr><td>needs at least one approval</td><td>sohan, hrehaan, or alexandra reviews before merging to main</td></tr>
+<tr><td>needs at least one approval</td><td>one of our mentors (Steve or Banks) reviews before merging to main</td></tr>
 </tbody>
 </table>
 
-<h2 class="sh">WPILib 2025 notes</h2>
-<p>WPILib updates every year and things get deprecated. here's what matters for 2025:</p>
+<h2 class="sh">WPILib 2026 notes</h2>
+<p>WPILib updates every year and things get deprecated. here's what matters for 2026:</p>
 
 <div class="concept-grid">
   <div class="concept-card">
     <div class="cc-label">Java 17</div>
     <div class="cc-title">still required</div>
-    <div class="cc-desc">WPILib 2025 uses Java 17. WPILib installer sets this up automatically. don't mess with the JDK path.</div>
+    <div class="cc-desc">WPILib 2026 still uses Java 17. WPILib installer sets this up automatically. don't mess with the JDK path.</div>
   </div>
   <div class="concept-card">
-    <div class="cc-label">REVLib 2025</div>
-    <div class="cc-title">SparkFlex added</div>
-    <div class="cc-desc">CANSparkFlex is the Spark MAX successor. we use both. config API is nearly identical so it's not too bad.</div>
+    <div class="cc-label">CTRE / Krakens</div>
+    <div class="cc-title">everything is TalonFX</div>
+    <div class="cc-desc">we run Kraken X60s (TalonFX) across the whole robot -- drive, shooter, intake, all of it. all config goes through Phoenix 6 configurator API. no REV motors on this team.</div>
   </div>
   <div class="concept-card">
     <div class="cc-label">Phoenix 6</div>
-    <div class="cc-title">use this, not Phoenix 5</div>
-    <div class="cc-desc">Phoenix 6 is the current CTRE library. Phoenix 5 / old TalonSRX API is deprecated. if you see Phoenix 5 in old code, don't copy it.</div>
+    <div class="cc-title">still current — use it</div>
+    <div class="cc-desc">Phoenix 6 is still the CTRE library. TalonFX + Phoenix 6 is what we use on the drivetrain. if you see Phoenix 5 in old code, do not copy it — it's dead.</div>
   </div>
   <div class="concept-card">
     <div class="cc-label">Commands</div>
-    <div class="cc-title">no big changes</div>
-    <div class="cc-desc">command-based architecture is stable. SubsystemBase, CommandBase, Scheduler all work the same as before.</div>
+    <div class="cc-title">stable — no big changes</div>
+    <div class="cc-desc">command-based architecture hasn't changed. SubsystemBase, Scheduler, Triggers all work the same. Choreo is still our path following library.</div>
   </div>
 </div>
 
 <div class="callout info"><p><strong>not sure what version we're on?</strong> check <code>build.gradle</code> in the robot repo. look for the wpilib version string. if you're confused just ask before changing anything :)</p></div>
+
+<h2 class="sh">heads up — System Core is coming (2027)</h2>
+<p>for the 2027 season we're switching to <strong>System Core</strong>, FIRST's new robot controller that replaces the roboRIO. it runs on a faster processor, has more I/O, and uses a new HAL underneath — but WPILib abstracts most of the differences so the code you write now will largely carry over. a few things to know now so you're not caught off guard:</p>
+
+<div class="concept-grid">
+  <div class="concept-card">
+    <div class="cc-label">same WPILib API</div>
+    <div class="cc-title">your code still works</div>
+    <div class="cc-desc">SubsystemBase, Commands, Triggers, TalonFX — all the same. WPILib wraps the hardware. you won't be rewriting the whole robot.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">new HAL</div>
+    <div class="cc-title">low-level stuff changes</div>
+    <div class="cc-desc">direct register access or anything that talks to roboRIO hardware specifically (custom DIO tricks, etc.) will need updating. most teams won't hit this.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">vendor libs</div>
+    <div class="cc-title">watch for updates</div>
+    <div class="cc-desc">Phoenix 6 / CTRE will need a 2027-compatible release. don't upgrade vendor deps until that drops — check team Discord before touching build.gradle.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">deployment</div>
+    <div class="cc-title">different image process</div>
+    <div class="cc-desc">System Core has a different imaging/flashing process than roboRIO. there will be a team doc on this before build season. don't wing it at comp when ur helping other teams</div>
+  </div>
+</div>
+
+<div class="callout warning"><p><strong>don't stress about this now.</strong> other teams are still on roboRIO for 2026, while we will be on systemcore because ~~we're just that goated~~ we're a beta testig team. learn the current stack well first — the concepts transfer directly. System Core is just new hardware underneath the same WPILib you already know.</p></div>
 
 <h2 class="sh">pre-PR checklist</h2>
 <p>run through this before opening a pull request. if you can't check all of these, fix it first!!</p>
@@ -278,14 +318,14 @@ m_controller.setSetpoint(ShooterK.kShootRPS);</pre>
     <div class="cc-desc">no blocking loops anywhere in robot code. check commands, periodic methods, and auto routines.</div>
   </div>
   <div class="concept-card">
-    <div class="cc-label">burnFlash</div>
-    <div class="cc-title">called after config?</div>
-    <div class="cc-desc">any SparkMAX/SparkFlex config needs <code>burnFlash()</code> to persist through power cycles. easy to forget.</div>
+    <div class="cc-label">applyConfig</div>
+    <div class="cc-title">TalonFX configured?</div>
+    <div class="cc-desc">all TalonFX motors need a <code>TalonFXConfiguration</code> applied via <code>getConfigurator().apply()</code> in the constructor. neutral mode, current limits, inversions -- all in there.</div>
   </div>
   <div class="concept-card">
     <div class="cc-label">sim</div>
     <div class="cc-title">doesn't crash in sim?</div>
-    <div class="cc-desc">run in simulation mode. it doesn't need to work perfectly, it just shouldn't throw exceptions.</div>
+    <div class="cc-desc">run in simulation mode. it doesn't need to work perfectly, it should just do what you intended it to do.</div>
   </div>
 </div>
 

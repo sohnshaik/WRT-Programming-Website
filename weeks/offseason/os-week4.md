@@ -1,7 +1,7 @@
 ---
 layout: week
 title: "Motors & Sensors"
-subtitle: "TalonFX (Phoenix 6), SparkFlex, CANcoder, Pigeon 2 — hardware used in the Rebuilt codebase."
+subtitle: "TalonFX (Phoenix 6), current detection, CANcoder, Pigeon 2 — hardware used in the Rebuilt codebase."
 badge: "Offseason · Week 4 of 8"
 phase: offseason
 phase_label: Offseason
@@ -10,7 +10,7 @@ page_id: "offseason-o4"
 weekly_test: true
 topics:
   - TalonFX & Phoenix 6
-  - CANSparkMax & SparkFlex
+  - Current-Based Detection
   - CANcoder & Pigeon 2
   - Logging & SmartDashboard
 prev_url: "/weeks/offseason/os-week3"
@@ -132,60 +132,45 @@ next_title: "O5 — PID Control"
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<h2 class="sh" id="topic-2">CANSparkMax &amp; SparkFlex</h2>
-<p>REV SparkMax (for NEO) and SparkFlex (for NEO Vortex) are used for mechanisms like the intake, indexer, and climber. The API is more straightforward than Phoenix 6 but has some gotchas.</p>
+<h2 class="sh" id="topic-2">Current-Based Game Piece Detection</h2>
+<p>One of the most common patterns in WRT code: detect a game piece by watching for a stator current spike. When intake rollers stall against a note or ball, current jumps. No extra sensor needed.</p>
+
+<h3 class="sub">How it Works</h3>
+<p>Stator current is proportional to torque. When a motor stalls, torque and current both spike. Set a threshold — if current exceeds it, something is blocking the mechanism.</p>
 
 <div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — SparkMax / SparkFlex setup</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
-<pre><span class="kw">import</span> com.revrobotics.<span class="cls">CANSparkFlex</span>;     <span class="cmt">// for NEO Vortex</span>
-<span class="kw">import</span> com.revrobotics.<span class="cls">CANSparkMax</span>;      <span class="cmt">// for NEO 550 / NEO</span>
-<span class="kw">import</span> com.revrobotics.CANSparkLowLevel.<span class="cls">MotorType</span>;
-<span class="kw">import</span> com.revrobotics.<span class="cls">RelativeEncoder</span>;
-<span class="kw">import</span> com.revrobotics.<span class="cls">SparkPIDController</span>;
-
-<span class="kw">public class</span> <span class="cls">IntakeSubsystem</span> <span class="kw">extends</span> <span class="cls">SubsystemBase</span> {
-    <span class="kw">private final</span> <span class="cls">CANSparkFlex</span>     m_rollerMotor;
-    <span class="kw">private final</span> <span class="cls">RelativeEncoder</span>  m_encoder;
-
-    <span class="kw">private static final int</span>    kMotorID         = <span class="num">9</span>;
-    <span class="kw">private static final int</span>    kCurrentLimit_A  = <span class="num">40</span>;
-
-    <span class="kw">public</span> <span class="fn">IntakeSubsystem</span>() {
-        m_rollerMotor = <span class="kw">new</span> <span class="cls">CANSparkFlex</span>(kMotorID, MotorType.kBrushless);
-        m_rollerMotor.<span class="fn">restoreFactoryDefaults</span>();
-        m_rollerMotor.<span class="fn">setInverted</span>(<span class="kw">false</span>);
-        m_rollerMotor.<span class="fn">setIdleMode</span>(CANSparkMax.IdleMode.kCoast);
-        m_rollerMotor.<span class="fn">setSmartCurrentLimit</span>(kCurrentLimit_A);
-
-        m_encoder = m_rollerMotor.<span class="fn">getEncoder</span>();
-        m_encoder.<span class="fn">setVelocityConversionFactor</span>(<span class="num">1.0</span> / <span class="num">60.0</span>); <span class="cmt">// RPM → RPS</span>
-
-        m_rollerMotor.<span class="fn">burnFlash</span>(); <span class="cmt">// always last</span>
-    }
-
-    <span class="kw">public void</span> <span class="fn">setPercent</span>(<span class="type">double</span> percent) { m_rollerMotor.<span class="fn">set</span>(percent); }
-    <span class="kw">public void</span> <span class="fn">stop</span>()                        { m_rollerMotor.<span class="fn">set</span>(<span class="num">0</span>); }
-    <span class="kw">public double</span> <span class="fn">getVelocity_rps</span>()           { <span class="kw">return</span> m_encoder.<span class="fn">getVelocity</span>(); }
-    <span class="kw">public double</span> <span class="fn">getCurrent_A</span>()              { <span class="kw">return</span> m_rollerMotor.<span class="fn">getOutputCurrent</span>(); }
-}</pre>
-</div>
-
-<h3 class="sub">Piece Detection via Current</h3>
-<p>A common pattern on WRT: detect a game piece by watching for a current spike. When the intake rollers stall against a note, current jumps. No extra sensor needed.</p>
-
-<div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — current-based piece detection</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
-<pre><span class="kw">private static final double</span> kPieceDetectedCurrent_A = <span class="num">30.0</span>;
+<div class="cb-header"><span class="cb-lang">java — current spike detection (TalonFX)</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">private static final double</span> kPieceDetectedCurrent_A = <span class="num">30.0</span>; <span class="cmt">// tune on robot</span>
 
 <span class="kw">public boolean</span> <span class="fn">hasPiece</span>() {
-    <span class="kw">return</span> m_rollerMotor.<span class="fn">getOutputCurrent</span>() > kPieceDetectedCurrent_A;
+    <span class="kw">return</span> m_rollerMotor.<span class="fn">getStatorCurrent</span>().<span class="fn">getValueAsDouble</span>() &gt; kPieceDetectedCurrent_A;
 }
 
-<span class="cmt">// In RobotContainer, use as a Trigger:</span>
+<span class="cmt">// In Robot.java, wire as a Trigger:</span>
 <span class="kw">var</span> trg_hasPiece = <span class="kw">new</span> <span class="cls">Trigger</span>(m_intake::<span class="fn">hasPiece</span>);</pre>
 </div>
 
-<h3 class="sub">Topic 2 — Quick Check</h3>
+<div class="callout tip"><p><strong>StatusSignals are cached.</strong> <code>getStatorCurrent()</code> returns a <code>StatusSignal</code>. Call <code>.getValueAsDouble()</code> to read the latest value. For tighter timing, use <code>BaseStatusSignal.refreshAll()</code> to batch-refresh multiple signals per CAN frame.</p></div>
+
+<h3 class="sub">Debounce to Avoid False Positives</h3>
+<p>A single spike can be a transient. Use WPILib's <code>Debouncer</code> to require the current to stay high for multiple loop cycles before confirming a detection.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — debounced detection</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">import</span> edu.wpi.first.math.filter.<span class="cls">Debouncer</span>;
+
+<span class="kw">private final</span> <span class="cls">Debouncer</span> m_pieceDebouncer = <span class="kw">new</span> <span class="cls">Debouncer</span>(<span class="num">0.1</span>); <span class="cmt">// 100ms</span>
+
+<span class="kw">public boolean</span> <span class="fn">hasPiece</span>() {
+    <span class="type">boolean</span> over = m_rollerMotor.<span class="fn">getStatorCurrent</span>().<span class="fn">getValueAsDouble</span>()
+                        &gt; kPieceDetectedCurrent_A;
+    <span class="kw">return</span> m_pieceDebouncer.<span class="fn">calculate</span>(over);
+}</pre>
+</div>
+
+<div class="callout warning"><p><strong>tune kPieceDetectedCurrent_A on the actual robot.</strong> start high (~50A), watch telemetry during normal operation, then lower until detection is reliable without false positives.</p></div>
+
+
 <div id="quiz-o4-t2"></div>
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
@@ -391,7 +376,7 @@ const quiz_o4_t1 = new Quiz('quiz-o4-t1', [
   { question: "What naming prefix does WRT use for Phoenix 6 signal variables?", options: ["s_","signal_","sig_","status_"], correct: 2, explanation: "sig_ prefix for status signal variables — sig_velocity, sig_current, sig_position. This convention is from the Rebuilt codebase." }
 ], 'offseason-o4');
 
-// ── TOPIC 2: SparkMax / SparkFlex ─────────────────────────────
+// ── TOPIC 2: Current Detection ─────────────────────────────
 const quiz_o4_t2 = new Quiz('quiz-o4-t2', [
   { question: "Why call restoreFactoryDefaults() on a SparkMax at startup?", options: ["Required to initialize CAN","Clears leftover config from previous deployments","Improves motor performance","Sets brake mode automatically"], correct: 1, explanation: "SparkMax saves settings in flash. Previous code might have set weird limits or inversions. restoreFactoryDefaults() starts clean." },
   { question: "Why do you call burnFlash() on a SparkMax?", options: ["It optimizes power usage","It writes your configuration to flash memory so it persists through power cycles","It resets the encoder","It's required to enable CAN communication"], correct: 1, explanation: "burnFlash() saves your configuration to the SparkMax's flash. Without it, settings are lost on power cycle. Always call it last in the constructor, never in loops." },
