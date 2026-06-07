@@ -34,12 +34,6 @@ page_id: home
     </div>
   </div>
 
-  <!-- ── SUMMER PHASE ────────────────────────────────────── -->
-  <!-- Summer Phase section removed from home - see /training/ for the dashboard -->
-
-  <!-- ── OFFSEASON PHASE ─────────────────────────────────── -->
-  <!-- Offseason Phase section removed from home - see /training/ for the dashboard -->
-
   <!-- ── MEET THE LEADS ─────────────────────────────────── -->
   <div class="cd-leads">
     <div class="cd-leads-inner">
