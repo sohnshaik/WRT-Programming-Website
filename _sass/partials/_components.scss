@@ -1,26 +1,26 @@
 // ── TYPOGRAPHY ───────────────────────────────────────────────
 h2.sh {
-  font-size: $text-xl; font-weight: 700; color: $navy;
+  font-family: $font-heading; font-size: 1.375rem; font-weight: 700; color: $navy;
   margin: 2.25rem 0 0.9rem;
   padding-bottom: 0.5rem; border-bottom: 2px solid $gray-200;
   display: flex; align-items: center; gap: 8px;
   &::before {
     content: '';
-    display: inline-block; width: 4px; height: 18px;
-    background: $red; border-radius: 2px;
+    display: inline-block; width: 4px; height: 20px;
+    background: $red; border-radius: 2px; flex-shrink: 0;
   }
 }
 h3.sub {
-  font-size: $text-lg; font-weight: 700; color: $gray-800;
+  font-family: $font-heading; font-size: 1.1875rem; font-weight: 700; color: $gray-800;
   margin: 1.5rem 0 0.5rem;
 }
 p {
-  color: $gray-600; margin-bottom: 0.9rem;
-  font-weight: 400; line-height: 1.7;
+  color: $gray-600; margin-bottom: 1.1rem;
+  font-weight: 400; line-height: 1.75;
 }
 strong { color: $gray-800; font-weight: 700; }
-ul, ol { color: $gray-600; margin: 0.5rem 0 0.9rem 1.4rem; line-height: 1.7; }
-li { margin-bottom: 0.2rem; }
+ul, ol { color: $gray-600; margin: 0.5rem 0 1.1rem 1.4rem; line-height: 1.75; }
+li { margin-bottom: 0.25rem; }
 
 // ── PAGE HERO ────────────────────────────────────────────────
 .page-hero {
@@ -42,7 +42,7 @@ li { margin-bottom: 0.2rem; }
     &.badge-bridge    { background: rgba(180,83,9,0.35);  color: #fcd19c; }
   }
   h1 {
-    font-size: $text-2xl; font-weight: 800; color: $white;
+    font-family: $font-heading; font-size: 1.875rem; font-weight: 800; color: $white;
     line-height: 1.15; margin-bottom: 0.5rem;
     text-wrap: balance;
   }

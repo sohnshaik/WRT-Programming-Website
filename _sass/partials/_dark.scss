@@ -82,6 +82,11 @@
     &:hover { background: #1f2337; border-color: #9fabc4; }
   }
 
+  // ── Code blocks ──────────────────────────────────────────
+  .code-block, figure.highlight {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+  }
+
   // ── Quiz ─────────────────────────────────────────────────
   .quiz-wrap { background: #1a1d2e; border-color: #2a2f47; }
   .quiz-q { color: #dce1ec; }

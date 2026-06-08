@@ -57,19 +57,19 @@ code:not(.highlight code) {
 // (figure.highlight > pre > code)
 figure.highlight {
   margin: 1.1rem 0;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid $gray-700;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
 }
 
 // Our own hand-rolled .code-block components (used in week pages)
 .code-block {
   border: 1px solid $gray-200;
-  border-radius: 6px;
+  border-radius: 8px;
   margin: 1.1rem 0;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
 }
 .cb-header {
   display: flex;
