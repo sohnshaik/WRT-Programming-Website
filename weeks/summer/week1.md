@@ -165,10 +165,10 @@ kMotorID = <span class="num">6</span>;  <span class="cmt">// COMPILE ERROR: cann
 
 <h3 class="sub">Topic 1 — Coding Prompt</h3>
 <div class="challenge">
-  <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Robot Constants Block</div><div class="ch-sub">Declare variables like you would in Constants.java</div></div></div>
+  <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Robot Shooter Block</div><div class="ch-sub">Declare variables like you would in Shooter.java</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Declare the following using proper WRT naming conventions: a constant int for the shooter motor CAN ID of 5, a constant double for max shooter speed of 0.9, a boolean for whether the shooter is currently spinning, and a String for the subsystem name "Shooter".</p>
-    <textarea class="code-input" placeholder="// Write your Constants.java block here..."></textarea>
+    <p class="ch-prompt">Declare four variables using WRT naming conventions:<br>• a constant <code>int</code> — the shooter motor's CAN ID (value: 5)<br>• a constant <code>double</code> — the max shooter speed (value: 0.9)<br>• a <code>boolean</code> — whether the shooter is currently spinning (start it as <code>false</code>)<br>• a <code>String</code> — the subsystem name (value: <code>"Shooter"</code>)<br><br>Then print all four with <code>System.out.println</code>.</p>
+    <textarea class="code-input" placeholder="// Write your Shooter.java block here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w1-t1')">Show Solution</button></div>
     <div id="sol-w1-t1" style="display:none;margin-top:1rem">
       <div class="code-block"><div class="cb-header"><span class="cb-lang">solution</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
@@ -328,7 +328,7 @@ count--;  <span class="cmt">// count is now 1 — shorthand for count = count - 
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Encoder Conversion</div><div class="ch-sub">Use operators to convert raw sensor data</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">A TalonFX encoder reports 2048 ticks per revolution. Given <code>int rawTicks = 9216</code>, calculate: (1) total revolutions as a double, (2) wheel distance in inches assuming a 4-inch diameter wheel (<code>circumference = Math.PI * 4</code>), and (3) whether the robot has moved more than 12 inches (boolean).</p>
+    <p class="ch-prompt">A TalonFX encoder reports 2048 ticks per revolution. Start with <code>int rawTicks = 9216;</code> and calculate three things — print each one:<br>1. total revolutions as a double (hint: <code>rawTicks / 2048.0</code> — the <code>.0</code> matters, try it without and see what breaks)<br>2. distance in inches — a 4-inch diameter wheel has a circumference of <code>Math.PI * 4</code>, so distance = revolutions × circumference<br>3. a boolean: has the robot moved more than 12 inches?</p>
     <textarea class="code-input" placeholder="// Write your conversion here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w1-t2')">Show Solution</button></div>
     <div id="sol-w1-t2" style="display:none;margin-top:1rem">
@@ -582,7 +582,7 @@ count--;  <span class="cmt">// count is now 1 — shorthand for count = count - 
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Motor Calculator</div><div class="ch-sub">Variables, types, casting, operators all in one</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Declare <code>final double kGearRatio = 8.46</code> and <code>double motorRPM = 5400.0</code>. Calculate <code>wheelRPM</code> as a double. Cast it to int. Then calculate the wheel surface speed in ft/s given a 4-inch radius wheel (<code>circumference = 2 * Math.PI * (4.0/12.0)</code> feet). Comment every line.</p>
+    <p class="ch-prompt">Start with these two variables:<br><code>final double kGearRatio = 8.46;</code><br><code>double motorRPM = 5400.0;</code><br><br>Do three things:<br>1. Calculate <code>wheelRPM</code> by dividing motorRPM by kGearRatio. Print it.<br>2. Cast <code>wheelRPM</code> to an <code>int</code> and store it in a new variable. Print it — what did casting do to the decimal?<br>3. Add a comment above each line explaining what it does.</p>
     <textarea class="code-input" placeholder="// Write your code here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w1-t4')">Show Solution</button></div>
     <div id="sol-w1-t4" style="display:none;margin-top:1rem">

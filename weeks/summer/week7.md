@@ -205,7 +205,7 @@ next_title: "Week 8 — Recap & Resources"
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Shooter State Machine</div><div class="ch-sub">Model a shooter subsystem using an enum and switch</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Declare an enum called <code>ShooterState</code> with values: <code>IDLE</code>, <code>SPOOLING</code>, <code>READY</code>, <code>FIRING</code>. Then write a method <code>void runShooter(ShooterState state)</code> that uses a switch statement: IDLE stops the motor, SPOOLING runs it at 0.5, READY runs it at 0.9, FIRING runs it at full speed (1.0) and calls a <code>fire()</code> method. Add a helper method <code>boolean isSpinning(ShooterState state)</code> that returns true if the state is not IDLE.</p>
+    <p class="ch-prompt">Declare an enum <code>ShooterState</code> with four values: <code>IDLE</code>, <code>SPOOLING</code>, <code>READY</code>, <code>FIRING</code>.<br><br>Write a method <code>void printAction(ShooterState state)</code> with a switch on it:<br>• <code>IDLE</code> → print <code>"Motor off"</code><br>• <code>SPOOLING</code> → print <code>"Running at 50%"</code><br>• <code>READY</code> → print <code>"Running at 90%"</code><br>• <code>FIRING</code> → print <code>"Firing!"</code><br><br>In main, call it with each of the four states to confirm all cases work.</p>
     <textarea class="code-input" placeholder="// Write your ShooterState enum and methods here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w7-t1')">Show Solution</button></div>
     <div id="sol-w7-t1" style="display:none;margin-top:1rem">
@@ -422,7 +422,7 @@ names.<span class="fn">remove</span>(<span class="str">"Alice"</span>); <span cl
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Vision Target Tracker</div><div class="ch-sub">Use an ArrayList to manage a dynamic list of targets</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Create an ArrayList&lt;String&gt; called <code>targets</code>. Add four targets: "NoteA", "NoteB", "NoteC", "NoteD". Then: (1) print the size, (2) print the element at index 2, (3) remove "NoteB", (4) print the size again, (5) check if "NoteB" is still in the list and print the result, (6) use a for-each loop to print all remaining targets. Make sure to import ArrayList.</p>
+    <p class="ch-prompt">Create an <code>ArrayList&lt;String&gt;</code> called <code>targets</code> and add four entries: <code>"NoteA"</code>, <code>"NoteB"</code>, <code>"NoteC"</code>, <code>"NoteD"</code>.<br><br>Then do each step and print as you go:<br>1. Print the size<br>2. Print the element at index 2<br>3. Remove <code>"NoteB"</code><br>4. Print the size again<br>5. Check if <code>"NoteB"</code> is still in the list using <code>contains()</code> — print the result<br>6. Use a for-each loop to print all remaining targets<br><br>Don't forget <code>import java.util.ArrayList;</code> at the top!</p>
     <textarea class="code-input" placeholder="// Write your vision tracker here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w7-t2')">Show Solution</button></div>
     <div id="sol-w7-t2" style="display:none;margin-top:1rem">
@@ -613,7 +613,7 @@ System.out.<span class="fn">println</span>(s);   <span class="cmt">// 0.75</span
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Motor ID Manager</div><div class="ch-sub">ArrayList&lt;Integer&gt; with autoboxing and wrapper utilities</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Create an ArrayList&lt;Integer&gt; called <code>motorIDs</code>. Add CAN IDs: 1, 5, 8, 12, 20. Then: (1) print the total count, (2) remove the ID at index 2 (which is 8), (3) add a new ID parsed from the String "15" using Integer.parseInt(), (4) print whether 5 is in the list using contains(), (5) use a for-each loop to print all IDs. Make sure the output makes sense given each step.</p>
+    <p class="ch-prompt">Create an <code>ArrayList&lt;Integer&gt;</code> called <code>motorIDs</code> and add five CAN IDs: 1, 5, 8, 12, 20.<br><br>Then do each step in order:<br>1. Print how many IDs are in the list<br>2. Remove the ID at index 2 using <code>remove(2)</code> — that's the value 8<br>3. Add a new ID by converting the String <code>"15"</code> to an int using <code>Integer.parseInt()</code><br>4. Print whether 5 is still in the list using <code>contains(5)</code><br>5. Use a for-each loop to print all remaining IDs<br><br>Don't forget <code>import java.util.ArrayList;</code>!</p>
     <textarea class="code-input" placeholder="// Write your motor ID manager here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w7-t3')">Show Solution</button></div>
     <div id="sol-w7-t3" style="display:none;margin-top:1rem">

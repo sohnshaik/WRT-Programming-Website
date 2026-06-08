@@ -199,7 +199,7 @@ System.out.<span class="fn">println</span>(motorIDs[motorIDs.length - <span clas
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Module Sensor Buffer</div><div class="ch-sub">Declare and loop through parallel arrays</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Declare two arrays: a <code>double[]</code> named <code>motorTemps</code> with values <code>{42.1, 38.5, 51.0, 44.8}</code> representing four motor temperatures, and a <code>String[]</code> named <code>moduleNames</code> with values <code>{"FL", "FR", "BL", "BR"}</code>. Then write a for loop that prints each module's name and temperature on one line, like: <code>FL: 42.1°C</code>. After the loop, print the total number of modules using <code>.length</code>.</p>
+    <p class="ch-prompt">Declare these two arrays:<br><code>double[] motorTemps = {42.1, 38.5, 51.0, 44.8};</code><br><code>String[] moduleNames = {"FL", "FR", "BL", "BR"};</code><br><br>Write a for loop that prints each module on one line like: <code>"FL: 42.1°C"</code><br><br>Use the same index variable to access both arrays at once. After the loop, print the total number of modules using <code>.length</code>.</p>
     <textarea class="code-input" placeholder="// Write your code here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w4-t1')">Show Solution</button></div>
     <div id="sol-w4-t1" style="display:none;margin-top:1rem">
@@ -387,7 +387,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Total modules: "</
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Clamp and Convert</div><div class="ch-sub">Write two utility methods and call them in sequence</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Write two static methods: (1) <code>clampSpeed(double speed, double max)</code> that returns <code>speed</code> clamped to the range <code>[-max, max]</code> — if speed is above max, return max; if below -max, return -max; otherwise return speed as-is. (2) <code>printModuleSpeeds(double[] speeds)</code> that loops through an array of doubles and prints each one clamped to 1.0, formatted as <code>"Module 0: 0.8"</code>. In <code>main</code>, create a double array <code>{0.5, 1.3, -0.7, -1.1}</code> and call <code>printModuleSpeeds</code> on it.</p>
+    <p class="ch-prompt">Write a static method called <code>clampSpeed(double speed, double max)</code> that prevents speeds from going out of range:<br>• if speed is above max → return max<br>• if speed is below -max → return -max<br>• otherwise → return speed unchanged<br><br>In <code>main</code>, test it by printing these calls:<br><code>clampSpeed(1.3, 1.0)</code> → should return 1.0<br><code>clampSpeed(-1.1, 1.0)</code> → should return -1.0<br><code>clampSpeed(0.5, 1.0)</code> → should return 0.5</p>
     <textarea class="code-input" placeholder="// Write your code here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w4-t2')">Show Solution</button></div>
     <div id="sol-w4-t2" style="display:none;margin-top:1rem">
@@ -587,7 +587,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Total modules: "</
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Document Your Utility Class</div><div class="ch-sub">Add proper Javadoc to a DriveCalculator class</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Below is a utility class with three methods but no documentation. Add: (1) a class-level Javadoc above <code>DriveCalculator</code>, (2) a full method Javadoc with <code>@param</code> and <code>@return</code> above each method. Then add inline comments inside each method body explaining WHY (not just what) each line does. Finally, name the class-level constant properly with a k-prefix and a units suffix.</p>
+    <p class="ch-prompt">The starter code has three methods but zero documentation. Your job:<br>1. Add a Javadoc comment above the class explaining what <code>DriveCalculator</code> does<br>2. Add a Javadoc above each method with <code>@param</code> for each input and <code>@return</code> describing the output<br>3. Add one inline comment inside each method explaining WHY that math works, not just what it does<br>4. Rename the constant to follow WRT convention: <code>k</code> prefix + a units suffix (e.g. <code>kTicksPerRev</code>)</p>
     <textarea class="code-input" placeholder="public class DriveCalculator {
     static double GEAR_RATIO = 8.46;
 
@@ -695,7 +695,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Total modules: "</
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Wheel Speed Calculator</div><div class="ch-sub">Write reusable methods for real FRC drivetrain math</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Write three static methods: (1) <code>motorRPMtoWheelRPM(double motorRPM, double gearRatio)</code> that returns motorRPM divided by gearRatio, (2) <code>wheelRPMtoSpeed_fps(double wheelRPM, double wheelDiam_in)</code> that returns wheel surface speed in feet per second using <code>Math.PI * wheelDiam_in / 12.0 * wheelRPM / 60.0</code>, and (3) <code>getModuleInfo(int[] canIDs, double[] angles)</code> that loops through both arrays and prints each module's CAN ID and angle on one line. Add a Javadoc to each method with @param and @return tags. In your <code>main</code>, call all three with a Falcon 500 at 5400 RPM, gear ratio 8.46, and 4-inch wheels.</p>
+    <p class="ch-prompt">Write two static methods for drivetrain math:<br>1. <code>motorToWheelRPM(double motorRPM, double gearRatio)</code> — returns <code>motorRPM / gearRatio</code><br>2. <code>wheelRPMtoSpeed(double wheelRPM, double wheelDiam_in)</code> — returns wheel surface speed in ft/s using: <code>Math.PI * wheelDiam_in / 12.0 * wheelRPM / 60.0</code><br><br>In <code>main</code>, call both with: motorRPM = 5400, gearRatio = 8.46, wheelDiam_in = 4.0. Print the wheel RPM and the speed in ft/s.<br><br>Add a <code>@param</code> and <code>@return</code> Javadoc comment to each method.</p>
     <textarea class="code-input" placeholder="// Your code here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w4')">Show Solution</button></div>
     <div id="sol-w4" style="display:none;margin-top:1rem">

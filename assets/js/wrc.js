@@ -490,3 +490,65 @@ document.addEventListener('keydown', e => {
     else openSearch();
   }
 });
+
+// ── CODE INPUT EDITOR BEHAVIOUR ───────────────────────────────
+// Tab = 4 spaces, Enter = auto-indent, } = auto-dedent
+document.addEventListener('keydown', e => {
+  const ta = e.target;
+  if (!ta.classList.contains('code-input')) return;
+
+  const INDENT = '    '; // 4 spaces
+
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    const s = ta.selectionStart, en = ta.selectionEnd;
+    if (s === en) {
+      // No selection — insert 4 spaces at cursor
+      ta.value = ta.value.slice(0, s) + INDENT + ta.value.slice(en);
+      ta.selectionStart = ta.selectionEnd = s + 4;
+    } else {
+      // Selection — indent every selected line
+      const lines = ta.value.split('\n');
+      let charCount = 0, firstLine = -1, lastLine = -1;
+      for (let i = 0; i < lines.length; i++) {
+        if (charCount <= s && firstLine === -1) firstLine = i;
+        if (charCount <= en - 1) lastLine = i;
+        charCount += lines[i].length + 1;
+      }
+      for (let i = firstLine; i <= lastLine; i++) lines[i] = INDENT + lines[i];
+      ta.value = lines.join('\n');
+      ta.selectionStart = s + 4;
+      ta.selectionEnd = en + 4 * (lastLine - firstLine + 1);
+    }
+
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    const s = ta.selectionStart;
+    const textBefore = ta.value.slice(0, s);
+    const currentLine = textBefore.split('\n').pop();
+    // Match indentation of current line
+    const indentMatch = currentLine.match(/^(\s*)/);
+    let indent = indentMatch ? indentMatch[1] : '';
+    // Extra indent after opening brace
+    if (currentLine.trimEnd().endsWith('{')) indent += INDENT;
+    ta.value = ta.value.slice(0, s) + '\n' + indent + ta.value.slice(ta.selectionEnd);
+    ta.selectionStart = ta.selectionEnd = s + 1 + indent.length;
+
+  } else if (e.key === '}') {
+    e.preventDefault();
+    const s = ta.selectionStart;
+    const textBefore = ta.value.slice(0, s);
+    const currentLine = textBefore.split('\n').pop();
+    // De-indent by one level if the line is only whitespace so far
+    let insert = '}';
+    if (/^\s+$/.test(currentLine) && currentLine.length >= 4) {
+      // Remove one indent level from the current line
+      const lineStart = s - currentLine.length;
+      ta.value = ta.value.slice(0, lineStart) + currentLine.slice(4) + '}' + ta.value.slice(s);
+      ta.selectionStart = ta.selectionEnd = s - 4 + 1;
+    } else {
+      ta.value = ta.value.slice(0, s) + '}' + ta.value.slice(ta.selectionEnd);
+      ta.selectionStart = ta.selectionEnd = s + 1;
+    }
+  }
+});

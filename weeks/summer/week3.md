@@ -173,7 +173,7 @@ next_title: "Week 4 — Arrays & Methods"
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">For Loop Fundamentals</div><div class="ch-sub">build a loop that processes motor IDs</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Given <code>int[] motorIDs = {10, 20, 30, 40, 50};</code>, write a for loop that: (1) prints each motor ID with its index like "Motor 0: ID 10", (2) also prints a warning if the ID is greater than 35 saying "Motor X: ID Y — HIGH ID, check wiring". use the index variable for both the array access and the label.</p>
+    <p class="ch-prompt">Start with: <code>int[] motorIDs = {10, 20, 30, 40, 50};</code><br><br>Write a for loop that goes through every element. For each motor:<br>• print a line like <code>"Motor 0: ID 10"</code> — the number is the index, the ID is the array value<br>• if the ID is greater than 35, also print: <code>"Motor X: ID Y — HIGH ID, check wiring"</code><br><br>Which motors in this array should trigger the warning?</p>
     <textarea class="code-input" placeholder="// Write your code here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w3-t1')">Show Solution</button></div>
     <div id="sol-w3-t1" style="display:none;margin-top:1rem">
@@ -315,7 +315,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Warnings triggered
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Sensor Array Scanner</div><div class="ch-sub">use foreach to analyze readings</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Given <code>double[] voltages = {11.8, 12.4, 9.1, 12.7, 10.5, 12.1};</code>, use a foreach loop to: (1) find and print the minimum voltage, (2) count and print how many readings are below 11.0 (consider these "low battery" warnings), (3) print the sum of all readings. do NOT use a regular for loop — this is foreach practice.</p>
+    <p class="ch-prompt">Start with: <code>double[] voltages = {11.8, 12.4, 9.1, 12.7, 10.5, 12.1};</code><br><br>Use a foreach loop (not a regular for loop) to go through every voltage. Inside the loop:<br>• add each voltage to a running total<br>• if the voltage is below 11.0, increment a warning counter<br><br>After the loop, print the total sum and how many low-battery warnings there were.<br><br>Hint: declare <code>double total = 0;</code> and <code>int warnings = 0;</code> before the loop.</p>
     <textarea class="code-input" placeholder="// Write your code here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w3-t2')">Show Solution</button></div>
     <div id="sol-w3-t2" style="display:none;margin-top:1rem">
@@ -463,7 +463,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Sum: "</span> + su
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Console Input Validator</div><div class="ch-sub">a while loop that's perfectly fine on a computer</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Write a while loop that simulates asking a user to enter a number between 1 and 10. Since we can't do real input here, simulate it: start with <code>int attempt = 0;</code> and on each iteration, generate a "user input" via <code>int input = (attempt % 12) + 1;</code> (this cycles through 1-12). Keep looping while input is not in range [1,10]. Print each attempt. When a valid input is found, print "Valid input: X". Cap iterations at 20 so you can't infinite loop.</p>
+    <p class="ch-prompt">Write a while loop that counts up from 1 and keeps going until it finds the first number divisible by both 3 and 7.<br><br>• start with <code>int n = 1;</code><br>• each iteration: print the current value of <code>n</code>, then add 1<br>• the loop condition should keep running while <code>n</code> is NOT divisible by both 3 and 7<br>• after the loop, print <code>"Found it: " + n</code><br><br>What number should it stop on? Verify it manually before running.</p>
     <textarea class="code-input" placeholder="// Write your code here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w3-t3')">Show Solution</button></div>
     <div id="sol-w3-t3" style="display:none;margin-top:1rem">
@@ -550,7 +550,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Sum: "</span> + su
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Sensor Array Analyzer</div><div class="ch-sub">Process a real FRC-style sensor array</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Given <code>double[] readings = {12.4, 13.1, 11.8, 14.0, 12.7};</code>, use a regular for loop to: calculate and print the average, find and print the maximum value, and print a warning for any reading below 12.0 inches.</p>
+    <p class="ch-prompt">Start with: <code>double[] readings = {12.4, 13.1, 11.8, 14.0, 12.7};</code><br><br>Use a regular for loop (with an index variable) to:<br>• add up all readings, then after the loop print the average (sum ÷ number of readings)<br>• track the highest value seen — after the loop print it<br>• for any reading below 12.0, print a warning like <code>"Reading 2: 11.8 — LOW"</code></p>
     <textarea class="code-input" placeholder="// Your code here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w3')">Show Solution</button></div>
     <div id="sol-w3" style="display:none;margin-top:1rem">

@@ -241,7 +241,7 @@ next_title: "Week 3 — Loops"
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Robot Ready Check</div><div class="ch-sub">Combine booleans with logical operators</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Given: <code>boolean isEnabled = true</code>, <code>boolean hasGamePiece = true</code>, <code>boolean isAtSpeed = false</code>, <code>double distanceInches = 20.0</code>.<br><br>Create a boolean <code>readyToShoot</code> that is true only when: robot is enabled AND has a game piece AND is at speed AND distance is 24 inches or less. Then create a boolean <code>shouldIntake</code> that is true when: enabled AND does NOT have a game piece. Print both.</p>
+    <p class="ch-prompt">Start with these variables:<br><code>boolean isEnabled = true;</code><br><code>boolean hasGamePiece = true;</code><br><code>boolean isAtSpeed = false;</code><br><code>double distanceInches = 20.0;</code><br><br>Create two new booleans using <code>&&</code>, <code>||</code>, and <code>!</code>:<br>• <code>readyToShoot</code> — true only if ALL of these are true: enabled, has piece, at speed, AND distance is 24 or less<br>• <code>shouldIntake</code> — true if enabled AND does NOT have a game piece<br><br>Print both. With these values, what should each one be?</p>
     <textarea class="code-input" placeholder="// Write your code here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w2-t1')">Show Solution</button></div>
     <div id="sol-w2-t1" style="display:none;margin-top:1rem">
@@ -528,7 +528,7 @@ System.out.<span class="fn">println</span>(<span class="str">"shouldIntake: "</s
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Robot State Checker</div><div class="ch-sub">Use if/else and booleans in an FRC scenario</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Given: <code>boolean isEnabled = true</code>, <code>boolean hasGamePiece = false</code>, <code>double distanceToTarget = 18.5</code> (inches).<br><br>Write an if/else chain that prints: "Robot disabled" if not enabled, "Intake" if no game piece, "Drive closer" if piece held but distance &gt; 24, and "Shoot!" if piece held and distance &lt;= 24. Check isEnabled first.</p>
+    <p class="ch-prompt">Start with these variables:<br><code>boolean isEnabled = true;</code><br><code>boolean hasGamePiece = false;</code><br><code>double distanceToTarget = 18.5;</code><br><br>Write an if/else chain that checks conditions in this exact order and prints the matching message:<br>1. not enabled → print <code>"Robot disabled"</code><br>2. no game piece → print <code>"Intake"</code><br>3. has piece but distance &gt; 24 → print <code>"Drive closer"</code><br>4. has piece and distance &lt;= 24 → print <code>"Shoot!"</code><br><br>With these starting values, which line should print?</p>
     <textarea class="code-input" placeholder="// Your code here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w2-t2')">Show Solution</button></div>
     <div id="sol-w2-t2" style="display:none;margin-top:1rem">
@@ -746,7 +746,7 @@ System.out.<span class="fn">println</span>(<span class="str">"shouldIntake: "</s
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Robot State Router</div><div class="ch-sub">Write a switch for a robot state machine</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Given a String variable <code>robotState</code>, write a switch statement with four cases: "INTAKING" prints "running intake", "SHOOTING" prints "shooting game piece", "CLIMBING" prints "deploying climber", and a default that prints "idle". Then test it by setting robotState to each value and tracing the output mentally.</p>
+    <p class="ch-prompt">Declare <code>String robotState = "SHOOTING";</code> and write a switch on it with four cases:<br>• <code>"INTAKING"</code> → print <code>"running intake"</code><br>• <code>"SHOOTING"</code> → print <code>"shooting game piece"</code><br>• <code>"CLIMBING"</code> → print <code>"deploying climber"</code><br>• default → print <code>"idle"</code><br><br>Run it with "SHOOTING", then change the value to "CLIMBING" and verify the right case runs. Don't forget <code>break;</code> after each case.</p>
     <textarea class="code-input" placeholder="// Write your code here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w2-t3')">Show Solution</button></div>
     <div id="sol-w2-t3" style="display:none;margin-top:1rem">
@@ -892,7 +892,7 @@ System.out.<span class="fn">println</span>(<span class="str">"shouldIntake: "</s
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Compact Motor Direction</div><div class="ch-sub">Use ternary for quick value selection</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Using ternary operators (not if/else): write a variable <code>intakeSpeed</code> that equals <code>0.7</code> if <code>isRunning</code> is true, else <code>0.0</code>. Then write <code>directionLabel</code> that equals <code>"FORWARD"</code> if <code>isReversed</code> is false, else <code>"REVERSE"</code>. Use <code>boolean isRunning = true</code> and <code>boolean isReversed = false</code>.</p>
+    <p class="ch-prompt">Start with these two booleans:<br><code>boolean isRunning = true;</code><br><code>boolean isReversed = false;</code><br><br>Using ternary operators only (no if/else allowed):<br>• <code>double intakeSpeed</code> — should be <code>0.7</code> if running, <code>0.0</code> if not<br>• <code>String directionLabel</code> — should be <code>"FORWARD"</code> if not reversed, <code>"REVERSE"</code> if reversed<br><br>Print both. Then flip <code>isRunning</code> to false, recalculate, and print again to check.</p>
     <textarea class="code-input" placeholder="// Write your code here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w2-t4')">Show Solution</button></div>
     <div id="sol-w2-t4" style="display:none;margin-top:1rem">
