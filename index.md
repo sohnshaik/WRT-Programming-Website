@@ -48,12 +48,12 @@ page_id: home
 
         <div class="lead-card">
           <div class="lc-video-wrap">
-            <iframe src="https://www.youtube.com/embed/pDyGaJHrMWM" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/2gwjvVwuv94" allowfullscreen></iframe>
           </div>
           <div class="lc-body">
             <div class="lc-role">Chief Programmer</div>
             <div class="lc-name">Sohan Shaik</div>
-            <div class="lc-bio">Hey!! I'm Sohan, the Chief Programmer, Software Lead, or whatever you want to call it, for team 2974. I've been lucky enough to be coding FRC robots since sophomore year and it's lowkey taken up a whoooleeee lot of my time, and fortunately, programming (not the idea but the people around me from programming) is my personality at this point lol. Little bit about me: I love music!! music is life to me and without it I don't think i would be much of a person. of course, i love robotics as a whole, and it does unfortuantely take up a lot of my time, but when im free, i love to read; whether it be manwha, manga, or just a long sci-fi novel — i'll read it all. gl and i hope y'all will reach out with questions! &lt;3 (srsly tho please ask questions i wish i did so so so much)</div>
+            <div class="lc-bio">Hey!! I'm Sohan, the Chief Programmer, Software Lead, or whatever you want to call it, for team 2974. I've been lucky enough to be coding FRC robots since sophomore year and it's lowkey taken up a whoooleeee lot of my time, and fortunately, programming (not the idea but the people around me from programming) is my personality at this point lol. Little bit about me: I love music!! music is life to me and without it I don't think i would be much of a person. of course, i love robotics as a whole, and it does unfortuantely take up a lot of my time, but when im free, i love to read; whether it be manwha, manga, or just a long sci-fi novel — i'll read it all. i also am a very big boba person; specifically thai tea boba :D, and i also love castella cakes. gl and i hope y'all will reach out with questions! &lt;3 (srsly tho please ask questions i wish i did so so so much)</div>
           </div>
         </div>
 
@@ -83,7 +83,7 @@ page_id: home
           <div class="lc-body">
             <div class="lc-role">Programming Lead</div>
             <div class="lc-name">Alexandra Ding</div>
-            <div class="lc-bio">something something ice skate boba cats (kitties :D)</div>
+            <div class="lc-bio">hi!!!! i'm alexandra, your favorite performative, nonchalant larper and also avid tiramisu enjoyer. i started coding FRC robots starting sophomore year, and i've made a lot of great friends not only on programming, but on this team in general. i'm super excited to see what we can do next year and to continue pushing our limits (wait guys, this is such motivational speach core)! can't wait to meet everyone!!!</div>
           </div>
         </div>
 
@@ -98,7 +98,7 @@ page_id: home
           <div class="lc-body">
             <div class="lc-role">Programming Lead</div>
             <div class="lc-name">Saarth Pandya</div>
-            <div class="lc-bio">something something brawl stars dr house something</div>
+            <div class="lc-bio">Hey guys, I'm Saarth, resident anti-procrastinator, Brawl Stars casual, and 2974 programmer. I started coding FRC bots my sophomore year, and over all of these years I've learned new skills, met new people, and made a bunch of fond memories. FRC programming (or really FRC in general) can get pretty heavy in terms of time commitment and such, and all the Java and FRC code that you need to learn may look intimidating at first, but don't worry- it's genuinely really fun once you get used to it and learn some basics. If it wasn't, I don't think any of us would be doing this. And also, if you're confused or need to ask something, don't hesitate, because as our goat Banks Troutman once famously said: "Ask and you shall receive!</div>
           </div>
         </div>
       </div>
