@@ -89,14 +89,14 @@ layout: default
 
   // Collect all direct children
   var children = Array.from(wrap.children);
-  var headers = children.filter(function(c) { return c.matches && c.matches('h2.sh'); });
+  var headers = children.filter(function(c) { return c.matches && c.matches('h2.sh, div.project-task'); });
   if (headers.length < 2) return; // single-section week, no splitting
 
-  // Build screens: group children by which h2 they follow
+  // Build screens: group children by which h2 / project-task they follow
   var screens = [];
   var current = null;
   children.forEach(function(child) {
-    if (child.matches && child.matches('h2.sh')) {
+    if (child.matches && child.matches('h2.sh, div.project-task')) {
       current = document.createElement('div');
       current.className = 'week-screen';
       screens.push(current);
@@ -142,7 +142,8 @@ layout: default
     });
 
     var h2 = screens[n].querySelector('h2.sh');
-    var title = h2 ? h2.textContent.trim() : ('Topic ' + (n + 1));
+    var pt = screens[n].querySelector('.project-task');
+    var title = h2 ? h2.textContent.trim() : (pt ? 'Project Task' : ('Topic ' + (n + 1)));
     var countEl = document.getElementById('sn-count');
     var titleEl = document.getElementById('sn-title');
     if (titleEl) titleEl.textContent = title;
