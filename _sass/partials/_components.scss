@@ -661,6 +661,15 @@ textarea.code-input {
   }
 }
 
+// Specificity fix: .topbar-links a (0,1,1) beats .ucd-item (0,1,0),
+// making dropdown items white-on-white in light mode.
+// .uc-dropdown .ucd-item (0,2,0) wins.
+.uc-dropdown .ucd-item {
+  color: $gray-700;
+  &:hover { color: $gray-800; }
+  &.ucd-signout { color: $red; }
+}
+
 // ── TOPBAR SEARCH BUTTON ──────────────────────────────────────
 .topbar-search-btn {
   background: rgba(255,255,255,0.1);

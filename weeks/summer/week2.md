@@ -939,6 +939,19 @@ System.out.<span class="fn">println</span>(<span class="str">"directionLabel: "<
 <h2 class="sh" id="topic-5">Knowledge Check</h2>
 <div id="quiz-w2"></div>
 
+<h2 class="sh" id="weekly-test">Weekly Test</h2>
+<p>covers everything from week 2. a bit longer than topic quizzes and your score gets sent to the leads :) try without looking back first!!</p>
+<div class="weekly-test-block">
+  <div class="wt-header">
+    <div class="wt-icon"><i data-lucide="clipboard-list"></i></div>
+    <div>
+      <div class="wt-title">week 2 test</div>
+      <div class="wt-sub">booleans, logical operators, if/else, switch · 8 questions · good luck!!</div>
+    </div>
+  </div>
+  <div id="test-summer-w2"></div>
+</div>
+
 <script>
 // ── TOPIC 1 QUIZ: Booleans & Logical Operators ─────────────────
 const quiz_w2_t1 = new Quiz('quiz-w2-t1', [
@@ -993,16 +1006,3 @@ const test_w2 = new Quiz('test-summer-w2', [
   { question: "When is a switch statement preferred over if-else?", options: ["When you need to check ranges (speed > 0.5)","When one variable maps to many exact fixed values","When you have complex boolean logic","When you need multiple variables compared"], correct: 1, explanation: "switch shines when one variable has many exact values to check -- like button IDs (1, 2, 3) or state strings ('SHOOTING', 'INTAKING', 'CLIMBING'). for ranges and complex logic involving multiple variables or && / || conditions, use if-else." }
 ], 'summer-w2-test');
 </script>
-
-<h2 class="sh" id="weekly-test">Weekly Test</h2>
-<p>covers everything from week 2. a bit longer than topic quizzes and your score gets sent to the leads :) try without looking back first!!</p>
-<div class="weekly-test-block">
-  <div class="wt-header">
-    <div class="wt-icon"><i data-lucide="clipboard-list"></i></div>
-    <div>
-      <div class="wt-title">week 2 test</div>
-      <div class="wt-sub">booleans, logical operators, if/else, switch · 8 questions · good luck!!</div>
-    </div>
-  </div>
-  <div id="test-summer-w2"></div>
-</div>
