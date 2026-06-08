@@ -118,7 +118,13 @@
   .fill-container { border-color: #2a2f47; }
 
   // ── Challenge ────────────────────────────────────────────
-  .challenge { border-color: #2a2f47; .ch-body { background: #1a1d2e; } }
+  .challenge {
+    border-color: #2a2f47;
+    .ch-body {
+      background: #1a1d2e;
+      .ch-prompt { color: #bec5d6; code { background: #252840; color: #f08090; } }
+    }
+  }
 
   // ── Interactive box ──────────────────────────────────────
   .interactive-box {

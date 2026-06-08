@@ -6,9 +6,7 @@
 (function() {
   try {
     const saved = localStorage.getItem('wrc-dark');
-    if (saved !== '0') {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    }
+    document.documentElement.setAttribute('data-theme', saved === '0' ? 'light' : 'dark');
   } catch {}
 })();
 
