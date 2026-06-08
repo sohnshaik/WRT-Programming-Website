@@ -68,7 +68,7 @@ page_id: home
           <div class="lc-body">
             <div class="lc-role">Assistant Chief Programmer</div>
             <div class="lc-name">Alex An</div>
-            <div class="lc-bio">something something brainrot lowkirkentological something</div>
+            <div class="lc-bio">yo guys what’s up, im alex. i invent brainrot, play geometry dash, and code robots!! im a sophomore and i only started last year so i don’t know how im even here honestly. just in that one year though ive made a lot of great friends in the team and learned a ton about programming and FRC. i think that anybody can succeed at robotics, it’s really not so intimidating once you grasp the basics. work hard and ask us any questions, i believe in you guys! also PLEASE watch frieren</div>
           </div>
         </div>
 
