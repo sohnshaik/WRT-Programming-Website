@@ -40,7 +40,7 @@ page_id: home
       <div class="cd-leads-header">
         <div class="cdlh-label">before you start</div>
         <div class="cdlh-title">meet the programming leads :)</div>
-        <div class="cdlh-sub">short intro videos from the people actually running this thing. watch these first — they'll tell you what to expect, what the team builds, and honestly just vibe check you lol. we don't bite LOL.</div>
+        <div class="cdlh-sub">short intro videos from the people actually running this thing. watch these first — they'll tell you what to expect, what the team builds, and honestly just give you a vibe check.</div>
         <div class="cdlh-scroll-hint"><span class="cdlh-arrow">↓</span> keep scrolling to meet everyone</div>
       </div>
 
@@ -48,16 +48,12 @@ page_id: home
 
         <div class="lead-card">
           <div class="lc-video-wrap">
-            <div class="lc-video-placeholder" data-slot="1">
-              <div class="lv-icon">▶</div>
-              <div class="lv-name">Chief Programmer</div>
-              <div class="lv-sub">video coming soon :)</div>
-            </div>
+            <iframe src="https://www.youtube.com/embed/pDyGaJHrMWM" allowfullscreen></iframe>
           </div>
           <div class="lc-body">
             <div class="lc-role">Chief Programmer</div>
             <div class="lc-name">Sohan Shaik</div>
-            <div class="lc-bio">Hey!! I'm sohan, the Chief Programmer, Software Lead, or whatever you want to call it, for team 2974. I've been lucky enough to be coding FRC robots since sophomore year and it's lowkey taken up a whoooleeee lot of my time, and fortunately, programming (not the idea but the people around me from programming) is my personality at this point lol. This course is basically everything I wish someone had sat me down and taught me when i joined. gl and i hope y'all will reach out with questions! &lt;3 (srsly tho please ask questions i wish i did so so so much)</div>
+            <div class="lc-bio">Hey!! I'm Sohan, the Chief Programmer, Software Lead, or whatever you want to call it, for team 2974. I've been lucky enough to be coding FRC robots since sophomore year and it's lowkey taken up a whoooleeee lot of my time, and fortunately, programming (not the idea but the people around me from programming) is my personality at this point lol. Little bit about me: I love music!! music is life to me and without it I don't think i would be much of a person. of course, i love robotics as a whole, and it does unfortuantely take up a lot of my time, but when im free, i love to read; whether it be manwha, manga, or just a long sci-fi novel — i'll read it all. gl and i hope y'all will reach out with questions! &lt;3 (srsly tho please ask questions i wish i did so so so much)</div>
           </div>
         </div>
 
