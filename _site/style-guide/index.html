@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Primary Meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B2A4A">
+<meta name="description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+<meta name="author" content="Walton Robotics Team 2974">
+
+<!-- Title -->
+<title>Java Style Guide | WRT Programming</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="/assets/images/logo.jpeg">
+<link rel="apple-touch-icon" href="/assets/images/logo.jpeg">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="WRT Programming">
+<meta property="og:title"       content="Java Style Guide">
+<meta property="og:description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+<meta property="og:url"         content="http://localhost:4000/style-guide/">
+<meta property="og:image"       content="http://localhost:4000/assets/images/logo.jpeg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="Java Style Guide">
+<meta name="twitter:description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+
+<!-- Jekyll SEO tag (handles canonical, structured data, etc.) -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Java Style Guide | WRT Programming</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Java Style Guide" />
+<meta name="author" content="Walton Robotics Team 2974" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<meta property="og:description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<link rel="canonical" href="http://localhost:4000/style-guide/" />
+<meta property="og:url" content="http://localhost:4000/style-guide/" />
+<meta property="og:site_name" content="WRT Programming" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Java Style Guide" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Walton Robotics Team 2974" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Walton Robotics Team 2974"},"@type":"WebPage","url":"http://localhost:4000/style-guide/","headline":"Java Style Guide","description":"Walton Robotics Team 2974 — Java &amp; FRC Programming Course","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<!-- Lucide icons (inline SVG, no build step required) -->
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.511.0/dist/umd/lucide.min.js"></script>
+
+<!-- Feed -->
+<link rel="alternate" type="application/rss+xml" title="WRT Programming" href="/feed.xml">
+
+</head>
+<body>
+
+<!-- Auth loading overlay — hidden once auth check resolves -->
+<div id="wrc-auth-overlay" aria-hidden="true">
+  <div class="wao-inner">
+    <div class="wao-spinner"></div>
+  </div>
+</div>
+
+<header class="topbar">
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Open sidebar"><i data-lucide="menu"></i></button>
+  <a href="/" class="topbar-logo">
+    <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+    <div>
+      <div class="topbar-name">WRT Programming</div>
+      <div class="topbar-sub">Team 2974 · 2026-27</div>
+    </div>
+  </a>
+  <div class="topbar-sep"></div>
+  <nav class="topbar-links">
+    <a href="/" >Home</a>
+    <a href="/training" >Training</a>
+    <a href="/weeks/summer/week1" >Summer</a>
+    <a href="/weeks/offseason/os-week1" >Offseason</a>
+    <a href="/project" >Project</a>
+    <a href="/style-guide" class="active">Style Guide</a>
+  </nav>
+  <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)"><i data-lucide="search"></i></button>
+  <a href="/login/" class="topbar-signin-btn" id="topbar-signin-static">sign in</a>
+</header>
+
+
+<!-- wrc.js must load BEFORE main content so Quiz class is defined for inline scripts -->
+<script src="/assets/js/wrc.js"></script>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+
+  <div class="sidebar-course-header">
+    <div class="sch-logo-row">
+      <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+      <div>
+        <span class="sch-logo-name">WRT Programming</span>
+        <span class="sch-logo-sub">Team 2974 · Java &amp; FRC</span>
+      </div>
+    </div>
+    <div class="sch-title-area">
+      <div class="sch-label">Course</div>
+      <div class="sch-title">2026-27 season</div>
+    </div>
+    <div class="sch-progress">
+      <div class="sp-label">
+        <span>Progress</span>
+        <span class="sp-pct-text">0%</span>
+      </div>
+      <div class="sp-track"><div class="sp-fill" style="transform:scaleX(0)"></div></div>
+    </div>
+    <!-- impeccable-variants-start 960f32f8 -->
+    <div data-impeccable-variants="960f32f8" data-impeccable-variant-count="3" style="display: contents">
+      <!-- Original -->
+      <div data-impeccable-variant="original">
+        <button class="sidebar-search-btn" onclick="openSearch()">
+          <span class="ssb-icon"><i data-lucide="search"></i></span>
+          <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+        </button>
+      </div>
+      <!-- Variants: insert below this line -->
+<style data-impeccable-css="960f32f8">
+  @scope ([data-impeccable-variant="1"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255, var(--p-opacity, 0.68));
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(255,255,255,0.13);
+      color: rgba(255,255,255,0.85);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.55);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+  @scope ([data-impeccable-variant="2"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(255,255,255, calc(var(--p-surface, 0.5) * 0.2));
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      transition: background 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.92);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.62);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+  @scope ([data-impeccable-variant="3"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(196,18,48, calc(var(--p-accent, 0.5) * 0.18));
+      border: 1px solid rgba(196,18,48, calc(var(--p-accent, 0.5) * 0.7));
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      transition: background 0.12s ease, border-color 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(196,18,48,0.18);
+      border-color: rgba(196,18,48,0.6);
+      color: rgba(255,255,255,0.92);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(196,18,48,0.12);
+      border: 1px solid rgba(196,18,48,0.25);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+</style>
+<div data-impeccable-variant="1" data-impeccable-params='[
+  {"id":"opacity","kind":"range","min":0.55,"max":0.82,"step":0.01,"default":0.68,"label":"Text brightness"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+<div data-impeccable-variant="2" style="display:none" data-impeccable-params='[
+  {"id":"surface","kind":"range","min":0,"max":1,"step":0.05,"default":0.5,"label":"Surface brightness"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+<div data-impeccable-variant="3" style="display:none" data-impeccable-params='[
+  {"id":"accent","kind":"range","min":0,"max":1,"step":0.05,"default":0.5,"label":"Red accent"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+    </div>
+    <!-- impeccable-variants-end 960f32f8 -->
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      <span class="ngl-icon"><i data-lucide="sun"></i></span>
+      <span class="ngl-text">Summer — Java Foundations</span>
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item " href="/weeks/summer/week1" data-page="summer-w1">
+        <span class="ni-num">W1</span>
+        <span class="ni-text">The Basics</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week2" data-page="summer-w2">
+        <span class="ni-num">W2</span>
+        <span class="ni-text">Logic &amp; Control Flow</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week3" data-page="summer-w3">
+        <span class="ni-num">W3</span>
+        <span class="ni-text">Loops</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week4" data-page="summer-w4">
+        <span class="ni-num">W4</span>
+        <span class="ni-text">Arrays &amp; Methods</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week5" data-page="summer-w5">
+        <span class="ni-num">W5</span>
+        <span class="ni-text">OOP — Classes &amp; Objects</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week6" data-page="summer-w6">
+        <span class="ni-num">W6</span>
+        <span class="ni-text">Inheritance &amp; Polymorphism</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week7" data-page="summer-w7">
+        <span class="ni-num">W7</span>
+        <span class="ni-text">Advanced Classes</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week8" data-page="summer-w8">
+        <span class="ni-num">W8</span>
+        <span class="ni-text">Recap &amp; Resources</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      <span class="ngl-icon"><i data-lucide="cpu"></i></span>
+      <span class="ngl-text">Offseason — FRC Training</span>
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item " href="/weeks/offseason/os-week1" data-page="offseason-o1">
+        <span class="ni-num">O1</span>
+        <span class="ni-text">Git &amp; GitHub</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week2" data-page="offseason-o2">
+        <span class="ni-num">O2</span>
+        <span class="ni-text">WPILib Setup</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week3" data-page="offseason-o3">
+        <span class="ni-num">O3</span>
+        <span class="ni-text">Command-Based</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week4" data-page="offseason-o4">
+        <span class="ni-num">O4</span>
+        <span class="ni-text">Motors &amp; Sensors</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week5" data-page="offseason-o5">
+        <span class="ni-num">O5</span>
+        <span class="ni-text">PID Control</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week6" data-page="offseason-o6">
+        <span class="ni-num">O6</span>
+        <span class="ni-text">Autonomous</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week7" data-page="offseason-o7">
+        <span class="ni-num">O7</span>
+        <span class="ni-text">Subsystem Ownership</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week8" data-page="offseason-o8">
+        <span class="ni-num">O8</span>
+        <span class="ni-text">Build Season Prep</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Collapse tab — fixed to right edge of sidebar, no overlap with progress bar -->
+  <button class="sidebar-collapse-btn" id="sidebar-collapse-btn"
+    onclick="toggleSidebarWidth()" title="Collapse sidebar" aria-label="Collapse sidebar">‹</button>
+
+</nav>
+
+<!-- Search Modal -->
+<div class="search-overlay" id="search-overlay" onclick="closeSearch()">
+  <div class="search-modal" onclick="event.stopPropagation()">
+    <div class="sm-header">
+      <span class="sm-icon"><i data-lucide="search"></i></span>
+      <input type="text" id="search-input" class="sm-input" placeholder="Search topics, concepts, keywords…" oninput="searchTopics(this.value)" autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="sm-close" onclick="closeSearch()"><i data-lucide="x"></i></button>
+    </div>
+    <div class="sm-results" id="search-results">
+      <div class="sm-empty">Start typing to search across all 16 weeks…</div>
+    </div>
+    <div class="sm-footer">
+      <span><kbd>↑↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> open</span>
+      <span><kbd>Esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+  <main class="main" id="main-content">
+    <div class="page-hero" style="border-bottom:4px solid #C41230">
+  <div class="ph-breadcrumb"><a href="/">home</a><span>/</span><span>style guide</span></div>
+  <div class="ph-badge badge-summer">reference</div>
+  <h1>WRT Java Style Guide</h1>
+  <p>how we write code on team 2974. read this before writing a single line for a real robot :)</p>
+</div>
+
+<div class="content-wrap">
+
+<div class="callout danger"><p><strong>this is not optional!!</strong> PRs that don't follow these conventions will get review comments and sent back. it's not personal, it's just how we keep 8+ programmers from losing their minds during build season :D</p></div>
+
+<h2 class="sh">naming conventions</h2>
+<p>we use specific prefixes so you can tell what kind of thing a variable is just by looking at its name. no guessing required.</p>
+
+<table>
+<thead><tr><th>prefix</th><th>what it's for</th><th>example</th></tr></thead>
+<tbody>
+<tr><td>k</td><td>constants (final static values, usually in a Constants.java nested class)</td><td><code>kShooterMotorID</code>, <code>kMaxTranslationSpeed_mps</code></td></tr>
+<tr><td>m_</td><td>member/instance variables (fields on a class)</td><td><code>m_drivetrain</code>, <code>m_shooter</code>, <code>m_isRunning</code></td></tr>
+<tr><td>trg_</td><td>Trigger objects (WPILib button bindings)</td><td><code>trg_shoot</code>, <code>trg_intakeIn</code></td></tr>
+<tr><td>log_</td><td>logging/telemetry objects (AdvantageKit, DataLog)</td><td><code>log_robotPose</code>, <code>log_shooterRPM</code></td></tr>
+<tr><td>sig_</td><td>Phoenix 6 StatusSignal objects</td><td><code>sig_velocity</code>, <code>sig_appliedVolts</code></td></tr>
+</tbody>
+</table>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — naming in practice</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">public class</span> <span class="cls">ShooterSubsystem</span> <span class="kw">extends</span> <span class="cls">SubsystemBase</span> {
+
+    <span class="cmt">// m_ prefix for instance fields</span>
+    <span class="kw">private final</span> <span class="cls">TalonFX</span> m_shooterMotor;
+    <span class="kw">private</span> <span class="type">double</span> m_targetRPS = <span class="num">0.0</span>;
+    <span class="kw">private</span> <span class="type">boolean</span> m_isSpunUp = <span class="kw">false</span>;
+
+    <span class="kw">public</span> <span class="cls">ShooterSubsystem</span>() {
+        <span class="cmt">// k prefix for constants from Constants.java</span>
+        m_shooterMotor = <span class="kw">new</span> <span class="cls">TalonFX</span>(ShooterK.kMotorID);
+    }
+}</pre>
+</div>
+
+<h2 class="sh">constants file structure</h2>
+<p>all constants live in <code>Constants.java</code> using nested static classes with the <code>K</code> suffix (short for "constants" -- yes it's a convention, just roll with it lol).</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — Constants.java structure</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">public final class</span> <span class="cls">Constants</span> {
+
+    <span class="cmt">// one nested class per subsystem</span>
+    <span class="kw">public static final class</span> <span class="cls">ShooterK</span> {
+        <span class="kw">public static final int</span>    kMotorID    = <span class="num">11</span>;
+        <span class="kw">public static final double</span> kIdleRPS    = <span class="num">0.0</span>;
+        <span class="kw">public static final double</span> kShootRPS   = <span class="num">80.0</span>;
+        <span class="kw">public static final String</span> kLogTab     = <span class="str">"Shooter"</span>;
+    }
+
+    <span class="kw">public static final class</span> <span class="cls">DriveK</span> {
+        <span class="cmt">// include units in the name to avoid conversion bugs!!</span>
+        <span class="kw">public static final double</span> kMaxTranslation_mps = <span class="num">4.5</span>;
+        <span class="kw">public static final double</span> kMaxRotation_radps  = <span class="num">9.42</span>;
+        <span class="kw">public static final double</span> kWheelRadius_m      = <span class="num">0.0508</span>;
+    }
+
+    <span class="kw">public static final class</span> <span class="cls">ControllerK</span> {
+        <span class="kw">public static final int</span> kDriverPort   = <span class="num">0</span>;
+        <span class="kw">public static final int</span> kOperatorPort = <span class="num">1</span>;
+    }
+}</pre>
+</div>
+
+<div class="callout tip"><p><strong>unit suffixes!!</strong> always include the unit in the constant name for any physical value. <code>kShootSpeed</code> is ambiguous. <code>kShootRPS</code> (rotations per second) or <code>kMaxTranslation_mps</code> (meters per second) is not. this has literally prevented robot crashes. not joking.</p></div>
+
+<h2 class="sh">casing rules</h2>
+<div class="concept-grid">
+  <div class="concept-card">
+    <div class="cc-label">camelCase</div>
+    <div class="cc-title">variables + methods</div>
+    <div class="cc-desc"><code>motorSpeed</code>, <code>isRunning</code>, <code>getTargetAngle()</code>. first word lowercase, each new word capitalized.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">PascalCase</div>
+    <div class="cc-title">classes + interfaces</div>
+    <div class="cc-desc"><code>ShooterSubsystem</code>, <code>DriveCommand</code>, <code>RobotContainer</code>. every word capitalized.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">k + PascalCase</div>
+    <div class="cc-title">constants</div>
+    <div class="cc-desc"><code>kMotorID</code>, <code>kMaxSpeed_mps</code>. always <code>k</code> lowercase, then PascalCase. <strong>not</strong> SCREAMING_SNAKE on this team.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">m_ + camelCase</div>
+    <div class="cc-title">member variables</div>
+    <div class="cc-desc"><code>m_shooter</code>, <code>m_isSpunUp</code>. the underscore is part of the prefix, not the name.</div>
+  </div>
+</div>
+
+<div class="callout warning"><p><strong>we don't use SCREAMING_SNAKE_CASE</strong> for constants on this team. i know java tutorials use it. we don't. use <code>k</code> prefix + PascalCase. yes this is different from standard java conventions. no we don't care lol</p></div>
+
+<h2 class="sh">comments</h2>
+<p>comments explain <em>why</em>, not <em>what</em>. the code already says what it does. you explain why it's doing that specific thing, especially if it looks weird.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — bad vs good comments</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// BAD: just restates the code, adds nothing</span>
+<span class="cmt">// set motor speed to 0.5</span>
+m_motor.set(<span class="num">0.5</span>);
+
+<span class="cmt">// GOOD: explains why 0.5, what this achieves</span>
+<span class="cmt">// ramp slowly to avoid current spike on enable</span>
+m_motor.set(<span class="num">0.5</span>);
+
+<span class="cmt">// ALSO GOOD: explains a non-obvious workaround</span>
+<span class="cmt">// inverted because motor is mounted backwards on Oasis (but not Watergate)</span>
+m_motor.setInverted(<span class="kw">true</span>);</pre>
+</div>
+
+<h3 class="sub">javadoc for public methods</h3>
+<p>any public method that's non-trivial needs a javadoc. especially anything other subsystems or commands will call.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — javadoc format</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">/**
+ * Sets the shooter target speed and begins spinning up.
+ *
+ * @param targetRPS desired flywheel speed in rotations per second
+ */</span>
+<span class="kw">public void</span> <span class="fn">setTargetRPS</span>(<span class="type">double</span> targetRPS) {
+    m_targetRPS = targetRPS;
+    m_controller.setSetpoint(targetRPS);
+}</pre>
+</div>
+
+<h2 class="sh">magic numbers = banned :)</h2>
+<p>a magic number is a raw number in your code with no explanation. they're basically bugs waiting to happen because nobody knows what they mean 6 months later.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — magic numbers</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// BAD -- what is 11? what is 80? who knows!!</span>
+m_motor = <span class="kw">new</span> <span class="cls">TalonFX</span>(<span class="num">11</span>);
+m_controller.setSetpoint(<span class="num">80.0</span>);
+
+<span class="cmt">// GOOD -- self-documenting, easy to change from one place</span>
+m_motor = <span class="kw">new</span> <span class="cls">TalonFX</span>(ShooterK.kMotorID);
+m_controller.setSetpoint(ShooterK.kShootRPS);</pre>
+</div>
+
+<h2 class="sh">subsystem structure</h2>
+<p>all subsystems extend <code>SubsystemBase</code> and follow the same section layout. makes it easier to jump between files without getting lost.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — subsystem template</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">package</span> frc.robot.subsystems;
+
+<span class="kw">import</span> edu.wpi.first.wpilibj2.command.SubsystemBase;
+<span class="kw">import</span> com.ctre.phoenix6.hardware.<span class="cls">TalonFXS</span>;
+<span class="kw">import</span> com.ctre.phoenix6.configs.<span class="cls">TalonFXSConfiguration</span>;
+<span class="kw">import</span> com.ctre.phoenix6.configs.<span class="cls">CurrentLimitsConfigs</span>;
+<span class="kw">import</span> com.ctre.phoenix6.configs.<span class="cls">MotorOutputConfigs</span>;
+<span class="kw">import</span> com.ctre.phoenix6.signals.<span class="cls">NeutralModeValue</span>;
+<span class="kw">import</span> com.ctre.phoenix6.signals.<span class="cls">InvertedValue</span>;
+
+<span class="kw">public class</span> <span class="cls">ExampleSubsystem</span> <span class="kw">extends</span> <span class="cls">SubsystemBase</span> {
+
+    <span class="cmt">// ---- HARDWARE -----------------------------------------------</span>
+    <span class="kw">private final</span> <span class="cls">TalonFXS</span> m_motor;
+
+    <span class="cmt">// ---- STATE --------------------------------------------------</span>
+    <span class="kw">private</span> <span class="type">double</span> m_targetRPS = <span class="num">0.0</span>;
+
+    <span class="cmt">// ---- CONSTRUCTOR --------------------------------------------</span>
+    <span class="kw">public</span> <span class="cls">ExampleSubsystem</span>() {
+        m_motor = <span class="kw">new</span> <span class="cls">TalonFXS</span>(ExampleK.kMotorID);
+        configureMotor();
+    }
+
+    <span class="kw">private void</span> <span class="fn">configureMotor</span>() {
+        <span class="kw">var</span> currentCfg = <span class="kw">new</span> <span class="cls">CurrentLimitsConfigs</span>()
+            .<span class="fn">withStatorCurrentLimit</span>(ExampleK.kCurrentLimit_A)
+            .<span class="fn">withSupplyCurrentLimit</span>(<span class="num">15</span>)
+            .<span class="fn">withStatorCurrentLimitEnable</span>(<span class="kw">true</span>)
+            .<span class="fn">withSupplyCurrentLimitEnable</span>(<span class="kw">true</span>);
+
+        <span class="kw">var</span> outputCfg = <span class="kw">new</span> <span class="cls">MotorOutputConfigs</span>()
+            .<span class="fn">withInverted</span>(<span class="cls">InvertedValue</span>.CounterClockwise_Positive) <span class="cmt">// flip if needed</span>
+            .<span class="fn">withNeutralMode</span>(<span class="cls">NeutralModeValue</span>.Coast);
+
+        m_motor.<span class="fn">getConfigurator</span>().<span class="fn">apply</span>(
+            <span class="kw">new</span> <span class="cls">TalonFXSConfiguration</span>()
+                .<span class="fn">withCurrentLimits</span>(currentCfg)
+                .<span class="fn">withMotorOutput</span>(outputCfg)
+        );
+    }
+
+    <span class="cmt">// ---- PUBLIC API ---------------------------------------------</span>
+    <span class="kw">public void</span> <span class="fn">setSpeed</span>(<span class="type">double</span> rps) { m_targetRPS = rps; }
+
+    <span class="kw">public boolean</span> <span class="fn">isAtTarget</span>() {
+        <span class="kw">return</span> Math.abs(m_motor.<span class="fn">getVelocity</span>().<span class="fn">getValueAsDouble</span>() - m_targetRPS) &lt; ExampleK.kTolerance_rps;
+    }
+
+    <span class="cmt">// ---- PERIODIC -----------------------------------------------</span>
+    <span class="kw">@Override</span>
+    <span class="kw">public void</span> <span class="fn">periodic</span>() {
+        <span class="cmt">// runs every 20ms. telemetry + closed-loop control goes here</span>
+        m_motor.set(m_targetRPS / ExampleK.kMaxRPS);
+    }
+}</pre>
+</div>
+
+<h2 class="sh">no while loops in robot code</h2>
+<div class="callout danger"><p><strong>seriously, no while loops.</strong> the robot runs a 20ms control loop managed by WPILib. a blocking while loop freezes that loop and the watchdog kills the robot. use commands, state machines, or periodic methods instead.</p></div>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — while loop vs command-based</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// NEVER DO THIS in robot code</span>
+<span class="kw">while</span> (!m_shooter.isAtTarget()) {
+    <span class="cmt">// blocks the entire robot loop. watchdog WILL fire. robot dies.</span>
+}
+</pre>
+</div>
+
+<h2 class="sh">git conventions</h2>
+<p>check O1 for the full git workflow. these are the non-negotiables:</p>
+
+<table>
+<thead><tr><th>rule</th><th>why</th></tr></thead>
+<tbody>
+<tr><td>never commit directly to <code>main</code></td><td>main = always working. one bad push during competition is a crisis</td></tr>
+<tr><td>branch name: <code>type/short-desc</code></td><td><code>feature/shooter-pid</code>, <code>fix/intake-stall</code>, <code>refactor/constants-cleanup</code></td></tr>
+<tr><td>keep PRs small and focused</td><td>one feature per PR. giant PRs are painful to review and silently break things</td></tr>
+<tr><td>needs at least one approval</td><td>one of our mentors (Steve or Banks) reviews before merging to main</td></tr>
+</tbody>
+</table>
+
+<h2 class="sh">WPILib 2026 notes</h2>
+<p>WPILib updates every year and things get deprecated. here's what matters for 2026:</p>
+
+<div class="concept-grid">
+  <div class="concept-card">
+    <div class="cc-label">Java 17</div>
+    <div class="cc-title">still required</div>
+    <div class="cc-desc">WPILib 2026 still uses Java 17. WPILib installer sets this up automatically. don't mess with the JDK path.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">CTRE / Krakens</div>
+    <div class="cc-title">everything is TalonFX</div>
+    <div class="cc-desc">we run Kraken X60s (TalonFX) across the whole robot -- drive, shooter, intake, all of it. all config goes through Phoenix 6 configurator API. no REV motors on this team.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">Phoenix 6</div>
+    <div class="cc-title">still current — use it</div>
+    <div class="cc-desc">Phoenix 6 is still the CTRE library. TalonFX + Phoenix 6 is what we use on the drivetrain. if you see Phoenix 5 in old code, do not copy it — it's dead.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">Commands</div>
+    <div class="cc-title">stable — no big changes</div>
+    <div class="cc-desc">command-based architecture hasn't changed. SubsystemBase, Scheduler, Triggers all work the same. Choreo is still our path following library.</div>
+  </div>
+</div>
+
+<div class="callout info"><p><strong>not sure what version we're on?</strong> check <code>build.gradle</code> in the robot repo. look for the wpilib version string. if you're confused just ask before changing anything :)</p></div>
+
+<h2 class="sh">heads up — System Core is coming (2027)</h2>
+<p>for the 2027 season we're switching to <strong>System Core</strong>, FIRST's new robot controller that replaces the roboRIO. it runs on a faster processor, has more I/O, and uses a new HAL underneath — but WPILib abstracts most of the differences so the code you write now will largely carry over. a few things to know now so you're not caught off guard:</p>
+
+<div class="concept-grid">
+  <div class="concept-card">
+    <div class="cc-label">same WPILib API</div>
+    <div class="cc-title">your code still works</div>
+    <div class="cc-desc">SubsystemBase, Commands, Triggers, TalonFX — all the same. WPILib wraps the hardware. you won't be rewriting the whole robot.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">new HAL</div>
+    <div class="cc-title">low-level stuff changes</div>
+    <div class="cc-desc">direct register access or anything that talks to roboRIO hardware specifically (custom DIO tricks, etc.) will need updating. most teams won't hit this.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">vendor libs</div>
+    <div class="cc-title">watch for updates</div>
+    <div class="cc-desc">Phoenix 6 / CTRE will need a 2027-compatible release. don't upgrade vendor deps until that drops — check team Discord before touching build.gradle.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">deployment</div>
+    <div class="cc-title">different image process</div>
+    <div class="cc-desc">System Core has a different imaging/flashing process than roboRIO. there will be a team doc on this before build season. don't wing it at comp when ur helping other teams</div>
+  </div>
+</div>
+
+<div class="callout warning"><p><strong>don't stress about this now.</strong> other teams are still on roboRIO for 2026, while we will be on systemcore because ~~we're just that goated~~ we're a beta testig team. learn the current stack well first — the concepts transfer directly. System Core is just new hardware underneath the same WPILib you already know.</p></div>
+
+<h2 class="sh">pre-PR checklist</h2>
+<p>run through this before opening a pull request. if you can't check all of these, fix it first!!</p>
+
+<div class="concept-grid">
+  <div class="concept-card">
+    <div class="cc-label">naming</div>
+    <div class="cc-title">prefixes used correctly?</div>
+    <div class="cc-desc">k, m_, trg_, log_ where appropriate. no raw magic numbers. no SCREAMING_SNAKE.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">comments</div>
+    <div class="cc-title">public methods documented?</div>
+    <div class="cc-desc">any public non-trivial method has a javadoc. workarounds have inline comments explaining why.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">constants</div>
+    <div class="cc-title">constants in Constants.java?</div>
+    <div class="cc-desc">no hardcoded IDs, speeds, or PID values in subsystem files. all in the relevant K class.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">loops</div>
+    <div class="cc-title">no while loops?</div>
+    <div class="cc-desc">no blocking loops anywhere in robot code. check commands, periodic methods, and auto routines.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">applyConfig</div>
+    <div class="cc-title">TalonFX configured?</div>
+    <div class="cc-desc">all TalonFX motors need a <code>TalonFXConfiguration</code> applied via <code>getConfigurator().apply()</code> in the constructor. neutral mode, current limits, inversions -- all in there.</div>
+  </div>
+  <div class="concept-card">
+    <div class="cc-label">sim</div>
+    <div class="cc-title">doesn't crash in sim?</div>
+    <div class="cc-desc">run in simulation mode. it doesn't need to work perfectly, it should just do what you intended it to do.</div>
+  </div>
+</div>
+
+</div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="sf-left">
+    <img src="/assets/images/logo.jpeg" alt="WRT">
+    <span>Walton Robotics Team 2974 &mdash; WRT Programming &mdash; 2026-27</span>
+  </div>
+  <div class="sf-right">
+    <a href="https://github.com/WaltonRobotics" target="_blank" rel="noopener">GitHub</a>
+    <a href="/sitemap.xml">Sitemap</a>
+    <a href="/feed.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- Mobile sidebar backdrop -->
+<div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+
+<script type="module" src="/assets/js/auth.js"></script>
+
+<script>
+  // Initialize Lucide icons after all content is in the DOM.
+  // Called again by auth.js after the user chip is injected.
+  function initIcons() { if (typeof lucide !== 'undefined') lucide.createIcons(); }
+  document.addEventListener('DOMContentLoaded', initIcons);
+</script>
+
+<!-- impeccable-live-start -->
+<script src="http://localhost:8400/live.js"></script>
+<!-- impeccable-live-end -->
+</body>
+</html>

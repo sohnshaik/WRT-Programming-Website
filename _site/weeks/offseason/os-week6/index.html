@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Primary Meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B2A4A">
+<meta name="description" content="Auto sequences, field coordinates, odometry, and PathPlanner.">
+<meta name="author" content="Walton Robotics Team 2974">
+
+<!-- Title -->
+<title>Autonomous & PathPlanner | WRT Programming</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="/assets/images/logo.jpeg">
+<link rel="apple-touch-icon" href="/assets/images/logo.jpeg">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="WRT Programming">
+<meta property="og:title"       content="Autonomous & PathPlanner">
+<meta property="og:description" content="Auto sequences, field coordinates, odometry, and PathPlanner.">
+<meta property="og:url"         content="http://localhost:4000/weeks/offseason/os-week6/">
+<meta property="og:image"       content="http://localhost:4000/assets/images/logo.jpeg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="Autonomous & PathPlanner">
+<meta name="twitter:description" content="Auto sequences, field coordinates, odometry, and PathPlanner.">
+
+<!-- Jekyll SEO tag (handles canonical, structured data, etc.) -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Autonomous &amp; PathPlanner | WRT Programming</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Autonomous &amp; PathPlanner" />
+<meta name="author" content="Walton Robotics Team 2974" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<meta property="og:description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<link rel="canonical" href="http://localhost:4000/weeks/offseason/os-week6/" />
+<meta property="og:url" content="http://localhost:4000/weeks/offseason/os-week6/" />
+<meta property="og:site_name" content="WRT Programming" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Autonomous &amp; PathPlanner" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Walton Robotics Team 2974" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Walton Robotics Team 2974"},"@type":"WebPage","url":"http://localhost:4000/weeks/offseason/os-week6/","headline":"Autonomous &amp; PathPlanner","description":"Walton Robotics Team 2974 — Java &amp; FRC Programming Course","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<!-- Lucide icons (inline SVG, no build step required) -->
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.511.0/dist/umd/lucide.min.js"></script>
+
+<!-- Feed -->
+<link rel="alternate" type="application/rss+xml" title="WRT Programming" href="/feed.xml">
+
+</head>
+<body data-page-id="offseason-o6" data-require-auth="1">
+
+<!-- Auth loading overlay — hidden once auth check resolves -->
+<div id="wrc-auth-overlay" aria-hidden="true">
+  <div class="wao-inner">
+    <div class="wao-spinner"></div>
+  </div>
+</div>
+
+<header class="topbar">
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Open sidebar"><i data-lucide="menu"></i></button>
+  <a href="/" class="topbar-logo">
+    <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+    <div>
+      <div class="topbar-name">WRT Programming</div>
+      <div class="topbar-sub">Team 2974 · 2026-27</div>
+    </div>
+  </a>
+  <div class="topbar-sep"></div>
+  <nav class="topbar-links">
+    <a href="/" >Home</a>
+    <a href="/training" >Training</a>
+    <a href="/weeks/summer/week1" >Summer</a>
+    <a href="/weeks/offseason/os-week1" class="active">Offseason</a>
+    <a href="/project" >Project</a>
+    <a href="/style-guide" >Style Guide</a>
+  </nav>
+  <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)"><i data-lucide="search"></i></button>
+  <a href="/login/" class="topbar-signin-btn" id="topbar-signin-static">sign in</a>
+</header>
+
+
+<!-- wrc.js must load BEFORE main content so Quiz class is defined for inline scripts -->
+<script src="/assets/js/wrc.js"></script>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+
+  <div class="sidebar-course-header">
+    <div class="sch-logo-row">
+      <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+      <div>
+        <span class="sch-logo-name">WRT Programming</span>
+        <span class="sch-logo-sub">Team 2974 · Java &amp; FRC</span>
+      </div>
+    </div>
+    <div class="sch-title-area">
+      <div class="sch-label">Course</div>
+      <div class="sch-title">2026-27 season</div>
+    </div>
+    <div class="sch-progress">
+      <div class="sp-label">
+        <span>Progress</span>
+        <span class="sp-pct-text">0%</span>
+      </div>
+      <div class="sp-track"><div class="sp-fill" style="transform:scaleX(0)"></div></div>
+    </div>
+    <!-- impeccable-variants-start 960f32f8 -->
+    <div data-impeccable-variants="960f32f8" data-impeccable-variant-count="3" style="display: contents">
+      <!-- Original -->
+      <div data-impeccable-variant="original">
+        <button class="sidebar-search-btn" onclick="openSearch()">
+          <span class="ssb-icon"><i data-lucide="search"></i></span>
+          <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+        </button>
+      </div>
+      <!-- Variants: insert below this line -->
+<style data-impeccable-css="960f32f8">
+  @scope ([data-impeccable-variant="1"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255, var(--p-opacity, 0.68));
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(255,255,255,0.13);
+      color: rgba(255,255,255,0.85);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.55);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+  @scope ([data-impeccable-variant="2"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(255,255,255, calc(var(--p-surface, 0.5) * 0.2));
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      transition: background 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.92);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.62);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+  @scope ([data-impeccable-variant="3"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(196,18,48, calc(var(--p-accent, 0.5) * 0.18));
+      border: 1px solid rgba(196,18,48, calc(var(--p-accent, 0.5) * 0.7));
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      transition: background 0.12s ease, border-color 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(196,18,48,0.18);
+      border-color: rgba(196,18,48,0.6);
+      color: rgba(255,255,255,0.92);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(196,18,48,0.12);
+      border: 1px solid rgba(196,18,48,0.25);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+</style>
+<div data-impeccable-variant="1" data-impeccable-params='[
+  {"id":"opacity","kind":"range","min":0.55,"max":0.82,"step":0.01,"default":0.68,"label":"Text brightness"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+<div data-impeccable-variant="2" style="display:none" data-impeccable-params='[
+  {"id":"surface","kind":"range","min":0,"max":1,"step":0.05,"default":0.5,"label":"Surface brightness"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+<div data-impeccable-variant="3" style="display:none" data-impeccable-params='[
+  {"id":"accent","kind":"range","min":0,"max":1,"step":0.05,"default":0.5,"label":"Red accent"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+    </div>
+    <!-- impeccable-variants-end 960f32f8 -->
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      <span class="ngl-icon"><i data-lucide="sun"></i></span>
+      <span class="ngl-text">Summer — Java Foundations</span>
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item " href="/weeks/summer/week1" data-page="summer-w1">
+        <span class="ni-num">W1</span>
+        <span class="ni-text">The Basics</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week2" data-page="summer-w2">
+        <span class="ni-num">W2</span>
+        <span class="ni-text">Logic &amp; Control Flow</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week3" data-page="summer-w3">
+        <span class="ni-num">W3</span>
+        <span class="ni-text">Loops</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week4" data-page="summer-w4">
+        <span class="ni-num">W4</span>
+        <span class="ni-text">Arrays &amp; Methods</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week5" data-page="summer-w5">
+        <span class="ni-num">W5</span>
+        <span class="ni-text">OOP — Classes &amp; Objects</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week6" data-page="summer-w6">
+        <span class="ni-num">W6</span>
+        <span class="ni-text">Inheritance &amp; Polymorphism</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week7" data-page="summer-w7">
+        <span class="ni-num">W7</span>
+        <span class="ni-text">Advanced Classes</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week8" data-page="summer-w8">
+        <span class="ni-num">W8</span>
+        <span class="ni-text">Recap &amp; Resources</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      <span class="ngl-icon"><i data-lucide="cpu"></i></span>
+      <span class="ngl-text">Offseason — FRC Training</span>
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item " href="/weeks/offseason/os-week1" data-page="offseason-o1">
+        <span class="ni-num">O1</span>
+        <span class="ni-text">Git &amp; GitHub</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week2" data-page="offseason-o2">
+        <span class="ni-num">O2</span>
+        <span class="ni-text">WPILib Setup</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week3" data-page="offseason-o3">
+        <span class="ni-num">O3</span>
+        <span class="ni-text">Command-Based</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week4" data-page="offseason-o4">
+        <span class="ni-num">O4</span>
+        <span class="ni-text">Motors &amp; Sensors</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week5" data-page="offseason-o5">
+        <span class="ni-num">O5</span>
+        <span class="ni-text">PID Control</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item active" href="/weeks/offseason/os-week6" data-page="offseason-o6">
+        <span class="ni-num">O6</span>
+        <span class="ni-text">Autonomous</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week7" data-page="offseason-o7">
+        <span class="ni-num">O7</span>
+        <span class="ni-text">Subsystem Ownership</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week8" data-page="offseason-o8">
+        <span class="ni-num">O8</span>
+        <span class="ni-text">Build Season Prep</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Collapse tab — fixed to right edge of sidebar, no overlap with progress bar -->
+  <button class="sidebar-collapse-btn" id="sidebar-collapse-btn"
+    onclick="toggleSidebarWidth()" title="Collapse sidebar" aria-label="Collapse sidebar">‹</button>
+
+</nav>
+
+<!-- Search Modal -->
+<div class="search-overlay" id="search-overlay" onclick="closeSearch()">
+  <div class="search-modal" onclick="event.stopPropagation()">
+    <div class="sm-header">
+      <span class="sm-icon"><i data-lucide="search"></i></span>
+      <input type="text" id="search-input" class="sm-input" placeholder="Search topics, concepts, keywords…" oninput="searchTopics(this.value)" autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="sm-close" onclick="closeSearch()"><i data-lucide="x"></i></button>
+    </div>
+    <div class="sm-results" id="search-results">
+      <div class="sm-empty">Start typing to search across all 16 weeks…</div>
+    </div>
+    <div class="sm-footer">
+      <span><kbd>↑↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> open</span>
+      <span><kbd>Esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+  <main class="main" id="main-content">
+    <div class="page-hero">
+  <div class="ph-breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <a href="#">Offseason</a>
+    <span>/</span>
+    <span>Week O6</span>
+  </div>
+  <div class="ph-badge badge-offseason">Offseason · Week 6 of 8</div>
+  <h1>Autonomous & PathPlanner</h1>
+  <p>Auto sequences, field coordinates, odometry, and PathPlanner.</p>
+  
+  <div class="ph-topics">
+    
+    <a href="#topic-1" class="ph-topic-pill">Autonomous Period</a>
+    
+    <a href="#topic-2" class="ph-topic-pill">PathPlanner</a>
+    
+    <a href="#topic-3" class="ph-topic-pill">Auto Chooser</a>
+    
+      
+  </div>
+  
+</div>
+
+<div class="week-layout">
+
+  
+  <nav class="topic-nav" id="topic-nav">
+    <div class="tn-header">this week</div>
+    <ul class="tn-list">
+      
+      <li>
+        <a class="tn-link" href="#topic-1" data-tn="1">
+          <span class="tn-num">1</span>
+          <span class="tn-label">Autonomous Period</span>
+        </a>
+      </li>
+      
+      <li>
+        <a class="tn-link" href="#topic-2" data-tn="2">
+          <span class="tn-num">2</span>
+          <span class="tn-label">PathPlanner</span>
+        </a>
+      </li>
+      
+      <li>
+        <a class="tn-link" href="#topic-3" data-tn="3">
+          <span class="tn-num">3</span>
+          <span class="tn-label">Auto Chooser</span>
+        </a>
+      </li>
+      
+      
+    </ul>
+  </nav>
+  
+
+  <div class="content-wrap">
+    <div id="week-screens-wrap">
+      <h2 class="sh">Autonomous Period</h2>
+<p>During the 15-second auto period, the robot runs entirely on its own — no driver input. Your code must handle all movement, scoring, and positioning decisions using sensors and pre-planned paths.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — simple auto command sequence</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">import static</span> edu.wpi.first.wpilibj2.command.Commands.*;
+
+<span class="cls">Command</span> getAutoCommand() {
+    <span class="kw">return</span> <span class="fn">sequence</span>(
+        <span class="kw">new</span> <span class="fn">DriveForwardCommand</span>(drive, <span class="num">1.5</span>),   <span class="cmt">// drive 1.5m</span>
+        <span class="fn">parallel</span>(
+            <span class="kw">new</span> <span class="fn">SpinUpShooterCommand</span>(shooter),  <span class="cmt">// spin up while</span>
+            <span class="fn">new</span> <span class="fn">WaitCommand</span>(<span class="num">1.5</span>)               <span class="cmt">// waiting 1.5s</span>
+        ),
+        <span class="kw">new</span> <span class="fn">ScoreCommand</span>(shooter),             <span class="cmt">// shoot</span>
+        <span class="kw">new</span> <span class="fn">DriveBackCommand</span>(drive, <span class="num">0.5</span>)       <span class="cmt">// back off</span>
+    );
+}</pre>
+</div>
+
+<h2 class="sh">PathPlanner</h2>
+<p>PathPlanner is a tool for designing robot paths visually and following them precisely using odometry. Most competitive teams use it for complex multi-note or multi-piece autos.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — PathPlanner auto</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">import</span> com.pathplanner.lib.auto.<span class="cls">AutoBuilder</span>;
+<span class="kw">import</span> com.pathplanner.lib.path.<span class="cls">PathPlannerPath</span>;
+
+<span class="cmt">// Load a path created in PathPlanner app</span>
+<span class="cls">PathPlannerPath</span> path = <span class="cls">PathPlannerPath</span>.<span class="fn">fromPathFile</span>(<span class="str">"2 Piece Auto"</span>);
+
+<span class="cmt">// Follow it</span>
+<span class="cls">Command</span> autoCmd = <span class="cls">AutoBuilder</span>.<span class="fn">followPath</span>(path);
+
+<span class="cmt">// Or build a named auto from PathPlanner</span>
+<span class="cls">Command</span> namedAuto = <span class="cls">AutoBuilder</span>.<span class="fn">buildAuto</span>(<span class="str">"2 Piece Center"</span>);</pre>
+</div>
+
+<h2 class="sh">Auto Chooser</h2>
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — RobotContainer auto chooser</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">private final</span> <span class="cls">SendableChooser</span>&lt;<span class="cls">Command</span>&gt; autoChooser = <span class="kw">new</span> <span class="cls">SendableChooser</span>&lt;&gt;();
+
+<span class="kw">public</span> <span class="fn">RobotContainer</span>() {
+    autoChooser.<span class="fn">setDefaultOption</span>(<span class="str">"Do Nothing"</span>, <span class="kw">new</span> <span class="cls">WaitCommand</span>(<span class="num">15</span>));
+    autoChooser.<span class="fn">addOption</span>(<span class="str">"Drive Forward"</span>, <span class="kw">new</span> <span class="fn">DriveForwardCommand</span>(drive, <span class="num">1.5</span>));
+    autoChooser.<span class="fn">addOption</span>(<span class="str">"2 Piece"</span>, <span class="cls">AutoBuilder</span>.<span class="fn">buildAuto</span>(<span class="str">"2 Piece Center"</span>));
+    SmartDashboard.<span class="fn">putData</span>(<span class="str">"Auto Mode"</span>, autoChooser);
+}
+
+<span class="kw">public</span> <span class="cls">Command</span> <span class="fn">getAutonomousCommand</span>() {
+    <span class="kw">return</span> autoChooser.<span class="fn">getSelected</span>();
+}</pre>
+</div>
+
+<h2 class="sh">Knowledge Check</h2>
+<div id="quiz-o6"></div>
+<script>
+const quiz_o6 = new Quiz('quiz-o6', [
+  { question: "sequence(A, B, C) runs commands:", options: ["All at once","A then B then C, each waiting for the previous to finish","Randomly","In reverse order"], correct: 1, explanation: "sequence() is serial. A must call isFinished() returning true before B starts. This is the most common auto structure." },
+  { question: "What does an auto chooser let you do?", options: ["Switch between auto routines from the driver station before a match","Change auto logic mid-match","Select which subsystems are active","Override driver inputs"], correct: 0, explanation: "The auto chooser appears on SmartDashboard/Shuffleboard. The drive team picks an auto strategy before the match. getAutonomousCommand() returns the selected command." },
+  { question: "PathPlanner uses odometry to follow paths. Odometry tracks:", options: ["Robot battery voltage","Robot position on the field using encoder + gyro data","Camera detection results","Driver joystick input"], correct: 1, explanation: "Odometry combines encoder (distance traveled) and gyroscope (heading) data to estimate the robot's position on the field. PathPlanner uses this to accurately follow trajectories." },
+  { question: "WaitCommand(2.0) in a sequence does what?", options: ["Waits 2 seconds before the sequence starts","Pauses the sequence for 2 seconds","Runs the next command for 2 seconds","Sets a 2-second timeout on the whole auto"], correct: 1, explanation: "WaitCommand(n) is a command that runs for n seconds and then finishes. Useful for adding deliberate pauses between actions in a sequence." }
+], 'offseason-o6');
+</script>
+
+
+    </div>
+
+    <div class="complete-banner" id="complete-banner" style="display:none">
+      <span class="cb-icon"><i data-lucide="trophy"></i></span>
+      <div class="cb-text">
+        <div class="cb-title">week complete!!</div>
+        <div class="cb-sub">score saved :) keep it up!!</div>
+      </div>
+      <a href="/weeks/offseason/os-week7" class="btn btn-success btn-sm">next week →</a>
+    </div>
+
+    <div class="page-nav">
+      
+      <a href="/weeks/offseason/os-week5" class="pn-link">
+        <span class="pn-label">← Previous</span>
+        <span class="pn-title">O5 — PID Control</span>
+      </a>
+      
+      
+      <a href="/weeks/offseason/os-week7" class="pn-link pn-next">
+        <span class="pn-label">Next →</span>
+        <span class="pn-title">O7 — Subsystem Ownership</span>
+      </a>
+      
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+(function() {
+  var wrap = document.getElementById('week-screens-wrap');
+  if (!wrap) return;
+
+  // Collect all direct children
+  var children = Array.from(wrap.children);
+  var headers = children.filter(function(c) { return c.matches && c.matches('h2.sh, div.project-task'); });
+  if (headers.length < 2) return; // single-section week, no splitting
+
+  // Build screens: group children by which h2 / project-task they follow
+  var screens = [];
+  var current = null;
+  children.forEach(function(child) {
+    if (child.matches && child.matches('h2.sh, div.project-task')) {
+      current = document.createElement('div');
+      current.className = 'week-screen';
+      screens.push(current);
+    }
+    if (current) current.appendChild(child); // moves node into screen
+  });
+
+  // Re-attach screens into wrap
+  screens.forEach(function(s) { wrap.appendChild(s); });
+
+  var total = screens.length;
+  var active = 0;
+
+  // Build screen nav bar
+  var navEl = document.createElement('div');
+  navEl.className = 'screen-nav';
+  navEl.id = 'screen-nav';
+
+  var dotsHtml = screens.map(function(_, i) {
+    return '<button class="sn-dot" data-sdot="' + i + '" title="Topic ' + (i+1) + '" onclick="weekGoScreen(' + i + ')"></button>';
+  }).join('');
+
+  navEl.innerHTML =
+    '<button class="sn-btn" id="sn-prev" onclick="weekGoScreen(' + "window._wss-1" + ')">← Prev</button>' +
+    '<div class="sn-meta"><span class="sn-topic-title" id="sn-title"></span><span class="sn-topic-count" id="sn-count"></span><div class="sn-dots" id="sn-dots">' + dotsHtml + '</div></div>' +
+    '<button class="sn-next sn-btn" id="sn-next" onclick="weekGoScreen(window._wss+1)">Next →</button>';
+
+  // Fix up prev button
+  navEl.querySelector('#sn-prev').onclick = function() { weekGoScreen(window._wss - 1); };
+  navEl.querySelector('#sn-next').onclick = function() { weekGoScreen(window._wss + 1); };
+
+  wrap.after(navEl);
+
+  window._wsTotal = total;
+  window._wss = 0;
+
+  window.weekGoScreen = function(n) {
+    n = Math.max(0, Math.min(total - 1, n));
+    window._wss = n;
+
+    screens.forEach(function(s, i) {
+      s.classList.toggle('ws-active', i === n);
+    });
+
+    var h2 = screens[n].querySelector('h2.sh');
+    var pt = screens[n].querySelector('.project-task');
+    var title = h2 ? h2.textContent.trim() : (pt ? 'Project Task' : ('Topic ' + (n + 1)));
+    var countEl = document.getElementById('sn-count');
+    var titleEl = document.getElementById('sn-title');
+    if (titleEl) titleEl.textContent = title;
+    if (countEl) countEl.textContent = (n + 1) + ' / ' + total;
+
+    var prevBtn = document.getElementById('sn-prev');
+    var nextBtn = document.getElementById('sn-next');
+    if (prevBtn) prevBtn.disabled = (n === 0);
+    if (nextBtn) {
+      if (n === total - 1) {
+        nextBtn.textContent = 'Done ✓';
+        nextBtn.classList.add('sn-finish');
+        nextBtn.onclick = function() {
+          var banner = document.getElementById('complete-banner');
+          if (banner) { banner.style.display = 'flex'; banner.scrollIntoView({behavior:'smooth',block:'center'}); }
+        };
+      } else {
+        nextBtn.textContent = 'Next →';
+        nextBtn.classList.remove('sn-finish');
+        nextBtn.onclick = function() { weekGoScreen(window._wss + 1); };
+      }
+    }
+
+    // Dots
+    document.querySelectorAll('.sn-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === n);
+    });
+
+    // Topic nav
+    document.querySelectorAll('.tn-link[data-tn]').forEach(function(link) {
+      var tn = link.getAttribute('data-tn');
+      var matches = tn === 'test' ? (n === total - 1) : (parseInt(tn) - 1 === n);
+      link.classList.toggle('tn-active', matches);
+    });
+
+    // Scroll to top of content area
+    var cw = document.querySelector('.content-wrap');
+    if (cw) window.scrollTo({ top: cw.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
+  };
+
+  // Wire topic nav clicks
+  document.querySelectorAll('.tn-link[data-tn]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var tn = this.getAttribute('data-tn');
+      var screenIdx = tn === 'test' ? (total - 1) : (parseInt(tn) - 1);
+      weekGoScreen(screenIdx);
+    });
+  });
+
+  // Wire hero topic pill clicks
+  document.querySelectorAll('.ph-topic-pill').forEach(function(pill) {
+    pill.addEventListener('click', function(e) {
+      e.preventDefault();
+      var href = this.getAttribute('href') || '';
+      if (href === '#weekly-test') {
+        weekGoScreen(total - 1);
+      } else {
+        var m = href.match(/#topic-(\d+)/);
+        if (m) weekGoScreen(parseInt(m[1]) - 1);
+      }
+    });
+  });
+
+  weekGoScreen(0);
+})();
+</script>
+
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="sf-left">
+    <img src="/assets/images/logo.jpeg" alt="WRT">
+    <span>Walton Robotics Team 2974 &mdash; WRT Programming &mdash; 2026-27</span>
+  </div>
+  <div class="sf-right">
+    <a href="https://github.com/WaltonRobotics" target="_blank" rel="noopener">GitHub</a>
+    <a href="/sitemap.xml">Sitemap</a>
+    <a href="/feed.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- Mobile sidebar backdrop -->
+<div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+
+<script type="module" src="/assets/js/auth.js"></script>
+
+<script>
+  // Initialize Lucide icons after all content is in the DOM.
+  // Called again by auth.js after the user chip is injected.
+  function initIcons() { if (typeof lucide !== 'undefined') lucide.createIcons(); }
+  document.addEventListener('DOMContentLoaded', initIcons);
+</script>
+
+<!-- impeccable-live-start -->
+<script src="http://localhost:8400/live.js"></script>
+<!-- impeccable-live-end -->
+</body>
+</html>

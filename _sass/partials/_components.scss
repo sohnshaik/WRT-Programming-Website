@@ -75,7 +75,7 @@ li { margin-bottom: 0.25rem; }
 }
 .concept-card {
   background: $white; border: 1px solid $gray-200;
-  border-top: 3px solid $red; border-radius: 5px;
+  border-top: 3px solid $red;
   padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   .cc-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: $red; margin-bottom: 5px; }
   .cc-title { font-size: 14px; font-weight: 700; color: $gray-800; margin-bottom: 4px; }
@@ -146,7 +146,7 @@ tr:hover td { background: $gray-50; }
 }
 .quiz-progress-bar {
   height: 4px; background: $gray-200;
-  .qpb-fill { height: 100%; background: $red; transition: width 0.3s; }
+  .qpb-fill { height: 100%; background: $red; transform-origin: left; transition: transform 0.3s ease; }
 }
 .quiz-body { padding: 1.5rem; }
 .quiz-q {
@@ -202,7 +202,7 @@ tr:hover td { background: $gray-50; }
     display: flex; align-items: center; justify-content: center;
     flex-direction: column; position: relative;
     .sc-pct { font-size: $text-2xl; font-weight: 800; color: $navy; line-height: 1; }
-    .sc-pct-label { font-size: 11px; color: $gray-400; }
+    .sc-pct-label { font-size: 11px; color: $gray-600; }
   }
   .sc-score { font-size: 15px; color: $gray-500; margin-bottom: 0.5rem; }
   .sc-msg   { font-size: 16px; font-weight: 700; color: $gray-800; margin-bottom: 1.5rem; }
@@ -299,7 +299,7 @@ textarea.code-input {
   border: 1px solid $gray-200; border-radius: 6px;
   background: $white; transition: all $t-fast; max-width: 48%;
   &:hover { border-color: $navy; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-decoration: none; }
-  .pn-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: $gray-400; }
+  .pn-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: $gray-600; }
   .pn-title { font-size: 14px; font-weight: 700; color: $navy; }
   &.pn-next { text-align: right; }
 }
@@ -347,7 +347,7 @@ textarea.code-input {
   }
   .sf-right {
     display: flex; gap: 1rem;
-    a { font-size: 12px; color: $gray-400; text-decoration: none;
+    a { font-size: 12px; color: $gray-600; text-decoration: none;
         &:hover { color: $navy; } }
   }
 }
@@ -454,9 +454,9 @@ textarea.code-input {
   border-radius: 5px;
   cursor: pointer;
   font-size: 12px;
-  color: rgba(255,255,255,0.38);
+  color: rgba(255,255,255,0.68);
   transition: all $t-fast;
-  &:hover { background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.7); }
+  &:hover { background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.88); }
   .ssb-icon { font-size: 13px; }
   .ssb-text { flex: 1; text-align: left; }
   kbd {
@@ -465,7 +465,7 @@ textarea.code-input {
     border: 1px solid rgba(255,255,255,0.12);
     border-radius: 3px;
     padding: 1px 5px;
-    color: rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.55);
     font-family: $font-mono;
   }
 }
@@ -715,7 +715,7 @@ textarea.code-input {
   gap: 12px;
   padding: 0.9rem 1.1rem;
   border-bottom: 1px solid $gray-200;
-  .sm-icon { font-size: 18px; color: $gray-400; flex-shrink: 0; }
+  .sm-icon { font-size: 18px; color: $gray-500; flex-shrink: 0; }
   .sm-input {
     flex: 1;
     border: none;
@@ -724,11 +724,11 @@ textarea.code-input {
     font-family: $font-body;
     color: $gray-800;
     background: transparent;
-    &::placeholder { color: $gray-400; }
+    &::placeholder { color: $gray-500; }
   }
   .sm-close {
     background: none; border: none;
-    color: $gray-400; font-size: 16px;
+    color: $gray-500; font-size: 16px;
     cursor: pointer; padding: 4px 8px;
     border-radius: 4px;
     &:hover { background: $gray-100; color: $gray-700; }
@@ -741,7 +741,7 @@ textarea.code-input {
   .sm-empty {
     text-align: center;
     padding: 2rem;
-    color: $gray-400;
+    color: $gray-600;
     font-size: 14px;
   }
 }
@@ -765,7 +765,7 @@ textarea.code-input {
   .sr-body { flex: 1; }
   .sr-title { font-size: 14px; font-weight: 700; color: $gray-800; margin-bottom: 2px; }
   .sr-sub   { font-size: 12px; color: $gray-500; }
-  .sr-arrow { color: $gray-300; font-size: 14px; }
+  .sr-arrow { color: $gray-500; font-size: 14px; }
 }
 .sm-footer {
   border-top: 1px solid $gray-100;
@@ -773,7 +773,7 @@ textarea.code-input {
   display: flex;
   gap: 1.25rem;
   font-size: 11px;
-  color: $gray-400;
+  color: $gray-600;
   kbd {
     background: $gray-100; border: 1px solid $gray-300;
     border-radius: 3px; padding: 1px 5px;
@@ -849,7 +849,7 @@ textarea.code-input {
     display: flex; align-items: center; gap: 12px;
     .cdbp-label { font-size: 12px; color: rgba(255,255,255,0.65); white-space: nowrap; }
     .cdbp-track { width: 140px; height: 5px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
-    .cdbp-fill  { height: 100%; background: $red; border-radius: 3px; transition: width 0.4s ease; }
+    .cdbp-fill  { height: 100%; background: $red; border-radius: 3px; transform-origin: left; transition: transform 0.4s ease; }
   }
 }
 

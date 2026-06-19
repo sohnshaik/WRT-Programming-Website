@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Primary Meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B2A4A">
+<meta name="description" content="P, I, D terms, WPILib PIDController, feedforward, and tuning basics.">
+<meta name="author" content="Walton Robotics Team 2974">
+
+<!-- Title -->
+<title>PID Control | WRT Programming</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="/assets/images/logo.jpeg">
+<link rel="apple-touch-icon" href="/assets/images/logo.jpeg">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="WRT Programming">
+<meta property="og:title"       content="PID Control">
+<meta property="og:description" content="P, I, D terms, WPILib PIDController, feedforward, and tuning basics.">
+<meta property="og:url"         content="http://localhost:4000/weeks/offseason/os-week5/">
+<meta property="og:image"       content="http://localhost:4000/assets/images/logo.jpeg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="PID Control">
+<meta name="twitter:description" content="P, I, D terms, WPILib PIDController, feedforward, and tuning basics.">
+
+<!-- Jekyll SEO tag (handles canonical, structured data, etc.) -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>PID Control | WRT Programming</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="PID Control" />
+<meta name="author" content="Walton Robotics Team 2974" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<meta property="og:description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<link rel="canonical" href="http://localhost:4000/weeks/offseason/os-week5/" />
+<meta property="og:url" content="http://localhost:4000/weeks/offseason/os-week5/" />
+<meta property="og:site_name" content="WRT Programming" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="PID Control" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Walton Robotics Team 2974" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Walton Robotics Team 2974"},"@type":"WebPage","url":"http://localhost:4000/weeks/offseason/os-week5/","headline":"PID Control","description":"Walton Robotics Team 2974 — Java &amp; FRC Programming Course","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<!-- Lucide icons (inline SVG, no build step required) -->
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.511.0/dist/umd/lucide.min.js"></script>
+
+<!-- Feed -->
+<link rel="alternate" type="application/rss+xml" title="WRT Programming" href="/feed.xml">
+
+</head>
+<body data-page-id="offseason-o5" data-require-auth="1">
+
+<!-- Auth loading overlay — hidden once auth check resolves -->
+<div id="wrc-auth-overlay" aria-hidden="true">
+  <div class="wao-inner">
+    <div class="wao-spinner"></div>
+  </div>
+</div>
+
+<header class="topbar">
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Open sidebar"><i data-lucide="menu"></i></button>
+  <a href="/" class="topbar-logo">
+    <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+    <div>
+      <div class="topbar-name">WRT Programming</div>
+      <div class="topbar-sub">Team 2974 · 2026-27</div>
+    </div>
+  </a>
+  <div class="topbar-sep"></div>
+  <nav class="topbar-links">
+    <a href="/" >Home</a>
+    <a href="/training" >Training</a>
+    <a href="/weeks/summer/week1" >Summer</a>
+    <a href="/weeks/offseason/os-week1" class="active">Offseason</a>
+    <a href="/project" >Project</a>
+    <a href="/style-guide" >Style Guide</a>
+  </nav>
+  <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)"><i data-lucide="search"></i></button>
+  <a href="/login/" class="topbar-signin-btn" id="topbar-signin-static">sign in</a>
+</header>
+
+
+<!-- wrc.js must load BEFORE main content so Quiz class is defined for inline scripts -->
+<script src="/assets/js/wrc.js"></script>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+
+  <div class="sidebar-course-header">
+    <div class="sch-logo-row">
+      <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+      <div>
+        <span class="sch-logo-name">WRT Programming</span>
+        <span class="sch-logo-sub">Team 2974 · Java &amp; FRC</span>
+      </div>
+    </div>
+    <div class="sch-title-area">
+      <div class="sch-label">Course</div>
+      <div class="sch-title">2026-27 season</div>
+    </div>
+    <div class="sch-progress">
+      <div class="sp-label">
+        <span>Progress</span>
+        <span class="sp-pct-text">0%</span>
+      </div>
+      <div class="sp-track"><div class="sp-fill" style="transform:scaleX(0)"></div></div>
+    </div>
+    <!-- impeccable-variants-start 960f32f8 -->
+    <div data-impeccable-variants="960f32f8" data-impeccable-variant-count="3" style="display: contents">
+      <!-- Original -->
+      <div data-impeccable-variant="original">
+        <button class="sidebar-search-btn" onclick="openSearch()">
+          <span class="ssb-icon"><i data-lucide="search"></i></span>
+          <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+        </button>
+      </div>
+      <!-- Variants: insert below this line -->
+<style data-impeccable-css="960f32f8">
+  @scope ([data-impeccable-variant="1"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255, var(--p-opacity, 0.68));
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(255,255,255,0.13);
+      color: rgba(255,255,255,0.85);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.55);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+  @scope ([data-impeccable-variant="2"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(255,255,255, calc(var(--p-surface, 0.5) * 0.2));
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      transition: background 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.92);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.62);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+  @scope ([data-impeccable-variant="3"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(196,18,48, calc(var(--p-accent, 0.5) * 0.18));
+      border: 1px solid rgba(196,18,48, calc(var(--p-accent, 0.5) * 0.7));
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      transition: background 0.12s ease, border-color 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(196,18,48,0.18);
+      border-color: rgba(196,18,48,0.6);
+      color: rgba(255,255,255,0.92);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(196,18,48,0.12);
+      border: 1px solid rgba(196,18,48,0.25);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+</style>
+<div data-impeccable-variant="1" data-impeccable-params='[
+  {"id":"opacity","kind":"range","min":0.55,"max":0.82,"step":0.01,"default":0.68,"label":"Text brightness"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+<div data-impeccable-variant="2" style="display:none" data-impeccable-params='[
+  {"id":"surface","kind":"range","min":0,"max":1,"step":0.05,"default":0.5,"label":"Surface brightness"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+<div data-impeccable-variant="3" style="display:none" data-impeccable-params='[
+  {"id":"accent","kind":"range","min":0,"max":1,"step":0.05,"default":0.5,"label":"Red accent"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+    </div>
+    <!-- impeccable-variants-end 960f32f8 -->
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      <span class="ngl-icon"><i data-lucide="sun"></i></span>
+      <span class="ngl-text">Summer — Java Foundations</span>
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item " href="/weeks/summer/week1" data-page="summer-w1">
+        <span class="ni-num">W1</span>
+        <span class="ni-text">The Basics</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week2" data-page="summer-w2">
+        <span class="ni-num">W2</span>
+        <span class="ni-text">Logic &amp; Control Flow</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week3" data-page="summer-w3">
+        <span class="ni-num">W3</span>
+        <span class="ni-text">Loops</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week4" data-page="summer-w4">
+        <span class="ni-num">W4</span>
+        <span class="ni-text">Arrays &amp; Methods</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week5" data-page="summer-w5">
+        <span class="ni-num">W5</span>
+        <span class="ni-text">OOP — Classes &amp; Objects</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week6" data-page="summer-w6">
+        <span class="ni-num">W6</span>
+        <span class="ni-text">Inheritance &amp; Polymorphism</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week7" data-page="summer-w7">
+        <span class="ni-num">W7</span>
+        <span class="ni-text">Advanced Classes</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week8" data-page="summer-w8">
+        <span class="ni-num">W8</span>
+        <span class="ni-text">Recap &amp; Resources</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      <span class="ngl-icon"><i data-lucide="cpu"></i></span>
+      <span class="ngl-text">Offseason — FRC Training</span>
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item " href="/weeks/offseason/os-week1" data-page="offseason-o1">
+        <span class="ni-num">O1</span>
+        <span class="ni-text">Git &amp; GitHub</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week2" data-page="offseason-o2">
+        <span class="ni-num">O2</span>
+        <span class="ni-text">WPILib Setup</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week3" data-page="offseason-o3">
+        <span class="ni-num">O3</span>
+        <span class="ni-text">Command-Based</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week4" data-page="offseason-o4">
+        <span class="ni-num">O4</span>
+        <span class="ni-text">Motors &amp; Sensors</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item active" href="/weeks/offseason/os-week5" data-page="offseason-o5">
+        <span class="ni-num">O5</span>
+        <span class="ni-text">PID Control</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week6" data-page="offseason-o6">
+        <span class="ni-num">O6</span>
+        <span class="ni-text">Autonomous</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week7" data-page="offseason-o7">
+        <span class="ni-num">O7</span>
+        <span class="ni-text">Subsystem Ownership</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week8" data-page="offseason-o8">
+        <span class="ni-num">O8</span>
+        <span class="ni-text">Build Season Prep</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Collapse tab — fixed to right edge of sidebar, no overlap with progress bar -->
+  <button class="sidebar-collapse-btn" id="sidebar-collapse-btn"
+    onclick="toggleSidebarWidth()" title="Collapse sidebar" aria-label="Collapse sidebar">‹</button>
+
+</nav>
+
+<!-- Search Modal -->
+<div class="search-overlay" id="search-overlay" onclick="closeSearch()">
+  <div class="search-modal" onclick="event.stopPropagation()">
+    <div class="sm-header">
+      <span class="sm-icon"><i data-lucide="search"></i></span>
+      <input type="text" id="search-input" class="sm-input" placeholder="Search topics, concepts, keywords…" oninput="searchTopics(this.value)" autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="sm-close" onclick="closeSearch()"><i data-lucide="x"></i></button>
+    </div>
+    <div class="sm-results" id="search-results">
+      <div class="sm-empty">Start typing to search across all 16 weeks…</div>
+    </div>
+    <div class="sm-footer">
+      <span><kbd>↑↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> open</span>
+      <span><kbd>Esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+  <main class="main" id="main-content">
+    <div class="page-hero">
+  <div class="ph-breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <a href="#">Offseason</a>
+    <span>/</span>
+    <span>Week O5</span>
+  </div>
+  <div class="ph-badge badge-offseason">Offseason · Week 5 of 8</div>
+  <h1>PID Control</h1>
+  <p>P, I, D terms, WPILib PIDController, feedforward, and tuning basics.</p>
+  
+  <div class="ph-topics">
+    
+    <a href="#topic-1" class="ph-topic-pill">What is PID?</a>
+    
+    <a href="#topic-2" class="ph-topic-pill">The P, I, D Terms</a>
+    
+    <a href="#topic-3" class="ph-topic-pill">Tuning Process</a>
+    
+      
+  </div>
+  
+</div>
+
+<div class="week-layout">
+
+  
+  <nav class="topic-nav" id="topic-nav">
+    <div class="tn-header">this week</div>
+    <ul class="tn-list">
+      
+      <li>
+        <a class="tn-link" href="#topic-1" data-tn="1">
+          <span class="tn-num">1</span>
+          <span class="tn-label">What is PID?</span>
+        </a>
+      </li>
+      
+      <li>
+        <a class="tn-link" href="#topic-2" data-tn="2">
+          <span class="tn-num">2</span>
+          <span class="tn-label">The P, I, D Terms</span>
+        </a>
+      </li>
+      
+      <li>
+        <a class="tn-link" href="#topic-3" data-tn="3">
+          <span class="tn-num">3</span>
+          <span class="tn-label">Tuning Process</span>
+        </a>
+      </li>
+      
+      
+    </ul>
+  </nav>
+  
+
+  <div class="content-wrap">
+    <div id="week-screens-wrap">
+      <h2 class="sh">What is PID?</h2>
+<p>PID is a control algorithm that continuously adjusts an output (like motor speed) to reach and maintain a target (like a specific angle or RPM). Without it, motors overshoot, oscillate, or never reach their target accurately.</p>
+
+<div class="concept-grid">
+  <div class="concept-card"><div class="cc-label">P — Proportional</div><div class="cc-title">React to current error</div><div class="cc-desc">Output = kP × error. Bigger error = bigger correction. Too high → oscillation. Too low → slow.</div></div>
+  <div class="concept-card"><div class="cc-label">I — Integral</div><div class="cc-title">React to accumulated error</div><div class="cc-desc">Fixes steady-state error. Rarely needed in FRC. Start with 0 and only add if the mechanism never quite reaches target.</div></div>
+  <div class="concept-card"><div class="cc-label">D — Derivative</div><div class="cc-title">React to rate of change</div><div class="cc-desc">Dampens oscillation. Output = kD × (error change rate). Like a shock absorber. Add after P to smooth out oscillation.</div></div>
+  <div class="concept-card"><div class="cc-label">Feedforward</div><div class="cc-title">Predict what's needed</div><div class="cc-desc">kS (static friction), kV (velocity), kA (acceleration). Reduces the work PID has to do by predicting the right output.</div></div>
+</div>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — WPILib PIDController</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">import</span> edu.wpi.first.math.controller.<span class="cls">PIDController</span>;
+
+<span class="cls">PIDController</span> pid = <span class="kw">new</span> <span class="cls">PIDController</span>(<span class="num">0.1</span>, <span class="num">0.0</span>, <span class="num">0.01</span>); <span class="cmt">// kP, kI, kD</span>
+pid.<span class="fn">setSetpoint</span>(<span class="num">4000.0</span>); <span class="cmt">// target RPM</span>
+pid.<span class="fn">setTolerance</span>(<span class="num">50.0</span>);  <span class="cmt">// ±50 RPM counts as "at target"</span>
+
+<span class="cmt">// In execute() — call every 20ms with current measurement</span>
+<span class="type">double</span> currentRPM = encoder.<span class="fn">getVelocity</span>();
+<span class="type">double</span> output = pid.<span class="fn">calculate</span>(currentRPM);
+motor.<span class="fn">set</span>(output);
+
+<span class="kw">if</span> (pid.<span class="fn">atSetpoint</span>()) {
+    System.out.<span class="fn">println</span>(<span class="str">"At target!"</span>);
+}</pre>
+</div>
+
+<h2 class="sh">Tuning Process</h2>
+<table>
+<thead><tr><th>Step</th><th>What to do</th><th>What to look for</th></tr></thead>
+<tbody>
+<tr><td>1. Start with P only</td><td>Set kI=0, kD=0. Increase kP until it moves</td><td>Reaches target but oscillates</td></tr>
+<tr><td>2. Add D</td><td>Increase kD slowly</td><td>Oscillation dampens without slowing response</td></tr>
+<tr><td>3. Add I if needed</td><td>Only if it never quite reaches setpoint</td><td>Steady-state error eliminated</td></tr>
+<tr><td>4. Add Feedforward</td><td>kS for static friction, kV for velocity</td><td>Faster response, less PID correction needed</td></tr>
+</tbody>
+</table>
+
+<h2 class="sh">Knowledge Check</h2>
+<div id="quiz-o5"></div>
+<script>
+const quiz_o5 = new Quiz('quiz-o5', [
+  { question: "The P term in PID responds to:", options: ["The accumulated past error","The rate of error change","The current error right now","The target setpoint"], correct: 2, explanation: "P = proportional = current error × kP. Bigger error → bigger output. Smaller error → smaller output. Simple but powerful." },
+  { question: "Your mechanism oscillates around the setpoint. Which term do you increase?", options: ["kP","kI","kD","setTolerance"], correct: 2, explanation: "kD is the derivative — it dampens oscillation by reacting to how fast the error is changing. Like a shock absorber on the controller." },
+  { question: "Your mechanism gets close to the setpoint but always stops slightly short. Which term fixes it?", options: ["kP (increase)","kI (add a small value)","kD (increase)","Feedforward only"], correct: 1, explanation: "Steady-state error (always a bit off) is the I term's job. kI accumulates the error over time and adds a correction. Use sparingly — it can cause wind-up." },
+  { question: "pid.calculate(measurement) should be called:", options: ["Once in the constructor","Only when the setpoint changes","Every 20ms in execute()","Only when atSetpoint() is false"], correct: 2, explanation: "PID needs to continuously update. Call calculate() every loop cycle with the latest measurement so it can keep correcting in real time." },
+  { question: "What is the purpose of feedforward in a control loop?", options: ["Replaces PID entirely","Predicts the needed output based on physics, reducing the correction PID has to make","Sets the maximum motor output","Only used for velocity control"], correct: 1, explanation: "Feedforward models the physics. For a flywheel, kV × targetRPM predicts the voltage needed to spin at that speed. PID then only corrects small deviations, instead of fighting from scratch." }
+], 'offseason-o5');
+</script>
+
+
+    </div>
+
+    <div class="complete-banner" id="complete-banner" style="display:none">
+      <span class="cb-icon"><i data-lucide="trophy"></i></span>
+      <div class="cb-text">
+        <div class="cb-title">week complete!!</div>
+        <div class="cb-sub">score saved :) keep it up!!</div>
+      </div>
+      <a href="/weeks/offseason/os-week6" class="btn btn-success btn-sm">next week →</a>
+    </div>
+
+    <div class="page-nav">
+      
+      <a href="/weeks/offseason/os-week4" class="pn-link">
+        <span class="pn-label">← Previous</span>
+        <span class="pn-title">O4 — Motors & Sensors</span>
+      </a>
+      
+      
+      <a href="/weeks/offseason/os-week6" class="pn-link pn-next">
+        <span class="pn-label">Next →</span>
+        <span class="pn-title">O6 — Autonomous</span>
+      </a>
+      
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+(function() {
+  var wrap = document.getElementById('week-screens-wrap');
+  if (!wrap) return;
+
+  // Collect all direct children
+  var children = Array.from(wrap.children);
+  var headers = children.filter(function(c) { return c.matches && c.matches('h2.sh, div.project-task'); });
+  if (headers.length < 2) return; // single-section week, no splitting
+
+  // Build screens: group children by which h2 / project-task they follow
+  var screens = [];
+  var current = null;
+  children.forEach(function(child) {
+    if (child.matches && child.matches('h2.sh, div.project-task')) {
+      current = document.createElement('div');
+      current.className = 'week-screen';
+      screens.push(current);
+    }
+    if (current) current.appendChild(child); // moves node into screen
+  });
+
+  // Re-attach screens into wrap
+  screens.forEach(function(s) { wrap.appendChild(s); });
+
+  var total = screens.length;
+  var active = 0;
+
+  // Build screen nav bar
+  var navEl = document.createElement('div');
+  navEl.className = 'screen-nav';
+  navEl.id = 'screen-nav';
+
+  var dotsHtml = screens.map(function(_, i) {
+    return '<button class="sn-dot" data-sdot="' + i + '" title="Topic ' + (i+1) + '" onclick="weekGoScreen(' + i + ')"></button>';
+  }).join('');
+
+  navEl.innerHTML =
+    '<button class="sn-btn" id="sn-prev" onclick="weekGoScreen(' + "window._wss-1" + ')">← Prev</button>' +
+    '<div class="sn-meta"><span class="sn-topic-title" id="sn-title"></span><span class="sn-topic-count" id="sn-count"></span><div class="sn-dots" id="sn-dots">' + dotsHtml + '</div></div>' +
+    '<button class="sn-next sn-btn" id="sn-next" onclick="weekGoScreen(window._wss+1)">Next →</button>';
+
+  // Fix up prev button
+  navEl.querySelector('#sn-prev').onclick = function() { weekGoScreen(window._wss - 1); };
+  navEl.querySelector('#sn-next').onclick = function() { weekGoScreen(window._wss + 1); };
+
+  wrap.after(navEl);
+
+  window._wsTotal = total;
+  window._wss = 0;
+
+  window.weekGoScreen = function(n) {
+    n = Math.max(0, Math.min(total - 1, n));
+    window._wss = n;
+
+    screens.forEach(function(s, i) {
+      s.classList.toggle('ws-active', i === n);
+    });
+
+    var h2 = screens[n].querySelector('h2.sh');
+    var pt = screens[n].querySelector('.project-task');
+    var title = h2 ? h2.textContent.trim() : (pt ? 'Project Task' : ('Topic ' + (n + 1)));
+    var countEl = document.getElementById('sn-count');
+    var titleEl = document.getElementById('sn-title');
+    if (titleEl) titleEl.textContent = title;
+    if (countEl) countEl.textContent = (n + 1) + ' / ' + total;
+
+    var prevBtn = document.getElementById('sn-prev');
+    var nextBtn = document.getElementById('sn-next');
+    if (prevBtn) prevBtn.disabled = (n === 0);
+    if (nextBtn) {
+      if (n === total - 1) {
+        nextBtn.textContent = 'Done ✓';
+        nextBtn.classList.add('sn-finish');
+        nextBtn.onclick = function() {
+          var banner = document.getElementById('complete-banner');
+          if (banner) { banner.style.display = 'flex'; banner.scrollIntoView({behavior:'smooth',block:'center'}); }
+        };
+      } else {
+        nextBtn.textContent = 'Next →';
+        nextBtn.classList.remove('sn-finish');
+        nextBtn.onclick = function() { weekGoScreen(window._wss + 1); };
+      }
+    }
+
+    // Dots
+    document.querySelectorAll('.sn-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === n);
+    });
+
+    // Topic nav
+    document.querySelectorAll('.tn-link[data-tn]').forEach(function(link) {
+      var tn = link.getAttribute('data-tn');
+      var matches = tn === 'test' ? (n === total - 1) : (parseInt(tn) - 1 === n);
+      link.classList.toggle('tn-active', matches);
+    });
+
+    // Scroll to top of content area
+    var cw = document.querySelector('.content-wrap');
+    if (cw) window.scrollTo({ top: cw.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
+  };
+
+  // Wire topic nav clicks
+  document.querySelectorAll('.tn-link[data-tn]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var tn = this.getAttribute('data-tn');
+      var screenIdx = tn === 'test' ? (total - 1) : (parseInt(tn) - 1);
+      weekGoScreen(screenIdx);
+    });
+  });
+
+  // Wire hero topic pill clicks
+  document.querySelectorAll('.ph-topic-pill').forEach(function(pill) {
+    pill.addEventListener('click', function(e) {
+      e.preventDefault();
+      var href = this.getAttribute('href') || '';
+      if (href === '#weekly-test') {
+        weekGoScreen(total - 1);
+      } else {
+        var m = href.match(/#topic-(\d+)/);
+        if (m) weekGoScreen(parseInt(m[1]) - 1);
+      }
+    });
+  });
+
+  weekGoScreen(0);
+})();
+</script>
+
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="sf-left">
+    <img src="/assets/images/logo.jpeg" alt="WRT">
+    <span>Walton Robotics Team 2974 &mdash; WRT Programming &mdash; 2026-27</span>
+  </div>
+  <div class="sf-right">
+    <a href="https://github.com/WaltonRobotics" target="_blank" rel="noopener">GitHub</a>
+    <a href="/sitemap.xml">Sitemap</a>
+    <a href="/feed.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- Mobile sidebar backdrop -->
+<div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+
+<script type="module" src="/assets/js/auth.js"></script>
+
+<script>
+  // Initialize Lucide icons after all content is in the DOM.
+  // Called again by auth.js after the user chip is injected.
+  function initIcons() { if (typeof lucide !== 'undefined') lucide.createIcons(); }
+  document.addEventListener('DOMContentLoaded', initIcons);
+</script>
+
+<!-- impeccable-live-start -->
+<script src="http://localhost:8400/live.js"></script>
+<!-- impeccable-live-end -->
+</body>
+</html>

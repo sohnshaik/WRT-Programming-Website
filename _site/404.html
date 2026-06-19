@@ -1,8 +1,105 @@
-<nav class="sidebar" id="sidebar">
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Primary Meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B2A4A">
+<meta name="description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+<meta name="author" content="Walton Robotics Team 2974">
+
+<!-- Title -->
+<title>404 — Page Not Found | WRT Programming</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="/assets/images/logo.jpeg">
+<link rel="apple-touch-icon" href="/assets/images/logo.jpeg">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="WRT Programming">
+<meta property="og:title"       content="404 — Page Not Found">
+<meta property="og:description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+<meta property="og:url"         content="http://localhost:4000/404.html">
+<meta property="og:image"       content="http://localhost:4000/assets/images/logo.jpeg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="404 — Page Not Found">
+<meta name="twitter:description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+
+<!-- Jekyll SEO tag (handles canonical, structured data, etc.) -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>404 — Page Not Found | WRT Programming</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="404 — Page Not Found" />
+<meta name="author" content="Walton Robotics Team 2974" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<meta property="og:description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<link rel="canonical" href="http://localhost:4000/404.html" />
+<meta property="og:url" content="http://localhost:4000/404.html" />
+<meta property="og:site_name" content="WRT Programming" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="404 — Page Not Found" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Walton Robotics Team 2974" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Walton Robotics Team 2974"},"@type":"WebPage","url":"http://localhost:4000/404.html","headline":"404 — Page Not Found","description":"Walton Robotics Team 2974 — Java &amp; FRC Programming Course","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<!-- Lucide icons (inline SVG, no build step required) -->
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.511.0/dist/umd/lucide.min.js"></script>
+
+<!-- Feed -->
+<link rel="alternate" type="application/rss+xml" title="WRT Programming" href="/feed.xml">
+
+</head>
+<body>
+
+<!-- Auth loading overlay — hidden once auth check resolves -->
+<div id="wrc-auth-overlay" aria-hidden="true">
+  <div class="wao-inner">
+    <div class="wao-spinner"></div>
+  </div>
+</div>
+
+<header class="topbar">
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Open sidebar"><i data-lucide="menu"></i></button>
+  <a href="/" class="topbar-logo">
+    <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+    <div>
+      <div class="topbar-name">WRT Programming</div>
+      <div class="topbar-sub">Team 2974 · 2026-27</div>
+    </div>
+  </a>
+  <div class="topbar-sep"></div>
+  <nav class="topbar-links">
+    <a href="/" >Home</a>
+    <a href="/training" >Training</a>
+    <a href="/weeks/summer/week1" >Summer</a>
+    <a href="/weeks/offseason/os-week1" >Offseason</a>
+    <a href="/project" >Project</a>
+    <a href="/style-guide" >Style Guide</a>
+  </nav>
+  <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)"><i data-lucide="search"></i></button>
+  <a href="/login/" class="topbar-signin-btn" id="topbar-signin-static">sign in</a>
+</header>
+
+
+<!-- wrc.js must load BEFORE main content so Quiz class is defined for inline scripts -->
+<script src="/assets/js/wrc.js"></script>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
 
   <div class="sidebar-course-header">
     <div class="sch-logo-row">
-      <img src="{{ '/assets/images/logo.jpeg' | relative_url }}" alt="Walton Robotics">
+      <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
       <div>
         <span class="sch-logo-name">WRT Programming</span>
         <span class="sch-logo-sub">Team 2974 · Java &amp; FRC</span>
@@ -10,7 +107,7 @@
     </div>
     <div class="sch-title-area">
       <div class="sch-label">Course</div>
-      <div class="sch-title">{{ site.season }} season</div>
+      <div class="sch-title">2026-27 season</div>
     </div>
     <div class="sch-progress">
       <div class="sp-label">
@@ -142,42 +239,42 @@
       <span class="ngl-arrow">▾</span>
     </div>
     <div class="nav-items">
-      <a class="nav-item {% if page.page_id == 'summer-w1' %}active{% endif %}" href="{{ '/weeks/summer/week1' | relative_url }}" data-page="summer-w1">
+      <a class="nav-item " href="/weeks/summer/week1" data-page="summer-w1">
         <span class="ni-num">W1</span>
         <span class="ni-text">The Basics</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'summer-w2' %}active{% endif %}" href="{{ '/weeks/summer/week2' | relative_url }}" data-page="summer-w2">
+      <a class="nav-item " href="/weeks/summer/week2" data-page="summer-w2">
         <span class="ni-num">W2</span>
         <span class="ni-text">Logic &amp; Control Flow</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'summer-w3' %}active{% endif %}" href="{{ '/weeks/summer/week3' | relative_url }}" data-page="summer-w3">
+      <a class="nav-item " href="/weeks/summer/week3" data-page="summer-w3">
         <span class="ni-num">W3</span>
         <span class="ni-text">Loops</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'summer-w4' %}active{% endif %}" href="{{ '/weeks/summer/week4' | relative_url }}" data-page="summer-w4">
+      <a class="nav-item " href="/weeks/summer/week4" data-page="summer-w4">
         <span class="ni-num">W4</span>
         <span class="ni-text">Arrays &amp; Methods</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'summer-w5' %}active{% endif %}" href="{{ '/weeks/summer/week5' | relative_url }}" data-page="summer-w5">
+      <a class="nav-item " href="/weeks/summer/week5" data-page="summer-w5">
         <span class="ni-num">W5</span>
         <span class="ni-text">OOP — Classes &amp; Objects</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'summer-w6' %}active{% endif %}" href="{{ '/weeks/summer/week6' | relative_url }}" data-page="summer-w6">
+      <a class="nav-item " href="/weeks/summer/week6" data-page="summer-w6">
         <span class="ni-num">W6</span>
         <span class="ni-text">Inheritance &amp; Polymorphism</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'summer-w7' %}active{% endif %}" href="{{ '/weeks/summer/week7' | relative_url }}" data-page="summer-w7">
+      <a class="nav-item " href="/weeks/summer/week7" data-page="summer-w7">
         <span class="ni-num">W7</span>
         <span class="ni-text">Advanced Classes</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'summer-w8' %}active{% endif %}" href="{{ '/weeks/summer/week8' | relative_url }}" data-page="summer-w8">
+      <a class="nav-item " href="/weeks/summer/week8" data-page="summer-w8">
         <span class="ni-num">W8</span>
         <span class="ni-text">Recap &amp; Resources</span>
         <span class="ni-check">○</span>
@@ -192,42 +289,42 @@
       <span class="ngl-arrow">▾</span>
     </div>
     <div class="nav-items">
-      <a class="nav-item {% if page.page_id == 'offseason-o1' %}active{% endif %}" href="{{ '/weeks/offseason/os-week1' | relative_url }}" data-page="offseason-o1">
+      <a class="nav-item " href="/weeks/offseason/os-week1" data-page="offseason-o1">
         <span class="ni-num">O1</span>
         <span class="ni-text">Git &amp; GitHub</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'offseason-o2' %}active{% endif %}" href="{{ '/weeks/offseason/os-week2' | relative_url }}" data-page="offseason-o2">
+      <a class="nav-item " href="/weeks/offseason/os-week2" data-page="offseason-o2">
         <span class="ni-num">O2</span>
         <span class="ni-text">WPILib Setup</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'offseason-o3' %}active{% endif %}" href="{{ '/weeks/offseason/os-week3' | relative_url }}" data-page="offseason-o3">
+      <a class="nav-item " href="/weeks/offseason/os-week3" data-page="offseason-o3">
         <span class="ni-num">O3</span>
         <span class="ni-text">Command-Based</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'offseason-o4' %}active{% endif %}" href="{{ '/weeks/offseason/os-week4' | relative_url }}" data-page="offseason-o4">
+      <a class="nav-item " href="/weeks/offseason/os-week4" data-page="offseason-o4">
         <span class="ni-num">O4</span>
         <span class="ni-text">Motors &amp; Sensors</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'offseason-o5' %}active{% endif %}" href="{{ '/weeks/offseason/os-week5' | relative_url }}" data-page="offseason-o5">
+      <a class="nav-item " href="/weeks/offseason/os-week5" data-page="offseason-o5">
         <span class="ni-num">O5</span>
         <span class="ni-text">PID Control</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'offseason-o6' %}active{% endif %}" href="{{ '/weeks/offseason/os-week6' | relative_url }}" data-page="offseason-o6">
+      <a class="nav-item " href="/weeks/offseason/os-week6" data-page="offseason-o6">
         <span class="ni-num">O6</span>
         <span class="ni-text">Autonomous</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'offseason-o7' %}active{% endif %}" href="{{ '/weeks/offseason/os-week7' | relative_url }}" data-page="offseason-o7">
+      <a class="nav-item " href="/weeks/offseason/os-week7" data-page="offseason-o7">
         <span class="ni-num">O7</span>
         <span class="ni-text">Subsystem Ownership</span>
         <span class="ni-check">○</span>
       </a>
-      <a class="nav-item {% if page.page_id == 'offseason-o8' %}active{% endif %}" href="{{ '/weeks/offseason/os-week8' | relative_url }}" data-page="offseason-o8">
+      <a class="nav-item " href="/weeks/offseason/os-week8" data-page="offseason-o8">
         <span class="ni-num">O8</span>
         <span class="ni-text">Build Season Prep</span>
         <span class="ni-check">○</span>
@@ -259,3 +356,51 @@
     </div>
   </div>
 </div>
+
+  <main class="main" id="main-content">
+    <div class="page-hero" style="min-height:40vh;display:flex;flex-direction:column;justify-content:center">
+  <div class="ph-badge badge-danger" style="background:rgba(196,18,48,0.3);color:#ffb3be">Error 404</div>
+  <h1>Page Not Found</h1>
+  <p>That page doesn't exist — it may have moved or you followed a broken link.</p>
+</div>
+
+<div class="content-wrap" style="text-align:center;padding-top:3rem">
+  <div style="font-size:5rem;margin-bottom:1.5rem">🤖</div>
+  <h2 style="font-size:1.3rem;color:#1B2A4A;margin-bottom:0.75rem">Robot not found at this URL</h2>
+  <p style="margin-bottom:2rem">Head back to the home page and navigate from there.</p>
+  <a href="/" class="btn btn-primary">← Back to Home</a>
+</div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="sf-left">
+    <img src="/assets/images/logo.jpeg" alt="WRT">
+    <span>Walton Robotics Team 2974 &mdash; WRT Programming &mdash; 2026-27</span>
+  </div>
+  <div class="sf-right">
+    <a href="https://github.com/WaltonRobotics" target="_blank" rel="noopener">GitHub</a>
+    <a href="/sitemap.xml">Sitemap</a>
+    <a href="/feed.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- Mobile sidebar backdrop -->
+<div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+
+<script type="module" src="/assets/js/auth.js"></script>
+
+<script>
+  // Initialize Lucide icons after all content is in the DOM.
+  // Called again by auth.js after the user chip is injected.
+  function initIcons() { if (typeof lucide !== 'undefined') lucide.createIcons(); }
+  document.addEventListener('DOMContentLoaded', initIcons);
+</script>
+
+<!-- impeccable-live-start -->
+<script src="http://localhost:8400/live.js"></script>
+<!-- impeccable-live-end -->
+</body>
+</html>

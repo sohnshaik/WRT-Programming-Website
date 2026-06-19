@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Primary Meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B2A4A">
+<meta name="description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+<meta name="author" content="Walton Robotics Team 2974">
+
+<!-- Title -->
+<title>MiniBot Project | WRT Programming</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="/assets/images/logo.jpeg">
+<link rel="apple-touch-icon" href="/assets/images/logo.jpeg">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="WRT Programming">
+<meta property="og:title"       content="MiniBot Project">
+<meta property="og:description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+<meta property="og:url"         content="http://localhost:4000/project/">
+<meta property="og:image"       content="http://localhost:4000/assets/images/logo.jpeg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="MiniBot Project">
+<meta name="twitter:description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+
+<!-- Jekyll SEO tag (handles canonical, structured data, etc.) -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>MiniBot Project | WRT Programming</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="MiniBot Project" />
+<meta name="author" content="Walton Robotics Team 2974" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<meta property="og:description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<link rel="canonical" href="http://localhost:4000/project/" />
+<meta property="og:url" content="http://localhost:4000/project/" />
+<meta property="og:site_name" content="WRT Programming" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="MiniBot Project" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Walton Robotics Team 2974" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Walton Robotics Team 2974"},"@type":"WebPage","url":"http://localhost:4000/project/","headline":"MiniBot Project","description":"Walton Robotics Team 2974 — Java &amp; FRC Programming Course","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<!-- Lucide icons (inline SVG, no build step required) -->
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.511.0/dist/umd/lucide.min.js"></script>
+
+<!-- Feed -->
+<link rel="alternate" type="application/rss+xml" title="WRT Programming" href="/feed.xml">
+
+</head>
+<body data-page-id="project" data-require-auth="1">
+
+<!-- Auth loading overlay — hidden once auth check resolves -->
+<div id="wrc-auth-overlay" aria-hidden="true">
+  <div class="wao-inner">
+    <div class="wao-spinner"></div>
+  </div>
+</div>
+
+<header class="topbar">
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Open sidebar"><i data-lucide="menu"></i></button>
+  <a href="/" class="topbar-logo">
+    <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+    <div>
+      <div class="topbar-name">WRT Programming</div>
+      <div class="topbar-sub">Team 2974 · 2026-27</div>
+    </div>
+  </a>
+  <div class="topbar-sep"></div>
+  <nav class="topbar-links">
+    <a href="/" >Home</a>
+    <a href="/training" >Training</a>
+    <a href="/weeks/summer/week1" >Summer</a>
+    <a href="/weeks/offseason/os-week1" >Offseason</a>
+    <a href="/project" class="active">Project</a>
+    <a href="/style-guide" >Style Guide</a>
+  </nav>
+  <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)"><i data-lucide="search"></i></button>
+  <a href="/login/" class="topbar-signin-btn" id="topbar-signin-static">sign in</a>
+</header>
+
+
+<!-- wrc.js must load BEFORE main content so Quiz class is defined for inline scripts -->
+<script src="/assets/js/wrc.js"></script>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+
+  <div class="sidebar-course-header">
+    <div class="sch-logo-row">
+      <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+      <div>
+        <span class="sch-logo-name">WRT Programming</span>
+        <span class="sch-logo-sub">Team 2974 · Java &amp; FRC</span>
+      </div>
+    </div>
+    <div class="sch-title-area">
+      <div class="sch-label">Course</div>
+      <div class="sch-title">2026-27 season</div>
+    </div>
+    <div class="sch-progress">
+      <div class="sp-label">
+        <span>Progress</span>
+        <span class="sp-pct-text">0%</span>
+      </div>
+      <div class="sp-track"><div class="sp-fill" style="transform:scaleX(0)"></div></div>
+    </div>
+    <!-- impeccable-variants-start 960f32f8 -->
+    <div data-impeccable-variants="960f32f8" data-impeccable-variant-count="3" style="display: contents">
+      <!-- Original -->
+      <div data-impeccable-variant="original">
+        <button class="sidebar-search-btn" onclick="openSearch()">
+          <span class="ssb-icon"><i data-lucide="search"></i></span>
+          <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+        </button>
+      </div>
+      <!-- Variants: insert below this line -->
+<style data-impeccable-css="960f32f8">
+  @scope ([data-impeccable-variant="1"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255, var(--p-opacity, 0.68));
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(255,255,255,0.13);
+      color: rgba(255,255,255,0.85);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.55);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+  @scope ([data-impeccable-variant="2"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(255,255,255, calc(var(--p-surface, 0.5) * 0.2));
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      transition: background 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.92);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.62);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+  @scope ([data-impeccable-variant="3"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(196,18,48, calc(var(--p-accent, 0.5) * 0.18));
+      border: 1px solid rgba(196,18,48, calc(var(--p-accent, 0.5) * 0.7));
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      transition: background 0.12s ease, border-color 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(196,18,48,0.18);
+      border-color: rgba(196,18,48,0.6);
+      color: rgba(255,255,255,0.92);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(196,18,48,0.12);
+      border: 1px solid rgba(196,18,48,0.25);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+</style>
+<div data-impeccable-variant="1" data-impeccable-params='[
+  {"id":"opacity","kind":"range","min":0.55,"max":0.82,"step":0.01,"default":0.68,"label":"Text brightness"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+<div data-impeccable-variant="2" style="display:none" data-impeccable-params='[
+  {"id":"surface","kind":"range","min":0,"max":1,"step":0.05,"default":0.5,"label":"Surface brightness"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+<div data-impeccable-variant="3" style="display:none" data-impeccable-params='[
+  {"id":"accent","kind":"range","min":0,"max":1,"step":0.05,"default":0.5,"label":"Red accent"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+    </div>
+    <!-- impeccable-variants-end 960f32f8 -->
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      <span class="ngl-icon"><i data-lucide="sun"></i></span>
+      <span class="ngl-text">Summer — Java Foundations</span>
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item " href="/weeks/summer/week1" data-page="summer-w1">
+        <span class="ni-num">W1</span>
+        <span class="ni-text">The Basics</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week2" data-page="summer-w2">
+        <span class="ni-num">W2</span>
+        <span class="ni-text">Logic &amp; Control Flow</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week3" data-page="summer-w3">
+        <span class="ni-num">W3</span>
+        <span class="ni-text">Loops</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week4" data-page="summer-w4">
+        <span class="ni-num">W4</span>
+        <span class="ni-text">Arrays &amp; Methods</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week5" data-page="summer-w5">
+        <span class="ni-num">W5</span>
+        <span class="ni-text">OOP — Classes &amp; Objects</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week6" data-page="summer-w6">
+        <span class="ni-num">W6</span>
+        <span class="ni-text">Inheritance &amp; Polymorphism</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week7" data-page="summer-w7">
+        <span class="ni-num">W7</span>
+        <span class="ni-text">Advanced Classes</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week8" data-page="summer-w8">
+        <span class="ni-num">W8</span>
+        <span class="ni-text">Recap &amp; Resources</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      <span class="ngl-icon"><i data-lucide="cpu"></i></span>
+      <span class="ngl-text">Offseason — FRC Training</span>
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item " href="/weeks/offseason/os-week1" data-page="offseason-o1">
+        <span class="ni-num">O1</span>
+        <span class="ni-text">Git &amp; GitHub</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week2" data-page="offseason-o2">
+        <span class="ni-num">O2</span>
+        <span class="ni-text">WPILib Setup</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week3" data-page="offseason-o3">
+        <span class="ni-num">O3</span>
+        <span class="ni-text">Command-Based</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week4" data-page="offseason-o4">
+        <span class="ni-num">O4</span>
+        <span class="ni-text">Motors &amp; Sensors</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week5" data-page="offseason-o5">
+        <span class="ni-num">O5</span>
+        <span class="ni-text">PID Control</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week6" data-page="offseason-o6">
+        <span class="ni-num">O6</span>
+        <span class="ni-text">Autonomous</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week7" data-page="offseason-o7">
+        <span class="ni-num">O7</span>
+        <span class="ni-text">Subsystem Ownership</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week8" data-page="offseason-o8">
+        <span class="ni-num">O8</span>
+        <span class="ni-text">Build Season Prep</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Collapse tab — fixed to right edge of sidebar, no overlap with progress bar -->
+  <button class="sidebar-collapse-btn" id="sidebar-collapse-btn"
+    onclick="toggleSidebarWidth()" title="Collapse sidebar" aria-label="Collapse sidebar">‹</button>
+
+</nav>
+
+<!-- Search Modal -->
+<div class="search-overlay" id="search-overlay" onclick="closeSearch()">
+  <div class="search-modal" onclick="event.stopPropagation()">
+    <div class="sm-header">
+      <span class="sm-icon"><i data-lucide="search"></i></span>
+      <input type="text" id="search-input" class="sm-input" placeholder="Search topics, concepts, keywords…" oninput="searchTopics(this.value)" autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="sm-close" onclick="closeSearch()"><i data-lucide="x"></i></button>
+    </div>
+    <div class="sm-results" id="search-results">
+      <div class="sm-empty">Start typing to search across all 16 weeks…</div>
+    </div>
+    <div class="sm-footer">
+      <span><kbd>↑↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> open</span>
+      <span><kbd>Esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+  <main class="main" id="main-content">
+    <div class="page-hero">
+  <div class="ph-badge badge-summer">Summer Project</div>
+  <h1>MiniBot — The Course Project</h1>
+  <p>you're building a real WRT-style robot codebase from scratch across 8 weeks. every week adds a new piece. by week 8, you'll have a fully structured robot program.</p>
+</div>
+
+<div class="content-wrap">
+
+<h2 class="sh">What You're Building</h2>
+<p>MiniBot is a simplified version of our actual FRC robot code. it uses the same patterns, naming conventions, and file structure as <a href="https://github.com/WaltonRobotics/Rebuilt" target="_blank" rel="noopener">WaltonRobotics/Rebuilt</a>. when you're done, your code could be the base of a real robot project.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">final project structure</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre>minibot/
+├── Constants.java               <span class="cmt">// Week 1 — all robot constants</span>
+├── AutoLogic.java               <span class="cmt">// Week 2 — if/switch auto selection</span>
+├── SensorProcessor.java         <span class="cmt">// Week 3 — loops + arrays</span>
+├── DriveCalculator.java         <span class="cmt">// Week 4 — static utility methods</span>
+├── subsystems/
+│   ├── DriveSubsystem.java      <span class="cmt">// Week 5 — first OOP class</span>
+│   └── ShooterSubsystem.java    <span class="cmt">// Week 6 — inheritance</span>
+├── RobotState.java              <span class="cmt">// Week 7 — enum + interface</span>
+└── Robot.java                   <span class="cmt">// Week 8 — final assembly</span></pre>
+</div>
+
+<h2 class="sh">Week-by-Week Checklist</h2>
+
+<table>
+<thead><tr><th>Week</th><th>File</th><th>What to build</th><th>Core concept</th></tr></thead>
+<tbody>
+<tr>
+  <td><a href="/weeks/summer/week1">Week 1</a></td>
+  <td><code>Constants.java</code></td>
+  <td>Inner classes <code>DriveK</code> + <code>ShooterK</code> with motor IDs, speeds, gear ratios</td>
+  <td>Variables, <code>final</code>, naming conventions</td>
+</tr>
+<tr>
+  <td><a href="/weeks/summer/week2">Week 2</a></td>
+  <td><code>AutoLogic.java</code></td>
+  <td>Static method that uses if/switch to return an auto routine name given an input mode int</td>
+  <td>if/else, switch, booleans</td>
+</tr>
+<tr>
+  <td><a href="/weeks/summer/week3">Week 3</a></td>
+  <td><code>SensorProcessor.java</code></td>
+  <td>Static methods: average of double array, count values above a threshold, find min/max</td>
+  <td>for loops, arrays, methods</td>
+</tr>
+<tr>
+  <td><a href="/weeks/summer/week4">Week 4</a></td>
+  <td><code>DriveCalculator.java</code></td>
+  <td>Static utility methods: RPM to m/s, ticks to rotations, clamp(val, min, max), deadband(input, threshold)</td>
+  <td>Static methods, parameters, return types</td>
+</tr>
+<tr>
+  <td><a href="/weeks/summer/week5">Week 5</a></td>
+  <td><code>DriveSubsystem.java</code></td>
+  <td>Class with <code>private final</code> motor fields, constructor, <code>periodic()</code>, <code>drive(double speed)</code>, <code>stop()</code>, getters</td>
+  <td>OOP, encapsulation, constructors</td>
+</tr>
+<tr>
+  <td><a href="/weeks/summer/week6">Week 6</a></td>
+  <td><code>ShooterSubsystem.java</code></td>
+  <td>Extends same abstract base as DriveSubsystem. Adds <code>m_targetRPS</code>, <code>isAtSpeed()</code>, overrides <code>periodic()</code></td>
+  <td>Inheritance, <code>extends</code>, <code>@Override</code></td>
+</tr>
+<tr>
+  <td><a href="/weeks/summer/week7">Week 7</a></td>
+  <td><code>RobotState.java</code></td>
+  <td>Enum with <code>IDLE</code>, <code>DRIVING</code>, <code>SHOOTING</code>, <code>DISABLED</code>. Plus interface <code>IControllable</code> with method signatures.</td>
+  <td>Enums, interfaces, nested classes</td>
+</tr>
+<tr>
+  <td><a href="/weeks/summer/week8">Week 8</a></td>
+  <td><code>Robot.java</code></td>
+  <td>Extends <code>TimedRobot</code>. Fields for both subsystems. <code>configureBindings()</code>. <code>robotPeriodic()</code> with CommandScheduler. Uses <code>RobotState</code>.</td>
+  <td>Full project integration</td>
+</tr>
+</tbody>
+</table>
+
+<h2 class="sh">Submission</h2>
+<p>at the end of week 8, you'll push all your .java files to a branch in the team repo and open a pull request. the leads will review your code — same process as real contributions to our robot.</p>
+
+<div class="callout tip"><p><strong>PR title format:</strong> <code>feat: minibot project — [your name]</code><br />
+Include a short description of what you built and anything you're unsure about. We give feedback, not just grades.</p></div>
+
+<h2 class="sh">Grading (quick version)</h2>
+<div class="concept-grid">
+  <div class="concept-card"><div class="cc-label">20 pts</div><div class="cc-title">Naming conventions</div><div class="cc-desc">k prefix on constants. m_ prefix on member vars. PascalCase classes. camelCase methods.</div></div>
+  <div class="concept-card"><div class="cc-label">20 pts</div><div class="cc-title">OOP structure</div><div class="cc-desc">Subsystems have proper constructors, periodic(), getters/setters. Inheritance and interface used correctly.</div></div>
+  <div class="concept-card"><div class="cc-label">20 pts</div><div class="cc-title">No magic numbers</div><div class="cc-desc">Every constant lives in Constants.java. Nothing hardcoded inline — not even CAN IDs.</div></div>
+  <div class="concept-card"><div class="cc-label">20 pts</div><div class="cc-title">Comments</div><div class="cc-desc">Every public method has a Javadoc. Tricky logic has inline // comments explaining the why.</div></div>
+  <div class="concept-card"><div class="cc-label">20 pts</div><div class="cc-title">Compiles + runs</div><div class="cc-desc">Your code should compile without errors. Logic should be sound — no while loops in periodic(), no raw mutation of private fields from outside the class.</div></div>
+</div>
+
+</div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="sf-left">
+    <img src="/assets/images/logo.jpeg" alt="WRT">
+    <span>Walton Robotics Team 2974 &mdash; WRT Programming &mdash; 2026-27</span>
+  </div>
+  <div class="sf-right">
+    <a href="https://github.com/WaltonRobotics" target="_blank" rel="noopener">GitHub</a>
+    <a href="/sitemap.xml">Sitemap</a>
+    <a href="/feed.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- Mobile sidebar backdrop -->
+<div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+
+<script type="module" src="/assets/js/auth.js"></script>
+
+<script>
+  // Initialize Lucide icons after all content is in the DOM.
+  // Called again by auth.js after the user chip is injected.
+  function initIcons() { if (typeof lucide !== 'undefined') lucide.createIcons(); }
+  document.addEventListener('DOMContentLoaded', initIcons);
+</script>
+
+<!-- impeccable-live-start -->
+<script src="http://localhost:8400/live.js"></script>
+<!-- impeccable-live-end -->
+</body>
+</html>

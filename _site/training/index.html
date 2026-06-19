@@ -1,26 +1,118 @@
----
-layout: default
-title: Training
-page_id: training
-no_sidebar: true
----
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Primary Meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B2A4A">
+<meta name="description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+<meta name="author" content="Walton Robotics Team 2974">
 
-<div class="course-dash">
+<!-- Title -->
+<title>Training | WRT Programming</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="/assets/images/logo.jpeg">
+<link rel="apple-touch-icon" href="/assets/images/logo.jpeg">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="WRT Programming">
+<meta property="og:title"       content="Training">
+<meta property="og:description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+<meta property="og:url"         content="http://localhost:4000/training/">
+<meta property="og:image"       content="http://localhost:4000/assets/images/logo.jpeg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="Training">
+<meta name="twitter:description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+
+<!-- Jekyll SEO tag (handles canonical, structured data, etc.) -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Training | WRT Programming</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Training" />
+<meta name="author" content="Walton Robotics Team 2974" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<meta property="og:description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<link rel="canonical" href="http://localhost:4000/training/" />
+<meta property="og:url" content="http://localhost:4000/training/" />
+<meta property="og:site_name" content="WRT Programming" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Training" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Walton Robotics Team 2974" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Walton Robotics Team 2974"},"@type":"WebPage","url":"http://localhost:4000/training/","headline":"Training","description":"Walton Robotics Team 2974 — Java &amp; FRC Programming Course","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<!-- Lucide icons (inline SVG, no build step required) -->
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.511.0/dist/umd/lucide.min.js"></script>
+
+<!-- Feed -->
+<link rel="alternate" type="application/rss+xml" title="WRT Programming" href="/feed.xml">
+
+</head>
+<body data-page-id="training" class="no-sidebar">
+
+<!-- Auth loading overlay — hidden once auth check resolves -->
+<div id="wrc-auth-overlay" aria-hidden="true">
+  <div class="wao-inner">
+    <div class="wao-spinner"></div>
+  </div>
+</div>
+
+<header class="topbar">
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Open sidebar"><i data-lucide="menu"></i></button>
+  <a href="/" class="topbar-logo">
+    <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+    <div>
+      <div class="topbar-name">WRT Programming</div>
+      <div class="topbar-sub">Team 2974 · 2026-27</div>
+    </div>
+  </a>
+  <div class="topbar-sep"></div>
+  <nav class="topbar-links">
+    <a href="/" >Home</a>
+    <a href="/training" class="active">Training</a>
+    <a href="/weeks/summer/week1" >Summer</a>
+    <a href="/weeks/offseason/os-week1" >Offseason</a>
+    <a href="/project" >Project</a>
+    <a href="/style-guide" >Style Guide</a>
+  </nav>
+  <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)"><i data-lucide="search"></i></button>
+  <a href="/login/" class="topbar-signin-btn" id="topbar-signin-static">sign in</a>
+</header>
+
+
+<!-- wrc.js must load BEFORE main content so Quiz class is defined for inline scripts -->
+<script src="/assets/js/wrc.js"></script>
+
+<div class="shell shell--no-sidebar">
+  
+  <main class="main main--full" id="main-content">
+    <div class="course-dash">
 
   <!-- ── BANNER ──────────────────────────────────────────── -->
   <div class="cd-banner">
     <div class="cdb-inner">
-      <img src="{{ '/assets/images/logo.jpeg' | relative_url }}" alt="Walton Robotics" class="cdb-logo">
+      <img src="/assets/images/logo.jpeg" alt="Walton Robotics" class="cdb-logo" />
       <div class="cdb-text">
         <h1>WRT Java &amp; FRC Course</h1>
-        <div class="cdb-season">Walton Robotics · Team 2974 · {{ site.season }}</div>
+        <div class="cdb-season">Walton Robotics · Team 2974 · 2026-27</div>
       </div>
       <div class="cdb-progress">
         <span class="cdbp-label sp-pct-text">0%</span>
         <div class="cdbp-track"><div class="cdbp-fill sp-fill" style="transform:scaleX(0)"></div></div>
         <span class="cdbp-count"><span id="dash-completed">0</span>/16</span>
       </div>
-      <a href="{{ '/weeks/summer/week1' | relative_url }}" class="btn btn-primary" id="dash-continue-btn">Start learning →</a>
+      <a href="/weeks/summer/week1" class="btn btn-primary" id="dash-continue-btn">Start learning →</a>
     </div>
   </div>
 
@@ -33,7 +125,7 @@ no_sidebar: true
     </div>
     <div class="cd-weeks-grid">
 
-      <a class="cdwc" href="{{ '/weeks/summer/week1' | relative_url }}" data-page="summer-w1">
+      <a class="cdwc" href="/weeks/summer/week1" data-page="summer-w1">
         <div class="cdwc-top">
           <span class="cdwc-num">W1</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -47,7 +139,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/summer/week2' | relative_url }}" data-page="summer-w2">
+      <a class="cdwc" href="/weeks/summer/week2" data-page="summer-w2">
         <div class="cdwc-top">
           <span class="cdwc-num">W2</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -61,7 +153,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/summer/week3' | relative_url }}" data-page="summer-w3">
+      <a class="cdwc" href="/weeks/summer/week3" data-page="summer-w3">
         <div class="cdwc-top">
           <span class="cdwc-num">W3</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -75,7 +167,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/summer/week4' | relative_url }}" data-page="summer-w4">
+      <a class="cdwc" href="/weeks/summer/week4" data-page="summer-w4">
         <div class="cdwc-top">
           <span class="cdwc-num">W4</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -89,7 +181,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/summer/week5' | relative_url }}" data-page="summer-w5">
+      <a class="cdwc" href="/weeks/summer/week5" data-page="summer-w5">
         <div class="cdwc-top">
           <span class="cdwc-num">W5</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -103,7 +195,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/summer/week6' | relative_url }}" data-page="summer-w6">
+      <a class="cdwc" href="/weeks/summer/week6" data-page="summer-w6">
         <div class="cdwc-top">
           <span class="cdwc-num">W6</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -117,7 +209,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/summer/week7' | relative_url }}" data-page="summer-w7">
+      <a class="cdwc" href="/weeks/summer/week7" data-page="summer-w7">
         <div class="cdwc-top">
           <span class="cdwc-num">W7</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -131,7 +223,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/summer/week8' | relative_url }}" data-page="summer-w8">
+      <a class="cdwc" href="/weeks/summer/week8" data-page="summer-w8">
         <div class="cdwc-top">
           <span class="cdwc-num">W8</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -157,7 +249,7 @@ no_sidebar: true
     </div>
     <div class="cd-weeks-grid">
 
-      <a class="cdwc" href="{{ '/weeks/offseason/os-week1' | relative_url }}" data-page="offseason-o1">
+      <a class="cdwc" href="/weeks/offseason/os-week1" data-page="offseason-o1">
         <div class="cdwc-top">
           <span class="cdwc-num">O1</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -171,7 +263,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/offseason/os-week2' | relative_url }}" data-page="offseason-o2">
+      <a class="cdwc" href="/weeks/offseason/os-week2" data-page="offseason-o2">
         <div class="cdwc-top">
           <span class="cdwc-num">O2</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -185,7 +277,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/offseason/os-week3' | relative_url }}" data-page="offseason-o3">
+      <a class="cdwc" href="/weeks/offseason/os-week3" data-page="offseason-o3">
         <div class="cdwc-top">
           <span class="cdwc-num">O3</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -199,7 +291,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/offseason/os-week4' | relative_url }}" data-page="offseason-o4">
+      <a class="cdwc" href="/weeks/offseason/os-week4" data-page="offseason-o4">
         <div class="cdwc-top">
           <span class="cdwc-num">O4</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -213,7 +305,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/offseason/os-week5' | relative_url }}" data-page="offseason-o5">
+      <a class="cdwc" href="/weeks/offseason/os-week5" data-page="offseason-o5">
         <div class="cdwc-top">
           <span class="cdwc-num">O5</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -227,7 +319,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/offseason/os-week6' | relative_url }}" data-page="offseason-o6">
+      <a class="cdwc" href="/weeks/offseason/os-week6" data-page="offseason-o6">
         <div class="cdwc-top">
           <span class="cdwc-num">O6</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -241,7 +333,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/offseason/os-week7' | relative_url }}" data-page="offseason-o7">
+      <a class="cdwc" href="/weeks/offseason/os-week7" data-page="offseason-o7">
         <div class="cdwc-top">
           <span class="cdwc-num">O7</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -255,7 +347,7 @@ no_sidebar: true
         </div>
       </a>
 
-      <a class="cdwc" href="{{ '/weeks/offseason/os-week8' | relative_url }}" data-page="offseason-o8">
+      <a class="cdwc" href="/weeks/offseason/os-week8" data-page="offseason-o8">
         <div class="cdwc-top">
           <span class="cdwc-num">O8</span>
           <span class="cdwc-status"><span class="cdwc-status-dot"></span><span class="cdwc-status-text">Not started</span></span>
@@ -273,3 +365,37 @@ no_sidebar: true
   </div>
 
 </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="sf-left">
+    <img src="/assets/images/logo.jpeg" alt="WRT">
+    <span>Walton Robotics Team 2974 &mdash; WRT Programming &mdash; 2026-27</span>
+  </div>
+  <div class="sf-right">
+    <a href="https://github.com/WaltonRobotics" target="_blank" rel="noopener">GitHub</a>
+    <a href="/sitemap.xml">Sitemap</a>
+    <a href="/feed.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- Mobile sidebar backdrop -->
+<div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+
+<script type="module" src="/assets/js/auth.js"></script>
+
+<script>
+  // Initialize Lucide icons after all content is in the DOM.
+  // Called again by auth.js after the user chip is injected.
+  function initIcons() { if (typeof lucide !== 'undefined') lucide.createIcons(); }
+  document.addEventListener('DOMContentLoaded', initIcons);
+</script>
+
+<!-- impeccable-live-start -->
+<script src="http://localhost:8400/live.js"></script>
+<!-- impeccable-live-end -->
+</body>
+</html>

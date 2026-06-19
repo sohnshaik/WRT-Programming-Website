@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Primary Meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B2A4A">
+<meta name="description" content="pull everything together. here's your java cheat sheet, the links that actually matter, and the final piece of your project.">
+<meta name="author" content="Walton Robotics Team 2974">
+
+<!-- Title -->
+<title>Recap & Resources | WRT Programming</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="/assets/images/logo.jpeg">
+<link rel="apple-touch-icon" href="/assets/images/logo.jpeg">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="WRT Programming">
+<meta property="og:title"       content="Recap & Resources">
+<meta property="og:description" content="pull everything together. here's your java cheat sheet, the links that actually matter, and the final piece of your project.">
+<meta property="og:url"         content="http://localhost:4000/weeks/summer/week8/">
+<meta property="og:image"       content="http://localhost:4000/assets/images/logo.jpeg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="Recap & Resources">
+<meta name="twitter:description" content="pull everything together. here's your java cheat sheet, the links that actually matter, and the final piece of your project.">
+
+<!-- Jekyll SEO tag (handles canonical, structured data, etc.) -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Recap &amp; Resources | WRT Programming</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Recap &amp; Resources" />
+<meta name="author" content="Walton Robotics Team 2974" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<meta property="og:description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<link rel="canonical" href="http://localhost:4000/weeks/summer/week8/" />
+<meta property="og:url" content="http://localhost:4000/weeks/summer/week8/" />
+<meta property="og:site_name" content="WRT Programming" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Recap &amp; Resources" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Walton Robotics Team 2974" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Walton Robotics Team 2974"},"@type":"WebPage","url":"http://localhost:4000/weeks/summer/week8/","headline":"Recap &amp; Resources","description":"Walton Robotics Team 2974 — Java &amp; FRC Programming Course","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<!-- Lucide icons (inline SVG, no build step required) -->
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.511.0/dist/umd/lucide.min.js"></script>
+
+<!-- Feed -->
+<link rel="alternate" type="application/rss+xml" title="WRT Programming" href="/feed.xml">
+
+</head>
+<body data-page-id="summer-w8" data-require-auth="1">
+
+<!-- Auth loading overlay — hidden once auth check resolves -->
+<div id="wrc-auth-overlay" aria-hidden="true">
+  <div class="wao-inner">
+    <div class="wao-spinner"></div>
+  </div>
+</div>
+
+<header class="topbar">
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Open sidebar"><i data-lucide="menu"></i></button>
+  <a href="/" class="topbar-logo">
+    <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+    <div>
+      <div class="topbar-name">WRT Programming</div>
+      <div class="topbar-sub">Team 2974 · 2026-27</div>
+    </div>
+  </a>
+  <div class="topbar-sep"></div>
+  <nav class="topbar-links">
+    <a href="/" >Home</a>
+    <a href="/training" >Training</a>
+    <a href="/weeks/summer/week1" class="active">Summer</a>
+    <a href="/weeks/offseason/os-week1" >Offseason</a>
+    <a href="/project" >Project</a>
+    <a href="/style-guide" >Style Guide</a>
+  </nav>
+  <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)"><i data-lucide="search"></i></button>
+  <a href="/login/" class="topbar-signin-btn" id="topbar-signin-static">sign in</a>
+</header>
+
+
+<!-- wrc.js must load BEFORE main content so Quiz class is defined for inline scripts -->
+<script src="/assets/js/wrc.js"></script>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+
+  <div class="sidebar-course-header">
+    <div class="sch-logo-row">
+      <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+      <div>
+        <span class="sch-logo-name">WRT Programming</span>
+        <span class="sch-logo-sub">Team 2974 · Java &amp; FRC</span>
+      </div>
+    </div>
+    <div class="sch-title-area">
+      <div class="sch-label">Course</div>
+      <div class="sch-title">2026-27 season</div>
+    </div>
+    <div class="sch-progress">
+      <div class="sp-label">
+        <span>Progress</span>
+        <span class="sp-pct-text">0%</span>
+      </div>
+      <div class="sp-track"><div class="sp-fill" style="transform:scaleX(0)"></div></div>
+    </div>
+    <!-- impeccable-variants-start 960f32f8 -->
+    <div data-impeccable-variants="960f32f8" data-impeccable-variant-count="3" style="display: contents">
+      <!-- Original -->
+      <div data-impeccable-variant="original">
+        <button class="sidebar-search-btn" onclick="openSearch()">
+          <span class="ssb-icon"><i data-lucide="search"></i></span>
+          <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+        </button>
+      </div>
+      <!-- Variants: insert below this line -->
+<style data-impeccable-css="960f32f8">
+  @scope ([data-impeccable-variant="1"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255, var(--p-opacity, 0.68));
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(255,255,255,0.13);
+      color: rgba(255,255,255,0.85);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.55);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+  @scope ([data-impeccable-variant="2"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(255,255,255, calc(var(--p-surface, 0.5) * 0.2));
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      transition: background 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.92);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.62);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+  @scope ([data-impeccable-variant="3"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(196,18,48, calc(var(--p-accent, 0.5) * 0.18));
+      border: 1px solid rgba(196,18,48, calc(var(--p-accent, 0.5) * 0.7));
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      transition: background 0.12s ease, border-color 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(196,18,48,0.18);
+      border-color: rgba(196,18,48,0.6);
+      color: rgba(255,255,255,0.92);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(196,18,48,0.12);
+      border: 1px solid rgba(196,18,48,0.25);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+</style>
+<div data-impeccable-variant="1" data-impeccable-params='[
+  {"id":"opacity","kind":"range","min":0.55,"max":0.82,"step":0.01,"default":0.68,"label":"Text brightness"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+<div data-impeccable-variant="2" style="display:none" data-impeccable-params='[
+  {"id":"surface","kind":"range","min":0,"max":1,"step":0.05,"default":0.5,"label":"Surface brightness"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+<div data-impeccable-variant="3" style="display:none" data-impeccable-params='[
+  {"id":"accent","kind":"range","min":0,"max":1,"step":0.05,"default":0.5,"label":"Red accent"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+    </div>
+    <!-- impeccable-variants-end 960f32f8 -->
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      <span class="ngl-icon"><i data-lucide="sun"></i></span>
+      <span class="ngl-text">Summer — Java Foundations</span>
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item " href="/weeks/summer/week1" data-page="summer-w1">
+        <span class="ni-num">W1</span>
+        <span class="ni-text">The Basics</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week2" data-page="summer-w2">
+        <span class="ni-num">W2</span>
+        <span class="ni-text">Logic &amp; Control Flow</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week3" data-page="summer-w3">
+        <span class="ni-num">W3</span>
+        <span class="ni-text">Loops</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week4" data-page="summer-w4">
+        <span class="ni-num">W4</span>
+        <span class="ni-text">Arrays &amp; Methods</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week5" data-page="summer-w5">
+        <span class="ni-num">W5</span>
+        <span class="ni-text">OOP — Classes &amp; Objects</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week6" data-page="summer-w6">
+        <span class="ni-num">W6</span>
+        <span class="ni-text">Inheritance &amp; Polymorphism</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week7" data-page="summer-w7">
+        <span class="ni-num">W7</span>
+        <span class="ni-text">Advanced Classes</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item active" href="/weeks/summer/week8" data-page="summer-w8">
+        <span class="ni-num">W8</span>
+        <span class="ni-text">Recap &amp; Resources</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      <span class="ngl-icon"><i data-lucide="cpu"></i></span>
+      <span class="ngl-text">Offseason — FRC Training</span>
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item " href="/weeks/offseason/os-week1" data-page="offseason-o1">
+        <span class="ni-num">O1</span>
+        <span class="ni-text">Git &amp; GitHub</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week2" data-page="offseason-o2">
+        <span class="ni-num">O2</span>
+        <span class="ni-text">WPILib Setup</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week3" data-page="offseason-o3">
+        <span class="ni-num">O3</span>
+        <span class="ni-text">Command-Based</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week4" data-page="offseason-o4">
+        <span class="ni-num">O4</span>
+        <span class="ni-text">Motors &amp; Sensors</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week5" data-page="offseason-o5">
+        <span class="ni-num">O5</span>
+        <span class="ni-text">PID Control</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week6" data-page="offseason-o6">
+        <span class="ni-num">O6</span>
+        <span class="ni-text">Autonomous</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week7" data-page="offseason-o7">
+        <span class="ni-num">O7</span>
+        <span class="ni-text">Subsystem Ownership</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week8" data-page="offseason-o8">
+        <span class="ni-num">O8</span>
+        <span class="ni-text">Build Season Prep</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Collapse tab — fixed to right edge of sidebar, no overlap with progress bar -->
+  <button class="sidebar-collapse-btn" id="sidebar-collapse-btn"
+    onclick="toggleSidebarWidth()" title="Collapse sidebar" aria-label="Collapse sidebar">‹</button>
+
+</nav>
+
+<!-- Search Modal -->
+<div class="search-overlay" id="search-overlay" onclick="closeSearch()">
+  <div class="search-modal" onclick="event.stopPropagation()">
+    <div class="sm-header">
+      <span class="sm-icon"><i data-lucide="search"></i></span>
+      <input type="text" id="search-input" class="sm-input" placeholder="Search topics, concepts, keywords…" oninput="searchTopics(this.value)" autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="sm-close" onclick="closeSearch()"><i data-lucide="x"></i></button>
+    </div>
+    <div class="sm-results" id="search-results">
+      <div class="sm-empty">Start typing to search across all 16 weeks…</div>
+    </div>
+    <div class="sm-footer">
+      <span><kbd>↑↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> open</span>
+      <span><kbd>Esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+  <main class="main" id="main-content">
+    <div class="page-hero">
+  <div class="ph-breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <a href="#">Summer</a>
+    <span>/</span>
+    <span>Week 8</span>
+  </div>
+  <div class="ph-badge badge-summer">Summer · Week 8 of 8</div>
+  <h1>Recap & Resources</h1>
+  <p>pull everything together. here's your java cheat sheet, the links that actually matter, and the final piece of your project.</p>
+  
+  <div class="ph-topics">
+    
+    <a href="#topic-1" class="ph-topic-pill">Java Foundations Recap</a>
+    
+    <a href="#topic-2" class="ph-topic-pill">FRC & WRT Resources</a>
+    
+    <a href="#topic-3" class="ph-topic-pill">MiniBot Final Project</a>
+    
+      <a href="#weekly-test" class="ph-topic-pill ph-topic-test"><i data-lucide="clipboard-list"></i> Weekly Test</a>
+  </div>
+  
+</div>
+
+<div class="week-layout">
+
+  
+  <nav class="topic-nav" id="topic-nav">
+    <div class="tn-header">this week</div>
+    <ul class="tn-list">
+      
+      <li>
+        <a class="tn-link" href="#topic-1" data-tn="1">
+          <span class="tn-num">1</span>
+          <span class="tn-label">Java Foundations Recap</span>
+        </a>
+      </li>
+      
+      <li>
+        <a class="tn-link" href="#topic-2" data-tn="2">
+          <span class="tn-num">2</span>
+          <span class="tn-label">FRC & WRT Resources</span>
+        </a>
+      </li>
+      
+      <li>
+        <a class="tn-link" href="#topic-3" data-tn="3">
+          <span class="tn-num">3</span>
+          <span class="tn-label">MiniBot Final Project</span>
+        </a>
+      </li>
+      
+      
+      <li>
+        <a class="tn-link tn-test" href="#weekly-test" data-tn="test">
+          <span class="tn-num"><i data-lucide="clipboard-list"></i></span>
+          <span class="tn-label">Weekly Test</span>
+        </a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+
+  <div class="content-wrap">
+    <div id="week-screens-wrap">
+      <h2 class="sh" id="topic-1">Java Foundations Recap</h2>
+<p>Seven weeks of content, distilled. use this as a reference when you're writing code and forget something — that's what it's here for. no shame in checking :)</p>
+
+<h3 class="sub">Week 1 — The Basics</h3>
+<p>Week 1 gave you the atoms that everything else is built from. types, variables, naming, casting. none of it feels exciting in isolation, but when you're deep in a subsystem at 11pm during build season and a casting bug is silently giving you the wrong encoder (encoders measure how far a motor shaft has rotated, giving you position and velocity data) position, you'll be really glad you understand how this works. these are the rules that never go away.</p>
+
+<table>
+<thead><tr><th>Concept</th><th>Key Syntax</th><th>WRT Rule</th></tr></thead>
+<tbody>
+<tr><td>Constants</td><td><code>final int kMotorID = 5;</code></td><td><code>k</code> prefix, always <code>final</code></td></tr>
+<tr><td>Member vars</td><td><code>private double m_speed = 0.0;</code></td><td><code>m_</code> prefix, always <code>private</code></td></tr>
+<tr><td>Primitive types</td><td><code>int</code>, <code>double</code>, <code>boolean</code></td><td>Use <code>double</code> for motor speeds (−1.0 to 1.0)</td></tr>
+<tr><td>Widening cast</td><td><code>double d = myInt;</code> (automatic)</td><td>int → double is safe, no cast needed</td></tr>
+<tr><td>Narrowing cast</td><td><code>int i = (int) myDouble;</code></td><td>Truncates (doesn't round). Watch encoder math!</td></tr>
+<tr><td>Comments</td><td><code>// inline</code>, <code>/* block */</code>, <code>/** javadoc */</code></td><td>Every public method gets a Javadoc</td></tr>
+</tbody>
+</table>
+
+<div class="callout warning"><p><strong>common gotcha:</strong> narrowing casts truncate silently. if your encoder calculation returns <code>3.99</code> rotations and you cast to <code>int</code> you get <code>3</code>, not <code>4</code>. this will not cause a compiler error. you will not know why your robot is off by a full rotation. use <code>Math.round()</code> when you need rounding, and only cast when you genuinely want truncation.</p></div>
+
+<h3 class="sub">Week 2 — Logic &amp; Control Flow</h3>
+<p>Week 2 is where your code started making decisions. in real robot code, you're constantly asking questions: is the shooter up to speed? is the intake extended? is the robot in auto or teleop? every sensor check, every state guard, every auto routine selection runs through this logic. if you can write a clean if/switch block you can write 80% of the control flow you'll need in a real robot.</p>
+
+<table>
+<thead><tr><th>Concept</th><th>Key Syntax</th><th>FRC Use Case</th></tr></thead>
+<tbody>
+<tr><td>Boolean operators</td><td><code>&amp;&amp;</code> <code>||</code> <code>!</code></td><td>Guard conditions: <code>isEnabled &amp;&amp; hasTarget</code></td></tr>
+<tr><td>if / else if / else</td><td><code>if (x) { } else if (y) { } else { }</code></td><td>Auto state logic, sensor range checks</td></tr>
+<tr><td>Switch</td><td><code>switch(val) { case X: ...; break; }</code></td><td>Game state machine, robot mode selection</td></tr>
+<tr><td>Ternary</td><td><code>int x = (a &gt; b) ? a : b;</code></td><td>Compact speed clamping, direction flags</td></tr>
+</tbody>
+</table>
+
+<div class="callout warning"><p><strong>common gotcha:</strong> forgetting <code>break;</code> in a switch case causes fall-through. Java will silently execute the next case's code after yours finishes. this is one of the most common first-season bugs and the compiler gives you zero warning about it. every case needs a <code>break;</code> unless you intentionally want fall-through (which is rare).</p></div>
+
+<h3 class="sub">Weeks 3 &amp; 4 — Loops, Arrays, Methods</h3>
+<p>Weeks 3 and 4 gave you the ability to repeat work and package it up neatly. swerve drives have four modules — you don't write four copies of the same logic, you loop over an array. unit conversions happen dozens of times per second — you don't inline the math every time, you write a static method in a utility class and call it. these are the tools that keep robot code from becoming a spaghetti mess.</p>
+
+<table>
+<thead><tr><th>Concept</th><th>Key Syntax</th><th>FRC Use Case</th></tr></thead>
+<tbody>
+<tr><td>for loop</td><td><code>for (int i = 0; i &lt; n; i++)</code></td><td>Process encoder arrays, iterate modules</td></tr>
+<tr><td>while loop</td><td><code>while (condition)</code></td><td>Avoid in robot code — periodic() is your loop</td></tr>
+<tr><td>enhanced for</td><td><code>for (Type x : array)</code></td><td>Read all swerve module states</td></tr>
+<tr><td>Array declaration</td><td><code>double[] arr = new double[4];</code></td><td>Swerve module speeds, sensor history buffers</td></tr>
+<tr><td>Static methods</td><td><code>public static double clamp(double v, ...)</code></td><td>Math utilities in Constants or MathUtil</td></tr>
+<tr><td>Return types</td><td><code>public double getVelocity() { return m_vel; }</code></td><td>All getters in subsystems</td></tr>
+</tbody>
+</table>
+
+<div class="callout danger"><p><strong>danger:</strong> never put a <code>while</code> loop inside <code>periodic()</code>. <code>periodic()</code> is already being called every 20ms by the scheduler — it IS your loop. if you write <code>while (condition)</code> inside it, you will block the entire robot loop, the watchdog will fire, and your robot will fault or disable. this is a disqualification risk during a match. for loops are fine (as long as they're bounded). while loops are not.</p></div>
+
+<h3 class="sub">Weeks 5, 6, 7 — OOP</h3>
+<p>Weeks 5, 6, and 7 are where everything came together. classes, inheritance, interfaces, enums — these aren't abstract concepts, they're the direct blueprint of how WRT's robot code is structured. every mechanism on the robot is a class that extends SubsystemBase. every state machine uses an enum. every abstract sensor abstraction uses an interface. you've been learning the actual architecture of our robot, just with simplified examples.</p>
+
+<table>
+<thead><tr><th>Concept</th><th>Key Syntax</th><th>WRT Pattern</th></tr></thead>
+<tbody>
+<tr><td>Subsystem class</td><td><code>public class Shooter extends SubsystemBase</code></td><td>One class per mechanism, in subsystems/</td></tr>
+<tr><td>Constructor</td><td><code>public Shooter() { m_motor = new TalonFX(kMotorID); }</code></td><td>Initialize hardware, apply configs</td></tr>
+<tr><td>periodic()</td><td><code>@Override public void periodic()</code></td><td>Logging, odometry (estimating where the robot is on the field by tracking motor rotations and gyro angle over time), state updates — runs every 20ms</td></tr>
+<tr><td>Inheritance</td><td><code>extends SubsystemBase</code></td><td>WPILib gives you the scheduler loop for free</td></tr>
+<tr><td>Interfaces</td><td><code>implements ISensor</code></td><td>Used for vision targets, sensor abstraction</td></tr>
+<tr><td>Enums</td><td><code>enum State { IDLE, SPINNING, AT_SPEED }</code></td><td>Subsystem state machines — very common</td></tr>
+<tr><td>Private modifier</td><td><code>private final TalonFX m_motor;</code></td><td>Hardware fields are ALWAYS private final</td></tr>
+</tbody>
+</table>
+
+<h3 class="sub">the most common mistakes you'll make in your first real code session</h3>
+<p>knowing the concepts is one thing. actually sitting down to write subsystem code for the first time is another. these are the six things that will trip you up, almost guaranteed, in that first real session.</p>
+
+<div class="concept-grid">
+  <div class="concept-card"><div class="cc-label">Integer Division</div><div class="cc-title">5 / 2 = 2, not 2.5</div><div class="cc-desc">When both sides of a division are <code>int</code>, Java discards the decimal entirely. this doesn't round, it truncates. encoder math is where this bites hardest — if you write <code>ticks / kTicksPerRev</code> and both are <code>int</code>, you'll silently lose precision on every cycle. fix: <code>(double) ticks / kTicksPerRev</code>. make one side a double and the whole expression becomes double division.</div></div>
+  <div class="concept-card"><div class="cc-label">== vs .equals()</div><div class="cc-title">For objects, use .equals()</div><div class="cc-desc"><code>==</code> asks "are these the exact same object in memory?" which is not what you want for string comparisons. two separate <code>String</code> objects with identical characters will return <code>false</code> from <code>==</code>. always use <code>.equals()</code> for Strings and objects. primitives (<code>int</code>, <code>double</code>, <code>boolean</code>) are fine with <code>==</code>. example: <code>if (name.equals("driver"))</code> not <code>if (name == "driver")</code>.</div></div>
+  <div class="concept-card"><div class="cc-label">While loops in robot</div><div class="cc-title">DO NOT DO THIS</div><div class="cc-desc"><code>periodic()</code> is called every 20ms by the CommandScheduler. it is already a loop. if you put a <code>while (condition) { }</code> inside periodic, you block that thread and the watchdog kills the robot. the symptom is: robot enables, then immediately disables with a "loop overrun" warning. if you see that, look for blocking code (while loops, <code>Thread.sleep()</code>, anything that waits). example of what NOT to do: <code>while (!atSpeed()) { }</code> inside periodic.</div></div>
+  <div class="concept-card"><div class="cc-label">Missing break in switch</div><div class="cc-title">Fall-through is silent</div><div class="cc-desc">Forgetting <code>break;</code> in a switch case silently runs the next case after yours finishes. the compiler won't warn you, the linter might not catch it, and it will manifest as weird behavior where two different state transitions happen when only one should. every case needs <code>break;</code> unless you are intentionally falling through (add a comment if you are). example: missing <code>break;</code> after <code>case IDLE:</code> means the <code>DRIVING</code> case also executes immediately.</div></div>
+  <div class="concept-card"><div class="cc-label">Hardcoded numbers</div><div class="cc-title">Put them in Constants</div><div class="cc-desc">Magic numbers — raw integers and doubles scattered through your code with no label — make robot code nearly impossible to maintain. when a motor ID changes from port 5 to port 7, you want to change exactly one line in Constants.java, not hunt through ten files. rule: if a number has a physical meaning (an ID, a speed limit, a threshold), it belongs in Constants. never write <code>new TalonFX(5)</code>; always write <code>new TalonFX(DriveK.kFLMotorID)</code>.</div></div>
+  <div class="concept-card"><div class="cc-label">Truncation ≠ Rounding</div><div class="cc-title">(int) 3.9 = 3, not 4</div><div class="cc-desc">Java's cast-to-int operation always chops toward zero. <code>(int) 3.9</code> gives <code>3</code>. <code>(int) -3.9</code> gives <code>-3</code>. neither rounds. this matters any time you're converting a floating-point sensor value or encoder reading to an integer index. if you need actual rounding, use <code>Math.round()</code> which returns a <code>long</code>, or <code>(int) Math.round(x)</code>. only use the cast directly when you want truncation on purpose.</div></div>
+</div>
+
+<h3 class="sub">patterns you'll use daily in WRT code</h3>
+<p>beyond the raw syntax, there are a handful of patterns that show up constantly in real robot code. if these feel familiar when you open the Rebuilt repo for the first time, you'll be in great shape.</p>
+
+<p><strong>1. private final field + k constant</strong> — every piece of hardware follows this pattern. the constant lives in Constants.java, the hardware object is a private final field in the subsystem.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// In Constants.java — the number lives here, nowhere else</span>
+<span class="kw">public static final class</span> <span class="cls">ShooterK</span> {
+    <span class="kw">public static final</span> <span class="type">int</span> kTopMotorID = <span class="num">11</span>;
+    <span class="kw">public static final</span> <span class="type">double</span> kTargetSpeedRPS = <span class="num">80.0</span>;
+}
+
+<span class="cmt">// In ShooterSubsystem.java — hardware is private final, ID comes from constants</span>
+<span class="kw">public class</span> <span class="cls">ShooterSubsystem</span> <span class="kw">extends</span> <span class="cls">SubsystemBase</span> {
+    <span class="kw">private final</span> <span class="cls">TalonFX</span> m_topMotor = <span class="kw">new</span> <span class="cls">TalonFX</span>(<span class="cls">ShooterK</span>.kTopMotorID);
+}</pre>
+</div>
+
+<p><strong>2. subsystem method that returns a Command</strong> — this is how WRT subsystems expose behavior. instead of calling motor.set() from Robot.java, the subsystem returns a Command object that encapsulates the action. Robot.java just wires the command to a trigger.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt">// In ShooterSubsystem.java</span>
+<span class="cmt">/**
+ * Spins the shooter to target speed and holds it.
+ * @return a Command that runs until interrupted
+ */</span>
+<span class="kw">public</span> <span class="cls">Command</span> <span class="fn">shoot</span>() {
+    <span class="kw">return</span> <span class="fn">startEnd</span>(
+        () -&gt; m_topMotor.<span class="fn">set</span>(<span class="cls">ShooterK</span>.kTargetSpeedRPS),
+        () -&gt; m_topMotor.<span class="fn">set</span>(<span class="num">0.0</span>)
+    );
+}
+
+<span class="cmt">// In Robot.java — clean, declarative wiring</span>
+trg_shootButton.<span class="fn">whileTrue</span>(m_shooter.<span class="fn">shoot</span>());</pre>
+</div>
+
+<p><strong>3. state machine with enum + switch</strong> — when a subsystem has multiple modes, use an enum to name the states and a switch to handle each one. this is cleaner and safer than string or integer comparisons.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">private enum</span> <span class="cls">State</span> { IDLE, SPINNING, AT_SPEED }
+<span class="kw">private</span> <span class="cls">State</span> m_state = <span class="cls">State</span>.IDLE;
+
+<span class="kw">@Override</span>
+<span class="kw">public void</span> <span class="fn">periodic</span>() {
+    <span class="kw">switch</span> (m_state) {
+        <span class="kw">case</span> IDLE:
+            m_topMotor.<span class="fn">set</span>(<span class="num">0.0</span>);
+            <span class="kw">break</span>;
+        <span class="kw">case</span> SPINNING:
+            m_topMotor.<span class="fn">set</span>(<span class="cls">ShooterK</span>.kTargetSpeedRPS);
+            <span class="cmt">// check if we've reached speed</span>
+            <span class="kw">if</span> (m_topMotor.<span class="fn">getVelocity</span>().<span class="fn">getValueAsDouble</span>() &gt;= <span class="cls">ShooterK</span>.kTargetSpeedRPS) {
+                m_state = <span class="cls">State</span>.AT_SPEED;
+            }
+            <span class="kw">break</span>;
+        <span class="kw">case</span> AT_SPEED:
+            <span class="cmt">// hold speed, maybe signal ready</span>
+            <span class="kw">break</span>;
+    }
+}</pre>
+</div>
+
+<p><strong>4. the periodic() logging pattern</strong> — in WRT code, every subsystem logs its state every cycle. this makes debugging infinitely easier because you can rewind the robot's behavior from a log file. the logging calls go at the end of periodic().</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">@Override</span>
+<span class="kw">public void</span> <span class="fn">periodic</span>() {
+    <span class="cmt">// 1. do the actual subsystem work first</span>
+    <span class="kw">switch</span> (m_state) { <span class="cmt">/* ... */</span> }
+
+    <span class="cmt">// 2. log everything at the end — WaltLogger is our wrapper over AdvantageKit</span>
+    log_state.<span class="fn">accept</span>(m_state.<span class="fn">toString</span>());
+    log_velocity.<span class="fn">accept</span>(m_topMotor.<span class="fn">getVelocity</span>().<span class="fn">getValueAsDouble</span>());
+    log_atSpeed.<span class="fn">accept</span>(m_state == <span class="cls">State</span>.AT_SPEED);
+}</pre>
+</div>
+
+<div class="callout tip"><p><strong>WRT convention:</strong> logging fields use the <code>log_</code> prefix, just like <code>m_</code> for member vars and <code>k</code> for constants. if you see a field like <code>log_velocity</code> in the codebase, it's a WaltLogger instance. you'll use these in the offseason weeks.</p></div>
+
+<hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0" />
+
+<h2 class="sh" id="topic-2">FRC &amp; WRT Resources</h2>
+<p>you don't need to memorize everything — you need to know where to look. these are the only links you'll actually need during build season.</p>
+
+<h3 class="sub">how to actually use these resources</h3>
+<p>there's a skill to using documentation efficiently. here's the mental model that most experienced WRT members use:</p>
+
+<ul>
+  <li><strong>Google / W3Schools / GeeksForGeeks</strong> — use these when you forget basic Java syntax. "how do i convert int to string java", "java enhanced for loop syntax", "how does switch fall-through work". fast answers for language questions.</li>
+  <li><strong>WPILib Docs</strong> — use these when you need to understand a framework concept. "how does SubsystemBase work", "what is the CommandScheduler", "how do Triggers work". if it's a WPILib class, the docs have the definitive answer.</li>
+  <li><strong>CTRE Phoenix 6 API</strong> — use this when you're working with hardware. "TalonFX setControl", "CANcoder getAbsolutePosition", "StatusSignal vs getValue". Phoenix 6 has a totally different API than Phoenix 5 so make sure you're on the right version (we're on 6).</li>
+  <li><strong>WRT Rebuilt repo</strong> — use this when you want to see how WE actually do something. don't just read the docs and guess, read how Swerve.java or Shooter.java actually uses the API. this is the real thing, not a tutorial.</li>
+  <li><strong>Ask a mentor</strong> — last resort after you've checked the docs and the repo. mentors want you to have already looked before asking. "i checked X and Y and couldn't figure out Z" is a way better question than "how do i do Z".</li>
+</ul>
+
+<div class="callout tip"><p><strong>WRT convention:</strong> the WRT Rebuilt repo is the single most useful resource you have. before asking a mentor how to do something, search the codebase for it. we probably already solved it. use GitHub's search (Ctrl+K in the browser) or clone the repo and use your IDE's full-text search. finding a real example beats any tutorial.</p></div>
+
+<div class="callout info"><p><strong>on WPILib versions:</strong> WPILib releases a new version every year, usually in January. make sure you're reading the docs for the same year as the codebase you're working on. a method that exists in 2025 might not exist in 2024, or might have a different signature. check the repo's <code>build.gradle</code> to see which year/version is in use before trusting a doc page.</p></div>
+
+<h3 class="sub">Learn Java</h3>
+<div class="resource-grid">
+  <a class="resource-card" href="https://www.w3schools.com/java/" target="_blank" rel="noopener">
+    <div class="rc-icon rc-icon--orange"><i data-lucide="book-open"></i></div>
+    <div class="rc-body">
+      <div class="rc-title">W3Schools Java</div>
+      <div class="rc-desc">Clean, beginner-friendly reference for every Java topic. Great for quick syntax lookups.</div>
+      <div class="rc-tag">w3schools.com</div>
+    </div>
+  </a>
+  <a class="resource-card" href="https://www.geeksforgeeks.org/java/" target="_blank" rel="noopener">
+    <div class="rc-icon rc-icon--green"><i data-lucide="code-2"></i></div>
+    <div class="rc-body">
+      <div class="rc-title">GeeksForGeeks Java</div>
+      <div class="rc-desc">More in-depth than W3. Good for OOP concepts, data structures, and interview-style problems.</div>
+      <div class="rc-tag">geeksforgeeks.org</div>
+    </div>
+  </a>
+  <a class="resource-card" href="https://docs.oracle.com/en/java/javase/17/docs/api/" target="_blank" rel="noopener">
+    <div class="rc-icon rc-icon--blue"><i data-lucide="file-text"></i></div>
+    <div class="rc-body">
+      <div class="rc-title">Java SE 17 API Docs</div>
+      <div class="rc-desc">The official source. Use when you need exact method signatures, exceptions, and return types.</div>
+      <div class="rc-tag">docs.oracle.com</div>
+    </div>
+  </a>
+</div>
+
+<h3 class="sub">FRC &amp; WPILib</h3>
+<div class="resource-grid">
+  <a class="resource-card" href="https://docs.wpilib.org" target="_blank" rel="noopener">
+    <div class="rc-icon rc-icon--red"><i data-lucide="bot"></i></div>
+    <div class="rc-body">
+      <div class="rc-title">WPILib Docs</div>
+      <div class="rc-desc">Command-based framework, SubsystemBase, TimedRobot (TimedRobot is the WPILib base class for the main Robot.java file — it calls periodic() methods on a 20ms schedule), motor controllers. The FRC bible.</div>
+      <div class="rc-tag">docs.wpilib.org</div>
+    </div>
+  </a>
+  <a class="resource-card" href="https://api.ctr-electronics.com/phoenix6/release/java/" target="_blank" rel="noopener">
+    <div class="rc-icon rc-icon--orange"><i data-lucide="zap"></i></div>
+    <div class="rc-body">
+      <div class="rc-title">CTRE Phoenix 6 API</div>
+      <div class="rc-desc">TalonFX, CANcoder (CANcoder is a CTRE magnetic encoder that plugs directly onto the CAN bus, used to measure absolute wheel angle in swerve modules), Pigeon 2 (Pigeon 2 is a CTRE IMU/gyro that measures the robot's rotation and tilt — we use it to know which direction the robot is facing) Java API. We use Phoenix 6 exclusively on WRT hardware.</div>
+      <div class="rc-tag">ctr-electronics.com</div>
+    </div>
+  </a>
+  <a class="resource-card" href="https://github.com/WaltonRobotics/Rebuilt" target="_blank" rel="noopener">
+    <div class="rc-icon rc-icon--red"><i data-lucide="github"></i></div>
+    <div class="rc-body">
+      <div class="rc-title">WRT Rebuilt Repo</div>
+      <div class="rc-desc">Our actual robot code. Read it. Model your code after it. This is what you'll be contributing to.</div>
+      <div class="rc-tag">github.com</div>
+    </div>
+  </a>
+  <a class="resource-card" href="https://choreo.autos" target="_blank" rel="noopener">
+    <div class="rc-icon rc-icon--blue"><i data-lucide="map"></i></div>
+    <div class="rc-body">
+      <div class="rc-title">Choreo</div>
+      <div class="rc-desc">Choreo (Choreo is a path-planning tool for FRC — you draw the robot's autonomous route on a field diagram and it generates the code) — path planner we use for autonomous. You'll use this in offseason once you understand subsystems.</div>
+      <div class="rc-tag">choreo.autos</div>
+    </div>
+  </a>
+</div>
+
+<h3 class="sub">WRT Codebase Structure (for reference)</h3>
+<p>This is how our actual robot code is organized. Everything you've learned maps directly to something in here.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">project structure — WaltonRobotics/Rebuilt</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre>src/main/java/frc/robot/
+├── Main.java                    <span class="cmt">// entry point: RobotBase.startRobot(Robot::new)</span>
+├── Robot.java                   <span class="cmt">// extends TimedRobot — your periodic() lives here</span>
+├── Constants.java               <span class="cmt">// inner classes: DriveK, ShooterK, IntakeK, etc.</span>
+├── FieldConstants.java          <span class="cmt">// field geometry constants</span>
+├── subsystems/
+│   ├── Swerve.java              <span class="cmt">// extends SubsystemBase</span>
+│   ├── Intake.java              <span class="cmt">// extends SubsystemBase</span>
+│   ├── Indexer.java             <span class="cmt">// extends SubsystemBase</span>
+│   ├── Superstructure.java      <span class="cmt">// orchestrates intake + indexer + shooter</span>
+│   └── shooter/
+│       ├── Shooter.java         <span class="cmt">// extends SubsystemBase</span>
+│       └── ShooterCalc.java     <span class="cmt">// shot math — static methods</span>
+├── autons/
+│   └── WaltAdaptableAutonFactory.java  <span class="cmt">// Choreo-based auto builder</span>
+└── vision/
+    └── WaltCamera.java          <span class="cmt">// AprilTag / note detection</span></pre>
+</div>
+
+<div class="callout info"><p><strong>No RobotContainer.</strong> Unlike some WPILib templates, we don't use a <code>RobotContainer</code> class. Subsystem instantiation and button bindings (button bindings = code that says "when this controller button is pressed, run this Command") happen directly in <code>Robot.java</code>. That said — the command-based concepts you learned still apply. <code>SubsystemBase</code>, <code>Commands.sequence()</code>, <code>Triggers</code> (WPILib Triggers watch for any condition — like a button press or a sensor reading — and run a Command when it becomes true) — all of it is real.</p></div>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — Robot.java pattern (simplified)</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">public class</span> <span class="cls">Robot</span> <span class="kw">extends</span> <span class="cls">TimedRobot</span> {
+
+    <span class="cmt">// All subsystems instantiated as fields</span>
+    <span class="kw">private final</span> <span class="cls">DriveSubsystem</span> m_drive = <span class="kw">new</span> <span class="cls">DriveSubsystem</span>();
+    <span class="kw">private final</span> <span class="cls">ShooterSubsystem</span> m_shooter = <span class="kw">new</span> <span class="cls">ShooterSubsystem</span>();
+
+    <span class="kw">public</span> <span class="cls">Robot</span>() {
+        configureBindings();
+    }
+
+    <span class="kw">private void</span> <span class="fn">configureBindings</span>() {
+        <span class="cmt">// Button → Command mappings go here</span>
+        <span class="cmt">// trg_shootButton.onTrue(m_shooter.shoot());</span>
+    }
+
+    <span class="kw">@Override</span>
+    <span class="kw">public void</span> <span class="fn">robotPeriodic</span>() {
+        <span class="cmt">// CommandScheduler runs all subsystem periodic() calls</span>
+        <span class="cls">CommandScheduler</span>.getInstance().<span class="fn">run</span>();
+    }
+}</pre>
+</div>
+
+<hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0" />
+
+<h2 class="sh" id="topic-3">MiniBot Final Project</h2>
+<p>this is what you've been building all summer. bring all your files together, make sure they compile and are consistent, and submit. this is a real deliverable!!</p>
+
+<h3 class="sub">before you start — do a quick audit</h3>
+<p>before you start writing Robot.java, spend 10 minutes going through every file you've written and answering these questions. you'd rather fix these now than discover them in a PR review.</p>
+
+<ul>
+  <li><strong>Constants.java:</strong> are all your inner classes there? does DriveK have all the motor IDs and limits that DriveSubsystem references? does ShooterK have everything ShooterSubsystem needs?</li>
+  <li><strong>AutoLogic.java:</strong> does it compile standalone? does it import anything from your other files, or is it just pure Java logic?</li>
+  <li><strong>SensorProcessor.java:</strong> does every method take parameters instead of hardcoded values? are the array sizes pulled from constants instead of being magic numbers?</li>
+  <li><strong>DriveCalculator.java:</strong> are all the conversion factors in Constants rather than inline in the method bodies?</li>
+  <li><strong>DriveSubsystem.java:</strong> do all your getter methods actually return values (not void)? does periodic() have logging calls? are all hardware fields private final?</li>
+  <li><strong>ShooterSubsystem.java:</strong> same checklist as DriveSubsystem. does it demonstrate inheritance properly — is it extending the right base class?</li>
+  <li><strong>RobotState.java:</strong> does the enum have all the states you plan to use in Robot.java? does the interface from W7 have at least one method that something implements?</li>
+</ul>
+
+<div class="callout tip"><p><strong>tip:</strong> open each file in your IDE and let it compile. if you're getting "cannot find symbol" errors, your files probably reference constants or methods that exist in other files but aren't imported yet. fix imports before you start assembling Robot.java.</p></div>
+
+<h3 class="sub">What You Should Have</h3>
+<p>by the end of week 7 you should have created all of these files. if any are missing, go back to that week and complete them first.</p>
+
+<table>
+<thead><tr><th>File</th><th>Created in</th><th>What it has</th></tr></thead>
+<tbody>
+<tr><td><code>Constants.java</code></td><td>Week 1</td><td>Inner classes <code>DriveK</code> and <code>ShooterK</code>, each with at least 3-4 typed, named constants using the <code>k</code> prefix and <code>public static final</code>. motor IDs, speed limits, encoder ratios — the source of truth for every number in your project.</td></tr>
+<tr><td><code>AutoLogic.java</code></td><td>Week 2</td><td>A static class with a method that takes a mode selector (String or int) and uses if/switch to return or describe an auto routine. demonstrates you can write decision logic cleanly.</td></tr>
+<tr><td><code>SensorProcessor.java</code></td><td>Week 3</td><td>Static utility methods that take a <code>double[]</code> sensor array as a parameter, process it with a for loop, and return a result (average, max, filtered value, etc.). no while loops, no hardcoded array sizes.</td></tr>
+<tr><td><code>DriveCalculator.java</code></td><td>Week 4</td><td>Static math utility methods for unit conversions and clamping. things like <code>ticksToMeters(double ticks)</code>, <code>clampSpeed(double speed)</code>. all conversion constants come from Constants.java.</td></tr>
+<tr><td><code>DriveSubsystem.java</code></td><td>Week 5</td><td>Extends SubsystemBase, has private final motor fields initialized from DriveK constants, implements <code>periodic()</code> with logging calls, has public getter/setter methods with Javadoc, returns a <code>Command</code> from at least one method.</td></tr>
+<tr><td><code>ShooterSubsystem.java</code></td><td>Week 6</td><td>Extends the same SubsystemBase base class as DriveSubsystem (demonstrating that both use inheritance the same way). has its own state enum, a <code>shoot()</code> method that returns a Command, and periodic() logging. shows you can apply the same pattern to a different mechanism.</td></tr>
+<tr><td><code>RobotState.java</code></td><td>Week 7</td><td>Top-level enum with at least IDLE, DRIVING, SHOOTING states. also contains or references the interface from W7 (something like <code>ILoggable</code> or <code>IStateProvider</code>) that at least one subsystem implements.</td></tr>
+</tbody>
+</table>
+
+<h3 class="sub">how to connect it all together</h3>
+<p>when you're assembling Robot.java, the order of dependencies matters. think of it as a layered graph where each layer can only depend on layers below it, not above it.</p>
+
+<ul>
+  <li><strong>Layer 0 — Constants.java:</strong> no dependencies on anything in your project. it just has numbers. every other file can import it freely.</li>
+  <li><strong>Layer 1 — utility classes (AutoLogic, SensorProcessor, DriveCalculator):</strong> these only depend on Constants (for k values). they're pure logic — no subsystems, no hardware. they can be tested in isolation.</li>
+  <li><strong>Layer 2 — subsystems (DriveSubsystem, ShooterSubsystem):</strong> depend on Constants (for IDs and limits) and optionally on the utility classes. they do NOT depend on each other in your minibot (in real code, a Superstructure class would coordinate them). they do NOT depend on Robot.java.</li>
+  <li><strong>Layer 3 — RobotState.java:</strong> can be imported by subsystems (they track state) and by Robot.java (it sets the top-level state). it has no dependency on any specific subsystem.</li>
+  <li><strong>Layer 4 — Robot.java:</strong> depends on everything. it imports and instantiates the subsystems, uses RobotState, wires commands to triggers. it sits at the top of the dependency graph.</li>
+</ul>
+
+<div class="callout info"><p><strong>why this matters:</strong> if you find that Constants.java is trying to import something from DriveSubsystem, or that SensorProcessor is calling methods on your subsystem, you have a circular dependency. that design is broken. layers should only flow downward. clean dependency graphs are one of the things senior devs look for in code reviews.</p></div>
+
+<h3 class="sub">Final Assembly — Robot.java</h3>
+<p>write a <code>Robot.java</code> that ties everything together. it doesn't need to run on actual hardware — focus on the structure being correct.</p>
+
+<div class="project-task">
+  <div class="pt-header">
+    <div class="pt-icon"><i data-lucide="wrench"></i></div>
+    <div class="pt-header-title">Final Project — Week 8</div>
+    <div class="pt-filename">Robot.java</div>
+  </div>
+  <div class="pt-body">
+    <p>Create <code>Robot.java</code> that:</p>
+    <ul>
+      <li>Extends <code>TimedRobot</code> (WRT pattern — no RobotContainer)</li>
+      <li>Declares <code>DriveSubsystem</code> and <code>ShooterSubsystem</code> as <code>private final</code> fields</li>
+      <li>Calls <code>configureBindings()</code> from the constructor</li>
+      <li>Has a <code>robotPeriodic()</code> that calls <code>CommandScheduler.getInstance().run()</code></li>
+      <li>Has a stub <code>configureBindings()</code> with comments showing where Trigger bindings would go</li>
+      <li>Uses <code>RobotState</code> enum to track current state in a <code>private RobotState m_state</code> field</li>
+    </ul>
+    <p>Then go through ALL your files from weeks 1–7 and make sure:</p>
+    <ul>
+      <li>All constants use <code>k</code> prefix and are <code>final</code></li>
+      <li>All member vars use <code>m_</code> prefix and are <code>private</code></li>
+      <li>Every public method has a Javadoc comment</li>
+      <li>No magic numbers anywhere — everything is in Constants.java</li>
+    </ul>
+    <span class="pt-note">submit: push all .java files to a branch in the team repo and open a PR. title it "feat: minibot project — [your name]"</span>
+  </div>
+</div>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — Robot.java starter</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">package</span> frc.robot;
+
+<span class="kw">import</span> edu.wpi.first.wpilibj.<span class="cls">TimedRobot</span>;
+<span class="kw">import</span> edu.wpi.first.wpilibj2.command.<span class="cls">CommandScheduler</span>;
+<span class="kw">import</span> frc.robot.subsystems.<span class="cls">DriveSubsystem</span>;
+<span class="kw">import</span> frc.robot.subsystems.<span class="cls">ShooterSubsystem</span>;
+
+<span class="cmt">/**
+ * Main robot class. Extends TimedRobot — WPILib calls our periodic methods
+ * every 20ms. No RobotContainer; subsystems and bindings live here.
+ */</span>
+<span class="kw">public class</span> <span class="cls">Robot</span> <span class="kw">extends</span> <span class="cls">TimedRobot</span> {
+
+    <span class="cmt">/** Current high-level robot state. */</span>
+    <span class="kw">private</span> <span class="cls">RobotState</span> m_state = <span class="cls">RobotState</span>.IDLE;
+
+    <span class="cmt">/** All subsystems as private final fields. */</span>
+    <span class="kw">private final</span> <span class="cls">DriveSubsystem</span>   m_drive   = <span class="kw">new</span> <span class="cls">DriveSubsystem</span>();
+    <span class="kw">private final</span> <span class="cls">ShooterSubsystem</span> m_shooter = <span class="kw">new</span> <span class="cls">ShooterSubsystem</span>();
+
+    <span class="kw">public</span> <span class="cls">Robot</span>() {
+        configureBindings();
+    }
+
+    <span class="cmt">/** Wire controller buttons to commands here. */</span>
+    <span class="kw">private void</span> <span class="fn">configureBindings</span>() {
+        <span class="cmt">// TODO: trg_shootButton.onTrue(m_shooter.shoot());</span>
+        <span class="cmt">// TODO: trg_driveJoystick → m_drive.driveArcade(...);</span>
+    }
+
+    <span class="kw">@Override</span>
+    <span class="kw">public void</span> <span class="fn">robotPeriodic</span>() {
+        <span class="cmt">// Runs all registered periodic() methods for every subsystem</span>
+        <span class="cls">CommandScheduler</span>.getInstance().<span class="fn">run</span>();
+    }
+
+    <span class="kw">@Override</span>
+    <span class="kw">public void</span> <span class="fn">teleopInit</span>() {
+        m_state = <span class="cls">RobotState</span>.DRIVING;
+    }
+
+    <span class="kw">@Override</span>
+    <span class="kw">public void</span> <span class="fn">disabledInit</span>() {
+        m_state = <span class="cls">RobotState</span>.IDLE;
+    }
+}</pre>
+</div>
+
+<h3 class="sub">submission checklist</h3>
+<p>go through this before you open your PR. each item has a one-line example of what "correct" looks like.</p>
+
+<div class="concept-grid">
+  <div class="concept-card"><div class="cc-label">WRT naming (required)</div><div class="cc-title">k prefix, m_ prefix, PascalCase classes</div><div class="cc-desc">every constant has <code>k</code>: <code>public static final int kMotorID = 5;</code>. every member var has <code>m_</code>: <code>private double m_speed = 0.0;</code>. class names are PascalCase, method names are camelCase. if you see a naked number or a variable named just <code>speed</code>, fix it.</div></div>
+  <div class="concept-card"><div class="cc-label">Javadocs (required)</div><div class="cc-title">Every public method documented</div><div class="cc-desc">every <code>public</code> method needs a <code>/** ... */</code> comment above it explaining what it does. example: <code>/** Sets the drive speed. @param speed -1.0 to 1.0 */</code>. if your IDE shows a yellow underline on a public method, that's probably a missing Javadoc warning.</div></div>
+  <div class="concept-card"><div class="cc-label">No magic numbers (required)</div><div class="cc-title">Everything in Constants.java</div><div class="cc-desc">search your files for raw literals. <code>new TalonFX(5)</code> is wrong, <code>new TalonFX(DriveK.kFLMotorID)</code> is right. <code>if (speed &gt; 0.8)</code> is wrong, <code>if (speed &gt; DriveK.kMaxSpeed)</code> is right. the only numbers allowed inline are 0, 1, and -1 in trivial arithmetic.</div></div>
+  <div class="concept-card"><div class="cc-label">private final hardware (required)</div><div class="cc-title">All hardware fields locked down</div><div class="cc-desc">every motor, sensor, and hardware object in your subsystems must be <code>private final</code>. example: <code>private final TalonFX m_motor = new TalonFX(ShooterK.kTopMotorID);</code>. <code>public</code> hardware fields are a safety and maintainability issue — other classes should never reach into a subsystem and poke hardware directly.</div></div>
+  <div class="concept-card"><div class="cc-label">Compiles clean (required)</div><div class="cc-title">Zero red errors in IDE</div><div class="cc-desc">your code must have no compile errors. yellow warnings are ok if you understand them. red errors are not. common sources: missing imports, type mismatches, calling void methods expecting a return value, missing override methods from an interface. fix all red before submitting.</div></div>
+  <div class="concept-card"><div class="cc-label">PR title format (required)</div><div class="cc-title">feat: minibot project — [name]</div><div class="cc-desc">your pull request title should follow the format exactly: <code>feat: minibot project — [your name]</code>. this is your first real PR to a team repo and it's also your first exposure to conventional commits format, which WRT uses for all its commit messages. get used to it now.</div></div>
+</div>
+
+<h3 class="sub">Grading Rubric</h3>
+<div class="concept-grid">
+  <div class="concept-card"><div class="cc-label">Naming (20pts)</div><div class="cc-title">k, m_, proper case</div><div class="cc-desc">All constants have k prefix. All member vars have m_ prefix. Classes are PascalCase. Methods are camelCase.</div></div>
+  <div class="concept-card"><div class="cc-label">Constants (15pts)</div><div class="cc-title">No magic numbers</div><div class="cc-desc">Every number is defined in Constants.java in the appropriate inner class. Nothing hardcoded inline.</div></div>
+  <div class="concept-card"><div class="cc-label">OOP (25pts)</div><div class="cc-title">Classes, inheritance, interface, enum</div><div class="cc-desc">DriveSubsystem and ShooterSubsystem show inheritance. RobotState enum is used. Interface from W7 is implemented.</div></div>
+  <div class="concept-card"><div class="cc-label">Methods (20pts)</div><div class="cc-title">Parameters, return types, Javadoc</div><div class="cc-desc">All public methods have correct return types, meaningful parameters, and Javadoc. No void where a value should be returned.</div></div>
+  <div class="concept-card"><div class="cc-label">Loops + Arrays (10pts)</div><div class="cc-title">SensorProcessor usage</div><div class="cc-desc">SensorProcessor.java uses arrays and loops correctly. No while loops in periodic methods.</div></div>
+  <div class="concept-card"><div class="cc-label">Code Style (10pts)</div><div class="cc-title">Readable, commented</div><div class="cc-desc">Code is consistently indented. Comments explain the why, not the what. No dead code or commented-out blocks.</div></div>
+</div>
+
+<h3 class="sub" id="weekly-test">Week 8 Review Quiz</h3>
+<p>covers material from all 8 weeks — think of it as a mini version of the final java quiz</p>
+<div class="weekly-test-block">
+  <div class="wt-header">
+    <div class="wt-icon"><i data-lucide="clipboard-list"></i></div>
+    <div>
+      <div class="wt-title">week 8 test</div>
+      <div class="wt-sub">comprehensive review · 10 questions · all topics</div>
+    </div>
+  </div>
+  <div id="test-summer-w8"></div>
+</div>
+
+<script>
+const test_w8 = new Quiz('test-summer-w8', [
+  { question: "On WRT, constants are declared as:", options: ["public static final with SCREAMING_SNAKE","private final with k prefix","public final with k prefix","static int with no prefix"], correct: 1, explanation: "WRT constants use <code>k</code> prefix and are <code>final</code>. They live inside inner classes in Constants.java — e.g., <code>DriveK.kFLMotorID</code>." },
+  { question: "What is the WRT entry point pattern?", options: ["RobotContainer creates subsystems","Main.java → Robot extends TimedRobot, subsystems as fields","Robot extends CommandRobot","Main.java → Robot extends SubsystemBase"], correct: 1, explanation: "WRT uses <code>Main.java</code> → <code>Robot extends TimedRobot</code>. Subsystems are <code>private final</code> fields in Robot. No RobotContainer." },
+  { question: "Why are while loops forbidden inside periodic()?", options: ["They slow down the JVM","They block the 20ms robot loop, triggering the watchdog","WPILib doesn't support them","They cause memory leaks"], correct: 1, explanation: "<code>periodic()</code> must return within 20ms. A while loop blocks it indefinitely. The watchdog fires, the robot faults." },
+  { question: "What does <code>CommandScheduler.getInstance().run()</code> do?", options: ["Creates a new command","Cancels all running commands","Runs all subsystem periodic() methods and advances commands","Starts the robot loop"], correct: 2, explanation: "This is the heartbeat of the command-based framework. It calls <code>periodic()</code> on every registered subsystem and advances all active commands." },
+  { question: "Which is the correct way to store a drivetrain's motor?", options: ["public TalonFX motor;","static int m_motor;","private final TalonFX m_leftMotor;","final double kMotor;"], correct: 2, explanation: "Hardware fields are always <code>private final</code> with the <code>m_</code> prefix. <code>public</code> exposes internals. <code>static</code> doesn't make sense for hardware." },
+  { question: "What does <code>(int) 4.9</code> evaluate to?", options: ["5 (rounded up)","4 (truncated)","Error","4.9"], correct: 1, explanation: "Casting to int always truncates toward zero — it doesn't round. <code>(int) 4.9 = 4</code>. Use <code>Math.round()</code> when you need rounding." },
+  { question: "An enum is best used for:", options: ["Storing a list of numbers","Representing a fixed set of named states or modes","Declaring class fields","Type casting between primitives"], correct: 1, explanation: "Enums represent a fixed, named set of values. In robot code: <code>RobotState.IDLE</code>, <code>RobotState.SHOOTING</code>. Much safer than using ints or Strings for state." },
+  { question: "What is the purpose of the <code>k</code> prefix on a constant?", options: ["It's a required Java keyword","It's WRT convention marking a constant value (final)","It makes the variable public","It prevents runtime errors"], correct: 1, explanation: "The <code>k</code> prefix is WRT convention (from our codebase). It visually distinguishes constants from variables at a glance. Combined with <code>final</code>, it enforces immutability." },
+  { question: "Which method in SubsystemBase runs every robot loop cycle?", options: ["init()","update()","periodic()","run()"], correct: 2, explanation: "<code>periodic()</code> is called every 20ms by the CommandScheduler. Put state updates, logging, and odometry math here." },
+  { question: "Which of these correctly implements an interface <code>ISensor</code>?", options: ["class MyClass extends ISensor","class MyClass inherits ISensor","class MyClass implements ISensor","interface MyClass uses ISensor"], correct: 2, explanation: "Classes <em>implement</em> interfaces. <code>extends</code> is for class inheritance. An interface is a contract — the implementing class must provide all the interface's methods." }
+], 'summer-w8-test');
+</script>
+
+
+    </div>
+
+    <div class="complete-banner" id="complete-banner" style="display:none">
+      <span class="cb-icon"><i data-lucide="trophy"></i></span>
+      <div class="cb-text">
+        <div class="cb-title">week complete!!</div>
+        <div class="cb-sub">score saved :) keep it up!!</div>
+      </div>
+      <a href="/weeks/offseason/os-week1" class="btn btn-success btn-sm">next week →</a>
+    </div>
+
+    <div class="page-nav">
+      
+      <a href="/weeks/summer/week7" class="pn-link">
+        <span class="pn-label">← Previous</span>
+        <span class="pn-title">Week 7 — Advanced Classes</span>
+      </a>
+      
+      
+      <a href="/weeks/offseason/os-week1" class="pn-link pn-next">
+        <span class="pn-label">Next →</span>
+        <span class="pn-title">O1 — Git & GitHub</span>
+      </a>
+      
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+(function() {
+  var wrap = document.getElementById('week-screens-wrap');
+  if (!wrap) return;
+
+  // Collect all direct children
+  var children = Array.from(wrap.children);
+  var headers = children.filter(function(c) { return c.matches && c.matches('h2.sh, div.project-task'); });
+  if (headers.length < 2) return; // single-section week, no splitting
+
+  // Build screens: group children by which h2 / project-task they follow
+  var screens = [];
+  var current = null;
+  children.forEach(function(child) {
+    if (child.matches && child.matches('h2.sh, div.project-task')) {
+      current = document.createElement('div');
+      current.className = 'week-screen';
+      screens.push(current);
+    }
+    if (current) current.appendChild(child); // moves node into screen
+  });
+
+  // Re-attach screens into wrap
+  screens.forEach(function(s) { wrap.appendChild(s); });
+
+  var total = screens.length;
+  var active = 0;
+
+  // Build screen nav bar
+  var navEl = document.createElement('div');
+  navEl.className = 'screen-nav';
+  navEl.id = 'screen-nav';
+
+  var dotsHtml = screens.map(function(_, i) {
+    return '<button class="sn-dot" data-sdot="' + i + '" title="Topic ' + (i+1) + '" onclick="weekGoScreen(' + i + ')"></button>';
+  }).join('');
+
+  navEl.innerHTML =
+    '<button class="sn-btn" id="sn-prev" onclick="weekGoScreen(' + "window._wss-1" + ')">← Prev</button>' +
+    '<div class="sn-meta"><span class="sn-topic-title" id="sn-title"></span><span class="sn-topic-count" id="sn-count"></span><div class="sn-dots" id="sn-dots">' + dotsHtml + '</div></div>' +
+    '<button class="sn-next sn-btn" id="sn-next" onclick="weekGoScreen(window._wss+1)">Next →</button>';
+
+  // Fix up prev button
+  navEl.querySelector('#sn-prev').onclick = function() { weekGoScreen(window._wss - 1); };
+  navEl.querySelector('#sn-next').onclick = function() { weekGoScreen(window._wss + 1); };
+
+  wrap.after(navEl);
+
+  window._wsTotal = total;
+  window._wss = 0;
+
+  window.weekGoScreen = function(n) {
+    n = Math.max(0, Math.min(total - 1, n));
+    window._wss = n;
+
+    screens.forEach(function(s, i) {
+      s.classList.toggle('ws-active', i === n);
+    });
+
+    var h2 = screens[n].querySelector('h2.sh');
+    var pt = screens[n].querySelector('.project-task');
+    var title = h2 ? h2.textContent.trim() : (pt ? 'Project Task' : ('Topic ' + (n + 1)));
+    var countEl = document.getElementById('sn-count');
+    var titleEl = document.getElementById('sn-title');
+    if (titleEl) titleEl.textContent = title;
+    if (countEl) countEl.textContent = (n + 1) + ' / ' + total;
+
+    var prevBtn = document.getElementById('sn-prev');
+    var nextBtn = document.getElementById('sn-next');
+    if (prevBtn) prevBtn.disabled = (n === 0);
+    if (nextBtn) {
+      if (n === total - 1) {
+        nextBtn.textContent = 'Done ✓';
+        nextBtn.classList.add('sn-finish');
+        nextBtn.onclick = function() {
+          var banner = document.getElementById('complete-banner');
+          if (banner) { banner.style.display = 'flex'; banner.scrollIntoView({behavior:'smooth',block:'center'}); }
+        };
+      } else {
+        nextBtn.textContent = 'Next →';
+        nextBtn.classList.remove('sn-finish');
+        nextBtn.onclick = function() { weekGoScreen(window._wss + 1); };
+      }
+    }
+
+    // Dots
+    document.querySelectorAll('.sn-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === n);
+    });
+
+    // Topic nav
+    document.querySelectorAll('.tn-link[data-tn]').forEach(function(link) {
+      var tn = link.getAttribute('data-tn');
+      var matches = tn === 'test' ? (n === total - 1) : (parseInt(tn) - 1 === n);
+      link.classList.toggle('tn-active', matches);
+    });
+
+    // Scroll to top of content area
+    var cw = document.querySelector('.content-wrap');
+    if (cw) window.scrollTo({ top: cw.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
+  };
+
+  // Wire topic nav clicks
+  document.querySelectorAll('.tn-link[data-tn]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var tn = this.getAttribute('data-tn');
+      var screenIdx = tn === 'test' ? (total - 1) : (parseInt(tn) - 1);
+      weekGoScreen(screenIdx);
+    });
+  });
+
+  // Wire hero topic pill clicks
+  document.querySelectorAll('.ph-topic-pill').forEach(function(pill) {
+    pill.addEventListener('click', function(e) {
+      e.preventDefault();
+      var href = this.getAttribute('href') || '';
+      if (href === '#weekly-test') {
+        weekGoScreen(total - 1);
+      } else {
+        var m = href.match(/#topic-(\d+)/);
+        if (m) weekGoScreen(parseInt(m[1]) - 1);
+      }
+    });
+  });
+
+  weekGoScreen(0);
+})();
+</script>
+
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="sf-left">
+    <img src="/assets/images/logo.jpeg" alt="WRT">
+    <span>Walton Robotics Team 2974 &mdash; WRT Programming &mdash; 2026-27</span>
+  </div>
+  <div class="sf-right">
+    <a href="https://github.com/WaltonRobotics" target="_blank" rel="noopener">GitHub</a>
+    <a href="/sitemap.xml">Sitemap</a>
+    <a href="/feed.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- Mobile sidebar backdrop -->
+<div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+
+<script type="module" src="/assets/js/auth.js"></script>
+
+<script>
+  // Initialize Lucide icons after all content is in the DOM.
+  // Called again by auth.js after the user chip is injected.
+  function initIcons() { if (typeof lucide !== 'undefined') lucide.createIcons(); }
+  document.addEventListener('DOMContentLoaded', initIcons);
+</script>
+
+<!-- impeccable-live-start -->
+<script src="http://localhost:8400/live.js"></script>
+<!-- impeccable-live-end -->
+</body>
+</html>

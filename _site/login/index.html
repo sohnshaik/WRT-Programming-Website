@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Primary Meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B2A4A">
+<meta name="description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+<meta name="author" content="Walton Robotics Team 2974">
+
+<!-- Title -->
+<title>Sign In | WRT Programming</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="/assets/images/logo.jpeg">
+<link rel="apple-touch-icon" href="/assets/images/logo.jpeg">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="WRT Programming">
+<meta property="og:title"       content="Sign In">
+<meta property="og:description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+<meta property="og:url"         content="http://localhost:4000/login/">
+<meta property="og:image"       content="http://localhost:4000/assets/images/logo.jpeg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="Sign In">
+<meta name="twitter:description" content="Walton Robotics Team 2974 — Java & FRC Programming Course">
+
+<!-- Jekyll SEO tag (handles canonical, structured data, etc.) -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Sign In | WRT Programming</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Sign In" />
+<meta name="author" content="Walton Robotics Team 2974" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<meta property="og:description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<link rel="canonical" href="http://localhost:4000/login/" />
+<meta property="og:url" content="http://localhost:4000/login/" />
+<meta property="og:site_name" content="WRT Programming" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Sign In" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Walton Robotics Team 2974" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Walton Robotics Team 2974"},"@type":"WebPage","url":"http://localhost:4000/login/","headline":"Sign In","description":"Walton Robotics Team 2974 — Java &amp; FRC Programming Course","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<!-- Lucide icons (inline SVG, no build step required) -->
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.511.0/dist/umd/lucide.min.js"></script>
+
+<!-- Feed -->
+<link rel="alternate" type="application/rss+xml" title="WRT Programming" href="/feed.xml">
+
+</head>
+<body class="no-sidebar">
+
+<!-- Auth loading overlay — hidden once auth check resolves -->
+<div id="wrc-auth-overlay" aria-hidden="true">
+  <div class="wao-inner">
+    <div class="wao-spinner"></div>
+  </div>
+</div>
+
+<header class="topbar">
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Open sidebar"><i data-lucide="menu"></i></button>
+  <a href="/" class="topbar-logo">
+    <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+    <div>
+      <div class="topbar-name">WRT Programming</div>
+      <div class="topbar-sub">Team 2974 · 2026-27</div>
+    </div>
+  </a>
+  <div class="topbar-sep"></div>
+  <nav class="topbar-links">
+    <a href="/" >Home</a>
+    <a href="/training" >Training</a>
+    <a href="/weeks/summer/week1" >Summer</a>
+    <a href="/weeks/offseason/os-week1" >Offseason</a>
+    <a href="/project" >Project</a>
+    <a href="/style-guide" >Style Guide</a>
+  </nav>
+  <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)"><i data-lucide="search"></i></button>
+  <a href="/login/" class="topbar-signin-btn" id="topbar-signin-static">sign in</a>
+</header>
+
+
+<!-- wrc.js must load BEFORE main content so Quiz class is defined for inline scripts -->
+<script src="/assets/js/wrc.js"></script>
+
+<div class="shell shell--no-sidebar">
+  
+  <main class="main main--full" id="main-content">
+    <style>
+.auth-shell {
+  min-height: calc(100vh - var(--topbar-h, 52px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: #f8f9fb;
+}
+.auth-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  overflow: hidden;
+}
+.auth-header {
+  background: #1B2A4A;
+  padding: 1.75rem 2rem;
+  text-align: center;
+  border-bottom: 4px solid #C41230;
+}
+.auth-header img { width: 52px; height: 52px; object-fit: contain; border-radius: 6px; margin-bottom: 0.75rem; }
+.auth-header h1 { font-size: 1.2rem; font-weight: 900; color: #fff; margin: 0 0 4px; }
+.auth-header p { font-size: 12px; color: rgba(255,255,255,0.5); margin: 0; }
+.auth-body { padding: 1.75rem 2rem; }
+.auth-tabs {
+  display: flex; gap: 4px; margin-bottom: 1.5rem;
+  background: #f1f5f9; border-radius: 6px; padding: 3px;
+}
+.auth-tab {
+  flex: 1; padding: 7px 12px; border: none;
+  background: transparent; border-radius: 4px;
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: all 0.15s; color: #64748b;
+  font-family: inherit;
+}
+.auth-tab.active { background: #fff; color: #1B2A4A; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.auth-form { display: none; }
+.auth-form.active { display: block; }
+.auth-field { margin-bottom: 1rem; }
+.auth-field label { display: block; font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
+.auth-field input, .auth-field select {
+  width: 100%; padding: 9px 12px;
+  border: 1px solid #e2e8f0; border-radius: 6px;
+  font-size: 14px; font-family: inherit; color: #1e293b;
+  outline: none; transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+.auth-field input:focus, .auth-field select:focus { border-color: #C41230; }
+.auth-field select { cursor: pointer; }
+.auth-submit {
+  width: 100%; padding: 10px; background: #C41230; color: #fff;
+  border: none; border-radius: 6px; font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: inherit; transition: background 0.15s;
+  margin-top: 0.25rem;
+}
+.auth-submit:hover { background: #a50f28; }
+.auth-submit:disabled { opacity: 0.5; cursor: default; }
+.auth-error {
+  background: #fff1f2; border: 1px solid #fca5a5;
+  border-radius: 5px; padding: 8px 12px;
+  font-size: 13px; color: #b91c1c; margin-bottom: 1rem;
+  display: none;
+}
+.auth-error.show { display: block; }
+.auth-success {
+  background: #f0fdf4; border: 1px solid #86efac;
+  border-radius: 5px; padding: 8px 12px;
+  font-size: 13px; color: #166534; margin-bottom: 1rem;
+  display: none;
+}
+.auth-success.show { display: block; }
+.auth-note {
+  margin-top: 1rem; font-size: 12px; color: #94a3b8;
+  text-align: center; line-height: 1.5;
+}
+</style>
+
+<div class="auth-shell">
+  <div class="auth-card">
+    <div class="auth-header">
+      <img src="/assets/images/logo.jpeg" alt="WRT" />
+      <h1>WRT Programming Course</h1>
+      <p>sign in or create an account to get started :)</p>
+    </div>
+    <div class="auth-body">
+
+      <div class="auth-error" id="auth-error"></div>
+      <div class="auth-success" id="auth-success"></div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchTab('login')">sign in</button>
+        <button class="auth-tab" onclick="switchTab('register')">create account</button>
+      </div>
+
+      <!-- Login form -->
+      <form class="auth-form active" id="form-login" onsubmit="handleLogin(event)">
+        <div class="auth-field">
+          <label>email</label>
+          <input type="email" id="login-email" placeholder="your@waltonrobotics.com" required="" />
+        </div>
+        <div class="auth-field">
+          <label>password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required="" />
+        </div>
+        <button class="auth-submit" type="submit" id="login-btn">sign in</button>
+        <p class="auth-note">forgot your password? ask (SLACK) sohan lol</p>
+      </form>
+
+      <!-- Register form -->
+      <form class="auth-form" id="form-register" onsubmit="handleRegister(event)">
+        <div class="auth-field">
+          <label>display name</label>
+          <input type="text" id="reg-name" placeholder="your name" required="" />
+        </div>
+        <div class="auth-field">
+          <label>email</label>
+          <input type="email" id="reg-email" placeholder="your@waltonrobotics.com" required="" />
+        </div>
+        <div class="auth-field">
+          <label>password</label>
+          <input type="password" id="reg-password" placeholder="at least 8 chars" minlength="8" required="" />
+        </div>
+        <div class="auth-field">
+          <label>access code</label>
+          <input type="text" id="reg-code" placeholder="ask your programming lead" required="" />
+          <p style="font-size:11px;color:#94a3b8;margin:4px 0 0">slack sohan for this please!!</p>
+        </div>
+        <button class="auth-submit" type="submit" id="register-btn">create account</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+// !! ADD YOUR FIREBASE CONFIG HERE AFTER CREATING A PROJECT AT console.firebase.google.com
+const firebaseConfig = {
+  apiKey: "AIzaSyDcqxHcEDsCkuZZhytuTqROycH71SOFtiE",
+  authDomain: "wrt-programming.firebaseapp.com",
+  projectId: "wrt-programming",
+  storageBucket: "wrt-programming.firebasestorage.app",
+  messagingSenderId: "241876848170",
+  appId: "1:241876848170:web:c471b9407abd661d477d53"
+};
+
+// Access codes are SHA-256 hashed — plaintext codes are never stored in source.
+// To generate a new hash: https://emn178.github.io/online-tools/sha256.html
+const ACCESS_CODE_HASHES = {
+  'fda533469e66a6f2da73b3e0ea0ad14284eebf37766de4114dab47d9ef49d84f': 'student',
+  '360835c8908fde77b297a90cfd838461fca6bfe22e428e3f845c0180c6d9032a': 'admin',
+};
+
+async function hashCode(raw) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw.trim()));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+window.switchTab = (tab) => {
+  document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='register')));
+  document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+  document.getElementById('form-' + tab).classList.add('active');
+  clearMessages();
+};
+
+function showError(msg) {
+  const el = document.getElementById('auth-error');
+  el.textContent = msg; el.classList.add('show');
+  document.getElementById('auth-success').classList.remove('show');
+}
+function showSuccess(msg) {
+  const el = document.getElementById('auth-success');
+  el.textContent = msg; el.classList.add('show');
+  document.getElementById('auth-error').classList.remove('show');
+}
+function clearMessages() {
+  document.getElementById('auth-error').classList.remove('show');
+  document.getElementById('auth-success').classList.remove('show');
+}
+
+window.handleLogin = async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('login-btn');
+  btn.disabled = true; btn.textContent = 'signing in...';
+  clearMessages();
+  const email    = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  try {
+    const cred = await signInWithEmailAndPassword(auth, email, password);
+    const snap = await getDoc(doc(db, 'users', cred.user.uid));
+    const role = snap.exists() ? snap.data().role : 'student';
+    localStorage.setItem('wrc-role', role);
+    localStorage.setItem('wrc-uid',  cred.user.uid);
+    localStorage.setItem('wrc-name', cred.user.displayName || email);
+    showSuccess('welcome back!! redirecting...');
+    setTimeout(() => { window.location.href = role === 'admin' ? '/dashboard-teacher/' : '/'; }, 900);
+  } catch(err) {
+    showError(friendlyError(err.code));
+    btn.disabled = false; btn.textContent = 'sign in';
+  }
+};
+
+window.handleRegister = async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('register-btn');
+  btn.disabled = true; btn.textContent = 'creating account...';
+  clearMessages();
+  const name     = document.getElementById('reg-name').value.trim();
+  const email    = document.getElementById('reg-email').value.trim();
+  const password = document.getElementById('reg-password').value;
+  const code     = document.getElementById('reg-code').value.trim();
+
+  const hash = await hashCode(code);
+  const role = ACCESS_CODE_HASHES[hash];
+  if (!role) {
+    showError("that access code isn't right :( ask a programming lead for the correct one!!");
+    btn.disabled = false; btn.textContent = 'create account';
+    return;
+  }
+
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(cred.user, { displayName: name });
+    await setDoc(doc(db, 'users', cred.user.uid), { name, email, role, createdAt: new Date().toISOString() });
+    localStorage.setItem('wrc-role', role);
+    localStorage.setItem('wrc-uid',  cred.user.uid);
+    localStorage.setItem('wrc-name', name);
+    showSuccess('account created!! welcome to the team :D redirecting...');
+    setTimeout(() => { window.location.href = '/'; }, 1200);
+  } catch(err) {
+    showError(friendlyError(err.code));
+    btn.disabled = false; btn.textContent = 'create account';
+  }
+};
+
+function friendlyError(code) {
+  const map = {
+    'auth/user-not-found':      "can't find an account with that email :(",
+    'auth/wrong-password':      'wrong password!! try again',
+    'auth/email-already-in-use':'that email is already registered. try signing in instead!',
+    'auth/weak-password':       'password needs to be at least 6 characters',
+    'auth/invalid-email':       'that email looks wrong :(',
+    'auth/too-many-requests':   'too many attempts. wait a bit and try again',
+  };
+  return map[code] || 'something went wrong: ' + code;
+}
+</script>
+
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="sf-left">
+    <img src="/assets/images/logo.jpeg" alt="WRT">
+    <span>Walton Robotics Team 2974 &mdash; WRT Programming &mdash; 2026-27</span>
+  </div>
+  <div class="sf-right">
+    <a href="https://github.com/WaltonRobotics" target="_blank" rel="noopener">GitHub</a>
+    <a href="/sitemap.xml">Sitemap</a>
+    <a href="/feed.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- Mobile sidebar backdrop -->
+<div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+
+<script type="module" src="/assets/js/auth.js"></script>
+
+<script>
+  // Initialize Lucide icons after all content is in the DOM.
+  // Called again by auth.js after the user chip is injected.
+  function initIcons() { if (typeof lucide !== 'undefined') lucide.createIcons(); }
+  document.addEventListener('DOMContentLoaded', initIcons);
+</script>
+
+<!-- impeccable-live-start -->
+<script src="http://localhost:8400/live.js"></script>
+<!-- impeccable-live-end -->
+</body>
+</html>

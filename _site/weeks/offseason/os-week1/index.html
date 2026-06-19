@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Primary Meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B2A4A">
+<meta name="description" content="Branches, pull requests, commit messages, and the 2974 team workflow.">
+<meta name="author" content="Walton Robotics Team 2974">
+
+<!-- Title -->
+<title>Git & GitHub | WRT Programming</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="/assets/images/logo.jpeg">
+<link rel="apple-touch-icon" href="/assets/images/logo.jpeg">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="WRT Programming">
+<meta property="og:title"       content="Git & GitHub">
+<meta property="og:description" content="Branches, pull requests, commit messages, and the 2974 team workflow.">
+<meta property="og:url"         content="http://localhost:4000/weeks/offseason/os-week1/">
+<meta property="og:image"       content="http://localhost:4000/assets/images/logo.jpeg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="Git & GitHub">
+<meta name="twitter:description" content="Branches, pull requests, commit messages, and the 2974 team workflow.">
+
+<!-- Jekyll SEO tag (handles canonical, structured data, etc.) -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Git &amp; GitHub | WRT Programming</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Git &amp; GitHub" />
+<meta name="author" content="Walton Robotics Team 2974" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<meta property="og:description" content="Walton Robotics Team 2974 — Java &amp; FRC Programming Course" />
+<link rel="canonical" href="http://localhost:4000/weeks/offseason/os-week1/" />
+<meta property="og:url" content="http://localhost:4000/weeks/offseason/os-week1/" />
+<meta property="og:site_name" content="WRT Programming" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Git &amp; GitHub" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Walton Robotics Team 2974" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Walton Robotics Team 2974"},"@type":"WebPage","url":"http://localhost:4000/weeks/offseason/os-week1/","headline":"Git &amp; GitHub","description":"Walton Robotics Team 2974 — Java &amp; FRC Programming Course","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<!-- Lucide icons (inline SVG, no build step required) -->
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.511.0/dist/umd/lucide.min.js"></script>
+
+<!-- Feed -->
+<link rel="alternate" type="application/rss+xml" title="WRT Programming" href="/feed.xml">
+
+</head>
+<body data-page-id="offseason-o1" data-require-auth="1">
+
+<!-- Auth loading overlay — hidden once auth check resolves -->
+<div id="wrc-auth-overlay" aria-hidden="true">
+  <div class="wao-inner">
+    <div class="wao-spinner"></div>
+  </div>
+</div>
+
+<header class="topbar">
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Open sidebar"><i data-lucide="menu"></i></button>
+  <a href="/" class="topbar-logo">
+    <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+    <div>
+      <div class="topbar-name">WRT Programming</div>
+      <div class="topbar-sub">Team 2974 · 2026-27</div>
+    </div>
+  </a>
+  <div class="topbar-sep"></div>
+  <nav class="topbar-links">
+    <a href="/" >Home</a>
+    <a href="/training" >Training</a>
+    <a href="/weeks/summer/week1" >Summer</a>
+    <a href="/weeks/offseason/os-week1" class="active">Offseason</a>
+    <a href="/project" >Project</a>
+    <a href="/style-guide" >Style Guide</a>
+  </nav>
+  <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)"><i data-lucide="search"></i></button>
+  <a href="/login/" class="topbar-signin-btn" id="topbar-signin-static">sign in</a>
+</header>
+
+
+<!-- wrc.js must load BEFORE main content so Quiz class is defined for inline scripts -->
+<script src="/assets/js/wrc.js"></script>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+
+  <div class="sidebar-course-header">
+    <div class="sch-logo-row">
+      <img src="/assets/images/logo.jpeg" alt="Walton Robotics">
+      <div>
+        <span class="sch-logo-name">WRT Programming</span>
+        <span class="sch-logo-sub">Team 2974 · Java &amp; FRC</span>
+      </div>
+    </div>
+    <div class="sch-title-area">
+      <div class="sch-label">Course</div>
+      <div class="sch-title">2026-27 season</div>
+    </div>
+    <div class="sch-progress">
+      <div class="sp-label">
+        <span>Progress</span>
+        <span class="sp-pct-text">0%</span>
+      </div>
+      <div class="sp-track"><div class="sp-fill" style="transform:scaleX(0)"></div></div>
+    </div>
+    <!-- impeccable-variants-start 960f32f8 -->
+    <div data-impeccable-variants="960f32f8" data-impeccable-variant-count="3" style="display: contents">
+      <!-- Original -->
+      <div data-impeccable-variant="original">
+        <button class="sidebar-search-btn" onclick="openSearch()">
+          <span class="ssb-icon"><i data-lucide="search"></i></span>
+          <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+        </button>
+      </div>
+      <!-- Variants: insert below this line -->
+<style data-impeccable-css="960f32f8">
+  @scope ([data-impeccable-variant="1"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255, var(--p-opacity, 0.68));
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(255,255,255,0.13);
+      color: rgba(255,255,255,0.85);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.55);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+  @scope ([data-impeccable-variant="2"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(255,255,255, calc(var(--p-surface, 0.5) * 0.2));
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      transition: background 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.92);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.62);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+  @scope ([data-impeccable-variant="3"]) {
+    :scope > button {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; margin-top: 10px; padding: 7px 10px;
+      background: rgba(196,18,48, calc(var(--p-accent, 0.5) * 0.18));
+      border: 1px solid rgba(196,18,48, calc(var(--p-accent, 0.5) * 0.7));
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      transition: background 0.12s ease, border-color 0.12s ease;
+    }
+    :scope > button:hover {
+      background: rgba(196,18,48,0.18);
+      border-color: rgba(196,18,48,0.6);
+      color: rgba(255,255,255,0.92);
+    }
+    :scope > button .ssb-icon { font-size: 13px; }
+    :scope > button .ssb-text { flex: 1; text-align: left; }
+    :scope > button kbd {
+      font-size: 10px;
+      background: rgba(196,18,48,0.12);
+      border: 1px solid rgba(196,18,48,0.25);
+      border-radius: 3px; padding: 1px 5px;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Source Code Pro', monospace;
+    }
+  }
+</style>
+<div data-impeccable-variant="1" data-impeccable-params='[
+  {"id":"opacity","kind":"range","min":0.55,"max":0.82,"step":0.01,"default":0.68,"label":"Text brightness"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+<div data-impeccable-variant="2" style="display:none" data-impeccable-params='[
+  {"id":"surface","kind":"range","min":0,"max":1,"step":0.05,"default":0.5,"label":"Surface brightness"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+<div data-impeccable-variant="3" style="display:none" data-impeccable-params='[
+  {"id":"accent","kind":"range","min":0,"max":1,"step":0.05,"default":0.5,"label":"Red accent"}
+]'>
+  <button class="sidebar-search-btn" onclick="openSearch()">
+    <span class="ssb-icon"><i data-lucide="search"></i></span>
+    <span class="ssb-text">Search topics… <kbd>⌘K</kbd></span>
+  </button>
+</div>
+    </div>
+    <!-- impeccable-variants-end 960f32f8 -->
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      <span class="ngl-icon"><i data-lucide="sun"></i></span>
+      <span class="ngl-text">Summer — Java Foundations</span>
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item " href="/weeks/summer/week1" data-page="summer-w1">
+        <span class="ni-num">W1</span>
+        <span class="ni-text">The Basics</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week2" data-page="summer-w2">
+        <span class="ni-num">W2</span>
+        <span class="ni-text">Logic &amp; Control Flow</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week3" data-page="summer-w3">
+        <span class="ni-num">W3</span>
+        <span class="ni-text">Loops</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week4" data-page="summer-w4">
+        <span class="ni-num">W4</span>
+        <span class="ni-text">Arrays &amp; Methods</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week5" data-page="summer-w5">
+        <span class="ni-num">W5</span>
+        <span class="ni-text">OOP — Classes &amp; Objects</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week6" data-page="summer-w6">
+        <span class="ni-num">W6</span>
+        <span class="ni-text">Inheritance &amp; Polymorphism</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week7" data-page="summer-w7">
+        <span class="ni-num">W7</span>
+        <span class="ni-text">Advanced Classes</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/summer/week8" data-page="summer-w8">
+        <span class="ni-num">W8</span>
+        <span class="ni-text">Recap &amp; Resources</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">
+      <span class="ngl-icon"><i data-lucide="cpu"></i></span>
+      <span class="ngl-text">Offseason — FRC Training</span>
+      <span class="ngl-arrow">▾</span>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item active" href="/weeks/offseason/os-week1" data-page="offseason-o1">
+        <span class="ni-num">O1</span>
+        <span class="ni-text">Git &amp; GitHub</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week2" data-page="offseason-o2">
+        <span class="ni-num">O2</span>
+        <span class="ni-text">WPILib Setup</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week3" data-page="offseason-o3">
+        <span class="ni-num">O3</span>
+        <span class="ni-text">Command-Based</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week4" data-page="offseason-o4">
+        <span class="ni-num">O4</span>
+        <span class="ni-text">Motors &amp; Sensors</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week5" data-page="offseason-o5">
+        <span class="ni-num">O5</span>
+        <span class="ni-text">PID Control</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week6" data-page="offseason-o6">
+        <span class="ni-num">O6</span>
+        <span class="ni-text">Autonomous</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week7" data-page="offseason-o7">
+        <span class="ni-num">O7</span>
+        <span class="ni-text">Subsystem Ownership</span>
+        <span class="ni-check">○</span>
+      </a>
+      <a class="nav-item " href="/weeks/offseason/os-week8" data-page="offseason-o8">
+        <span class="ni-num">O8</span>
+        <span class="ni-text">Build Season Prep</span>
+        <span class="ni-check">○</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Collapse tab — fixed to right edge of sidebar, no overlap with progress bar -->
+  <button class="sidebar-collapse-btn" id="sidebar-collapse-btn"
+    onclick="toggleSidebarWidth()" title="Collapse sidebar" aria-label="Collapse sidebar">‹</button>
+
+</nav>
+
+<!-- Search Modal -->
+<div class="search-overlay" id="search-overlay" onclick="closeSearch()">
+  <div class="search-modal" onclick="event.stopPropagation()">
+    <div class="sm-header">
+      <span class="sm-icon"><i data-lucide="search"></i></span>
+      <input type="text" id="search-input" class="sm-input" placeholder="Search topics, concepts, keywords…" oninput="searchTopics(this.value)" autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="sm-close" onclick="closeSearch()"><i data-lucide="x"></i></button>
+    </div>
+    <div class="sm-results" id="search-results">
+      <div class="sm-empty">Start typing to search across all 16 weeks…</div>
+    </div>
+    <div class="sm-footer">
+      <span><kbd>↑↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> open</span>
+      <span><kbd>Esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+  <main class="main" id="main-content">
+    <div class="page-hero">
+  <div class="ph-breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <a href="#">Offseason</a>
+    <span>/</span>
+    <span>Week O1</span>
+  </div>
+  <div class="ph-badge badge-offseason">Offseason · Week 1 of 8</div>
+  <h1>Git & GitHub</h1>
+  <p>Branches, pull requests, commit messages, and the 2974 team workflow.</p>
+  
+  <div class="ph-topics">
+    
+    <a href="#topic-1" class="ph-topic-pill">Core Concepts</a>
+    
+    <a href="#topic-2" class="ph-topic-pill">Daily Workflow</a>
+    
+    <a href="#topic-3" class="ph-topic-pill">Branch Naming & Commits</a>
+    
+      
+  </div>
+  
+</div>
+
+<div class="week-layout">
+
+  
+  <nav class="topic-nav" id="topic-nav">
+    <div class="tn-header">this week</div>
+    <ul class="tn-list">
+      
+      <li>
+        <a class="tn-link" href="#topic-1" data-tn="1">
+          <span class="tn-num">1</span>
+          <span class="tn-label">Core Concepts</span>
+        </a>
+      </li>
+      
+      <li>
+        <a class="tn-link" href="#topic-2" data-tn="2">
+          <span class="tn-num">2</span>
+          <span class="tn-label">Daily Workflow</span>
+        </a>
+      </li>
+      
+      <li>
+        <a class="tn-link" href="#topic-3" data-tn="3">
+          <span class="tn-num">3</span>
+          <span class="tn-label">Branch Naming & Commits</span>
+        </a>
+      </li>
+      
+      
+    </ul>
+  </nav>
+  
+
+  <div class="content-wrap">
+    <div id="week-screens-wrap">
+      <div class="callout danger"><p><strong>This comes before WPILib.</strong> A programmer who can't use Git can't safely contribute to the team codebase during build season. Learn this first, use it every session.</p></div>
+
+<h2 class="sh">Core Concepts</h2>
+<div class="concept-grid">
+  <div class="concept-card"><div class="cc-label">Repository</div><div class="cc-title">The project + its history</div><div class="cc-desc">Every commit ever made, every branch, every file. Lives on GitHub and on your laptop.</div></div>
+  <div class="concept-card"><div class="cc-label">Commit</div><div class="cc-title">A saved snapshot</div><div class="cc-desc">A point-in-time capture of your files with a message explaining what changed. The unit of work in Git.</div></div>
+  <div class="concept-card"><div class="cc-label">Branch</div><div class="cc-title">A parallel line of work</div><div class="cc-desc">Work on a feature in isolation without breaking main. When done, merge it back via a PR.</div></div>
+  <div class="concept-card"><div class="cc-label">Pull Request</div><div class="cc-title">Request to merge + review</div><div class="cc-desc">Open a PR when your branch is ready. Teammates review before it merges to main.</div></div>
+</div>
+
+<h2 class="sh">Daily Workflow</h2>
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">terminal</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt"># 1. Start from current main</span>
+git checkout main
+git pull
+
+<span class="cmt"># 2. Create your feature branch</span>
+git checkout -b feature/shooter-pid
+
+<span class="cmt"># 3. Make changes, then stage and commit</span>
+git add .
+git commit -m <span class="str">"feat: add velocity PID to shooter flywheel"</span>
+
+<span class="cmt"># 4. Push and open a PR</span>
+git push origin feature/shooter-pid
+<span class="cmt"># → go to GitHub and open a Pull Request</span></pre>
+</div>
+
+<div class="callout warning"><p><strong>Never push directly to main.</strong> Always work on a branch and open a PR. Even if you're the only one working on it. This keeps the robot's working code safe from in-progress changes.</p></div>
+
+<h2 class="sh">Branch Naming</h2>
+<table>
+<thead><tr><th>Prefix</th><th>Use for</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td>feature/</td><td>New functionality</td><td><code>feature/auto-align</code></td></tr>
+<tr><td>fix/</td><td>Bug fix</td><td><code>fix/shooter-pid-oscillation</code></td></tr>
+<tr><td>refactor/</td><td>Cleanup, no behavior change</td><td><code>refactor/drivetrain-cleanup</code></td></tr>
+<tr><td>docs/</td><td>Comments/docs only</td><td><code>docs/intake-javadocs</code></td></tr>
+</tbody>
+</table>
+
+<h2 class="sh">Commit Messages</h2>
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">terminal — bad vs good</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="cmt"># BAD</span>
+git commit -m <span class="str">"stuff"</span>
+git commit -m <span class="str">"fixed it"</span>
+git commit -m <span class="str">"asdf"</span>
+
+<span class="cmt"># GOOD — type: short description of what changed</span>
+git commit -m <span class="str">"feat: add encoder-based speed control to shooter"</span>
+git commit -m <span class="str">"fix: prevent motor from running past limit switch"</span>
+git commit -m <span class="str">"refactor: extract PID constants to Constants.java"</span></pre>
+</div>
+
+<h2 class="sh">Fill in the Blanks</h2>
+<div id="fill-o1">
+  <div class="fill-container">
+    <span class="cmt"># Create AND switch to new branch feature/elevator</span><br />
+    git <input class="fill-blank" data-answer="checkout -b|switch -c" placeholder="???????????" /> feature/elevator
+  </div>
+  <div class="fill-container">
+    <span class="cmt"># Stage all changed files</span><br />
+    git <input class="fill-blank" data-answer="add ." placeholder="?????" />
+  </div>
+  <div class="fill-container">
+    <span class="cmt"># Get the latest changes from remote main</span><br />
+    git <input class="fill-blank" data-answer="pull" placeholder="????" />
+  </div>
+</div>
+<div style="display:flex;align-items:center;gap:12px;margin-top:10px">
+  <button class="btn btn-navy btn-sm" onclick="checkFills('fill-o1')">Check Answers</button>
+  <span id="fill-o1-result" style="font-size:13px;font-weight:700;display:none"></span>
+</div>
+
+<h2 class="sh">Knowledge Check</h2>
+<div id="quiz-o1"></div>
+
+<h2 class="sh">Assignment — Your First PR</h2>
+<div class="challenge">
+  <div class="ch-header"><div class="ch-icon">📝</div><div><div class="ch-title">First PR on the Team Repo</div><div class="ch-sub">Real Git on real code</div></div></div>
+  <div class="ch-body">
+    <p class="ch-prompt">1. Clone <a href="https://github.com/sohnshaik/training-test-1" style="color:#C41230">sohnshaik/training-test-1</a><br />
+    2. Create branch <code>feature/yourname-intro</code><br />
+    3. Add file <code>intros/yourname.md</code> with your name + one thing you want to build this season<br />
+    4. Commit with a proper message<br />
+    5. Push and open a Pull Request<br />
+    6. Request review from Hrehaan or Sohan<br /><br />
+    When it merges, you've officially contributed to the team codebase.</p>
+  </div>
+</div>
+
+<script>
+const quiz_o1 = new Quiz('quiz-o1', [
+  { question: "You're starting work on a new auto routine. First thing you do?", options: ["Edit files directly on main","git pull on main, then create a new branch","Create a commit on main first","Delete other branches"], correct: 1, explanation: "Always pull latest main before branching. Your feature branch starts from the current state of the codebase. Then create your branch and work in isolation." },
+  { question: "You changed 3 files. You only want to commit 1. Which command?", options: ["git add .","git commit -f Shooter.java","git add ShooterSubsystem.java","git stage --only ShooterSubsystem.java"], correct: 2, explanation: "git add filename stages just that one file. git add . stages everything. Be deliberate — unrelated files in a commit make history messy." },
+  { question: "What does a Pull Request do?", options: ["Pulls latest code to your laptop","Requests to merge your branch into another branch, with a review step","Creates a backup","Deletes your branch after merging"], correct: 1, explanation: "A PR is a merge request + review. Teammates check your code before it hits main. This is how we catch bugs before they reach a competition robot." },
+  { question: "Git shows conflict markers in a file. What do you do?", options: ["Delete the file and restart","Run git undo","Open the file, pick the correct version, remove markers, then commit","Force push to override"], correct: 2, explanation: "Open the conflicted file. Git marks both versions with <<< === >>> markers. Keep the right one (or combine them), delete the markers, then git add and commit. VS Code's merge editor makes this visual." },
+  { question: "Best commit message?", options: ["\"asdf\"","\"changes to shooter\"","\"feat: add velocity-based PID to shooter flywheel\"","\"I worked on the shooter today and it now does PID\""], correct: 2, explanation: "Good commit messages are specific and use a type prefix. They describe WHAT changed. Anyone reading the log should understand it without opening the diff." }
+], 'offseason-o1');
+</script>
+
+
+    </div>
+
+    <div class="complete-banner" id="complete-banner" style="display:none">
+      <span class="cb-icon"><i data-lucide="trophy"></i></span>
+      <div class="cb-text">
+        <div class="cb-title">week complete!!</div>
+        <div class="cb-sub">score saved :) keep it up!!</div>
+      </div>
+      <a href="/weeks/offseason/os-week2" class="btn btn-success btn-sm">next week →</a>
+    </div>
+
+    <div class="page-nav">
+      
+      <a href="/weeks/summer/week8" class="pn-link">
+        <span class="pn-label">← Previous</span>
+        <span class="pn-title">Week 8 — Bridge: XRP & WPILib</span>
+      </a>
+      
+      
+      <a href="/weeks/offseason/os-week2" class="pn-link pn-next">
+        <span class="pn-label">Next →</span>
+        <span class="pn-title">O2 — WPILib Setup</span>
+      </a>
+      
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+(function() {
+  var wrap = document.getElementById('week-screens-wrap');
+  if (!wrap) return;
+
+  // Collect all direct children
+  var children = Array.from(wrap.children);
+  var headers = children.filter(function(c) { return c.matches && c.matches('h2.sh, div.project-task'); });
+  if (headers.length < 2) return; // single-section week, no splitting
+
+  // Build screens: group children by which h2 / project-task they follow
+  var screens = [];
+  var current = null;
+  children.forEach(function(child) {
+    if (child.matches && child.matches('h2.sh, div.project-task')) {
+      current = document.createElement('div');
+      current.className = 'week-screen';
+      screens.push(current);
+    }
+    if (current) current.appendChild(child); // moves node into screen
+  });
+
+  // Re-attach screens into wrap
+  screens.forEach(function(s) { wrap.appendChild(s); });
+
+  var total = screens.length;
+  var active = 0;
+
+  // Build screen nav bar
+  var navEl = document.createElement('div');
+  navEl.className = 'screen-nav';
+  navEl.id = 'screen-nav';
+
+  var dotsHtml = screens.map(function(_, i) {
+    return '<button class="sn-dot" data-sdot="' + i + '" title="Topic ' + (i+1) + '" onclick="weekGoScreen(' + i + ')"></button>';
+  }).join('');
+
+  navEl.innerHTML =
+    '<button class="sn-btn" id="sn-prev" onclick="weekGoScreen(' + "window._wss-1" + ')">← Prev</button>' +
+    '<div class="sn-meta"><span class="sn-topic-title" id="sn-title"></span><span class="sn-topic-count" id="sn-count"></span><div class="sn-dots" id="sn-dots">' + dotsHtml + '</div></div>' +
+    '<button class="sn-next sn-btn" id="sn-next" onclick="weekGoScreen(window._wss+1)">Next →</button>';
+
+  // Fix up prev button
+  navEl.querySelector('#sn-prev').onclick = function() { weekGoScreen(window._wss - 1); };
+  navEl.querySelector('#sn-next').onclick = function() { weekGoScreen(window._wss + 1); };
+
+  wrap.after(navEl);
+
+  window._wsTotal = total;
+  window._wss = 0;
+
+  window.weekGoScreen = function(n) {
+    n = Math.max(0, Math.min(total - 1, n));
+    window._wss = n;
+
+    screens.forEach(function(s, i) {
+      s.classList.toggle('ws-active', i === n);
+    });
+
+    var h2 = screens[n].querySelector('h2.sh');
+    var pt = screens[n].querySelector('.project-task');
+    var title = h2 ? h2.textContent.trim() : (pt ? 'Project Task' : ('Topic ' + (n + 1)));
+    var countEl = document.getElementById('sn-count');
+    var titleEl = document.getElementById('sn-title');
+    if (titleEl) titleEl.textContent = title;
+    if (countEl) countEl.textContent = (n + 1) + ' / ' + total;
+
+    var prevBtn = document.getElementById('sn-prev');
+    var nextBtn = document.getElementById('sn-next');
+    if (prevBtn) prevBtn.disabled = (n === 0);
+    if (nextBtn) {
+      if (n === total - 1) {
+        nextBtn.textContent = 'Done ✓';
+        nextBtn.classList.add('sn-finish');
+        nextBtn.onclick = function() {
+          var banner = document.getElementById('complete-banner');
+          if (banner) { banner.style.display = 'flex'; banner.scrollIntoView({behavior:'smooth',block:'center'}); }
+        };
+      } else {
+        nextBtn.textContent = 'Next →';
+        nextBtn.classList.remove('sn-finish');
+        nextBtn.onclick = function() { weekGoScreen(window._wss + 1); };
+      }
+    }
+
+    // Dots
+    document.querySelectorAll('.sn-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === n);
+    });
+
+    // Topic nav
+    document.querySelectorAll('.tn-link[data-tn]').forEach(function(link) {
+      var tn = link.getAttribute('data-tn');
+      var matches = tn === 'test' ? (n === total - 1) : (parseInt(tn) - 1 === n);
+      link.classList.toggle('tn-active', matches);
+    });
+
+    // Scroll to top of content area
+    var cw = document.querySelector('.content-wrap');
+    if (cw) window.scrollTo({ top: cw.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
+  };
+
+  // Wire topic nav clicks
+  document.querySelectorAll('.tn-link[data-tn]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var tn = this.getAttribute('data-tn');
+      var screenIdx = tn === 'test' ? (total - 1) : (parseInt(tn) - 1);
+      weekGoScreen(screenIdx);
+    });
+  });
+
+  // Wire hero topic pill clicks
+  document.querySelectorAll('.ph-topic-pill').forEach(function(pill) {
+    pill.addEventListener('click', function(e) {
+      e.preventDefault();
+      var href = this.getAttribute('href') || '';
+      if (href === '#weekly-test') {
+        weekGoScreen(total - 1);
+      } else {
+        var m = href.match(/#topic-(\d+)/);
+        if (m) weekGoScreen(parseInt(m[1]) - 1);
+      }
+    });
+  });
+
+  weekGoScreen(0);
+})();
+</script>
+
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="sf-left">
+    <img src="/assets/images/logo.jpeg" alt="WRT">
+    <span>Walton Robotics Team 2974 &mdash; WRT Programming &mdash; 2026-27</span>
+  </div>
+  <div class="sf-right">
+    <a href="https://github.com/WaltonRobotics" target="_blank" rel="noopener">GitHub</a>
+    <a href="/sitemap.xml">Sitemap</a>
+    <a href="/feed.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- Mobile sidebar backdrop -->
+<div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+
+<script type="module" src="/assets/js/auth.js"></script>
+
+<script>
+  // Initialize Lucide icons after all content is in the DOM.
+  // Called again by auth.js after the user chip is injected.
+  function initIcons() { if (typeof lucide !== 'undefined') lucide.createIcons(); }
+  document.addEventListener('DOMContentLoaded', initIcons);
+</script>
+
+<!-- impeccable-live-start -->
+<script src="http://localhost:8400/live.js"></script>
+<!-- impeccable-live-end -->
+</body>
+</html>
