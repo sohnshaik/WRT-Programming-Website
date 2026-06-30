@@ -756,11 +756,21 @@ count--;  <span class="cmt">// count is now 1 — shorthand for count = count - 
       <li><strong>install the Java extension:</strong> open VS Code → press <kbd>Ctrl+Shift+X</kbd> → search <code>Extension Pack for Java</code> → Install</li>
       <li><strong>get the project folder:</strong>
         <ul>
-          <li><em>if you have a repo link:</em> open a terminal (<kbd>Ctrl+`</kbd> in VS Code) and run <code>git clone [URL your lead gives you] minibot-project</code></li>
+          <li><em>if you have a repo link:</em> open a terminal (<kbd>Ctrl+`</kbd> in VS Code) and run <code>git clone [URL of the repository that you made] minibot-project</code></li>
           <li><em>if starting from scratch:</em> create a new folder called <code>minibot-project</code> anywhere on your computer</li>
         </ul>
       </li>
       <li><strong>open the folder in VS Code:</strong> File → Open Folder → select <code>minibot-project</code></li>
+      <li><strong>create a Github repository for your project:</strong> follow the instructions on this google doc :D <a href="https://docs.google.com/document/d/1RONII6XiNW-G7-xRZELJVoiIMVbDhLi5nUja9T_fLfI/edit?usp=sharing" target="_blank" rel="noopener no referrer">GitHub Setup Guide</a>
+        <ul>
+          <li><strong>things to note:</strong>
+            <ul>
+            <li>you should be commiting very periodically — either whenever something major is working, you're finished with your week, or if you're leaving ur desktop/laptop, you get the gist.</li>
+            <li>use commit names that are meaningful, rather than just random sentences that don't have meaning to others (like sometimes i use).</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
     </ol>
     <p>now create <code>Constants.java</code> directly inside your <code>minibot-project</code> folder. this is the foundation of your entire MiniBot project — every magic number in your robot code lives here, named and typed properly so nothing is mysterious to anyone reading it later.</p>
     <ul>
