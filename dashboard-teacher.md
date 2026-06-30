@@ -127,10 +127,14 @@ table.score-table { width: 100%; border-collapse: collapse; font-size: 13px; bac
   </div>
 </div>
 
-<script type="module">
-import { getApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-import { getFirestore, collection, getDocs, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+<script>
+/* Admin dashboard logic.
+   Firebase is initialized once by auth.js (loaded in the footer). Rather than
+   touch Firebase here — and race auth.js's initializeApp() — we wait for the
+   `wrc-auth-ready` event auth.js fires once it knows the user + role, then pull
+   data through the window._wrc* helpers it exposes. This script is a classic
+   (non-module) script so it parses/executes before the deferred auth.js module,
+   guaranteeing our listener is registered before the event fires. */
 
 const WEEKS = [
   {id:'summer-w1',label:'W1'},{id:'summer-w2',label:'W2'},{id:'summer-w3',label:'W3'},{id:'summer-w4',label:'W4'},
@@ -139,41 +143,47 @@ const WEEKS = [
   {id:'offseason-o5',label:'O5'},{id:'offseason-o6',label:'O6'},{id:'offseason-o7',label:'O7'},{id:'offseason-o8',label:'O8'},
 ];
 
-// auth.js always initializes the default Firebase app first — reuse it here
-const app  = getApp();
-const auth = getAuth(app);
-const db   = getFirestore(app);
-
 let allStudents = [], allUsers = [];
 let studentAnswers = {};
+let dashBooted = false;
 
-onAuthStateChanged(auth, async (user) => {
-  if (!user) { window.location.replace('/login/'); return; }
-  const snap = await getDoc(doc(db, 'users', user.uid));
-  const role = snap.exists() ? snap.data().role : 'student';
-  if (!['teacher','admin','leads'].includes(role)) { window.location.replace('/'); return; }
-  await loadData();
-});
+// ── BOOTSTRAP ────────────────────────────────────────────────
+function bootDashboard(role) {
+  if (dashBooted) return;
+  // auth.js already redirects non-admin/leads users; guard here too.
+  if (!['admin','leads'].includes(role)) return;
+  dashBooted = true;
+  loadData();
+}
+
+window.addEventListener('wrc-auth-ready', (e) => bootDashboard(e.detail && e.detail.role));
+// In case auth.js resolved before this script attached its listener:
+if (window._wrcRole) bootDashboard(window._wrcRole);
+
+// Safety net: if Firebase is blocked/offline and auth never resolves, don't spin forever.
+setTimeout(() => {
+  if (!dashBooted) {
+    const el = document.getElementById('dash-loading');
+    if (el) el.textContent = 'could not verify your session — try refreshing or signing in again';
+  }
+}, 9000);
 
 async function loadData() {
-  const usersSnap = await getDocs(collection(db, 'users'));
-  allUsers = usersSnap.docs.map(d => ({ uid: d.id, ...d.data() }));
-  allStudents = [];
+  try {
+    allUsers    = (await window._wrcLoadAllUsers())         || [];
+    allStudents = (await window._wrcLoadAllStudentScores()) || [];
 
-  for (const uDoc of usersSnap.docs) {
-    const u = uDoc.data();
-    if (u.role !== 'student') continue;
-    const scoresSnap = await getDocs(collection(db, 'scores', uDoc.id, 'weeks'));
-    const weeks = {};
-    scoresSnap.forEach(s => { weeks[s.id] = s.data(); });
-    allStudents.push({ uid: uDoc.id, name: u.name || u.email, email: u.email, weeks });
+    updateStats(); renderTable(allStudents); renderUsersTable(); populateAnswerStudentSelect();
+
+    document.getElementById('dash-loading').style.display  = 'none';
+    document.getElementById('score-table').style.display   = 'table';
+    document.getElementById('users-loading').style.display = 'none';
+    document.getElementById('users-table').style.display   = 'table';
+  } catch (e) {
+    console.error('dashboard: loadData failed', e);
+    const el = document.getElementById('dash-loading');
+    if (el) el.textContent = 'failed to load data — check your connection and Firestore permissions, then refresh';
   }
-
-  updateStats(); renderTable(allStudents); renderUsersTable(); populateAnswerStudentSelect();
-  document.getElementById('dash-loading').style.display  = 'none';
-  document.getElementById('score-table').style.display   = 'table';
-  document.getElementById('users-loading').style.display = 'none';
-  document.getElementById('users-table').style.display   = 'table';
 }
 
 function updateStats() {
@@ -245,19 +255,18 @@ window.loadAnswersForStudent = async () => {
   qSel.innerHTML = '<option value="">select a quiz/week...</option>';
   document.getElementById('answer-panel-wrap').innerHTML = '<div class="dash-loading">loading...</div>';
   try {
-    const snap = await getDocs(collection(db, 'answers', uid, 'quizzes'));
-    studentAnswers[uid] = {};
-    snap.forEach(d => { studentAnswers[uid][d.id] = d.data(); });
-    if (snap.empty) {
+    studentAnswers[uid] = (await window._wrcLoadStudentAnswers(uid)) || {};
+    const quizIds = Object.keys(studentAnswers[uid]);
+    if (quizIds.length === 0) {
       document.getElementById('answer-panel-wrap').innerHTML = '<div class="dash-loading">no quiz answers saved for this student yet — they need to complete quizzes on the site first</div>';
       return;
     }
-    snap.docs.forEach(d => {
+    quizIds.forEach(id => {
       const o = document.createElement('option');
-      o.value = d.id; o.textContent = d.id;
+      o.value = id; o.textContent = id;
       qSel.appendChild(o);
     });
-    qSel.value = snap.docs[0].id;
+    qSel.value = quizIds[0];
     renderAnswerPanel();
   } catch(e) {
     document.getElementById('answer-panel-wrap').innerHTML = '<div class="dash-loading">error loading answers</div>';
@@ -310,16 +319,23 @@ window.switchTab = (id) => {
 };
 
 window.exportCSV = () => {
-  const hdr = ['Name','Email',...WEEKS.map(w=>w.label),'Average'].join(',');
+  const esc = v => {
+    const s = (v ?? '').toString();
+    return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  };
+  const hdr = ['Name','Email',...WEEKS.map(w=>w.label),'Average'].map(esc).join(',');
   const rows = allStudents.map(s => {
     const scores = WEEKS.map(w => s.weeks[w.id]?.pct ?? '');
     const done = WEEKS.map(w=>s.weeks[w.id]).filter(w=>w?.complete);
     const avg  = done.length ? Math.round(done.reduce((a,w)=>a+w.pct,0)/done.length) : '';
-    return [s.name,s.email,...scores,avg].join(',');
+    return [s.name, s.email, ...scores, avg].map(esc).join(',');
   });
+  const blob = new Blob([[hdr,...rows].join('\n')], { type: 'text/csv;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = 'data:text/csv,'+encodeURIComponent([hdr,...rows].join('\n'));
+  a.href = url;
   a.download = 'wrt-scores-'+new Date().toISOString().slice(0,10)+'.csv';
   a.click();
+  URL.revokeObjectURL(url);
 };
 </script>
