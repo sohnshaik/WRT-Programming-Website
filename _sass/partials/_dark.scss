@@ -22,11 +22,11 @@
     border-color: #2a2f47;
     .sch-label { color: #9fabc4; }
     .sch-title { color: #dce1ec; }
-    .sp-label span { color: #6b7690; }
+    .sp-label span { color: #8892a8; }
     .sp-track { background: #2a2f47; }
   }
   .nav-group { border-color: #1f2337; }
-  .nav-group-label { color: #5a6480; &:hover { color: #9fabc4; } }
+  .nav-group-label { color: #7e8aa2; &:hover { color: #bec5d6; } }
   .nav-item {
     &:hover { background: #1f2337; }
     &.active { background: rgba(196,18,48,0.15); }
@@ -35,7 +35,7 @@
     .ni-check { color: #2a2f47; }
   }
   .sidebar-search-btn {
-    background: #1f2337; border-color: #2a2f47; color: #6b7690;
+    background: #1f2337; border-color: #2a2f47; color: #8892a8;
     &:hover { background: #252840; color: #bec5d6; }
     kbd { background: #1a1d2e; border-color: #2a2f47; color: #5a6480; }
   }

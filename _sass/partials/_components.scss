@@ -1180,7 +1180,7 @@ textarea.code-input {
   .ucd-avatar { background: $red; }
   .ucd-info {
     .ucd-fullname { color: #dce1ec; }
-    .ucd-email    { color: #6e7a94; }
+    .ucd-email    { color: #9fabc4; }
   }
   .ucd-role-badge { color: #a8bfff; background: rgba(168,191,255,0.12); }
   .ucd-sep        { background: #2d3752; }
@@ -1188,6 +1188,13 @@ textarea.code-input {
     color: #dce1ec;
     &:hover { background: #1f2337; color: #ffffff; }
     &.ucd-signout { color: #f08090; &:hover { background: rgba(196,18,48,0.15); } }
+  }
+  // Specificity fix: .topbar .uc-dropdown .ucd-item (0,3,0) beats [data-theme] .ucd-item (0,2,0).
+  // This selector adds the attribute, winning in dark mode.
+  .topbar .uc-dropdown .ucd-item {
+    color: #dce1ec;
+    &:hover { color: #ffffff; }
+    &.ucd-signout { color: #f08090; }
   }
 
   // Settings page
