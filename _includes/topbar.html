@@ -9,13 +9,11 @@
   </a>
   <div class="topbar-sep"></div>
   <nav class="topbar-links">
-    <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
-    <a href="{{ '/training' | relative_url }}" {% if page.page_id == 'training' %}class="active"{% endif %}>Training</a>
-    <a href="{{ '/weeks/summer/week1' | relative_url }}" {% if page.phase == 'summer' or page.phase == 'bridge' %}class="active"{% endif %}>Summer</a>
-    <a href="{{ '/weeks/offseason/os-week1' | relative_url }}" {% if page.phase == 'offseason' %}class="active"{% endif %}>Offseason</a>
-    <a href="{{ '/project' | relative_url }}" {% if page.page_id == 'project' %}class="active"{% endif %}>Project</a>
-    <a href="{{ '/style-guide' | relative_url }}" {% if page.url contains 'style-guide' %}class="active"{% endif %}>Style Guide</a>
+    <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>home</a>
+    <a href="{{ '/training' | relative_url }}" {% if page.page_id == 'training' or page.phase == 'summer' or page.phase == 'bridge' or page.phase == 'offseason' %}class="active"{% endif %}>training</a>
+    <a href="{{ '/project' | relative_url }}" {% if page.page_id == 'project' %}class="active"{% endif %}>project</a>
+    <a href="{{ '/style-guide' | relative_url }}" {% if page.url contains 'style-guide' %}class="active"{% endif %}>style guide</a>
   </nav>
-  <button class="topbar-search-btn" onclick="openSearch()" title="Search (⌘K)"><i data-lucide="search"></i></button>
+  <button class="topbar-search-btn" onclick="openSearch()" title="Search (Ctrl+K / ⌘K)"><i data-lucide="search"></i></button>
   <a href="{{ '/login/' | relative_url }}" class="topbar-signin-btn" id="topbar-signin-static">sign in</a>
 </header>

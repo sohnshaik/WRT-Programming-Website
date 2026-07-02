@@ -67,6 +67,13 @@ onAuthStateChanged(auth, async (user) => {
     window._wrcUid  = user.uid;
 
     renderUserChip(user, currentRole);
+    // Show progress UI for authenticated users
+    const progressEl = document.getElementById('sidebar-progress');
+    const signoutHint = document.getElementById('sidebar-progress-signout');
+    if (progressEl) progressEl.style.display = '';
+    if (signoutHint) signoutHint.style.display = 'none';
+    const homePct = document.getElementById('home-progress-ui');
+    if (homePct) homePct.style.display = '';
     window.dispatchEvent(new CustomEvent('wrc-auth-ready', { detail: { user, role: currentRole } }));
 
     // Role gate: admin pages
@@ -279,7 +286,7 @@ window._wrcLoadAllStudentScores = async function() {
     const usersSnap = await getDocs(collection(db, 'users'));
     for (const userDoc of usersSnap.docs) {
       const u = userDoc.data();
-      if (u.role === 'student') {
+      if (u.role === 'student' && !u.isTest) {
         const scoresSnap = await getDocs(collection(db, 'scores', userDoc.id, 'weeks'));
         const weeks = {};
         scoresSnap.forEach(s => { weeks[s.id] = s.data(); });

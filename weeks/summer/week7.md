@@ -28,13 +28,13 @@ next_title: "Week 8 — Recap & Resources"
 
 <p>before we get into syntax, let's talk about the problem enums solve, because the "why" here is way more important than the "how."</p>
 
-<h3 class="sub">what even IS an enum?</h3>
+<h3 class="sub">the enum mental model</h3>
 
 <p>imagine you're at a restaurant. you can't just walk up to the counter and say "i want a unicorn steak with a side of moon rocks." you have to order from the menu. the menu is a fixed list of valid options — you pick one of those, nothing else. an enum is the menu. you define the exact options upfront, and Java will <em>only</em> allow those options. nothing else compiles. nothing else runs.</p>
 
 <p>that sounds limiting, but it's the entire point. before enums existed, people tracked robot state with strings or integers. string "TELEOP" works great — until someone types "Teleop" (capital T) or "TELE0P" (zero instead of an O). Java doesn't catch either of those. the robot just behaves wrong and you spend an hour debugging a typo. an integer 0 for disabled, 1 for teleop, 2 for auto works great — until someone passes 7 and you have no idea what that means. enum fixes all of this: only the exact declared values are valid, and the <em>compiler</em> checks it, not you at runtime.</p>
 
-<p><strong>why does it matter in FRC?</strong> arm positions, drivetrain modes, game piece types, scoring locations, LED states — all of these are "pick from a list" problems. the codebase uses enums for basically all of them. if you see a field declared as <code>ArmState m_state</code> in a WRT subsystem, that's an enum. if you see a switch statement checking <code>m_state</code>, that's an enum. this is the most foundational pattern in how we structure behavior.</p>
+<div class="callout tip"><p>arm positions, drivetrain modes, game piece types, scoring locations, LED states — all of these are "pick from a list" problems. the codebase uses enums for basically all of them. if you see a field declared as <code>ArmState m_state</code> in a WRT subsystem, that's an enum. if you see a switch statement checking <code>m_state</code>, that's an enum. this is the most foundational pattern in how we structure behavior.</p></div>
 
 <div class="callout warning"><p><strong>the String problem in detail:</strong> say you track robot mode with <code>String m_mode = "TELEOP"</code>. three weeks later, your teammate writes a condition: <code>if (m_mode == "Teleop")</code> — different capitalization. Java won't warn you. the condition is always false. the robot runs teleop code but your condition never triggers. good luck finding that bug at midnight before a competition. enum makes this literally impossible to compile.</p></div>
 
@@ -256,13 +256,13 @@ next_title: "Week 8 — Recap & Resources"
 
 <p>you've used arrays before. you know the deal: declare the size upfront, access by index, done. but what happens when you don't know the size upfront? what if the size needs to change while the program is running? that's where <code>ArrayList</code> comes in.</p>
 
-<h3 class="sub">what even IS an ArrayList?</h3>
+<h3 class="sub">ArrayList — arrays that grow</h3>
 
 <p>imagine a whiteboard where you write down a list of tasks. you can add new items at the bottom, erase items you finished, check if something is on the list — and the whiteboard is magic: it's as long as you need it to be. there's no "sorry, the whiteboard is full" — it just grows. that's an ArrayList.</p>
 
 <p>contrast that with a regular array. a regular array is like a row of fixed lockers — you bolt them to the wall at construction time and you're stuck with that count forever. need one more locker? too bad. have an empty one? it just sits there wasting space. if you know you need exactly N items and that will never change, an array is great. but as soon as the count might change, ArrayList wins.</p>
 
-<p><strong>why does it matter in FRC?</strong> vision processing returns a variable number of detected targets — you might see 0, 1, or 5 game pieces and you don't know which until the camera tells you. a list of queued commands is dynamic — new commands get added and completed commands get removed. error logs, telemetry history, active subsystems — all of these have counts that change at runtime. that's ArrayList territory.</p>
+<div class="callout tip"><p>vision processing returns a variable number of detected targets — you might see 0, 1, or 5 game pieces and you don't know which until the camera tells you. a list of queued commands is dynamic — new commands get added and completed commands get removed. error logs, telemetry history, active subsystems — all of these have counts that change at runtime. that's ArrayList territory.</p></div>
 
 <h3 class="sub">array vs ArrayList — the mental model</h3>
 
@@ -460,13 +460,13 @@ System.out.<span class="fn">println</span>(targets.<span class="fn">contains</sp
 
 <p>you just learned that ArrayList only holds objects, not primitives. so <code>ArrayList&lt;int&gt;</code> won't compile. but you might very well need a list of integers. what do you do? Java's answer is wrapper classes — object versions of every primitive type.</p>
 
-<h3 class="sub">what even IS a wrapper class?</h3>
+<h3 class="sub">wrapper classes — boxing up primitives</h3>
 
 <p>imagine you need to ship a piece of candy in the mail. you can't just tape a single Skittle to a postcard — it's too small and fragile, it doesn't have an address, and the post office doesn't know what to do with it. but if you put it in a box, suddenly it has all the structure the mail system needs: an address label, dimensions, packaging. the candy itself didn't change — you just wrapped it.</p>
 
 <p>a primitive (like <code>int</code>) is the raw candy. a wrapper class (like <code>Integer</code>) is the box. the value inside is the same, but now it's a full object with methods, and it can go anywhere an object is expected — like inside an ArrayList.</p>
 
-<p><strong>why does it matter in FRC?</strong> once you start using collections (ArrayList, HashMap, etc.) you will constantly see <code>Integer</code>, <code>Double</code>, and <code>Boolean</code> in type parameters. you also use the static utility methods on wrapper classes — <code>Integer.parseInt()</code> is everywhere in config reading and dashboard input handling.</p>
+<div class="callout tip"><p>once you start using collections (ArrayList, HashMap, etc.) you will constantly see <code>Integer</code>, <code>Double</code>, and <code>Boolean</code> in type parameters. you also use the static utility methods on wrapper classes — <code>Integer.parseInt()</code> is everywhere in config reading and dashboard input handling.</p></div>
 
 <h3 class="sub">the primitive-to-wrapper mapping</h3>
 

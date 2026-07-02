@@ -28,7 +28,7 @@ next_title: "Week 5 — OOP: Classes & Objects"
 
 <p>once you have arrays AND loops together, you can do things like "apply this formula to all four drivetrain (the drivetrain is the system of motors and wheels that makes the robot move) motors" in four lines instead of sixteen. that combo is one of the most used patterns in all of FRC code.</p>
 
-<h3 class="sub">what even IS an array?</h3>
+<h3 class="sub">arrays — the locker row mental model</h3>
 
 <p>imagine a row of lockers at school. each locker has a number painted on the door (0, 1, 2, 3...) and can hold exactly one thing inside. all the lockers in the row hold the same type of stuff — you can't have a locker full of text next to a locker full of numbers. the whole row is one unit — one array.</p>
 
@@ -228,7 +228,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Total modules: "</
 
 <p>methods solve this completely. a method is a named block of code that you write once and can call as many times as you want from anywhere. fix it in the method, fixed everywhere.</p>
 
-<h3 class="sub">what even IS a method?</h3>
+<h3 class="sub">the anatomy of a method</h3>
 
 <p>think of a method like a recipe. you write the pancake recipe once in a cookbook. then whenever you want pancakes, you just say "make pancakes." you don't re-write the whole recipe every time you want breakfast. the recipe is the method. "make pancakes" is calling it.</p>
 

@@ -1,7 +1,7 @@
 ---
 layout: week
-title: "Autonomous & PathPlanner"
-subtitle: "Auto sequences, field coordinates, odometry, and PathPlanner."
+title: "Autonomous & Choreo"
+subtitle: "Auto sequences, field coordinates, odometry, and Choreo path following."
 badge: "Offseason · Week 6 of 8"
 phase: offseason
 phase_label: Offseason
@@ -9,7 +9,7 @@ week_label: "Week O6"
 page_id: "offseason-o6"
 topics:
   - Autonomous Period
-  - PathPlanner
+  - Choreo Path Following
   - Auto Chooser
 prev_url: "/weeks/offseason/os-week5"
 prev_title: "O5 — PID Control"
@@ -37,22 +37,27 @@ next_title: "O7 — Subsystem Ownership"
 }</pre>
 </div>
 
-<h2 class="sh">PathPlanner</h2>
-<p>PathPlanner is a tool for designing robot paths visually and following them precisely using odometry. Most competitive teams use it for complex multi-note or multi-piece autos.</p>
+<h2 class="sh">Choreo Path Following</h2>
+<p>Choreo is WRT's path following library. you design robot trajectories visually in the Choreo desktop app, export them, and follow them precisely in code using odometry. it integrates tightly with WPILib's command-based architecture and is what you'll use for all multi-piece autos on the actual robot.</p>
+
+<div class="callout info"><p><strong>why Choreo, not PathPlanner?</strong> Choreo generates time-optimized trajectories with physics constraints baked in, exports a standard JSON format, and has first-class WPILib integration. it's also what the team has standardized on — so all existing auto routines use it. see the style guide for the team's official stance.</p></div>
 
 <div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — PathPlanner auto</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
-<pre><span class="kw">import</span> com.pathplanner.lib.auto.<span class="cls">AutoBuilder</span>;
-<span class="kw">import</span> com.pathplanner.lib.path.<span class="cls">PathPlannerPath</span>;
+<div class="cb-header"><span class="cb-lang">java — Choreo auto (WPILib integration)</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">import</span> choreo.auto.<span class="cls">AutoFactory</span>;
+<span class="kw">import</span> choreo.auto.<span class="cls">AutoRoutine</span>;
+<span class="kw">import</span> choreo.auto.<span class="cls">AutoTrajectory</span>;
 
-<span class="cmt">// Load a path created in PathPlanner app</span>
-<span class="cls">PathPlannerPath</span> path = <span class="cls">PathPlannerPath</span>.<span class="fn">fromPathFile</span>(<span class="str">"2 Piece Auto"</span>);
+<span class="cmt">// In RobotContainer, build a routine from a .traj file</span>
+<span class="cls">AutoRoutine</span> twopiece = autoFactory.<span class="fn">newRoutine</span>(<span class="str">"twoPiece"</span>);
+<span class="cls">AutoTrajectory</span> traj = twopiece.<span class="fn">trajectory</span>(<span class="str">"twoPiece"</span>);
 
-<span class="cmt">// Follow it</span>
-<span class="cls">Command</span> autoCmd = <span class="cls">AutoBuilder</span>.<span class="fn">followPath</span>(path);
+<span class="cmt">// chain commands: follow path, then score</span>
+twopiece.<span class="fn">active</span>().<span class="fn">onTrue</span>(
+    traj.<span class="fn">cmd</span>().<span class="fn">andThen</span>(<span class="kw">new</span> <span class="fn">ScoreCommand</span>(m_shooter))
+);
 
-<span class="cmt">// Or build a named auto from PathPlanner</span>
-<span class="cls">Command</span> namedAuto = <span class="cls">AutoBuilder</span>.<span class="fn">buildAuto</span>(<span class="str">"2 Piece Center"</span>);</pre>
+<span class="kw">return</span> twopiece.<span class="fn">cmd</span>();</pre>
 </div>
 
 <h2 class="sh">Auto Chooser</h2>
@@ -78,7 +83,7 @@ next_title: "O7 — Subsystem Ownership"
 const quiz_o6 = new Quiz('quiz-o6', [
   { question: "sequence(A, B, C) runs commands:", options: ["All at once","A then B then C, each waiting for the previous to finish","Randomly","In reverse order"], correct: 1, explanation: "sequence() is serial. A must call isFinished() returning true before B starts. This is the most common auto structure." },
   { question: "What does an auto chooser let you do?", options: ["Switch between auto routines from the driver station before a match","Change auto logic mid-match","Select which subsystems are active","Override driver inputs"], correct: 0, explanation: "The auto chooser appears on SmartDashboard/Shuffleboard. The drive team picks an auto strategy before the match. getAutonomousCommand() returns the selected command." },
-  { question: "PathPlanner uses odometry to follow paths. Odometry tracks:", options: ["Robot battery voltage","Robot position on the field using encoder + gyro data","Camera detection results","Driver joystick input"], correct: 1, explanation: "Odometry combines encoder (distance traveled) and gyroscope (heading) data to estimate the robot's position on the field. PathPlanner uses this to accurately follow trajectories." },
+  { question: "Choreo uses odometry to follow paths. Odometry tracks:", options: ["Robot battery voltage","Robot position on the field using encoder + gyro data","Camera detection results","Driver joystick input"], correct: 1, explanation: "Odometry combines encoder (distance traveled) and gyroscope (heading) data to estimate the robot's position on the field. Choreo uses this to accurately follow trajectories." },
   { question: "WaitCommand(2.0) in a sequence does what?", options: ["Waits 2 seconds before the sequence starts","Pauses the sequence for 2 seconds","Runs the next command for 2 seconds","Sets a 2-second timeout on the whole auto"], correct: 1, explanation: "WaitCommand(n) is a command that runs for n seconds and then finishes. Useful for adding deliberate pauses between actions in a sequence." }
 ], 'offseason-o6');
 </script>

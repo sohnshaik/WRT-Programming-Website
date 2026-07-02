@@ -157,6 +157,9 @@ class Quiz {
     const letters = ['A', 'B', 'C', 'D'];
     const pct     = Math.round((this.current / this.questions.length) * 100);
     const cid     = this.containerId;
+    // Admin hint: highlights the correct option for leads reviewing questions.
+    // Note: answers are also visible in page source — this quiz is a learning
+    // check, not a verified exam. See item 28 in the design audit.
     const isAdmin = ['admin', 'leads', 'teacher'].includes(window._wrcRole);
 
     this.el.innerHTML = `
@@ -170,7 +173,6 @@ class Quiz {
         </div>
         <div class="quiz-body">
           <div class="quiz-q">${q.question}</div>
-          ${isAdmin ? `<div class="quiz-admin-note">✏️ admin view — correct answer is <strong>${letters[q.correct]}</strong></div>` : ''}
           <div class="quiz-options">
             ${q.options.map((opt, i) => `
               <button class="quiz-option${isAdmin && i === q.correct ? ' admin-correct-hint' : ''}" data-idx="${i}"
@@ -182,7 +184,6 @@ class Quiz {
           </div>
           <div class="quiz-feedback" id="qfb-${cid}"></div>
           <div class="quiz-controls">
-            <span class="quiz-score">Score: ${this.score} / ${this.questions.length}</span>
             <button class="btn btn-navy btn-sm" id="qnext-${cid}"
               onclick="window['_quiz_${cid}'].next()" disabled>
               ${this.current < this.questions.length - 1 ? 'Next Question →' : 'See Results →'}
@@ -246,7 +247,11 @@ class Quiz {
     const color = pct >= 80 ? '#00875A' : pct >= 60 ? '#b45309' : '#C41230';
     const cid   = this.containerId;
 
-    if (this.pageId) WRC.markComplete(this.pageId, this.score, this.questions.length);
+    // First-attempt-only scoring: only record if no prior score exists for this page.
+    // Retakes are allowed for learning, but only the first attempt counts toward progress.
+    const existingScore = this.pageId ? WRC.getScore(this.pageId) : null;
+    const isFirstAttempt = !existingScore?.complete;
+    if (this.pageId && isFirstAttempt) WRC.markComplete(this.pageId, this.score, this.questions.length);
 
     const wrap = document.getElementById(`qwrap-${cid}`);
     if (wrap) wrap.style.display = 'none';
@@ -255,6 +260,12 @@ class Quiz {
     sc.classList.add('show');
 
     const circumference = 2 * Math.PI * 55;
+    const savedNote = this.pageId
+      ? (isFirstAttempt
+          ? '<div class="sc-saved">✓ first attempt saved to your progress</div>'
+          : `<div class="sc-saved">↺ retake — first attempt was ${existingScore.score}/${existingScore.total} (${existingScore.pct}%)</div>`)
+      : '';
+
     sc.innerHTML = `
       <div class="sc-ring" style="border:8px solid ${color}20">
         <svg style="position:absolute;top:-8px;left:-8px;width:126px;height:126px"
@@ -271,7 +282,7 @@ class Quiz {
       </div>
       <div class="sc-score">${this.score} of ${this.questions.length} correct</div>
       <div class="sc-msg">${msg}</div>
-      ${this.pageId ? '<div class="sc-saved">✓ Score saved to your progress</div>' : ''}
+      ${savedNote}
       <button class="btn btn-outline" onclick="window['_quiz_${cid}'].reset()">↺ Try Again</button>
     `;
 
@@ -380,6 +391,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pageId = document.body.dataset.pageId;
   if (pageId) WRC.maybeShowBanner(pageId);
+
+  // Platform-aware keyboard shortcut label (Windows/Linux → Ctrl+K, Mac → ⌘K)
+  const kbdEl = document.getElementById('search-kbd');
+  if (kbdEl && !/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)) {
+    kbdEl.textContent = 'Ctrl+K';
+  }
 });
 
 // ── SIDEBAR COLLAPSE (DESKTOP) ────────────────────────────────
@@ -428,7 +445,7 @@ const SEARCH_INDEX = [
   { id:'offseason-o3', badge:'O3', title:'Command-Based Architecture', sub:'Subsystems, Commands, Scheduler, Triggers, addRequirements, execute, isFinished, sequence, parallel, TalonFX, Phoenix 6', url:'/weeks/offseason/os-week3' },
   { id:'offseason-o4', badge:'O4', title:'Motors & Sensors', sub:'TalonFX, stator current detection, Debouncer, CANcoder, Pigeon 2, SmartDashboard, VelocityTorqueCurrentFOC, MotionMagic', url:'/weeks/offseason/os-week4' },
   { id:'offseason-o5', badge:'O5', title:'PID Control', sub:'Proportional, Integral, Derivative, kP kI kD, PIDController, setpoint, feedforward, tuning, oscillation', url:'/weeks/offseason/os-week5' },
-  { id:'offseason-o6', badge:'O6', title:'Autonomous & PathPlanner', sub:'Auto routines, sequence, WaitCommand, PathPlanner, odometry, field coordinates, auto chooser', url:'/weeks/offseason/os-week6' },
+  { id:'offseason-o6', badge:'O6', title:'Autonomous & Choreo', sub:'Auto routines, sequence, WaitCommand, Choreo, odometry, field coordinates, auto chooser', url:'/weeks/offseason/os-week6' },
   { id:'offseason-o7', badge:'O7', title:'Subsystem Ownership', sub:'Code reading, Javadoc, @param, @return, magic numbers, Constants, capstone, PR review', url:'/weeks/offseason/os-week7' },
   { id:'offseason-o8', badge:'O8', title:'Build Season Prep', sub:'SCRUM, sprint planning, standup, backlog, code freeze, AdvantageKit, logging, GitHub Issues', url:'/weeks/offseason/os-week8' },
 ];
@@ -448,6 +465,19 @@ function closeSearch() {
   const overlay = document.getElementById('search-overlay');
   if (overlay) overlay.classList.remove('open');
 }
+
+// Focus trap for search modal — keeps Tab/Shift+Tab inside the modal
+document.addEventListener('keydown', e => {
+  const overlay = document.getElementById('search-overlay');
+  if (!overlay?.classList.contains('open') || e.key !== 'Tab') return;
+  const modal = overlay.querySelector('.search-modal');
+  if (!modal) return;
+  const focusable = Array.from(modal.querySelectorAll('button, input, a[href], [tabindex]:not([tabindex="-1"])')).filter(el => !el.disabled);
+  if (!focusable.length) return;
+  const first = focusable[0], last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
 
 function searchTopics(query) {
   renderSearchResults(query.trim().toLowerCase());

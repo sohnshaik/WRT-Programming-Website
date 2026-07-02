@@ -29,7 +29,7 @@ next_title: "Week 4 — Arrays & Methods"
 
 <p>the <code>for</code> loop is the workhorse. it's what you'll reach for the most in Java, and especially in FRC code. it's built for situations where you know (or can figure out) exactly how many times you want to loop — like "go through all 4 drive motors" or "check each of the 8 sensor readings" or "process every module in my swerve drive (swerve is a drivetrain where each wheel can spin and rotate independently, letting the robot move in any direction without turning first)." when the count is known, <code>for</code> is your guy.</p>
 
-<h3 class="sub">what even IS a for loop?</h3>
+<h3 class="sub">the for loop anatomy</h3>
 
 <p>picture a factory assembly line. a conveyor belt carries items past a worker, one at a time. the worker does the exact same job on each item — inspect it, stamp it, move it on. there's a counter keeping track of how many items have been processed. when the counter hits the target number, the belt stops. that's a for loop: a counter, a job to do, and a stopping condition.</p>
 
@@ -210,7 +210,7 @@ next_title: "Week 4 — Arrays & Methods"
 
 <p>you'll use foreach constantly in FRC code for things like reading sensor arrays, logging subsystem states, or checking a list of conditions. any time you're going front-to-back through a collection and don't need the index, foreach is the move.</p>
 
-<h3 class="sub">what even IS a foreach loop?</h3>
+<h3 class="sub">foreach — cleaner iteration</h3>
 
 <p>think of a teacher taking attendance. she doesn't call out "student number 0, student number 1" — she just goes "for each student in this room, call their name." she doesn't care about the position. she just wants to hit every person, one at a time, from start to finish. that's a foreach loop.</p>
 
@@ -349,7 +349,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Sum: "</span> + su
 
 <p>ok, we need to have a talk. while loops are a perfectly normal, fundamental part of Java. you'll use them in regular desktop and console programs. they're not bad. but in FRC robot code, they are effectively banned from periodic methods — and it's not an arbitrary rule somebody made up. it comes from a real, documented failure mode that has actually ended robots' matches at real competitions. let's understand what a while loop is, why it's useful normally, and why it's so dangerous in robot code specifically.</p>
 
-<h3 class="sub">what even IS a while loop?</h3>
+<h3 class="sub">while loops — and why they're banned</h3>
 
 <p>imagine doing dishes. you stand at the sink and keep washing while there are still dirty dishes. you don't know in advance how many dishes there are — you just keep going until there aren't any left. that's a while loop: you don't know the count up front, so you keep looping as long as some condition is true.</p>
 

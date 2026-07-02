@@ -29,7 +29,7 @@ next_title: "Week 7 — Advanced Classes"
 
 <p>that's inheritance. and once you understand it, every WPILib subsystem you've ever seen will suddenly make total sense.</p>
 
-<h3 class="sub">what even IS inheritance?</h3>
+<h3 class="sub">the inheritance mental model</h3>
 
 <p>think about a family tree. a kid inherits traits from their parents — eye color, height, maybe a stubborn streak. but they also have their own unique traits on top. the kid IS a person. the parent IS a person. but the kid is also their own specific individual with extra stuff the parent doesn't have.</p>
 
@@ -37,7 +37,7 @@ next_title: "Week 7 — Advanced Classes"
 
 <p>the whole point is code reuse. instead of writing the same <code>getName()</code> method in Dog, Cat, and Bird, you write it ONCE in Animal, and all three get it automatically. you fix a bug in Animal, it's fixed everywhere. you add a feature to Animal, every child class gets it for free. this is one of the big wins of object-oriented programming.</p>
 
-<div class="callout info"><p><strong>why does it matter in FRC?</strong> your entire robot codebase is built on inheritance. every subsystem you write extends <code>SubsystemBase</code>. every command you write extends <code>Command</code>. WPILib wrote those parent classes once, with all the framework plumbing built in, and you just build on top. without inheritance, you'd have to re-implement all of that plumbing from scratch every time you make a new subsystem. that would be awful.</p></div>
+<div class="callout info"><p>your entire robot codebase is built on inheritance. every subsystem you write extends <code>SubsystemBase</code>. every command you write extends <code>Command</code>. WPILib wrote those parent classes once, with all the framework plumbing built in, and you just build on top. without inheritance, you'd have to re-implement all of that plumbing from scratch every time you make a new subsystem. that would be awful.</p></div>
 
 <h3 class="sub">the vehicle analogy</h3>
 
@@ -314,7 +314,7 @@ shoot.<span class="fn">periodic</span>();  <span class="cmt">// "shooting: Shoot
 
 <p>you've been using abstract classes since the moment you wrote <code>extends Command</code>. now let's understand why.</p>
 
-<h3 class="sub">what even IS an abstract class?</h3>
+<h3 class="sub">abstract classes — the partial blueprint</h3>
 
 <p>imagine a paper form with some fields already filled in — like the date, the school name, the instructions at the top — and some fields that are intentionally left blank for you to fill in. the pre-filled fields are done. your job is the blanks. and critically: you cannot hand in an incomplete form. if you haven't filled in your name or answers, it's rejected.</p>
 
@@ -322,7 +322,7 @@ shoot.<span class="fn">periodic</span>();  <span class="cmt">// "shooting: Shoot
 
 <p>the key insight is: abstract classes let you say "here's a bunch of functionality I've already written for you, AND here's a list of things you must provide yourself." it's a partial blueprint that requires some customization before it's usable.</p>
 
-<div class="callout info"><p><strong>why does it matter in FRC?</strong> <code>Command</code> in WPILib is basically an abstract class. it has default implementations for <code>initialize()</code>, <code>execute()</code>, <code>end()</code>, and <code>isFinished()</code>. you pick which ones to override based on what your command needs to do. WPILib could have made some of them truly abstract (required to override), but it chose to give defaults so you only have to write what you care about. the pattern is the same though: parent provides structure, child fills in the details.</p></div>
+<div class="callout info"><p><code>Command</code> in WPILib is basically an abstract class. it has default implementations for <code>initialize()</code>, <code>execute()</code>, <code>end()</code>, and <code>isFinished()</code>. you pick which ones to override based on what your command needs to do. WPILib could have made some of them truly abstract (required to override), but it chose to give defaults so you only have to write what you care about. the pattern is the same though: parent provides structure, child fills in the details.</p></div>
 
 <h3 class="sub">abstract methods — the mandatory blanks</h3>
 
@@ -516,7 +516,7 @@ sa.<span class="fn">printStatus</span>();  <span class="cmt">// "Action: Stoppin
 
 <p>interfaces solve this. they let you layer in extra "capabilities" on top of whatever class hierarchy you already have, without the single-inheritance restriction.</p>
 
-<h3 class="sub">what even IS an interface?</h3>
+<h3 class="sub">interfaces — what you can do, not what you are</h3>
 
 <p>think of a job posting. the posting says "to get this job, you must be able to: write code, do code reviews, and attend stand-up meetings." it doesn't tell you HOW to write code or what your code review process looks like. it just says you MUST be able to do those things. you sign the offer letter, you're promising to fulfill that contract.</p>
 
@@ -524,7 +524,7 @@ sa.<span class="fn">printStatus</span>();  <span class="cmt">// "Action: Stoppin
 
 <p>the critical difference from abstract classes: interfaces define what a class <em>can do</em> (capabilities), not what it <em>is</em> (identity). <code>Loggable</code> is a capability. <code>SubsystemBase</code> is an identity. <code>Stoppable</code> is a capability. <code>Command</code> is an identity.</p>
 
-<div class="callout info"><p><strong>why does it matter in FRC?</strong> you can only extend one parent, but your subsystem might need to do multiple things that don't come from SubsystemBase. it might need to be loggable (send data to a custom logger). it might need to be stoppable (emergency stop behavior). it might need to be tunable (adjustable PID gains from dashboard). interfaces let you layer all of those capabilities onto a class that already has a parent.</p></div>
+<div class="callout info"><p>you can only extend one parent, but your subsystem might need to do multiple things that don't come from SubsystemBase. it might need to be loggable (send data to a custom logger). it might need to be stoppable (emergency stop behavior). it might need to be tunable (adjustable PID gains from dashboard). interfaces let you layer all of those capabilities onto a class that already has a parent.</p></div>
 
 <h3 class="sub">defining and implementing an interface</h3>
 

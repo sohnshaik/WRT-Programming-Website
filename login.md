@@ -115,7 +115,7 @@ no_auth_guard: true
           <input type="password" id="login-password" placeholder="••••••••" required>
         </div>
         <button class="auth-submit" type="submit" id="login-btn">sign in</button>
-        <p class="auth-note">forgot your password? ask (SLACK) sohan lol</p>
+        <p class="auth-note">forgot your password? use the <button type="button" style="background:none;border:none;color:inherit;text-decoration:underline;cursor:pointer;padding:0;font:inherit" onclick="sendPasswordReset()">reset link</button> or slack sohan / hrehaan</p>
       </form>
 
       <!-- Register form -->
@@ -135,7 +135,7 @@ no_auth_guard: true
         <div class="auth-field">
           <label>access code</label>
           <input type="text" id="reg-code" placeholder="ask your programming lead" required>
-          <p style="font-size:11px;color:#94a3b8;margin:4px 0 0">slack sohan for this please!!</p>
+          <p style="font-size:11px;color:#94a3b8;margin:4px 0 0">slack sohan or hrehaan for this :)</p>
         </div>
         <button class="auth-submit" type="submit" id="register-btn">create account</button>
       </form>
@@ -146,7 +146,7 @@ no_auth_guard: true
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 // !! ADD YOUR FIREBASE CONFIG HERE AFTER CREATING A PROJECT AT console.firebase.google.com
@@ -260,7 +260,22 @@ function friendlyError(code) {
     'auth/weak-password':       'password needs to be at least 6 characters',
     'auth/invalid-email':       'that email looks wrong :(',
     'auth/too-many-requests':   'too many attempts. wait a bit and try again',
+    'auth/invalid-credential':  'email or password is incorrect :(',
   };
   return map[code] || 'something went wrong: ' + code;
 }
+
+window.sendPasswordReset = async () => {
+  const email = document.getElementById('login-email').value.trim();
+  if (!email) {
+    showError('enter your email above first, then click the reset link :)');
+    return;
+  }
+  try {
+    await sendPasswordResetEmail(auth, email);
+    showSuccess('reset email sent!! check your inbox (and spam folder)');
+  } catch(err) {
+    showError(friendlyError(err.code));
+  }
+};
 </script>

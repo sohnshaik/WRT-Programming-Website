@@ -27,13 +27,13 @@ next_title: "Week 3 — Loops"
 
 <p>that might sound too simple to be useful, but booleans are actually the backbone of everything a robot does. every decision the robot makes — every "should i do this right now?" question — is a boolean under the hood. is the robot allowed to move? is the intake (the intake is the mechanism that picks up game pieces) holding something? has the shooter (the shooter launches game pieces into scoring targets) wheel spun up to speed? all booleans. all the time.</p>
 
-<h3 class="sub">what even IS a boolean?</h3>
+<h3 class="sub">the boolean mental model</h3>
 
 <p>ok so imagine you have a yes/no checklist. "is the robot enabled?" yes. "does the intake have a game piece (game pieces are the objects FRC robots pick up and score each season — changes every year)?" no. "is the shooter at target speed?" yes. each of those answers is exactly one bit of information — true or false. that's what a boolean is.</p>
 
 <p>at a hardware level, a boolean is literally just 1 bit of memory. the whole entire concept boils down to: is this bit a 1 (true) or a 0 (false)? everything your robot decides — every motion command, every state transition, every safety check — eventually collapses into a bunch of these yes/no decisions chained together.</p>
 
-<p><strong>why does it matter in FRC?</strong> your robot code is FULL of state. is the shooter running? is the limit switch pressed? is the robot in auto or teleop (teleop = the 2-minute period where drivers control the robot manually)? is the alliance station red or blue? every single one of those is a boolean. state machines (a design pattern where the robot switches between named modes like INTAKING, SHOOTING, IDLE) also rely on boolean-reliant things, known as triggers. state machines are one of the more complex things in FRC, so I won't burden y'all with that quite yet. (those who know)</p>
+<div class="callout tip"><p>your robot code is FULL of state. is the shooter running? is the limit switch pressed? is the robot in auto or teleop (teleop = the 2-minute period where drivers control the robot manually)? is the alliance station red or blue? every single one of those is a boolean. state machines (a design pattern where the robot switches between named modes like INTAKING, SHOOTING, IDLE) also rely on boolean-reliant things, known as triggers. state machines are one of the more complex things in FRC, so I won't burden y'all with that quite yet. (those who know)</p></div>
 
 <h3 class="sub">declaring a boolean</h3>
 
@@ -277,13 +277,13 @@ System.out.<span class="fn">println</span>(<span class="str">"shouldIntake: "</s
 
 <p>the idea is simple: "IF this condition is true, run this code. ELSE (otherwise), run this other code." Java reads your program line by line, and when it hits an <code>if</code>, it checks the condition. if the condition is <code>true</code>, it runs the block inside the braces. if the condition is <code>false</code>, it skips that block entirely.</p>
 
-<h3 class="sub">what even IS an if/else?</h3>
+<h3 class="sub">if/else — programs that make decisions</h3>
 
 <p>imagine a bouncer at the door of a venue. they have a guest list. for every person who walks up, they run through a mental checklist: "are you on the list? are you 18+? do you have valid ID?" if all conditions pass, you get in. otherwise, you don't. the bouncer isn't doing math or calculating anything complex — they're just checking yes/no conditions in order and branching based on the result.</p>
 
 <p>your Java program's if/else works exactly like that bouncer. you give it a boolean condition (the check), and it either runs the block inside (let them in) or skips it (turn them away). no guessing, no "maybe" — it's a clean binary branch.</p>
 
-<p><strong>why does it matter in FRC?</strong> every robot behavior is conditional. "if the shooter is at speed, allow firing." "if the sensor sees a game piece, stop the intake." "if we're in auto mode, run the preloaded trajectory." if you can't write if/else well, you literally can't program a robot. this is the single most important topic in week 2.</p>
+<div class="callout tip"><p>every robot behavior is conditional. "if the shooter is at speed, allow firing." "if the sensor sees a game piece, stop the intake." "if we're in auto mode, run the preloaded trajectory." if you can't write if/else well, you literally can't program a robot. this is the single most important topic in week 2.</p></div>
 
 <h3 class="sub">the simplest possible example</h3>
 
@@ -562,11 +562,11 @@ System.out.<span class="fn">println</span>(<span class="str">"shouldIntake: "</s
 
 <p>think about a vending machine. you press B3 and get chips. press B4, get water. press B5, get a soda. the machine doesn't check "is the code greater than B2? is it less than B6?" — it just looks at what you pressed and jumps straight to that slot. that's a switch.</p>
 
-<h3 class="sub">what even IS a switch statement?</h3>
+<h3 class="sub">switch — jump to the matching case</h3>
 
 <p>ok so here's the mental model. with if/else, you're running through a checklist one by one: check condition 1, nope, check condition 2, nope, check condition 3... you're evaluating multiple different expressions. a switch is different. you say "i have this ONE value, and i want to jump directly to whichever case matches." Java evaluates the variable once and routes to the matching case.</p>
 
-<p><strong>why does it matter in FRC?</strong> robot code often has a concept of "states" — the robot is either INTAKING, SHOOTING, CLIMBING, or IDLE. when you want different behavior for each state, a switch is much cleaner than a chain of if/else-if. you can look at a switch and immediately see every possible state and what happens in each one. it's way more readable at a glance.</p>
+<div class="callout tip"><p>robot code often has a concept of "states" — the robot is either INTAKING, SHOOTING, CLIMBING, or IDLE. when you want different behavior for each state, a switch is much cleaner than a chain of if/else-if. you can look at a switch and immediately see every possible state and what happens in each one. it's way more readable at a glance.</p></div>
 
 <h3 class="sub">the syntax, line by line</h3>
 
@@ -783,7 +783,7 @@ System.out.<span class="fn">println</span>(<span class="str">"shouldIntake: "</s
 
 <p>it's called "ternary" because it takes THREE operands: a condition, a value if true, and a value if false. most operators take one or two operands, so three is unusual — hence the special name.</p>
 
-<h3 class="sub">what even IS the ternary operator?</h3>
+<h3 class="sub">the ternary — a one-line if/else</h3>
 
 <p>ok so imagine someone asks you "hey, do you want pizza or tacos?" and you just say "pizza" or "tacos" — a quick yes/no pick between two options. that's the ternary. instead of writing a whole if/else block to choose between two values, you write it on one line:</p>
 
@@ -791,7 +791,7 @@ System.out.<span class="fn">println</span>(<span class="str">"shouldIntake: "</s
 
 <p>read it as: "is the condition true? if yes, give me valueIfTrue. if no, give me valueIfFalse."</p>
 
-<p><strong>why does it matter in FRC?</strong> you'll see ternaries constantly in robot code for compact value selection — picking a motor direction based on a flag, clamping a speed to 0 if disabled, selecting a string label for the dashboard. it keeps simple conditional assignments short and readable instead of taking up 5 lines for an if/else.</p>
+<div class="callout tip"><p>you'll see ternaries constantly in robot code for compact value selection — picking a motor direction based on a flag, clamping a speed to 0 if disabled, selecting a string label for the dashboard. it keeps simple conditional assignments short and readable instead of taking up 5 lines for an if/else.</p></div>
 
 <h3 class="sub">ternary vs if/else — they're equivalent</h3>
 

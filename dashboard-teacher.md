@@ -16,28 +16,36 @@ require_role: teacher
 .dash-stats { display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; }
 .dstat { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem 1.25rem; min-width: 120px; flex: 1; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
 .dstat-num   { font-size: 1.8rem; font-weight: 900; color: #1B2A4A; line-height: 1; }
-.dstat-label { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
+.dstat-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
 .tab-bar { display: flex; gap: 4px; margin: 1.5rem 0 0; border-bottom: 2px solid #e2e8f0; }
-.tab-btn { padding: 8px 18px; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; font-size: 13px; font-weight: 700; color: #94a3b8; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+.tab-btn { padding: 8px 18px; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; font-size: 13px; font-weight: 700; color: #64748b; cursor: pointer; font-family: inherit; transition: all 0.15s; }
 .tab-btn.active { color: #1B2A4A; border-bottom-color: #C41230; }
 .tab-panel { display: none; padding-top: 1.5rem; }
 .tab-panel.active { display: block; }
-.filter-bar { display: flex; gap: 10px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.filter-bar { display: flex; gap: 10px; margin-bottom: 1.25rem; flex-wrap: wrap; align-items: center; }
 .filter-input { padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 13px; font-family: inherit; outline: none; transition: border-color 0.15s; color: #1e293b; background: #fff; }
 .filter-input:focus { border-color: #C41230; }
+select.filter-input { -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 32px; }
 .student-table-wrap { overflow-x: auto; }
 table.score-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
 .score-table thead { background: #1B2A4A; }
 .score-table th { padding: 10px 14px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.7); text-align: left; white-space: nowrap; }
 .score-table td { padding: 9px 14px; border-bottom: 1px solid #f1f5f9; color: #475569; white-space: nowrap; }
-.score-table td:first-child { font-weight: 700; color: #1B2A4A; }
+.score-table td:first-child { font-weight: 700; color: #1B2A4A; position: sticky; left: 0; background: #fff; box-shadow: inset -1px 0 0 #e2e8f0; z-index: 1; }
+.score-table th:first-child { position: sticky; left: 0; background: #1B2A4A; z-index: 2; box-shadow: inset -1px 0 0 rgba(255,255,255,0.15); }
 .score-table tr:last-child td { border-bottom: none; }
 .score-table tr:hover td { background: #f8fafc; }
+.score-table tr:hover td:first-child { background: #f8fafc; }
+.table-empty { text-align: center; padding: 3rem 1rem; color: #64748b; font-size: 14px; }
 .score-cell { display: inline-block; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-family: monospace; font-size: 12px; }
-.sc-great { background: #f0fdf4; color: #166534; }
-.sc-ok    { background: #fefce8; color: #854d0e; }
-.sc-bad   { background: #fff1f2; color: #b91c1c; }
-.sc-none  { background: #f1f5f9; color: #94a3b8; }
+.sc-great { background: #dcfce7; color: #166534; }
+.sc-ok    { background: #fef9c3; color: #854d0e; }
+.sc-bad   { background: #ffe4e6; color: #b91c1c; }
+.sc-none  { background: #f1f5f9; color: #64748b; }
+.role-pill { display: inline-block; padding: 2px 9px; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
+.role-admin   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.role-leads   { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+.role-student { background: #f1f5f9; color: #334155; border: 1px solid #e2e8f0; }
 .view-answers-btn { padding: 4px 10px; background: #1B2A4A; color: #fff; border: none; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; white-space: nowrap; }
 .view-answers-btn:hover { background: #0f1c33; }
 .email-btn { padding: 4px 10px; background: #C41230; color: #fff; border: none; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; white-space: nowrap; text-decoration: none; display: inline-block; }
@@ -56,7 +64,7 @@ table.score-table { width: 100%; border-collapse: collapse; font-size: 13px; bac
 .ar-opt.sel-correct { background: #f0fdf4; color: #166534; border-color: #86efac; font-weight: 700; }
 .ar-opt.sel-wrong   { background: #fff1f2; color: #b91c1c; border-color: #fca5a5; font-weight: 700; }
 .ar-opt.answer-key  { background: #eff6ff; color: #1e40af; border-color: #93c5fd; }
-.ar-meta { font-size: 11px; color: #94a3b8; }
+.ar-meta { font-size: 11px; color: #64748b; }
 </style>
 
 <div class="dash-hero">
@@ -67,9 +75,9 @@ table.score-table { width: 100%; border-collapse: collapse; font-size: 13px; bac
 <div class="dash-shell">
   <div class="dash-stats">
     <div class="dstat"><div class="dstat-num" id="stat-students">...</div><div class="dstat-label">students</div></div>
-    <div class="dstat"><div class="dstat-num" id="stat-completed">...</div><div class="dstat-label">weeks completed</div></div>
+    <div class="dstat"><div class="dstat-num" id="stat-completed">...</div><div class="dstat-label">weeks done</div></div>
     <div class="dstat"><div class="dstat-num" id="stat-avgpct">...</div><div class="dstat-label">avg score</div></div>
-    <div class="dstat"><div class="dstat-num" id="stat-perfect">...</div><div class="dstat-label">100% scores</div></div>
+    <div class="dstat"><div class="dstat-num" id="stat-perfect">...</div><div class="dstat-label">perfect scores</div></div>
   </div>
 
   <div class="tab-bar">
@@ -90,7 +98,7 @@ table.score-table { width: 100%; border-collapse: collapse; font-size: 13px; bac
         <option value="summer-w7">W7 - Advanced</option><option value="summer-w8">W8 - Bridge</option>
         <option value="offseason-o1">O1 - Git</option><option value="offseason-o2">O2 - WPILib</option>
         <option value="offseason-o3">O3 - Commands</option><option value="offseason-o4">O4 - Motors</option>
-        <option value="offseason-o5">O5 - PID</option><option value="offseason-o6">O6 - Autonomous</option>
+        <option value="offseason-o5">O5 - PID</option><option value="offseason-o6">O6 - Choreo</option>
         <option value="offseason-o7">O7 - Subsystem</option><option value="offseason-o8">O8 - Build</option>
       </select>
       <button class="export-btn" onclick="exportCSV()">export CSV</button>
@@ -202,6 +210,10 @@ function renderTable(students) {
   const wks = fw ? WEEKS.filter(w => w.id === fw) : WEEKS;
   document.getElementById('table-head').innerHTML =
     '<tr><th>name</th><th>email</th>' + wks.map(w=>`<th>${w.label}</th>`).join('') + '<th>avg</th><th></th></tr>';
+  if (students.length === 0) {
+    document.getElementById('table-body').innerHTML = `<tr><td colspan="${wks.length + 3}" class="table-empty">no students match your filter</td></tr>`;
+    return;
+  }
   document.getElementById('table-body').innerHTML = students.map(s => {
     const cells = wks.map(w => {
       const sc = s.weeks[w.id];
@@ -227,7 +239,7 @@ function renderUsersTable() {
     <tr>
       <td>${u.name||'—'}</td>
       <td style="font-size:12px;color:#64748b">${u.email||'—'}</td>
-      <td><span class="score-cell ${u.role==='admin'?'sc-great':u.role==='leads'?'sc-ok':'sc-none'}">${u.role||'student'}</span></td>
+      <td><span class="role-pill ${u.role==='admin'?'role-admin':u.role==='leads'?'role-leads':'role-student'}">${u.role||'student'}</span></td>
       <td style="font-size:12px;color:#94a3b8">${u.createdAt?new Date(u.createdAt).toLocaleDateString():'—'}</td>
       <td>${u.email?`<a class="email-btn" href="mailto:${u.email}">email</a>`:'—'}</td>
     </tr>`).join('');

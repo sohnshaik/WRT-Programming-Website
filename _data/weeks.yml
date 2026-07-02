@@ -81,8 +81,8 @@ offseason:
     phase: offseason
   - num: 6
     slug: os-week6
-    title: "Autonomous & PathPlanner"
-    subtitle: "Auto sequences, field coordinates, odometry, PathPlanner"
+    title: "Autonomous & Choreo"
+    subtitle: "Auto sequences, field coordinates, odometry, Choreo path following"
     badge: "Offseason · Week 6 of 8"
     phase: offseason
   - num: 7

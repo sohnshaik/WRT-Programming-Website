@@ -137,6 +137,14 @@
       border-radius: 3px; transform-origin: left; transition: transform 0.4s ease;
     }
   }
+  .sch-progress-signout {
+    margin-top: 4px;
+    .sp-signin-hint {
+      font-size: 11px; color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      &:hover { color: rgba(255,255,255,0.7); }
+    }
+  }
 }
 
 .nav-group { border-bottom: 1px solid rgba(255,255,255,0.05); }

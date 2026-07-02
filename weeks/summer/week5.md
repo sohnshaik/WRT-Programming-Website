@@ -30,7 +30,7 @@ next_title: "Week 6 — Inheritance & Polymorphism"
 
 <p>here's the single most important concept in this entire course: a <strong>class</strong> is a blueprint. an <strong>object</strong> is one specific thing you built from that blueprint. you write the class once. you can create as many objects from it as you want, and each one is completely independent from the others.</p>
 
-<h3 class="sub">what even IS the class/object distinction?</h3>
+<h3 class="sub">class vs object — the blueprint and the thing</h3>
 
 <p>ok let's start with the cookie cutter analogy because it's genuinely the best one. a cookie cutter is just a piece of metal bent into a shape — a star, a gingerbread man, whatever. the cutter itself doesn't taste like anything. it doesn't have sprinkles. it just defines the shape. every cookie you actually cut out IS a cookie — it exists in the real world and it's its own separate thing. you can frost one cookie and leave the others plain. you can eat one and the rest are fine. changing one cookie does nothing to any other cookie.</p>
 
@@ -542,7 +542,7 @@ System.out.<span class="fn">println</span>(s.<span class="fn">isReadyToShoot</sp
 
 <p>you learned how to write methods in week 4. now they're inside a class, which makes them <strong>instance methods</strong> — methods that belong to a specific object and can directly access that object's private fields. this is where everything comes together.</p>
 
-<h3 class="sub">what even IS an instance method?</h3>
+<h3 class="sub">instance methods — behavior that belongs to an object</h3>
 
 <p>in week 4, some methods had the <code>static</code> keyword — <code>Math.abs(-5)</code>, <code>Math.max(a, b)</code>. you called those on the CLASS directly, no object needed. <code>static</code> methods are just utility functions that belong to the class as a whole, not to any particular object. they can't access fields because there's no "this object" when you call them.</p>
 

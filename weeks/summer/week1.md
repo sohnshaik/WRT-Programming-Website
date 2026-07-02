@@ -2,6 +2,8 @@
 layout: week
 title: "The Basics"
 subtitle: "Variables, data types, operators, scope, and writing code other people can actually read."
+description: "Week 1 of WRT's Java course: variables, data types, operators, scope, naming conventions, type casting, and comments."
+reading_time: "~45 min"
 badge: "Summer · Week 1 of 8"
 phase: summer
 phase_label: Summer
@@ -25,15 +27,15 @@ next_title: "Week 2 — Logic & Control Flow"
 
 <p>ok so before we write a single line of robot code, we need to talk about the most fundamental thing in all of programming: <strong>variables</strong>. if you've never programmed before, don't worry — this is actually pretty intuitive once you have the right mental model for it.</p>
 
-<h3 class="sub">what even IS a variable?</h3>
+<h3 class="sub">the mental model</h3>
 
-<p>imagine you're making a sandwich and you need to remember how many slices of bread you have left. you'd probably just... hold that number in your head. your brain grabs a little chunk of memory and stashes the number there so you can use it later. a variable is exactly that — it's a <strong>named slot in your computer's memory</strong> where you can stash a value and pull it back out whenever you need it.</p>
+<p>imagine you're making a sandwich and you need to remember how many slices of bread you have left. you'd probably just hold that number in your head. your brain grabs a little chunk of memory and stashes the number there so you can use it later. a variable is exactly that: a <strong>named slot in your computer's memory</strong> where you can stash a value and pull it back out whenever you need it.</p>
 
-<p>think of it like a labeled box. you write a name on the outside of the box (that's the variable name), you decide what kind of thing goes inside (that's the type), and then you put something in it (that's the value). later, whenever you need that value, you just look at the box with that name on it.</p>
+<p>think of it like a labeled box. you write a name on the outside (the variable name), decide what kind of thing goes inside (the type), and put something in it (the value). later, whenever you need that value, you just look at the box with that name on it.</p>
 
 <div class="callout info"><p><strong>what's RAM?</strong> when your program runs, Java grabs a chunk of your computer's RAM (random access memory) to work with. RAM is super fast but temporary — it only exists while the program is running. every variable you declare takes up a little piece of that RAM. when the robot reboots, poof, it's all gone. that's totally fine for us, because the robot starts fresh every time anyway.</p></div>
 
-<p><strong>why does it matter in FRC?</strong> your robot needs to remember TONS of stuff at once — what speed the motor is running at, whether a button is being pressed, what the encoder (an encoder is a sensor that measures how far a motor shaft has rotated) is reading, what subsystem (a subsystem is one distinct part of the robot — intake, drivetrain, shooter, etc. — represented as a class) is active. every single one of those is a variable. you literally cannot write robot code without them.</p>
+<p>in robot code, variables are everywhere. your robot needs to track what speed each motor is running at, whether a button is currently pressed, what the encoder is reading (an encoder measures how far a motor shaft has rotated), and which subsystem (a distinct part of the robot — intake, drivetrain, shooter — represented as a class) is active. every single one of those is a variable. you cannot write robot code without them.</p>
 
 <h3 class="sub">declaring a variable</h3>
 
@@ -102,7 +104,7 @@ kMotorID = <span class="num">6</span>;  <span class="cmt">// COMPILE ERROR: cann
 
 <p>there are actually tons of types in Java, but these four are what you'll use 95% of the time in robot code. memorize them:</p>
 
-<table>
+<div class="table-scroll"><table>
 <thead><tr><th>Type</th><th>Category</th><th>What it holds</th><th>FRC use case</th></tr></thead>
 <tbody>
 <tr><td><code>int</code></td><td>Primitive</td><td>Whole numbers only (-2 billion to +2 billion)</td><td>Motor CAN IDs, encoder ticks, loop counters, game piece counts</td></tr>
@@ -110,7 +112,7 @@ kMotorID = <span class="num">6</span>;  <span class="cmt">// COMPILE ERROR: cann
 <tr><td><code>boolean</code></td><td>Primitive</td><td><code>true</code> or <code>false</code>, that's it</td><td>Limit switch state, "is shooter at speed?", "did autonomous finish?", button state</td></tr>
 <tr><td><code>String</code></td><td>Non-primitive</td><td>Any text, any length</td><td>Shuffleboard widget labels, log messages, error descriptions, subsystem names</td></tr>
 </tbody>
-</table>
+</table></div>
 
 <div class="callout info"><p><strong>primitive vs object — what's the difference?</strong> primitives (<code>int</code>, <code>double</code>, <code>boolean</code>) are raw values stored directly in memory — super simple, super fast. non-primitives like <code>String</code> are objects, which means they're more complex under the hood and come with built-in methods (<code>name.length()</code>, <code>name.toLowerCase()</code>, etc). the distinction matters more once we hit OOP week, but just know: <code>String</code> with a capital S is special compared to the lowercase primitives.</p></div>
 
@@ -144,24 +146,7 @@ kMotorID = <span class="num">6</span>;  <span class="cmt">// COMPILE ERROR: cann
 
 <div class="callout warning"><p><strong>common beginner gotcha:</strong> just because an instance variable <em>can</em> default to 0 or false doesn't mean you should rely on that. always initialize your variables explicitly. it makes your code way clearer and prevents subtle bugs where you forget to set something and it silently uses 0 or null when you didn't expect it.</p></div>
 
-<h3 class="sub">bad names vs good names</h3>
-
-<p>one more thing before the quiz — naming matters a LOT. here's a side-by-side that shows why:</p>
-
-<div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — bad vs good names</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
-<pre><span class="cmt">// BAD — what does any of this mean? you have no idea</span>
-<span class="type">double</span> x1 = <span class="num">0.8</span>;
-<span class="type">int</span> y = <span class="num">3</span>;
-<span class="type">boolean</span> f = <span class="kw">true</span>;
-<span class="type">String</span> s = <span class="str">"thing"</span>;
-
-<span class="cmt">// GOOD — completely self-documenting, no guessing required</span>
-<span class="kw">final</span> <span class="type">double</span>  kMaxShooterSpeed    = <span class="num">0.8</span>;    <span class="cmt">// k prefix = constant</span>
-<span class="kw">final</span> <span class="type">int</span>     kShooterMotorID     = <span class="num">3</span>;      <span class="cmt">// immediately obvious what this is</span>
-<span class="type">boolean</span> m_isShooterEnabled  = <span class="kw">true</span>;   <span class="cmt">// m_ prefix = member variable</span>
-<span class="type">String</span>  m_subsystemName     = <span class="str">"Shooter"</span>; <span class="cmt">// no mystery here</span></pre>
-</div>
+<div class="callout tip"><p>naming your variables well is one of the most important skills you'll pick up in this course. we go deep on this in <strong>topic 3</strong>, including the specific prefixes (<code>k</code>, <code>m_</code>) your code must use on this team.</p></div>
 
 <h3 class="sub">Topic 1 — Coding Prompt</h3>
 <div class="challenge">
@@ -193,11 +178,11 @@ kMotorID = <span class="num">6</span>;  <span class="cmt">// COMPILE ERROR: cann
 
 <p>operators are just symbols that let you <em>do stuff</em> with values — add them, subtract them, compare them, combine them. you already know most of these from math class. a few have Java-specific twists that are worth knowing cold because they cause real bugs if you don't.</p>
 
-<h3 class="sub">what even IS an operator?</h3>
+<h3 class="sub">ok so what are these, exactly</h3>
 
-<p>think of an operator like a tiny machine that takes values in and spits a result out. the <code>+</code> operator takes two numbers and gives you their sum. the <code>></code> operator takes two numbers and gives you a yes/no answer about which is bigger. that's really all it is.</p>
+<p>an operator is a tiny machine that takes values in and spits a result out. the <code>+</code> operator takes two numbers and gives you their sum. the <code>></code> operator takes two numbers and gives you a yes/no answer about which is bigger. that's really all it is.</p>
 
-<p><strong>why does it matter in FRC?</strong> literally every calculation on the robot uses operators — converting encoder ticks to rotations, clamping motor speeds to safe ranges, figuring out if a sensor reading crossed a threshold. if you don't understand integer division and modulo, you WILL introduce bugs in your first week of writing real robot code.</p>
+<p>in robot code, operators are literally everywhere: converting encoder ticks to rotations, clamping motor speeds to safe ranges, checking if a sensor reading crossed a threshold. if you don't understand integer division and modulo in particular, you will introduce bugs in your first week of writing real robot code.</p>
 
 <h3 class="sub">arithmetic operators</h3>
 
@@ -355,13 +340,13 @@ count--;  <span class="cmt">// count is now 1 — shorthand for count = count - 
 
 <p>two of the most important "invisible" concepts in programming — you can't see scope in the output of your program, and naming doesn't affect whether the code runs. but both of them will absolutely destroy you if you ignore them when working on a team.</p>
 
-<h3 class="sub">what even IS scope?</h3>
+<h3 class="sub">rooms and doors — the scope analogy</h3>
 
-<p>imagine your house has rooms. stuff you bring into the kitchen — a cup, a bowl, some cereal — only exists in the kitchen. you can't take a kitchen cup into the bedroom just by thinking about it; you'd have to explicitly carry it through the door. scope is the same idea: a variable only exists in the <strong>room (block of code)</strong> where it was created.</p>
+<p>imagine your house has rooms. stuff you bring into the kitchen (a cup, a bowl, some cereal) only exists in the kitchen. you can't take a kitchen cup into the bedroom just by thinking about it; you'd have to explicitly carry it through the door. scope is the same idea: a variable only exists in the <strong>block of code</strong> where it was created.</p>
 
-<p>in Java, "rooms" are defined by curly braces <code>{ }</code>. anything declared inside a pair of curly braces only exists within those curly braces. once execution leaves that block, the variable is gone — Java frees up that memory automatically.</p>
+<p>in Java, blocks are defined by curly braces <code>{ }</code>. anything declared inside a pair of curly braces only exists within those curly braces. once execution leaves that block, the variable is gone. Java frees up that memory automatically.</p>
 
-<p><strong>why does it matter in FRC?</strong> "cannot find symbol" is one of the most common compile errors beginners hit, and it almost always means you tried to use a variable outside the scope where it was declared. understanding scope lets you read that error immediately and know exactly where the fix goes.</p>
+<p>"cannot find symbol" is one of the most common compile errors beginners hit, and it almost always means you tried to use a variable outside the scope where it was declared. once you understand scope, you can read that error immediately and know exactly where the fix goes.</p>
 
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
@@ -451,7 +436,7 @@ count--;  <span class="cmt">// count is now 1 — shorthand for count = count - 
 <span class="type">boolean</span> m_isShooterEnabled          = <span class="kw">true</span>;</pre>
 </div>
 
-<table>
+<div class="table-scroll"><table>
 <thead><tr><th>What it is</th><th>Convention</th><th>Example</th></tr></thead>
 <tbody>
 <tr><td>Local variable or parameter</td><td>camelCase</td><td><code>targetSpeed</code>, <code>motorId</code>, <code>angleRad</code></td></tr>
@@ -460,7 +445,7 @@ count--;  <span class="cmt">// count is now 1 — shorthand for count = count - 
 <tr><td>Class name</td><td>PascalCase</td><td><code>ShooterSubsystem</code>, <code>DriveCommand</code>, <code>Constants</code></td></tr>
 <tr><td>Method name</td><td>camelCase</td><td><code>setSpeed()</code>, <code>getPosition()</code>, <code>isAtTarget()</code></td></tr>
 </tbody>
-</table>
+</table></div>
 
 <div class="callout warning"><p><strong>unit suffixes:</strong> on WRT, we often put units directly in constant names — <code>kMaxSpeed_mps</code> (meters per second), <code>kArmLength_in</code> (inches), <code>kAngle_deg</code> (degrees). this sounds like overkill until you're trying to debug why your robot is driving 3x too fast because someone mixed up meters and feet. the suffix makes unit conversion bugs immediately obvious.</p></div>
 
@@ -473,13 +458,13 @@ count--;  <span class="cmt">// count is now 1 — shorthand for count = count - 
 
 <p>sometimes you have a value stored as one type and you need it in another type. like you have a speed in <code>int</code> form but the motor library expects a <code>double</code>. or you have a precise <code>double</code> position and you want a whole-number count of full rotations. converting between types is called <strong>type casting</strong>.</p>
 
-<h3 class="sub">what even IS type casting?</h3>
+<h3 class="sub">before the syntax, the idea</h3>
 
-<p>picture pouring water between containers. if you pour from a small cup into a large bucket, all the water makes it — nothing lost. that's widening conversion. but if you try to pour from a large bucket into a small cup, the cup can only hold so much — some water spills on the floor and is gone forever. that's narrowing conversion.</p>
+<p>picture pouring water between containers. if you pour from a small cup into a large bucket, all the water makes it (nothing lost). that's widening conversion. but if you pour from a large bucket into a small cup, the cup can only hold so much and some water spills on the floor. that's narrowing conversion.</p>
 
-<p>in Java: going from a smaller type (like <code>int</code>) to a larger type (like <code>double</code>) is widening — no information is lost, Java does it automatically. going from a larger type (<code>double</code>) to a smaller type (<code>int</code>) is narrowing — you LOSE the decimal part, and Java forces you to explicitly say you're okay with that.</p>
+<p>in Java: going from a smaller type (like <code>int</code>) to a larger type (like <code>double</code>) is widening. no information is lost and Java does it automatically. going from a larger type (<code>double</code>) to a smaller type (<code>int</code>) is narrowing. you LOSE the decimal part, and Java forces you to explicitly say you're okay with that.</p>
 
-<p><strong>why does it matter in FRC?</strong> you're constantly moving data between sensor readings (often <code>double</code>), loop counters (<code>int</code>), motor inputs (<code>double</code>), and display strings (<code>String</code>). knowing when Java will auto-convert and when you need to be explicit — and knowing what gets lost — prevents real runtime bugs.</p>
+<p>in robot code you're constantly moving data between sensor readings (often <code>double</code>), loop counters (<code>int</code>), motor inputs (<code>double</code>), and display strings (<code>String</code>). knowing when Java will auto-convert and when you need to be explicit prevents real runtime bugs.</p>
 
 <h3 class="sub">widening vs narrowing</h3>
 
@@ -613,13 +598,13 @@ count--;  <span class="cmt">// count is now 1 — shorthand for count = count - 
 
 <p>last topic of week 1! this is about the structure of Java files and how to write code that other humans (and future you) can actually understand.</p>
 
-<h3 class="sub">what even IS a comment, and why bother?</h3>
+<h3 class="sub">sticky notes for future you (and everyone else)</h3>
 
-<p>a comment is text in your code that the compiler completely ignores — it's purely there for humans to read. think of it like sticky notes you leave on your code explaining what's going on.</p>
+<p>a comment is text in your code that the compiler completely ignores. it's purely there for humans to read, like sticky notes you leave explaining what's going on.</p>
 
-<p>here's the scenario: it's 1am at a regional. your robot is broken. some subsystem has weird behavior in autonomous and no one knows why. the programmer who wrote that code graduated last year. the code has zero comments. the variable names are <code>x1</code>, <code>y</code>, and <code>val2</code>. nobody can fix it in time. that's the horror story that motivates good commenting habits.</p>
+<p>here's the scenario: it's 1am at a regional. your robot is broken. some subsystem has weird behavior in autonomous and no one knows why. the programmer who wrote it graduated last year. the code has zero comments. the variable names are <code>x1</code>, <code>y</code>, and <code>val2</code>. nobody can fix it in time. that's the actual horror story that motivates good commenting habits.</p>
 
-<p><strong>why does it matter in FRC?</strong> FRC is a team sport. other people WILL read your code. you WILL read your own code six months later and have no memory of what you were thinking. comments are how you leave a trail of breadcrumbs for everyone who comes after you — including yourself.</p>
+<p>FRC is a team sport. other people will read your code. you will read your own code six months later with zero memory of what you were thinking. comments are how you leave a trail of breadcrumbs for everyone who comes after you, including yourself.</p>
 
 <h3 class="sub">the three comment types</h3>
 
@@ -754,24 +739,11 @@ count--;  <span class="cmt">// count is now 1 — shorthand for count = count - 
     <ol>
       <li><strong>install VS Code</strong> if you don't have it → <a href="https://code.visualstudio.com" target="_blank" rel="noopener noreferrer">code.visualstudio.com</a></li>
       <li><strong>install the Java extension:</strong> open VS Code → press <kbd>Ctrl+Shift+X</kbd> → search <code>Extension Pack for Java</code> → Install</li>
-      <li><strong>get the project folder:</strong>
-        <ul>
-          <li><em>if you have a repo link:</em> open a terminal (<kbd>Ctrl+`</kbd> in VS Code) and run <code>git clone [URL of the repository that you made] minibot-project</code></li>
-          <li><em>if starting from scratch:</em> create a new folder called <code>minibot-project</code> anywhere on your computer</li>
-        </ul>
-      </li>
+      <li><strong>create a GitHub repository for your project:</strong> follow the instructions in this doc :D <a href="https://docs.google.com/document/d/1RONII6XiNW-G7-xRZELJVoiIMVbDhLi5nUja9T_fLfI/edit?usp=sharing" target="_blank" rel="noopener noreferrer">GitHub Setup Guide</a></li>
+      <li><strong>clone it to your computer:</strong> open a terminal (<kbd>Ctrl+`</kbd> in VS Code) and run <code>git clone [URL of your new repo] minibot-project</code></li>
       <li><strong>open the folder in VS Code:</strong> File → Open Folder → select <code>minibot-project</code></li>
-      <li><strong>create a Github repository for your project:</strong> follow the instructions on this google doc :D <a href="https://docs.google.com/document/d/1RONII6XiNW-G7-xRZELJVoiIMVbDhLi5nUja9T_fLfI/edit?usp=sharing" target="_blank" rel="noopener no referrer">GitHub Setup Guide</a>
-        <ul>
-          <li><strong>things to note:</strong>
-            <ul>
-            <li>you should be commiting very periodically — either whenever something major is working, you're finished with your week, or if you're leaving ur desktop/laptop, you get the gist.</li>
-            <li>use commit names that are meaningful, rather than just random sentences that don't have meaning to others (like sometimes i use).</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
     </ol>
+    <p><strong>commit often</strong> — whenever something major is working, at the end of each week, or before you close your laptop. use commit messages that mean something to a teammate reading them cold.</p>
     <p>now create <code>Constants.java</code> directly inside your <code>minibot-project</code> folder. this is the foundation of your entire MiniBot project — every magic number in your robot code lives here, named and typed properly so nothing is mysterious to anyone reading it later.</p>
     <ul>
       <li>Create two <code>public static final class</code> inner classes: <code>DriveK</code> and <code>ShooterK</code></li>
@@ -789,7 +761,7 @@ count--;  <span class="cmt">// count is now 1 — shorthand for count = count - 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
 <h2 class="sh" id="weekly-test">Weekly Test</h2>
-<p>covers everything from week 1. a bit longer than the topic quizzes and your score gets sent to the leads :) try it without looking back at the content first!!</p>
+<p>covers everything from week 1. longer than the topic quizzes. try it without looking back at the material first, then use it to find gaps. your first attempt score gets sent to the leads as a learning signal (not a grade :)</p>
 <div class="weekly-test-block">
   <div class="wt-header">
     <div class="wt-icon"><i data-lucide="clipboard-list"></i></div>

@@ -4,15 +4,16 @@ layout: default
 
 <div class="page-hero">
   <div class="ph-breadcrumb">
-    <a href="{{ '/' | relative_url }}">Home</a>
+    <a href="{{ '/' | relative_url }}">home</a>
     <span>/</span>
-    <a href="#">{{ page.phase_label }}</a>
+    <a href="{{ '/training' | relative_url }}#{{ page.phase }}">{{ page.phase_label | downcase }}</a>
     <span>/</span>
-    <span>{{ page.week_label }}</span>
+    <span>{{ page.week_label | downcase }}</span>
   </div>
   <div class="ph-badge badge-{{ page.phase }}">{{ page.badge }}</div>
   <h1>{{ page.title }}</h1>
   <p>{{ page.subtitle }}</p>
+  {% if page.reading_time %}<div class="ph-reading-time">⏱ {{ page.reading_time }}</div>{% endif %}
   {% if page.topics %}
   <div class="ph-topics">
     {% for topic in page.topics %}
@@ -24,30 +25,6 @@ layout: default
 </div>
 
 <div class="week-layout{% unless page.topics %} week-layout--notopics{% endunless %}">
-
-  {% if page.topics %}
-  <nav class="topic-nav" id="topic-nav">
-    <div class="tn-header">this week</div>
-    <ul class="tn-list">
-      {% for topic in page.topics %}
-      <li>
-        <a class="tn-link" href="#topic-{{ forloop.index }}" data-tn="{{ forloop.index }}">
-          <span class="tn-num">{{ forloop.index }}</span>
-          <span class="tn-label">{{ topic }}</span>
-        </a>
-      </li>
-      {% endfor %}
-      {% if page.weekly_test %}
-      <li>
-        <a class="tn-link tn-test" href="#weekly-test" data-tn="test">
-          <span class="tn-num"><i data-lucide="clipboard-list"></i></span>
-          <span class="tn-label">Weekly Test</span>
-        </a>
-      </li>
-      {% endif %}
-    </ul>
-  </nav>
-  {% endif %}
 
   <div class="content-wrap">
     <div id="week-screens-wrap">

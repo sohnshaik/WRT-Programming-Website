@@ -2,7 +2,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1B2A4A">
-<meta name="description" content="{% if page.subtitle %}{{ page.subtitle }}{% else %}{{ site.description }}{% endif %}">
+<meta name="description" content="{% if page.description %}{{ page.description }}{% elsif page.subtitle %}{{ page.subtitle }}{% else %}{{ site.description }}{% endif %}">
 <meta name="author" content="{{ site.author.name }}">
 
 <!-- Title -->
@@ -16,14 +16,14 @@
 <meta property="og:type"        content="website">
 <meta property="og:site_name"   content="{{ site.title }}">
 <meta property="og:title"       content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-<meta property="og:description" content="{% if page.subtitle %}{{ page.subtitle }}{% else %}{{ site.description }}{% endif %}">
+<meta property="og:description" content="{% if page.description %}{{ page.description }}{% elsif page.subtitle %}{{ page.subtitle }}{% else %}{{ site.description }}{% endif %}">
 <meta property="og:url"         content="{{ page.url | absolute_url }}">
 <meta property="og:image"       content="{{ '/assets/images/logo.jpeg' | absolute_url }}">
 
 <!-- Twitter Card -->
 <meta name="twitter:card"        content="summary">
 <meta name="twitter:title"       content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-<meta name="twitter:description" content="{% if page.subtitle %}{{ page.subtitle }}{% else %}{{ site.description }}{% endif %}">
+<meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% elsif page.subtitle %}{{ page.subtitle }}{% else %}{{ site.description }}{% endif %}">
 
 <!-- Jekyll SEO tag (handles canonical, structured data, etc.) -->
 {% seo %}

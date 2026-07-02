@@ -19,7 +19,7 @@ no_auth_guard: true
 <h2 class="sh">naming conventions</h2>
 <p>we use specific prefixes so you can tell what kind of thing a variable is just by looking at its name. no guessing required.</p>
 
-<table>
+<div class="table-scroll"><table>
 <thead><tr><th>prefix</th><th>what it's for</th><th>example</th></tr></thead>
 <tbody>
 <tr><td>k</td><td>constants (final static values, usually in a Constants.java nested class)</td><td><code>kShooterMotorID</code>, <code>kMaxTranslationSpeed_mps</code></td></tr>
@@ -28,7 +28,7 @@ no_auth_guard: true
 <tr><td>log_</td><td>logging/telemetry objects (AdvantageKit, DataLog)</td><td><code>log_robotPose</code>, <code>log_shooterRPM</code></td></tr>
 <tr><td>sig_</td><td>Phoenix 6 StatusSignal objects</td><td><code>sig_velocity</code>, <code>sig_appliedVolts</code></td></tr>
 </tbody>
-</table>
+</table></div>
 
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java — naming in practice</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
@@ -229,7 +229,7 @@ m_controller.setSetpoint(ShooterK.kShootRPS);</pre>
 <h2 class="sh">git conventions</h2>
 <p>check O1 for the full git workflow. these are the non-negotiables:</p>
 
-<table>
+<div class="table-scroll"><table>
 <thead><tr><th>rule</th><th>why</th></tr></thead>
 <tbody>
 <tr><td>never commit directly to <code>main</code></td><td>main = always working. one bad push during competition is a crisis</td></tr>
@@ -237,7 +237,7 @@ m_controller.setSetpoint(ShooterK.kShootRPS);</pre>
 <tr><td>keep PRs small and focused</td><td>one feature per PR. giant PRs are painful to review and silently break things</td></tr>
 <tr><td>needs at least one approval</td><td>one of our mentors (Steve or Banks) reviews before merging to main</td></tr>
 </tbody>
-</table>
+</table></div>
 
 <h2 class="sh">WPILib 2026 notes</h2>
 <p>WPILib updates every year and things get deprecated. here's what matters for 2026:</p>
@@ -289,11 +289,11 @@ m_controller.setSetpoint(ShooterK.kShootRPS);</pre>
   <div class="concept-card">
     <div class="cc-label">deployment</div>
     <div class="cc-title">different image process</div>
-    <div class="cc-desc">System Core has a different imaging/flashing process than roboRIO. there will be a team doc on this before build season. don't wing it at comp when ur helping other teams</div>
+    <div class="cc-desc">System Core has a different imaging/flashing process than roboRIO. there will be a team doc on this before build season. don't wing it at comp when you're helping other teams</div>
   </div>
 </div>
 
-<div class="callout warning"><p><strong>don't stress about this now.</strong> other teams are still on roboRIO for 2026, while we will be on systemcore because ~~we're just that goated~~ we're a beta testig team. learn the current stack well first — the concepts transfer directly. System Core is just new hardware underneath the same WPILib you already know.</p></div>
+<div class="callout warning"><p><strong>don't stress about this now.</strong> other teams are still on roboRIO for 2026, while we will be on systemcore because ~~we're just that goated~~ we're a beta testing team. learn the current stack well first — the concepts transfer directly. System Core is just new hardware underneath the same WPILib you already know.</p></div>
 
 <h2 class="sh">pre-PR checklist</h2>
 <p>run through this before opening a pull request. if you can't check all of these, fix it first!!</p>

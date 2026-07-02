@@ -15,7 +15,7 @@ page_id: home
         <h1>WRT Java &amp; FRC Course</h1>
         <div class="cdb-season">Walton Robotics · Team 2974 · {{ site.season }}</div>
       </div>
-      <div class="cdb-progress">
+      <div class="cdb-progress" id="home-progress-ui" style="display:none">
         <span class="cdbp-label sp-pct-text">0%</span>
         <div class="cdbp-track"><div class="cdbp-fill sp-fill" style="transform:scaleX(0)"></div></div>
         <span class="cdbp-count"><span id="dash-completed">0</span>/16</span>
@@ -53,14 +53,13 @@ page_id: home
           <div class="lc-body">
             <div class="lc-role">Chief Programmer</div>
             <div class="lc-name">Sohan Shaik</div>
-            <div class="lc-bio">Hey!! I'm Sohan, the Chief Programmer, Software Lead, or whatever you want to call it, for team 2974. I've been lucky enough to be coding FRC robots since sophomore year and it's lowkey taken up a whoooleeee lot of my time, and fortunately, programming (not the idea but the people around me from programming) is my personality at this point lol. Little bit about me: I love music!! music is life to me and without it I don't think i would be much of a person. of course, i love robotics as a whole, and it does unfortuantely take up a lot of my time, but when im free, i love to read; whether it be manwha, manga, or just a long sci-fi novel — i'll read it all. i also am a very big boba person; specifically thai tea boba :D, and i also love castella cakes. gl and i hope y'all will reach out with questions! &lt;3 (srsly tho please ask questions i wish i did so so so much)</div>
+            <div class="lc-bio">Hey!! I'm Sohan, the Chief Programmer, Software Lead, or whatever you want to call it, for team 2974. I've been lucky enough to be coding FRC robots since sophomore year and it's lowkey taken up a whoooleeee lot of my time, and fortunately, programming (not the idea but the people around me from programming) is my personality at this point lol. Little bit about me: I love music!! music is life to me and without it I don't think i would be much of a person. of course, i love robotics as a whole, and it does unfortunately take up a lot of my time, but when im free, i love to read; whether it be manwha, manga, or just a long sci-fi novel — i'll read it all. i also am a very big boba person; specifically thai tea boba :D, and i also love castella cakes. gl and i hope y'all will reach out with questions! &lt;3 (srsly tho please ask questions i wish i did so so so much)</div>
           </div>
         </div>
 
         <div class="lead-card">
           <div class="lc-video-wrap">
             <div class="lc-video-placeholder" data-slot="3">
-              <div class="lv-icon">▶</div>
               <div class="lv-name">Assistant Chief Programmer</div>
               <div class="lv-sub">video coming soon :)</div>
             </div>
@@ -75,7 +74,6 @@ page_id: home
         <div class="lead-card">
           <div class="lc-video-wrap">
             <div class="lc-video-placeholder" data-slot="2">
-              <div class="lv-icon">▶</div>
               <div class="lv-name">Programming Lead</div>
               <div class="lv-sub">video coming soon :)</div>
             </div>
