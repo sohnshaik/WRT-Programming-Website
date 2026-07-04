@@ -1012,16 +1012,10 @@ textarea.code-input {
   50%       { transform: translateY(5px); }
 }
 
-// ── Week layout (canvas-style) ────────────────────────────────────────────────
+// ── Week layout ───────────────────────────────────────────────────────────────
+// topic-nav removed; content-wrap centers itself via max-width/margin:auto in _layout.scss
 .week-layout {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 0;
-  align-items: start;
-  &.week-layout--notopics {
-    grid-template-columns: 1fr;
-    .content-wrap { max-width: 860px; margin: 0 auto; }
-  }
+  display: block;
 }
 
 // Topic pills in page hero

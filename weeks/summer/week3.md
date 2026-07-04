@@ -321,20 +321,18 @@ System.out.<span class="fn">println</span>(<span class="str">"Warnings triggered
     <div id="sol-w3-t2" style="display:none;margin-top:1rem">
       <div class="code-block"><div class="cb-header"><span class="cb-lang">solution</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="type">double</span>[] voltages = {<span class="num">11.8</span>, <span class="num">12.4</span>, <span class="num">9.1</span>, <span class="num">12.7</span>, <span class="num">10.5</span>, <span class="num">12.1</span>};
-
-<span class="type">double</span> min = voltages[<span class="num">0</span>]; <span class="cmt">// start with first element as the assumed minimum</span>
-<span class="type">int</span> lowCount = <span class="num">0</span>;
-<span class="type">double</span> sum = <span class="num">0.0</span>;
+<span class="type">double</span> total = <span class="num">0</span>;
+<span class="type">int</span> warnings = <span class="num">0</span>;
 
 <span class="kw">for</span> (<span class="type">double</span> v : voltages) {
-    <span class="kw">if</span> (v &lt; min) min = v;   <span class="cmt">// update minimum if we found a lower one</span>
-    <span class="kw">if</span> (v &lt; <span class="num">11.0</span>) lowCount++;
-    sum += v;
+    total += v;
+    <span class="kw">if</span> (v &lt; <span class="num">11.0</span>) warnings++;
 }
 
-System.out.<span class="fn">println</span>(<span class="str">"Min voltage: "</span> + min);
-System.out.<span class="fn">println</span>(<span class="str">"Low battery warnings: "</span> + lowCount);
-System.out.<span class="fn">println</span>(<span class="str">"Sum: "</span> + sum);</pre>
+System.out.<span class="fn">println</span>(<span class="str">"Total: "</span> + total);
+System.out.<span class="fn">println</span>(<span class="str">"Low battery warnings: "</span> + warnings);
+<span class="cmt">// Total: 70.7</span>
+<span class="cmt">// Low battery warnings: 1  (only 9.1 is below 11.0)</span></pre>
       </div>
     </div>
   </div>
@@ -468,22 +466,15 @@ System.out.<span class="fn">println</span>(<span class="str">"Sum: "</span> + su
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w3-t3')">Show Solution</button></div>
     <div id="sol-w3-t3" style="display:none;margin-top:1rem">
       <div class="code-block"><div class="cb-header"><span class="cb-lang">solution</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
-<pre><span class="type">int</span> attempt = <span class="num">0</span>;
-<span class="type">int</span> input = <span class="num">0</span>;
-
-<span class="cmt">// keep looping until we get a valid input (or hit 20 attempts)</span>
-<span class="kw">while</span> ((input &lt; <span class="num">1</span> || input &gt; <span class="num">10</span>) &amp;&amp; attempt &lt; <span class="num">20</span>) {
-    input = (attempt % <span class="num">12</span>) + <span class="num">1</span>; <span class="cmt">// simulates: 1,2,3,4,5,6,7,8,9,10,11,12,1,2...</span>
-    System.out.<span class="fn">println</span>(<span class="str">"Attempt "</span> + attempt + <span class="str">": input = "</span> + input);
-    <span class="kw">if</span> (input &lt; <span class="num">1</span> || input &gt; <span class="num">10</span>) {
-        System.out.<span class="fn">println</span>(<span class="str">"  invalid, try again"</span>);
-    }
-    attempt++;
+<pre><span class="type">int</span> n = <span class="num">1</span>;
+<span class="kw">while</span> (n % <span class="num">3</span> != <span class="num">0</span> || n % <span class="num">7</span> != <span class="num">0</span>) {
+    System.out.<span class="fn">println</span>(n);
+    n++;
 }
-
-<span class="kw">if</span> (input &gt;= <span class="num">1</span> &amp;&amp; input &lt;= <span class="num">10</span>) {
-    System.out.<span class="fn">println</span>(<span class="str">"Valid input: "</span> + input);
-}</pre>
+System.out.<span class="fn">println</span>(<span class="str">"Found it: "</span> + n);
+<span class="cmt">// prints 1 through 20, then:</span>
+<span class="cmt">// Found it: 21</span>
+<span class="cmt">// 21 = 3 × 7 — the smallest number divisible by both</span></pre>
       </div>
     </div>
   </div>
@@ -563,7 +554,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Sum: "</span> + su
     sum += readings[i];
     <span class="kw">if</span> (readings[i] &gt; max) max = readings[i];
     <span class="kw">if</span> (readings[i] &lt; <span class="num">12.0</span>)
-        System.out.<span class="fn">println</span>(<span class="str">"Warning: low reading at ["</span> + i + <span class="str">"]"</span>);
+        System.out.<span class="fn">println</span>(<span class="str">"Reading "</span> + i + <span class="str">": "</span> + readings[i] + <span class="str">" — LOW"</span>);
 }
 System.out.<span class="fn">println</span>(<span class="str">"Average: "</span> + (sum / readings.length));
 System.out.<span class="fn">println</span>(<span class="str">"Max: "</span> + max);</pre>
