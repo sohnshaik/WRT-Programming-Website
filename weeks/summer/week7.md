@@ -46,7 +46,10 @@ next_title: "Week 8 — Recap & Resources"
 <div class="cb-header"><span class="cb-lang">java</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="cmt">// declare the enum — like a class but for a fixed set of values</span>
 <span class="kw">public enum</span> <span class="cls">RobotState</span> {
-    DISABLED, TELEOP, AUTO, TEST
+    DISABLED,
+    TELEOP,
+    AUTO,
+    TEST
 }
 
 <span class="cmt">// using it — type is RobotState, value must be one of the four</span>
@@ -111,7 +114,12 @@ next_title: "Week 8 — Recap & Resources"
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java — GOOD: enum-based state (safe)</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="cmt">// GOOD: the compiler enforces every value</span>
-<span class="kw">public enum</span> <span class="cls">Mode</span> { IDLE, TELEOP, AUTO, DISABLED }
+<span class="kw">public enum</span> <span class="cls">Mode</span> {
+    IDLE,
+    TELEOP,
+    AUTO,
+    DISABLED
+}
 
 <span class="kw">private</span> <span class="cls">Mode</span> m_mode = <span class="cls">Mode</span>.IDLE;
 
@@ -131,7 +139,10 @@ next_title: "Week 8 — Recap & Resources"
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="kw">public enum</span> <span class="cls">RobotState</span> {
-    DISABLED, TELEOP, AUTO, TEST;  <span class="cmt">// semicolon required when you add methods</span>
+    DISABLED,
+    TELEOP,
+    AUTO,
+    TEST;  <span class="cmt">// semicolon required when you add methods</span>
 
     <span class="cmt">// helper method — call as state.isActive()</span>
     <span class="kw">public boolean</span> <span class="fn">isActive</span>() {
@@ -156,39 +167,73 @@ next_title: "Week 8 — Recap & Resources"
 }</pre>
 </div>
 
+<h3 class="sub">enums with parameters and constructors</h3>
+
+<p>here's where enums really flex: each constant can carry data. you give the enum fields, a constructor, and then each constant passes arguments to that constructor — just like creating an object. this is how our actual codebase works. open <a href="https://github.com/WaltonRobotics/Reefscape/blob/main/src/main/java/frc/robot/subsystems/Superstructure.java" target="_blank">Superstructure.java</a> and scroll to the bottom — you'll see every state carries an index and a name.</p>
+
+<div class="code-block">
+<div class="cb-header"><span class="cb-lang">java — enum with fields and constructor</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+<pre><span class="kw">public enum</span> <span class="cls">State</span> {
+    IDLE(<span class="num">0</span>, <span class="str">"idle"</span>),
+    INTAKING(<span class="num">1</span>, <span class="str">"intaking"</span>),
+    SCORING_LOW(<span class="num">2</span>, <span class="str">"scoring low"</span>),
+    SCORING_HIGH(<span class="num">3</span>, <span class="str">"scoring high"</span>),
+    CLIMBING(<span class="num">4</span>, <span class="str">"climbing"</span>);
+
+    <span class="kw">public final</span> <span class="type">double</span> idx;
+    <span class="kw">public final</span> <span class="cls">String</span> name;
+
+    <span class="kw">private</span> <span class="fn">State</span>(<span class="type">double</span> index, <span class="cls">String</span> _name) {
+        idx = index;
+        name = _name;
+    }
+}
+
+<span class="cmt">// usage — access the fields directly</span>
+<span class="cls">State</span> current = <span class="cls">State</span>.SCORING_HIGH;
+System.out.<span class="fn">println</span>(current.name);  <span class="cmt">// "scoring high"</span>
+System.out.<span class="fn">println</span>(current.idx);   <span class="cmt">// 3.0</span></pre>
+</div>
+
+<p>notice: the constructor is <code>private</code>. you can never call <code>new State(...)</code> yourself — Java creates the instances from the constant declarations and that's it. this is what makes enums safe: the list of values is locked at compile time.</p>
+
+<div class="callout info"><p><strong>why attach data to enum constants?</strong> the alternative is a separate lookup — a map from state to name, another map from state to index. that's fragile and easy to get out of sync. when the data lives directly on the enum, adding a new state means adding one line with all its data right there. nothing else to update.</p></div>
+
 <h3 class="sub">enums in FRC — the WRT state machine pattern</h3>
 
-<p>on 2974, enums power our state machines (a state machine tracks what "mode" the robot is in — like INTAKING, SHOOTING, or IDLE — and behaves differently in each). a subsystem has a "current state" (stored as an enum field), and the periodic loop checks that state and runs the right code. this replaces spaghetti if/else chains with a clean, readable, extensible pattern. when we need to add a new state, we add one value to the enum — we don't hunt through a chain of conditions trying to figure out where to insert a new branch.</p>
+<p>on 2974, enums power our state machines (a state machine tracks what "mode" the robot is in — like INTAKING, SHOOTING, or IDLE — and behaves differently in each). a subsystem has a "current state" (stored as an enum field), and the periodic loop checks that state and runs the right code. this replaces spaghetti if/else chains with a clean, readable, extensible pattern.</p>
+
+<p>notice where the enum goes: <strong>at the bottom of the class, after all the methods.</strong> this is our convention. the class's logic comes first (fields, constructor, methods), and the enum definition sits at the end. this keeps the important behavior front and center when you open the file. you can see this in our actual codebase — open any subsystem and scroll to the bottom, that's where the state enum lives.</p>
 
 <div class="code-block">
 <div class="cb-header"><span class="cb-lang">java — simplified WRT pattern</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
-<pre><span class="kw">public enum</span> <span class="cls">ArmState</span> {
-    STOWED, INTAKING, SCORING, CLIMBING
-}
+<pre><span class="kw">public class</span> <span class="cls">ArmSubsystem</span> <span class="kw">extends</span> <span class="cls">SubsystemBase</span> {
 
-<span class="kw">public class</span> <span class="cls">ArmSubsystem</span> <span class="kw">extends</span> <span class="cls">SubsystemBase</span> {
+    <span class="kw">private</span> <span class="cls">State</span> m_state = <span class="cls">State</span>.STOWED;
 
-    <span class="cmt">// current state lives as a field — m_ prefix because it's a member var</span>
-    <span class="kw">private</span> <span class="cls">ArmState</span> m_state = <span class="cls">ArmState</span>.STOWED;
-
-    <span class="cmt">// command calls this to request a state change</span>
-    <span class="kw">public void</span> <span class="fn">setState</span>(<span class="cls">ArmState</span> newState) {
+    <span class="kw">public void</span> <span class="fn">setState</span>(<span class="cls">State</span> newState) {
         m_state = newState;
     }
 
-    <span class="cmt">// runs every 20ms — switch drives all behavior</span>
     <span class="kw">@Override</span>
     <span class="kw">public void</span> <span class="fn">periodic</span>() {
         <span class="kw">switch</span> (m_state) {
             <span class="kw">case</span> INTAKING:  <span class="fn">moveToIntakePos</span>();  <span class="kw">break</span>;
             <span class="kw">case</span> SCORING:   <span class="fn">moveToScorePos</span>();   <span class="kw">break</span>;
             <span class="kw">case</span> CLIMBING:  <span class="fn">moveToClimbPos</span>();   <span class="kw">break</span>;
-            <span class="kw">default</span>:        <span class="fn">holdPosition</span>();     <span class="cmt">// STOWED — hold where we are</span>
+            <span class="kw">default</span>:        <span class="fn">holdPosition</span>();     <span class="kw">break</span>;
         }
     }
 
-    <span class="cmt">// expose state for other subsystems or dashboard</span>
-    <span class="kw">public</span> <span class="cls">ArmState</span> <span class="fn">getState</span>() { <span class="kw">return</span> m_state; }
+    <span class="kw">public</span> <span class="cls">State</span> <span class="fn">getState</span>() { <span class="kw">return</span> m_state; }
+
+    <span class="cmt">// enum lives at the bottom of the class — WRT convention</span>
+    <span class="kw">public enum</span> <span class="cls">State</span> {
+        STOWED,
+        INTAKING,
+        SCORING,
+        CLIMBING
+    }
 }</pre>
 </div>
 
@@ -199,7 +244,7 @@ next_title: "Week 8 — Recap & Resources"
   <div class="concept-card"><div class="cc-label">methods</div><div class="cc-title">Behavior on the enum</div><div class="cc-desc">you can add methods like <code>isActive()</code> directly to an enum. no separate helper class needed.</div></div>
 </div>
 
-<div class="callout tip"><p><strong>WRT convention:</strong> if you catch yourself writing <code>private String m_state = "IDLE"</code> in a subsystem, stop and refactor it to an enum. strings for state is a code smell we actively avoid. the PR reviewer will flag it every time.</p></div>
+<div class="callout tip"><p><strong>WRT convention:</strong> if you catch yourself writing <code>private String m_state = "IDLE"</code> in a subsystem, stop and refactor it to an enum. strings for state is a code error we actively avoid. people will note and flag it everytime.</p></div>
 
 <h3 class="sub">Topic 1 — Coding Prompt</h3>
 <div class="challenge">
@@ -211,7 +256,10 @@ next_title: "Week 8 — Recap & Resources"
     <div id="sol-w7-t1" style="display:none;margin-top:1rem">
       <div class="code-block"><div class="cb-header"><span class="cb-lang">solution</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
 <pre><span class="kw">public enum</span> <span class="cls">ShooterState</span> {
-    IDLE, SPOOLING, READY, FIRING;
+    IDLE,
+    SPOOLING,
+    READY,
+    FIRING;
 
     <span class="cmt">// helper lives right on the enum — no separate utility needed</span>
     <span class="kw">public boolean</span> <span class="fn">isSpinning</span>() {
@@ -464,9 +512,9 @@ System.out.<span class="fn">println</span>(targets.<span class="fn">contains</sp
 
 <p>imagine you need to ship a piece of candy in the mail. you can't just tape a single Skittle to a postcard — it's too small and fragile, it doesn't have an address, and the post office doesn't know what to do with it. but if you put it in a box, suddenly it has all the structure the mail system needs: an address label, dimensions, packaging. the candy itself didn't change — you just wrapped it.</p>
 
-<p>a primitive (like <code>int</code>) is the raw candy. a wrapper class (like <code>Integer</code>) is the box. the value inside is the same, but now it's a full object with methods, and it can go anywhere an object is expected — like inside an ArrayList.</p>
+<p>a primitive (like <code>int</code>) is the raw candy. a wrapper class (like <code>Integer</code>) is the wrapper (haha totally unintentional). the value inside is the same, but now it's a full object with methods, and it can go anywhere an object is expected — like inside an ArrayList.</p>
 
-<div class="callout tip"><p>once you start using collections (ArrayList, HashMap, etc.) you will constantly see <code>Integer</code>, <code>Double</code>, and <code>Boolean</code> in type parameters. you also use the static utility methods on wrapper classes — <code>Integer.parseInt()</code> is everywhere in config reading and dashboard input handling.</p></div>
+<div class="callout tip"><p>once you start using collections (ArrayList, HashMap, etc.) you will constantly see <code>Integer</code>, <code>Double</code>, and <code>Boolean</code> in type parameters.</p></div>
 
 <h3 class="sub">the primitive-to-wrapper mapping</h3>
 
@@ -709,7 +757,10 @@ System.out.<span class="fn">println</span>(list.<span class="fn">contains</span>
 }</pre>
 </div>
 
+<div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w7-cc')">Show Answers</button></div>
+<div id="sol-w7-cc" style="display:none;margin-top:1rem">
 <div class="callout tip"><p>answers: <code>size()</code> → 3, <code>get(1)</code> → "gamma" (after removing "beta", gamma shifts to index 1), <code>contains("beta")</code> → false. the foreach prints: alpha, gamma, delta.</p></div>
+</div>
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 

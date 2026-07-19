@@ -114,6 +114,11 @@ layout: default
     n = Math.max(0, Math.min(total - 1, n));
     window._wss = n;
 
+    // Update URL hash so refresh restores position
+    var screenH2 = screens[n].querySelector('h2.sh, .project-task');
+    var hashId = screenH2 ? screenH2.id : ('topic-' + (n + 1));
+    if (hashId) history.replaceState(null, '', '#' + hashId);
+
     screens.forEach(function(s, i) {
       s.classList.toggle('ws-active', i === n);
     });
@@ -185,7 +190,27 @@ layout: default
     });
   });
 
-  weekGoScreen(0);
+  // Restore position from URL hash (e.g. #topic-3, #weekly-test)
+  var startScreen = 0;
+  var hash = location.hash.replace('#', '');
+  if (hash) {
+    if (hash === 'weekly-test') {
+      startScreen = total - 1;
+    } else {
+      // Match #topic-N or find screen containing element with that id
+      var m = hash.match(/^topic-(\d+)$/);
+      if (m) {
+        startScreen = Math.min(parseInt(m[1]) - 1, total - 1);
+      } else {
+        // Generic id lookup — find which screen contains the element
+        var el = document.getElementById(hash);
+        if (el) {
+          screens.forEach(function(s, i) { if (s.contains(el)) startScreen = i; });
+        }
+      }
+    }
+  }
+  weekGoScreen(startScreen);
 })();
 </script>
 {% endif %}

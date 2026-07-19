@@ -45,21 +45,33 @@ const WRC = {
     return this.getProgress()[pageId] || null;
   },
   totalComplete() {
-    return Object.values(this.getProgress()).filter(v => v.complete).length;
+    // Count distinct weeks via sidebar items — prevents double-counting
+    // when both a topic quiz (summer-w7) and weekly test (summer-w7-test) exist
+    const p = this.getProgress();
+    const pages = document.querySelectorAll('.nav-item[data-page]');
+    let done = 0;
+    pages.forEach(el => {
+      const key = el.dataset.page;
+      if (p[key]?.complete || p[key + '-test']?.complete) done++;
+    });
+    return done;
   },
 
   updateSidebar() {
     const p    = this.getProgress();
+    const pages = document.querySelectorAll('.nav-item[data-page]');
+    const total = pages.length || 16;
     const done  = this.totalComplete();
-    const pct   = Math.round((done / 16) * 100);
+    const pct   = Math.round((done / total) * 100);
 
     const fill  = document.querySelector('.sp-fill');
     const label = document.querySelector('.sp-pct-text');
     if (fill)  fill.style.transform = 'scaleX(' + (pct / 100) + ')';
     if (label) label.textContent = pct + '%';
 
-    document.querySelectorAll('.nav-item[data-page]').forEach(el => {
-      const s = p[el.dataset.page];
+    pages.forEach(el => {
+      const key = el.dataset.page;
+      const s = p[key] || p[key + '-test'];
       if (s?.complete) {
         el.classList.add('completed');
         const chk = el.querySelector('.ni-check');
