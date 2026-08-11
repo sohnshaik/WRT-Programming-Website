@@ -135,7 +135,7 @@ no_auth_guard: true
         <div class="auth-field">
           <label>access code</label>
           <input type="text" id="reg-code" placeholder="ask your programming lead" required>
-          <p style="font-size:11px;color:#94a3b8;margin:4px 0 0">slack sohan or hrehaan for this :)</p>
+          <p style="font-size:11px;color:#94a3b8;margin:4px 0 0">slack sohan or another programming lead for this :)</p>
         </div>
         <button class="auth-submit" type="submit" id="register-btn">create account</button>
       </form>
