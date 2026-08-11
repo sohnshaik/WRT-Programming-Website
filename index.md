@@ -61,7 +61,6 @@ page_id: home
           <div class="lc-video-wrap">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/UehFxe04JRI?si=MwiTz-D3HYrhFP3J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
-          </div>
           <div class="lc-body">
             <div class="lc-role">Programming Lead</div>
             <div class="lc-name">Saarth Pandya</div>
