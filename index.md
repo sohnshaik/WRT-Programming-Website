@@ -57,23 +57,21 @@ page_id: home
           </div>
         </div>
 
-        <div class="lead-card">
+      <div class="lead-card">
           <div class="lc-video-wrap">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/UehFxe04JRI?si=MwiTz-D3HYrhFP3J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
+          </div>
           <div class="lc-body">
-            <div class="lc-role">Assistant Chief Programmer</div>
-            <div class="lc-name">Alex An</div>
-            <div class="lc-bio">yo guys what’s up, im alex. i invent brainrot, play geometry dash, and code robots!! im a sophomore and i only started last year so i don’t know how im even here honestly. just in that one year though ive made a lot of great friends in the team and learned a ton about programming and FRC. i think that anybody can succeed at robotics, it’s really not so intimidating once you grasp the basics. work hard and ask us any questions, i believe in you guys! also PLEASE watch frieren</div>
+            <div class="lc-role">Programming Lead</div>
+            <div class="lc-name">Saarth Pandya</div>
+            <div class="lc-bio">Hey guys, I'm Saarth, resident anti-procrastinator, Brawl Stars casual, and 2974 programmer. I started coding FRC bots my sophomore year, and over all of these years I've learned new skills, met new people, and made a bunch of fond memories. FRC programming (or really FRC in general) can get pretty heavy in terms of time commitment and such, and all the Java and FRC code that you need to learn may look intimidating at first, but don't worry- it's genuinely really fun once you get used to it and learn some basics. If it wasn't, I don't think any of us would be doing this. And also, if you're confused or need to ask something, don't hesitate, because as our goat Banks Troutman once famously said: "Ask and you shall receive!</div>
           </div>
         </div>
 
         <div class="lead-card">
           <div class="lc-video-wrap">
-            <div class="lc-video-placeholder" data-slot="2">
-              <div class="lv-name">Programming Lead</div>
-              <div class="lv-sub">video coming soon :)</div>
-            </div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/fryYLp9oOqw?si=0juGfOKQD5G7eYFJ&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <div class="lc-body">
             <div class="lc-role">Programming Lead</div>
@@ -82,20 +80,20 @@ page_id: home
           </div>
         </div>
 
-        <div class="lead-card">
+      <div class="lead-card">
           <div class="lc-video-wrap">
-            <div class="lc-video-placeholder" data-slot="3">
-              <div class="lv-icon">▶</div>
+            <div class="lc-video-placeholder" data-slot="2">
               <div class="lv-name">Programming Lead</div>
               <div class="lv-sub">video coming soon :)</div>
             </div>
           </div>
           <div class="lc-body">
-            <div class="lc-role">Programming Lead</div>
-            <div class="lc-name">Saarth Pandya</div>
-            <div class="lc-bio">Hey guys, I'm Saarth, resident anti-procrastinator, Brawl Stars casual, and 2974 programmer. I started coding FRC bots my sophomore year, and over all of these years I've learned new skills, met new people, and made a bunch of fond memories. FRC programming (or really FRC in general) can get pretty heavy in terms of time commitment and such, and all the Java and FRC code that you need to learn may look intimidating at first, but don't worry- it's genuinely really fun once you get used to it and learn some basics. If it wasn't, I don't think any of us would be doing this. And also, if you're confused or need to ask something, don't hesitate, because as our goat Banks Troutman once famously said: "Ask and you shall receive!</div>
+            <div class="lc-role">Assistant Chief Programmer</div>
+            <div class="lc-name">Alex An</div>
+            <div class="lc-bio">yo guys what’s up, im alex. i invent brainrot, play geometry dash, and code robots!! im a sophomore and i only started last year so i don’t know how im even here honestly. just in that one year though ive made a lot of great friends in the team and learned a ton about programming and FRC. i think that anybody can succeed at robotics, it’s really not so intimidating once you grasp the basics. work hard and ask us any questions, i believe in you guys! also PLEASE watch frieren</div>
           </div>
         </div>
+        
       </div>
     </div>
   </div>
