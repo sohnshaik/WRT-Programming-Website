@@ -199,7 +199,7 @@ System.out.<span class="fn">println</span>(motorIDs[motorIDs.length - <span clas
 <div class="challenge">
   <div class="ch-header"><div class="ch-icon">⚡</div><div><div class="ch-title">Module Sensor Buffer</div><div class="ch-sub">Declare and loop through parallel arrays</div></div></div>
   <div class="ch-body">
-    <p class="ch-prompt">Declare these two arrays:<br><code>double[] motorTemps = {42.1, 38.5, 51.0, 44.8};</code><br><code>String[] moduleNames = {"FL", "FR", "BL", "BR"};</code><br><br>Write a for loop that prints each module on one line like: <code>"FL: 42.1°C"</code><br><br>Use the same index variable to access both arrays at once. After the loop, print the total number of modules using <code>.length</code>.</p>
+    <p class="ch-prompt">Declare two parallel arrays: one <code>double[]</code> called <code>motorTemps</code> with 4 temperature values, and one <code>String[]</code> called <code>moduleNames</code> with the swerve module labels (FL, FR, BL, BR).<br><br>Write a for loop that prints each module on one line like: <code>"FL: 42.1°C"</code><br><br>Use the same index variable to access both arrays at once. After the loop, print the total number of modules using <code>.length</code>.</p>
     <textarea class="code-input" placeholder="// Write your code here..."></textarea>
     <div style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showSolution('sol-w4-t1')">Show Solution</button></div>
     <div id="sol-w4-t1" style="display:none;margin-top:1rem">

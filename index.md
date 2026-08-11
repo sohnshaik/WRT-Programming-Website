@@ -48,7 +48,7 @@ page_id: home
 
         <div class="lead-card">
           <div class="lc-video-wrap">
-            <iframe src="https://www.youtube.com/embed/2gwjvVwuv94" allowfullscreen></iframe>
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/2gwjvVwuv94?si=Z6dASx2Zm66qvE_S" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <div class="lc-body">
             <div class="lc-role">Chief Programmer</div>
@@ -59,10 +59,7 @@ page_id: home
 
         <div class="lead-card">
           <div class="lc-video-wrap">
-            <div class="lc-video-placeholder" data-slot="3">
-              <div class="lv-name">Assistant Chief Programmer</div>
-              <div class="lv-sub">video coming soon :)</div>
-            </div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/UehFxe04JRI?si=MwiTz-D3HYrhFP3J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <div class="lc-body">
             <div class="lc-role">Assistant Chief Programmer</div>

@@ -82,12 +82,12 @@ onAuthStateChanged(auth, async (user) => {
       return;
     }
 
-    // Sync Firestore scores into local progress
+    // Sync Firestore scores into local progress (per-user)
     const scores = await loadScoresFromFirestore(user.uid);
     if (typeof WRC !== 'undefined') {
-      const local = WRC.getProgress();
-      Object.assign(local, scores);
-      WRC.saveProgress(local);
+      // Replace local progress with this user's Firestore data — prevents
+      // stale data from a previous user bleeding through on shared devices.
+      WRC.saveProgress(scores);
       WRC.updateSidebar();
       WRC.loadModuleScores();
     }
@@ -109,6 +109,7 @@ onAuthStateChanged(auth, async (user) => {
     localStorage.removeItem('wrc-role');
     localStorage.removeItem('wrc-uid');
     localStorage.removeItem('wrc-name');
+    localStorage.removeItem('wrc-progress-v2');
 
     renderUserChip(null, null);
 

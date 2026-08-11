@@ -1,7 +1,7 @@
 ---
 layout: week
 title: "Loops"
-subtitle: "for loops, foreach loops, and the very important reason while loops are banned from robot code :D"
+subtitle: "for loops, foreach loops, and why you need to be careful with while loops"
 badge: "Summer · Week 3 of 8"
 phase: summer
 phase_label: Summer
@@ -11,7 +11,7 @@ weekly_test: true
 topics:
   - For Loops
   - Foreach Loops
-  - While Loops & Why They're Banned
+  - While Loops
   - Loop Visualizer
   - Fill in the Blanks
   - Knowledge Check
@@ -167,7 +167,7 @@ next_title: "Week 4 — Arrays & Methods"
 
 <div class="callout warning"><p><strong>the rule to remember:</strong> <code>i &lt; array.length</code> is almost always what you want. <code>i &lt;= array.length</code> goes one past the end and crashes. one character difference. super easy to typo. when a loop crashes with ArrayIndexOutOfBoundsException, this is the first thing you check.</p></div>
 
-<div class="callout danger"><p><strong>infinite loop:</strong> if the condition NEVER becomes false, the loop runs forever and your program freezes. example: <code>for (int i = 0; i &gt;= 0; i++)</code> — i starts at 0 and only goes up, so <code>i &gt;= 0</code> is always true. no exit. in a desktop program this just locks up your app. in robot code this is worse — keep reading the while loop section for why.</p></div>
+<div class="callout danger"><p><strong>infinite loop:</strong> if the condition NEVER becomes false, the loop runs forever and your program freezes. example: <code>for (int i = 0; i &gt;= 0; i++)</code> — i starts at 0 and only goes up, so <code>i &gt;= 0</code> is always true. no exit. your program hangs and you have to force-quit it.</p></div>
 
 <h3 class="sub">Topic 1 — Coding Prompt</h3>
 <div class="challenge">
@@ -343,11 +343,11 @@ System.out.<span class="fn">println</span>(<span class="str">"Low battery warnin
 
 <hr style="border:none;border-top:1px solid #eee;margin:2.5rem 0">
 
-<h2 class="sh" id="topic-3">While Loops &amp; Why They're Banned</h2>
+<h2 class="sh" id="topic-3">While Loops</h2>
 
-<p>ok, we need to have a talk. while loops are a perfectly normal, fundamental part of Java. you'll use them in regular desktop and console programs. they're not bad. but in FRC robot code, they are effectively banned from periodic methods — and it's not an arbitrary rule somebody made up. it comes from a real, documented failure mode that has actually ended robots' matches at real competitions. let's understand what a while loop is, why it's useful normally, and why it's so dangerous in robot code specifically.</p>
+<p>while loops are a perfectly normal, fundamental part of Java. you'll use them in regular desktop and console programs. they're not bad. but they can be dangerous if you don't fully understand what your condition is doing, when it will terminate, and what happens if it doesn't. they require more discipline than for loops.</p>
 
-<h3 class="sub">while loops — and why they're banned</h3>
+<h3 class="sub">what is a while loop</h3>
 
 <p>imagine doing dishes. you stand at the sink and keep washing while there are still dirty dishes. you don't know in advance how many dishes there are — you just keep going until there aren't any left. that's a while loop: you don't know the count up front, so you keep looping as long as some condition is true.</p>
 
@@ -392,46 +392,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Low battery warnin
 
 <p>all of these are totally fine on a regular computer. the program just... waits. nobody cares. your desktop app isn't going to explode if it blocks for a second. but this exact pattern is what kills robots at competition.</p>
 
-<h3 class="sub">the FRC problem — the 20ms loop</h3>
-
-<p>here's what you need to understand about how FRC robots actually run. your robot's control loop runs on a 20 millisecond cycle. every 20ms, WPILib (the FRC framework) calls your code to say "hey, update yourself." it reads the latest joystick input from the driver station (the laptop at the driver's station running the FRC Driver Station software -- it connects wirelessly to the robot), updates motor commands, reads sensors, updates dashboards — all of that runs 50 times per second, like clockwork.</p>
-
-<p>the framework EXPECTS your code to run fast and return control within that 20ms window. run, return. run, return. over and over. every piece of your robot's responsiveness — joystick response, motor updates, safety checks — depends on your code completing quickly every single cycle and handing control back.</p>
-
-<div class="callout danger"><p><strong>here's what a while loop does to this.</strong> your periodic method gets called. inside it, there's a <code>while (!atTarget) { move(); }</code>. Java starts running the while loop. the target isn't reached yet, so it loops. again. again. still looping. 20ms pass. 40ms. 100ms. the framework can't get control back because your while loop has it. motors stop being commanded because nobody is calling them. the driver pushes the joystick and nothing happens. the system logs a warning. then the watchdog fires.</p></div>
-
-<h3 class="sub">the watchdog — the robot's dead-man's switch</h3>
-
-<p>the watchdog is a safety timer built into WPILib. if your code doesn't return control to the framework within a few hundred milliseconds, the watchdog assumes something is catastrophically wrong and automatically disables the robot. it cuts motor output. everything stops. the robot goes limp.</p>
-
-<p>this is actually the RIGHT call — a frozen, unresponsive robot on a field with other robots and field elements is genuinely dangerous. but it means your robot just became a paperweight in the middle of a match because your while loop was waiting for a sensor that took too long to settle.</p>
-
-<div class="code-block">
-<div class="cb-header"><span class="cb-lang">java — BANNED in robot periodic methods</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
-<pre><span class="cmt">// DO NOT DO THIS inside any periodic method in robot code</span>
-<span class="kw">public void</span> <span class="fn">teleopPeriodic</span>() {
-    <span class="cmt">// this blocks the 20ms cycle until the encoder reaches target</span>
-    <span class="cmt">// if the encoder is slow or stuck, this runs forever</span>
-    <span class="cmt">// the watchdog fires, the robot disables mid-match</span>
-    <span class="kw">while</span> (!arm.<span class="fn">isAtTarget</span>()) {
-        arm.<span class="fn">driveToTarget</span>(); <span class="cmt">// BAD: blocks the entire framework</span>
-    }
-}
-
-<span class="cmt">// the right pattern for "keep doing this until something happens" is</span>
-<span class="cmt">// a state machine that checks once per cycle and returns immediately</span>
-<span class="cmt">// you'll learn state machines in Phase 2 — for now, just know: no while loops</span></pre>
-</div>
-
-<h3 class="sub">a real story — while loops at competition</h3>
-
-<p>this isn't hypothetical. during a regional qualification match, a team's autonomous (the 15-second period at the start of a match where the robot runs without driver input) routine had a while loop waiting for an arm encoder to reach a target position. the encoder was slow to settle due to mechanical slop in the gearbox. the while loop kept running. 50ms. 100ms. 200ms. the watchdog fired. the robot disabled for the rest of the auto period.</p>
-
-<p>when teleop (teleop = the 2-minute driver-controlled period of the match) started, the robot was oriented the wrong direction because auto never finished. it drove forward and immediately hit a field element. the team got a foul. they missed playoffs by one match. one while loop. one competition. don't be that team.</p>
-
-<div class="callout warning"><p><strong>to be fair:</strong> while loops are completely fine in the console programs this course has you build. the ban is specific to FRC robot periodic methods where the 20ms cycle is sacred. you'll write plenty of while loops this course — just never inside <code>teleopPeriodic()</code>, <code>autonomousPeriodic()</code>, or any method that runs on the robot's loop.</p></div>
-
-<div class="callout info"><p><strong>what to use instead in robot code:</strong> when you need "keep doing this until something happens" behavior, the answer is state machines and the WPILib Command-Based framework. your state machine checks conditions once per 20ms cycle and decides what to do next — it never blocks. you'll learn Command-Based programming in Phase 2 and it will make total sense once you've seen why blocking loops are a problem.</p></div>
+<div class="callout danger"><p><strong>be careful with while loops.</strong> if you don't fully understand your condition — what makes it true, what makes it false, and what happens if it never becomes false — you can easily freeze your program. in robot code specifically, we don't use while loops in periodic methods at all. you'll learn why in Phase 2 when we cover the command-based framework. for now just know: while loops require you to be very intentional about your exit condition.</p></div>
 
 <h3 class="sub">the infinite loop gotcha</h3>
 
@@ -581,7 +542,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Max: "</span> + ma
       <li>Also write <code>static double findMax(double[] readings)</code> using a regular for loop</li>
       <li>In a <code>main</code> method, test with: <code>{-2.0, 14.5, 150.0, 12.1, 0.5, 88.3}</code></li>
     </ul>
-    <span class="pt-note">no while loops allowed anywhere in this file. you know why :)</span>
+    <span class="pt-note">use for loops or foreach loops only — no while loops for this task.</span>
   </div>
 </div>
 
@@ -592,7 +553,7 @@ System.out.<span class="fn">println</span>(<span class="str">"Max: "</span> + ma
     <div class="wt-icon"><i data-lucide="clipboard-list"></i></div>
     <div>
       <div class="wt-title">week 3 test</div>
-      <div class="wt-sub">for loops, foreach, while loops & why they're banned · 8 questions!!</div>
+      <div class="wt-sub">for loops, foreach, while loops · 8 questions!!</div>
     </div>
   </div>
   <div id="test-summer-w3"></div>
@@ -626,14 +587,14 @@ const quiz_w3_t2 = new Quiz('quiz-w3-t2', [
 ], 'summer-w3');
 
 const quiz_w3_t3 = new Quiz('quiz-w3-t3', [
-  { question: "Why are while loops banned inside FRC robot periodic methods?", options: ["They use more memory than for loops","WPILib doesn't compile them","A stuck while loop blocks the robot's 20ms cycle, the watchdog fires, and the robot disables mid-match","They're slower than for loops"], correct: 2, explanation: "The FRC framework calls your code every 20ms and expects it back quickly. a while loop that waits for a sensor blocks this cycle. the watchdog timer fires and disables the robot. this has happened at real competitions." },
-  { question: "What does the WPILib watchdog timer do when your code takes too long?", options: ["Logs a warning and continues normally","Disables the robot by cutting motor output","Restarts the robot program","Slows the update rate to 10ms"], correct: 1, explanation: "The watchdog is a dead-man's switch. if your code doesn't return control within the allowed time, it assumes something is wrong and disables the robot. it's a safety feature — an unresponsive robot is dangerous on a field." },
-  { question: "You forget to increment the counter inside a while loop. What happens?", options: ["The loop runs zero times","The loop runs exactly once","The condition never becomes false, causing an infinite loop","Java throws a LoopException"], correct: 2, explanation: "If the variable controlling the condition never changes, the condition stays true forever. infinite loop. your program freezes. in robot code, the watchdog disables the robot. always make sure something inside your while loop moves toward making the condition false." }
+  { question: "What makes while loops more dangerous than for loops?", options: ["They use more memory","The exit condition and step are separate from the header — easy to forget or mess up","They can't access arrays","They're slower to execute"], correct: 1, explanation: "In a for loop, init/condition/step are all in one line — you can see exactly what controls the loop. in a while loop, you manage the condition and step yourself. forgetting to update the condition variable is the #1 cause of infinite loops." },
+  { question: "What is the most common while loop mistake?", options: ["Using == instead of <","Forgetting the curly braces","Forgetting to update the condition variable, causing an infinite loop","Putting a semicolon after while()"], correct: 2, explanation: "If the variable controlling the condition never changes inside the loop body, the condition stays true forever. your program freezes. always make sure something inside your while loop moves toward making the condition false." },
+  { question: "You forget to increment the counter inside a while loop. What happens?", options: ["The loop runs zero times","The loop runs exactly once","The condition never becomes false, causing an infinite loop","Java throws a LoopException"], correct: 2, explanation: "If the variable controlling the condition never changes, the condition stays true forever. infinite loop. your program freezes. always make sure something inside your while loop moves toward making the condition false." }
 ], 'summer-w3');
 
 const quiz_w3 = new Quiz('quiz-w3', [
   { question: "How many times does <code>for (int i = 2; i &lt; 7; i++)</code> execute?", options: ["4","5","6","7"], correct: 1, explanation: "i takes values 2, 3, 4, 5, 6 — that's 5 iterations. the loop stops before i reaches 7. off-by-one errors are super common — trace through it manually when you're unsure." },
-  { question: "Why are while loops banned in FRC robot code?", options: ["They use more memory","WPILib doesn't support them","A stuck while loop blocks the robot's 20ms cycle, freezing motor updates and tripping the watchdog","They're slower than for loops"], correct: 2, explanation: "The FRC framework expects your code to return every 20ms. a while loop that waits for a sensor blocks this cycle indefinitely. the watchdog fires, disabling the robot mid-match. this has happened at real competitions." },
+  { question: "What makes while loops riskier than for loops?", options: ["They use more memory","They can't iterate over arrays","You manage the condition and step separately — forgetting to update the condition causes an infinite loop","They're slower than for loops"], correct: 2, explanation: "In a for loop the condition and step are right there in the header. in a while loop, you're responsible for updating the condition variable somewhere in the body. forgetting that one line freezes your program." },
   { question: "You want to multiply every element in an array by 2. Which loop type should you use?", options: ["Foreach — it's cleaner","Regular for loop with index","While loop","Either works identically"], correct: 1, explanation: "You need the index to write back: <code>arr[i] = arr[i] * 2</code>. a foreach gives you a copy of the value — changes to that copy do NOT affect the original array." },
   { question: "<code>for (int i = 0; i &gt;= 0; i++)</code> — what happens?", options: ["Runs once","Never runs","Runs forever (infinite loop)","Compile error"], correct: 2, explanation: "i starts at 0, condition is i >= 0. since i keeps increasing, it will always be >= 0. the condition never becomes false. infinite loop." },
   { question: "A foreach loop gives you:", options: ["The index of each element","A copy of each element's value","A reference you can use to modify the array","The length of the array"], correct: 1, explanation: "Foreach gives you a copy of the value — not a reference to the slot. modifying the variable inside a foreach does NOT change the original array. use a regular for loop if you need to write back." }
@@ -643,8 +604,8 @@ const test_w3 = new Quiz('test-summer-w3', [
   { question: "How many times does <code>for (int i = 0; i &lt; 8; i++)</code> execute?", options: ["7","8","9","6"], correct: 1, explanation: "i goes 0, 1, 2, 3, 4, 5, 6, 7 — that's 8 iterations. the loop stops when i reaches 8 (because 8 < 8 is false). the pattern <code>i < N</code> always runs exactly N times starting from 0." },
   { question: "After <code>for (int i = 0; i &lt; 5; i++) { }</code> finishes, what is the value of i?", options: ["4","5","0","i doesn't exist after the loop"], correct: 3, explanation: "The variable i is declared inside the for loop header, so it only exists during the loop. once the loop ends, i goes out of scope and is gone. you'd get a compile error if you tried to access it after." },
   { question: "You want to set every element in an array to 0.0. Which loop should you use?", options: ["Foreach — shorter syntax","Regular for loop with the index","Either — foreach can modify arrays too","While loop"], correct: 1, explanation: "Foreach gives you a copy of each value. modifying the copy doesn't change the array. to actually write to <code>arr[i]</code>, you need the index, which only the regular for loop gives you." },
-  { question: "Why are while loops banned in FRC robot code?", options: ["They compile to slower bytecode","If the loop condition stays true too long, it blocks the 20ms robot cycle and the watchdog disables the robot","WPILib throws an exception if you use one","They can't access sensor data"], correct: 1, explanation: "The WPILib framework calls your code every 20ms and expects it to return quickly. a blocking while loop prevents that. the watchdog timer fires and the robot gets disabled. this has happened in real competition matches." },
-  { question: "A while loop blocks the 20ms robot cycle. What does the watchdog do when this happens?", options: ["Logs a warning and continues","Restarts the loop from the beginning","Disables the robot by cutting motor output","Slows the loop down to 100ms"], correct: 2, explanation: "The watchdog is a dead-man's switch — if your code doesn't return control within a set time, it assumes something is wrong and disables the robot. motors stop, driver loses control. it's a safety feature, but it means your bug just ended your match." },
+  { question: "Why do while loops require more care than for loops?", options: ["They compile to slower bytecode","The condition and step are managed separately — if you forget to update the condition, you get an infinite loop","Java doesn't optimize them","They can't use break statements"], correct: 1, explanation: "A for loop puts init, condition, and step all in the header so you can't forget them. a while loop puts that responsibility on you. one missing increment and your program freezes in an infinite loop." },
+  { question: "Your while loop's condition is <code>x != 10</code> but x starts at 1 and you increment by 3. What happens?", options: ["Loop runs 3 times and stops","Loop runs 4 times and stops","Infinite loop — x skips over 10","Compile error"], correct: 2, explanation: "x goes 1, 4, 7, 10... wait, 1+3=4, 4+3=7, 7+3=10 — it does hit 10. but if x started at 2: 2, 5, 8, 11, 14... it skips right past 10 and never equals it. always use < or > instead of != when incrementing by more than 1." },
   { question: "What does this print? <code>for (int i = 1; i &lt;= 3; i++) { System.out.println(i); }</code>", options: ["0 1 2","1 2 3","1 2 3 4","0 1 2 3"], correct: 1, explanation: "i starts at 1 (not 0), and the condition is <= 3 (not < 3). so i goes 1, 2, 3. when i becomes 4, the condition 4 <= 3 is false and the loop exits. prints 1, 2, 3." },
   { question: "You have <code>int[] ids = {10, 20, 30, 40};</code>. Which loop prints them in reverse order (40, 30, 20, 10)?", options: ["<code>for (int id : ids)</code>","<code>for (int i = ids.length; i > 0; i--)</code>","<code>for (int i = ids.length - 1; i >= 0; i--)</code>","<code>for (int i = 3; i > 0; i--)</code>"], correct: 2, explanation: "Start at the last valid index (length - 1 = 3), go down to 0 inclusive (>= 0). so i = 3, 2, 1, 0 and you print ids[3]=40, ids[2]=30, ids[1]=20, ids[0]=10. option B starts at length=4 which is one past the end and would throw an ArrayIndexOutOfBoundsException." },
   { question: "When is a foreach loop preferred over a regular for loop?", options: ["When you need to modify the array in place","When you need to iterate backwards","When you only need to read each value and don't need the index","When you need to skip elements"], correct: 2, explanation: "Foreach shines when you just want each value — summing, printing, finding max/min. it's cleaner and harder to mess up. use a regular for loop when you need the index (to write back, go backwards, or skip)." }

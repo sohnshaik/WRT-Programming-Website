@@ -92,12 +92,17 @@ table.score-table { width: 100%; border-collapse: collapse; font-size: 13px; bac
       <input class="filter-input" type="text" id="search-students" placeholder="search by name or email..." oninput="filterTable()">
       <select class="filter-input" id="filter-week" onchange="filterTable()">
         <option value="">all weeks</option>
-        <option value="summer-w1">W1 - The Basics</option><option value="summer-w2">W2 - Logic</option>
-        <option value="summer-w3">W3 - Loops</option><option value="summer-w4">W4 - Arrays</option>
-        <option value="summer-w5">W5 - OOP</option><option value="summer-w6">W6 - Inheritance</option>
-        <option value="summer-w7">W7 - Advanced</option><option value="summer-w8">W8 - Bridge</option>
+        <option value="summer-w1">W1 - The Basics</option><option value="summer-w1-test">W1 Test</option>
+        <option value="summer-w2">W2 - Logic</option><option value="summer-w2-test">W2 Test</option>
+        <option value="summer-w3">W3 - Loops</option><option value="summer-w3-test">W3 Test</option>
+        <option value="summer-w4">W4 - Arrays</option><option value="summer-w4-test">W4 Test</option>
+        <option value="summer-w5">W5 - OOP</option><option value="summer-w5-test">W5 Test</option>
+        <option value="summer-w6">W6 - Inheritance</option><option value="summer-w6-test">W6 Test</option>
+        <option value="summer-w7">W7 - Advanced</option><option value="summer-w7-test">W7 Test</option>
+        <option value="summer-w8">W8 - Bridge</option><option value="summer-w8-test">W8 Test</option>
         <option value="offseason-o1">O1 - Git</option><option value="offseason-o2">O2 - WPILib</option>
-        <option value="offseason-o3">O3 - Commands</option><option value="offseason-o4">O4 - Motors</option>
+        <option value="offseason-o3">O3 - Commands</option><option value="offseason-o3-test">O3 Test</option>
+        <option value="offseason-o4">O4 - Motors</option><option value="offseason-o4-test">O4 Test</option>
         <option value="offseason-o5">O5 - PID</option><option value="offseason-o6">O6 - Choreo</option>
         <option value="offseason-o7">O7 - Subsystem</option><option value="offseason-o8">O8 - Build</option>
       </select>
@@ -145,10 +150,19 @@ table.score-table { width: 100%; border-collapse: collapse; font-size: 13px; bac
    guaranteeing our listener is registered before the event fires. */
 
 const WEEKS = [
-  {id:'summer-w1',label:'W1'},{id:'summer-w2',label:'W2'},{id:'summer-w3',label:'W3'},{id:'summer-w4',label:'W4'},
-  {id:'summer-w5',label:'W5'},{id:'summer-w6',label:'W6'},{id:'summer-w7',label:'W7'},{id:'summer-w8',label:'W8'},
-  {id:'offseason-o1',label:'O1'},{id:'offseason-o2',label:'O2'},{id:'offseason-o3',label:'O3'},{id:'offseason-o4',label:'O4'},
-  {id:'offseason-o5',label:'O5'},{id:'offseason-o6',label:'O6'},{id:'offseason-o7',label:'O7'},{id:'offseason-o8',label:'O8'},
+  {id:'summer-w1',label:'W1'},{id:'summer-w1-test',label:'W1T'},
+  {id:'summer-w2',label:'W2'},{id:'summer-w2-test',label:'W2T'},
+  {id:'summer-w3',label:'W3'},{id:'summer-w3-test',label:'W3T'},
+  {id:'summer-w4',label:'W4'},{id:'summer-w4-test',label:'W4T'},
+  {id:'summer-w5',label:'W5'},{id:'summer-w5-test',label:'W5T'},
+  {id:'summer-w6',label:'W6'},{id:'summer-w6-test',label:'W6T'},
+  {id:'summer-w7',label:'W7'},{id:'summer-w7-test',label:'W7T'},
+  {id:'summer-w8',label:'W8'},{id:'summer-w8-test',label:'W8T'},
+  {id:'offseason-o1',label:'O1'},{id:'offseason-o2',label:'O2'},
+  {id:'offseason-o3',label:'O3'},{id:'offseason-o3-test',label:'O3T'},
+  {id:'offseason-o4',label:'O4'},{id:'offseason-o4-test',label:'O4T'},
+  {id:'offseason-o5',label:'O5'},{id:'offseason-o6',label:'O6'},
+  {id:'offseason-o7',label:'O7'},{id:'offseason-o8',label:'O8'},
 ];
 
 let allStudents = [], allUsers = [];
@@ -273,9 +287,22 @@ window.loadAnswersForStudent = async () => {
       document.getElementById('answer-panel-wrap').innerHTML = '<div class="dash-loading">no quiz answers saved for this student yet — they need to complete quizzes on the site first</div>';
       return;
     }
-    quizIds.forEach(id => {
+    quizIds.sort().forEach(id => {
       const o = document.createElement('option');
-      o.value = id; o.textContent = id;
+      o.value = id;
+      // Friendly label: quiz-w7-t1 → "W7 Topic 1 Quiz", test-summer-w7 → "W7 Weekly Test"
+      if (id.startsWith('test-')) {
+        const m = id.match(/test-(?:summer-w|offseason-o)(\d+)/);
+        o.textContent = m ? (id.includes('summer') ? `W${m[1]} Weekly Test` : `O${m[1]} Weekly Test`) : id;
+      } else if (id.match(/quiz-[wo]\d+-t\d+/)) {
+        const m = id.match(/quiz-([wo])(\d+)-t(\d+)/);
+        o.textContent = m ? `${m[1]==='w'?'W':'O'}${m[2]} Topic ${m[3]} Quiz` : id;
+      } else if (id.match(/quiz-[wo]\d+$/)) {
+        const m = id.match(/quiz-([wo])(\d+)$/);
+        o.textContent = m ? `${m[1]==='w'?'W':'O'}${m[2]} Knowledge Check` : id;
+      } else {
+        o.textContent = id;
+      }
       qSel.appendChild(o);
     });
     qSel.value = quizIds[0];
@@ -335,12 +362,12 @@ window.exportCSV = () => {
     const s = (v ?? '').toString();
     return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
   };
-  const hdr = ['Name','Email',...WEEKS.map(w=>w.label),'Average'].map(esc).join(',');
+  const hdr = ['Name','Email',...WEEKS.map(w=>w.label),'Avg'].map(esc).join(',');
   const rows = allStudents.map(s => {
-    const scores = WEEKS.map(w => s.weeks[w.id]?.pct ?? '');
+    const cells = WEEKS.map(w => s.weeks[w.id]?.pct ?? '');
     const done = WEEKS.map(w=>s.weeks[w.id]).filter(w=>w?.complete);
     const avg  = done.length ? Math.round(done.reduce((a,w)=>a+w.pct,0)/done.length) : '';
-    return [s.name, s.email, ...scores, avg].map(esc).join(',');
+    return [s.name, s.email, ...cells, avg].map(esc).join(',');
   });
   const blob = new Blob([[hdr,...rows].join('\n')], { type: 'text/csv;charset=utf-8' });
   const url  = URL.createObjectURL(blob);

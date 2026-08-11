@@ -230,8 +230,10 @@ class Quiz {
     document.getElementById(`qnext-${this.containerId}`).disabled = false;
 
     // Save per-question answer for admin review
+    // Use containerId as the doc key so multiple quizzes on the same page
+    // don't overwrite each other (e.g. quiz-w7-t1, quiz-w7-t2, quiz-w7)
     if (this.pageId && typeof window._wrcSaveAnswer === 'function') {
-      window._wrcSaveAnswer(this.pageId, this.current, {
+      window._wrcSaveAnswer(this.containerId, this.current, {
         question:  q.question,
         selected:  idx,
         correct:   q.correct,

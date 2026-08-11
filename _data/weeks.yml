@@ -14,7 +14,7 @@ summer:
   - num: 3
     slug: week3
     title: "Loops"
-    subtitle: "For loops, foreach, and why while loops are banned from robot code"
+    subtitle: "For loops, foreach, and why you need to be careful with while loops"
     badge: "Summer · Week 3 of 8"
     phase: summer
   - num: 4
